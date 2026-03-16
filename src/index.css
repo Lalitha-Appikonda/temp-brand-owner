@@ -1,0 +1,312 @@
+/************************************Reset Css  Start ******************************/
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+label {
+  display: block;
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  font-size: 0;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote,
+q {
+  &:before,
+  &:after {
+    content: "";
+    content: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+svg {
+  display: block;
+  line-height: 0;
+}
+
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Reset  End HERE*/
+
+/* CONTAINER */
+.container,
+.container-fluid {
+  width: 100%;
+  margin: 0 auto;
+}
+.container-fluid {
+  padding: 0px 32px;
+}
+@media (max-width: 576px) {
+  .container {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+.container-fulid {
+  width: 100%;
+  max-width: 100%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ============================================================================ global css =========================================================================================================== */
+
+
+/*=========================================================== colors ========================================================*/
+:root{
+    
+    /*================================ background colors =======================================*/
+
+    /* login page */
+    --orange-bg: 254, 136, 17;
+    --primary-bg : 255, 255, 255;
+    --secondary-bg: 242, 242, 242;
+    --green-bg:0, 186, 0;
+   
+
+    /* dashboard */
+    --icon-color: 37, 61, 78;
+    --like-bg: 255, 55, 48;
+    --pink-bg: 247, 75, 129;
+    --yellow-bg: 232, 186, 0;
+    --star-bg : 246, 177, 32;
+   --product-bg : 246, 246, 246;
+   --slider-circle-bg : 217, 217, 217;
+   --dividing-line : 223, 223, 223;
+   --three-star-rating : 114, 191, 188;
+   --two-star-rating : 252, 179, 1;
+   --one-star-rating : 241, 101, 101;
+   --borders : 0, 0, 0;
+  
+
+    
+
+
+     /*======================================== text colors =============================================================*/
+
+     /* login page */
+     --primary-text:4, 35, 56;
+     --secondary-text: 101, 101, 101;
+     --error-text : 254, 77, 17;
+     --rating-text :92, 92, 92;
+    
+     
+
+    
+
+     /* dashboard */
+     --green-text : 1, 152, 18;
+     --out-of-stock-text : 255, 78, 72;
+     
+    
+
+}
+/* input field  */
+
+.input-group .input-wrapper input{
+  padding: 20px 24px;
+  border: 1px solid rgba(var(--borders), 0.4);
+  border-radius: 39px;
+  font-size: 12px;
+}
+.input-group .input-wrapper input ::placeholder{
+  color: rgba(var(--secondary-text), 1);
+}
+
+.input-group input:focus {
+  border-color: rgba(var(--borders), 0.4);
+  outline: none;
+}
+
+.input-group input:hover {
+  border-color: rgba(var(--borders), 0.4);
+}
+.input-group input:disabled {
+  background-color: rgba(var(--primary-bg), 0.6);
+  cursor: not-allowed;
+}
+.input-error {
+  border-color: rgba(var(--error-text), 1);
+}
+.error-text {
+  color: rgba(var(--error-text), 1);
+  font-size: 12px;
+}
