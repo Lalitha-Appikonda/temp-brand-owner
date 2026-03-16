@@ -178,55 +178,6 @@ input::-webkit-inner-spin-button {
 
 /* Reset  End HERE*/
 
-/* CONTAINER */
-.container,
-.container-fluid {
-  width: 100%;
-  margin: 0 auto;
-}
-.container-fluid {
-  padding: 0px 32px;
-}
-@media (max-width: 576px) {
-  .container {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-}
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1320px;
-  }
-}
-
-.container-fulid {
-  width: 100%;
-  max-width: 100%;
-  margin: 0px auto;
-  display: flex;
-  justify-content: space-between;
-}
-
 /* ============================================================================ global css =========================================================================================================== */
 
 
