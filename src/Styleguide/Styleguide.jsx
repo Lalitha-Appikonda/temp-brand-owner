@@ -1,5 +1,8 @@
 import React from "react";
-import Input from "../components/Input/Input";
+import Input from "../components/form elements/Input";
+import Buttons from "../components/form elements/Buttons";
+import { FiArrowUpRight } from "react-icons/fi";
+import PopUp from "../components/popup/PopUp";
 
 
 const Styleguide = () => {
@@ -44,15 +47,10 @@ const Styleguide = () => {
       <div>
         <h1 style={{ fontSize: "50px", textAlign: "center", marginTop: "100px" }}>Input fields</h1>
         <Input placeholder="Enter refer member mail" />
-
-
-
-
       </div>
-      <div>
-        <h1 style={{ fontSize: "50px", textAlign: "center", marginTop: "100px" }}>Input fields</h1>
 
-      </div>
+
+      
       <div style={{ textAlign: "center", margin: "20px" }} >
         <p style={{ fontSize: "40px", fontWeight: "900", }}>typography</p>
         <h1>styleguide</h1>
@@ -74,9 +72,44 @@ const Styleguide = () => {
 
       <div style={{ margin: "50px" }}>
         <p style={{ fontSize: "50px", textAlign: "center", marginTop: "100px" }}>Buttons</p>
-        <button className="btn">primary</button>
-        <button className=" btn btn-primary">primary-button</button>
 
+        <h2 style={{ margin: "20px" }}>double Buttons</h2>
+        <div style={{ display: "flex", gap: "20px"}}>
+          <div className="double-buttons">
+            <Buttons variant="double-primary" className="primary-circle-button">Primary</Buttons>
+            <Buttons variant="circle-primary" className="circle-button"><FiArrowUpRight className="arrow-icon"/></Buttons>
+          </div>
+        </div>
+
+        <h2 style={{ margin: "20px" }}>Outline Buttons</h2>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <Buttons variant="outline-primary">Primary</Buttons>
+          <Buttons variant="outline-primary" className="outline-bg">Primary with background</Buttons>
+        </div>
+
+        <h2 style={{ margin: "20px" }}>Soft Buttons</h2>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <Buttons variant="primary">Primary</Buttons>
+          {/* <Buttons variant="soft-secondary">Secondary</Buttons> */}
+        </div>
+
+        <h2 style={{ margin: "20px" }}>circle Buttons</h2>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <Buttons variant="circle-primary"><FiArrowUpRight className="arrow-icon"/></Buttons>
+          <Buttons variant="circle-secondary"><FiArrowUpRight className="arrow-icon"/></Buttons>
+        </div>
+
+      </div>
+
+      <div style={{ marginTop: "50px" }}>
+        <h1 style={{ fontSize: "50px", textAlign: "center" }}>popups</h1>
+        <PopUp
+        trigger={<button>Edit</button>}
+        size="sm"
+        title="Edit Package"
+      >
+        <div>Content here...</div>
+      </PopUp>
       </div>
     </>
   );

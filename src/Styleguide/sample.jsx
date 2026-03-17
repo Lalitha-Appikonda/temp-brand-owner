@@ -1,37 +1,21 @@
+import React from 'react'
 
-
-const Select = ({
-  label,
-  name,
-  value,
-  onChange,
-  options = [],
-  required = false,
-  error,
-  placeholder= "choose..."
-}) => {
+function sample() {
   return (
-    <div className="form-group">
-      <label>{label}</label>
+    <div>
+      <h2>Outline Buttons</h2>
+      <div style={{ display: "flex", gap: "20px" }}>
+        <Button variant="outline-primary">Primary</Button>
+        <Button variant="outline-secondary">Secondary</Button>
+      </div>
 
-      <select
-        name={name}
-        value={value}
-        onChange={onChange}
-     
-        className={`custom-input ${error ? "input-error" : ""}`}
-      >
-        <option value="" >{placeholder}</option>
-        {options.map((opt, i) => (
-          <option key={i} value={opt}>
-            {opt}
-          </option>
-        ))}
-      </select>
-
-      {error && <p className="error-text">{error}</p>}
+      <h2>Soft Buttons</h2>
+      <div style={{ display: "flex", gap: "20px" }}>
+        <Button variant="soft-primary">Primary</Button>
+        <Button variant="soft-secondary">Secondary</Button>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Select;
+export default sample
