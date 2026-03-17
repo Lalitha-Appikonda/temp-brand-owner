@@ -109,6 +109,7 @@ const Styleguide = () => {
         title="Edit Package"
       >
         <div>Content here...</div>
+        <div>Hello World</div>
       </PopUp>
       </div>
     </>
