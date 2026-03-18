@@ -5,5 +5,8 @@ export const Images = {
     quesIcon : "/assets/icons/ques-icon.svg",
     waitTime : "/assets/icons/wait-time.svg",
     approved : "/assets/icons/approved.svg",
-    rejected : "/assets/icons/rejection.svg"
+    rejected : "/assets/icons/rejection.svg",
+     mainlogo:"/assets/login-sign up/Logo Side 1.png",
+    user:"/assets/login-sign up/Group.svg"
 }
+

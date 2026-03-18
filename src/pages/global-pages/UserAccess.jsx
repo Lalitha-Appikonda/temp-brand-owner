@@ -21,9 +21,9 @@ const dummiCondition = isMobile && currentPath === "/security-questions"
             <img className="image" src={Images.diffImg} alt="image" />
           </div>
           <div className="main-content">
-            {
-                !dummiCondition && <img src={Images.lessThan} alt="" /> 
-            }
+           <div className='main-logo'>
+                <img className='mainlogo' src={Images.mainlogo} alt="" />
+                </div>
             <div>
               <Outlet />
             </div>
