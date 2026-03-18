@@ -10,11 +10,18 @@ import Layout from '../layout/Layout'
 
 
 import { Routes, Route } from "react-router-dom";
+import SignUp from '../pages/global pages/SignUp'
+import UserAccess from '../pages/global pages/UserAccess'
+import SecurityQuestions from '../pages/global pages/SecurityQuestions'
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout/>}>
+      <Route path='/' element={<UserAccess />}>
+        <Route index element={<SignUp />}/>
+        <Route path='security-questions' element={<SecurityQuestions />}/>
+      </Route>
+      {/* <Route path="/" element={<Layout/>}>
 
         <Route index element={<Home/>} />
 
@@ -26,7 +33,7 @@ const AppRoutes = () => {
         <Route path="address" element={<DeliveryAddress />} />
         <Route path="address/edit" element={<EditAddress />} />
 
-      </Route>
+      </Route> */}
     </Routes>
   )
 }
