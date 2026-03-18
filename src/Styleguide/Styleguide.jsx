@@ -142,7 +142,6 @@ const Styleguide = () => {
         </PopUp>
       </div>
 
-<<<<<<< HEAD
       <div style={{ marginTop: "50px" }}>
         <h1 style={{ fontSize: "50px", textAlign: "center" }}>select box</h1>
         <div className="select-wrapper">
@@ -167,9 +166,6 @@ const Styleguide = () => {
         <h1 style={{ fontSize: "50px", textAlign: "center" }}>Radio buttons</h1>
       </div>
 
-=======
-          <div>hello world.........</div>
->>>>>>> eeeceb78519a1b43c6363ab7f79209c4df1e8865
 
     </>
   );
