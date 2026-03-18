@@ -14,6 +14,9 @@ import SignUp from '../pages/global-pages/SignUp'
 import UserAccess from '../pages/global-pages/UserAccess'
 import SecurityQuestions from '../pages/global-pages/SecurityQuestions'
 import ProductCategory from '../pages/global-pages/ProductCategory'
+import ApprovalWait from '../pages/global-pages/ApprovalWait'
+import AccountApproved from '../pages/global-pages/AccountApproved'
+import RejectedApproval from '../pages/global-pages/RejectedApproval'
 
 const AppRoutes = () => {
   return (
@@ -23,7 +26,12 @@ const AppRoutes = () => {
         <Route path='security-questions' element={<SecurityQuestions />}/>
         <Route path='product-category' element= {<ProductCategory />} />
       </Route>
-      {/* <Route path="/" element={<Layout/>}>
+      <Route path='waiting-approval' element={<ApprovalWait />} />
+      <Route path='account-approved' element= {<AccountApproved />}/>
+      <Route path='account-rejected' element= {<RejectedApproval />}/>
+
+
+      {/* <Route path="/" element={<Laywout/>}>
 
         <Route index element={<Home/>} />
 

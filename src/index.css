@@ -874,7 +874,7 @@ h6 {
   border-top: 1px solid rgba(var(--dividing-line), 1);
 }
 
-/* security questions */
+/* user access layout */
 
 .user-access-conatiner{
   background-color: rgba(var(--login-bg), 1);
@@ -887,12 +887,43 @@ h6 {
   display: flex;
   gap: 100px;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   border-radius: 57px;
 }
-.user-access-conatiner .access-wrapper .main-content{
-  width: 100%;
+.user-access-conatiner .access-wrapper .side-img .image{
+  min-width: 320px;
 }
+/* .user-access-conatiner .access-wrapper .main-content{
+  width: 90%;
+} */
+@media (max-width:1100px) {
+.user-access-conatiner .access-wrapper {
+    gap: 60px;
+}
+}
+@media (max-width:993px) {
+  .user-access-conatiner .access-wrapper {
+    gap: 40px;
+}
+}
+@media (max-width:880px) {
+.user-access-conatiner .access-wrapper .side-img{
+  display: none;
+}
+}
+@media (max-width:576px) {
+.user-access-conatiner {
+    padding: 0px 0px;
+}
+.user-access-conatiner .access-wrapper {
+  border-radius: unset;
+  padding: 40px 15px;
+    }
+}
+
+
+/* security questions */
+
 .security-ques-text-content .back-btn{
   width: 40px;
   height: 40px;
@@ -988,24 +1019,220 @@ h6 {
 .security-ques-text-content .ques-submit .btn-container .btn-primary{
    width: 300px;
    height: 50px;
+   border:  1px solid rgba(var(--secondary-text), 0.1);
+   background-color: rgba(var(--secondary-text), 0.4);
+   color: rgba(var(--primary-bg), 1);
 }
 
 @media (max-width:1100px) {
 .security-ques-text-content .text-content h1{
   font-size: 30px;
 }
-/* .security-ques-text-content .text-content .choose{
-  width: 330px;
-  height: 50px;
-  margin: 15px auto 0;
-  font-size: 14px;
-  line-height: 18px;
-  font-family: "creatodisplay-regular";
-  text-align: center;
-  color: rgba(var(--secondary-text),1);
-} */
 .security-ques-text-content .text-content h6{
   font-size: 15px;
+}
+}
+@media (max-width:993px) {
+.security-ques-text-content .text-content h1{
+  font-size: 25px;
+}
+.security-ques-text-content .text-content .choose{
+    font-size: 12px;
+}
+.security-ques-text-content .text-content h6{
+  font-size: 14px;
+}
+}
+@media (max-width:400px) {
+  .security-ques-text-content .text-content .ques-container .boxes .ques-prefix{
+    gap: 20px;
+  }
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .ques{
+  text-align: start;
+}
+}
+
+/* wait time screen */
+
+.close-icon{
+  display: flex;
+  justify-content: flex-end;
+}
+.close-icon .icon{
+  width: 30px;
+  height: 20px;
+}
+.wait-time-screen{
+display: flex;
+flex-direction: column;
+margin: 30px 30px;
+}
+.wait-time-screen .wait-content{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 200px;
+}
+.wait-time-screen .wait-content h1{
+  margin-top: 20px;
+  font-family: "creatodisplay-bold";
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+}
+.wait-time-screen .wait-content h3{
+  width: 800px;
+  height: 60px;
+  margin: 15px auto 0;
+  font-family: "creatodisplay-regular";
+  line-height: 23px;
+  color: rgba(var(--secondary-text), 1);
+  text-align: center;
+  letter-spacing: 2%;
+}
+@media (max-width:950px) {
+  .wait-time-screen .wait-content h3{
+  width: 630px;
+  height: auto; 
+}
+}
+@media (max-width:768px) {
+  .wait-time-screen .wait-content{
+margin-top: 100px;
+}
+  .wait-time-screen .wait-content h3{
+  width: 500px;
+  height: auto; 
+}
+}
+@media (max-width:576px) {
+  .wait-time-screen .wait-content h3{
+  width: 400px;
+  height: auto; 
+}
+}
+@media (max-width:483px) {
+  .wait-time-screen .wait-content h3{
+  width: 306px;
+  height: 60px; 
+}
+}
+@media (max-width:400px) {
+  .wait-time-screen .wait-content h3{
+  width: 236px;
+  height: 60px; 
+}
+}
+
+/* Account approved */
+
+.approved-screen{
+display: flex;
+flex-direction: column;
+margin: 30px 30px;
+}
+.approved-screen .approved-content{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 200px;
+}
+.approved-screen .approved-content h1{
+  margin-top: 20px;
+  font-family: "creatodisplay-bold";
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+}
+.approved-screen .approved-content h3{
+  width: 800px;
+  height: 60px;
+  margin: 15px auto 0;
+  font-family: "creatodisplay-regular";
+  line-height: 23px;
+  color: rgba(var(--secondary-text), 1);
+  text-align: center;
+  letter-spacing: 2%;
+}
+.approved-screen .approved-content div{
+  margin-top: 15px;
+}
+@media (max-width:768px) {
+ .approved-screen .approved-content{
+margin-top: 100px;
+} 
+}
+/* account rejected */
+
+.rejected-screen{
+display: flex;
+flex-direction: column;
+margin: 30px 30px;
+}
+.rejected-screen .rejected-content{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 200px;
+}
+.rejected-screen .rejected-content h1{
+  margin-top: 20px;
+  font-family: "creatodisplay-bold";
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+}
+.rejected-screen .rejected-content h3{
+  margin-top: 15px;
+  font-family: "creatodisplay-regular";
+  line-height: 23px;
+  color: rgba(var(--secondary-text), 1);
+  text-align: center;
+  letter-spacing: 2%;
+}
+.rejected-screen .rejected-content div{
+  margin-top: 15px;
+}
+.rejected-screen .rejected-content div .btn-outline-primary{
+  width: 300px;
+  height: 50px;
+  border-color: rgba(var(--out-of-stock-text), 1);
+  color:rgba(var(--out-of-stock-text), 1) ;
+}
+@media (max-width:950px) {
+.rejected-screen .rejected-content h3{
+  width: 630px;
+  height: auto; 
+}
+}
+@media (max-width:768px) {
+  .rejected-screen .rejected-content{
+margin-top: 100px;
+}
+.rejected-screen .rejected-content h3{
+  width: 500px;
+  height: auto; 
+}
+}
+@media (max-width:576px) {
+.rejected-screen .rejected-content h3{
+  width: 400px;
+  height: auto; 
+}
+}
+@media (max-width:483px) {
+.rejected-screen .rejected-content h3{
+  width: 306px;
+  height: 60px; 
+}
+}
+@media (max-width:400px) {
+.rejected-screen .rejected-content h3{
+  width: 236px;
+  height: 60px; 
+}
+.rejected-screen .rejected-content div .btn-outline-primary{
+  width: 250px;
 }
 }
 
@@ -1016,6 +1243,9 @@ h6 {
   margin: 40px auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 15px;
   font-family: Arial, sans-serif;
 }
@@ -1031,6 +1261,7 @@ h6 {
   font-size: 21px;
   font-weight: 700;
   font-style: bol;
+  width: 100%;
 }
 
 
@@ -1038,6 +1269,7 @@ h6 {
   font-size: 12px;
   color:var(--secondary-text);
   line-height: 18px;
+  width: 100%;
 }
 
 
@@ -1045,11 +1277,13 @@ h6 {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  width: 100%;
 }
 
 
 .category-container .custom-select {
   position: relative;
+  width: 100%;
 }
 
 
@@ -1059,6 +1293,8 @@ h6 {
   border-radius: 6px;
   cursor: pointer;
   background: #fff;
+  text-align: start;
+  width: 100%;
 }
 
 
@@ -1081,9 +1317,33 @@ h6 {
   padding: 5px 0;
 }
 .category-container .button{
-  background: #65656566;
-  height: 58px;
+  background: rgba(var(--secondary-text), 0.4);
+  height: 40px;
   padding: 22px 43px;
   border-radius: 39px;
+  color: #FFFFFF;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 300px;
 
+
+}
+.category-container .button:active{
+  background-color: #FE8811;
+}
+
+.category-container .terms-conditions{
+  color:#656565;
+}
+.category-container .terms-conditions span{
+  color:black;
+  text-decoration: underline;
+}
+.category-container .select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
