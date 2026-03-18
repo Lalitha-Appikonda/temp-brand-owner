@@ -5,7 +5,8 @@ import App from './App'
 
 import { BrowserRouter } from "react-router-dom";
 import Styleguide from './Styleguide/Styleguide';
-import ProductCategory from './ProductCategory';
+import ProductCategory from './pages/global-pages/ProductCategory';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
