@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 
 const ProductCategory = () => {
-  const [open,setOpen]=useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
     <div className="category-container">
@@ -15,19 +16,23 @@ const ProductCategory = () => {
       </div>
 
       <select className="select">
-        <option value="">Aquaculture</option>
-        <option value="">Agriculture</option>
-        <option value="">Human Medicine</option>
-        <option value="">Other</option>
+        <option>Aquaculture</option>
+        <option>Agriculture</option>
+        <option>Human Medicine</option>
+        <option>Other</option>
       </select>
 
       <div className="custom-select">
 
+         
         <div 
           className="select-box"
-          onClick={()=>setOpen(!open)}
+          onClick={() => setOpen(!open)}
         >
-          Select Types
+          <span>Select Types</span>
+
+          
+          {open ? <FaChevronUp /> : <FaChevronDown />}
         </div>
 
         {open && (
@@ -54,8 +59,13 @@ const ProductCategory = () => {
 
       </div>
 
-
-      <button className='button'>next</button>
+      <button className='button'>Next</button>
+      
+      <p className='terms-conditions'>
+        By clicking, I confirm that I have read, understood, and agree to the 
+        <span> Terms of Service</span>
+          <span></span> of Sri Animalife Biotech Pvt Ltd.
+      </p>
 
     </div>
   )
