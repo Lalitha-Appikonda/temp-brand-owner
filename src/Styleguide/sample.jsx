@@ -2,9 +2,13 @@ import React from 'react'
 
 function sample() {
   return (
-    <div>
-      
+    <>
+    <div className='product-category-container'>
+      <div className='conatiner product-wrapper'>
+
+      </div>
     </div>
+    </>
   )
 }
 

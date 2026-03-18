@@ -209,6 +209,7 @@ input::-webkit-inner-spin-button {
   --primary-bg: 255, 255, 255;
   --secondary-bg: 242, 242, 242;
   --green-bg: 0, 186, 0;
+  --login-bg:243, 245, 247;
 
 
   /* dashboard */
@@ -864,7 +865,6 @@ h6 {
 /* **************************global css *******************************************/
 
 
-
 /* card css */
 
 .card-containerm .card-image-wrapper{
@@ -884,3 +884,14 @@ h6 {
   border-radius: 60px;
   background-color: rgba(var(--primary-bg), 1);
 }
+
+
+
+
+
+
+
+
+
+
+
