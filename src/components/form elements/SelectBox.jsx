@@ -1,9 +1,41 @@
-import React from 'react'
+import React from "react";
 
-const SelectBox = () => {
+const SelectBox = ({
+  label,
+  name,
+  value,
+  onChange,
+  options = [],
+  required = false,
+  error,
+  placeholder = ""
+}) => {
   return (
-    <div>SelectBox</div>
-  )
-}
+    <div className="select-group">
+      {label && <label htmlFor={name}>{label}</label>}
 
-export default SelectBox
+      <select
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        className={`custom-select ${error ? "select-error" : ""}`}
+      >
+        <option value=""  disabled>
+          {placeholder}
+        </option>
+
+        {options.map((item, index) => (
+          <option key={index} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </select>
+
+      {error && <p className="error-text">{error}</p>}
+    </div>
+  );
+};
+
+export default SelectBox;
