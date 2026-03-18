@@ -994,7 +994,7 @@ h6 {
 .security-ques-text-content .text-content h1{
   font-size: 30px;
 }
-.security-ques-text-content .text-content .choose{
+/* .security-ques-text-content .text-content .choose{
   width: 330px;
   height: 50px;
   margin: 15px auto 0;
@@ -1003,75 +1003,9 @@ h6 {
   font-family: "creatodisplay-regular";
   text-align: center;
   color: rgba(var(--secondary-text),1);
-}
+} */
 .security-ques-text-content .text-content h6{
-  font-family: "creatodisplay-bold";
-  font-size: 16px;
-  line-height: 18px;
-  text-align: center;
-  color: rgba(var(--primary-text),1);
-}
-.security-ques-text-content .text-content .ques-container{
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
-}
-.security-ques-text-content .text-content .ques-container .boxes{
-  border-radius: 39px;
-  border: 1px solid rgba(var(--primary-text),0.4);
-  padding: 9px 20px ;
-  cursor: pointer;
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-prefix{
-  display: flex;
-  justify-content: space-between;
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1{
-  display: flex;
-  gap: 12px;
-  /* justify-content: center; */
-  align-items: center;
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .prefix-container{
-  width: 40px;
-  height: 40px;
-  border-radius: 33px;
-  background-color: rgba(var(--secondary-bg), 1) ;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .prefix-container img{
-  width: 19.8px;
-  height: 19.8px;
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .ques{
-  font-size: 14px;
-  line-height: 16px;
-  font-family: "creatodisplay-regular";
-  text-align: center;
-  color: rgba(var(--primary-text),1);
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .dropdowns{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.security-ques-text-content .text-content .ques-container .boxes .dividing-line{
-  margin: 9px 0px 12px;
-}
-.security-ques-text-content .text-content .ques-container .boxes .ques-input{
-  border: none;
-  padding-top: 5px;
-}
-.security-ques-text-content .ques-submit{
-  margin-top: 50px;
-  text-align: center;
-}
-.security-ques-text-content .ques-submit .btn-container .btn-primary{
-   width: 300px;
-   height: 50px;
+  font-size: 15px;
 }
 }
 
