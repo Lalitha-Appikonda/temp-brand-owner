@@ -24,9 +24,3 @@ export default UserAccess
 
 
 
-{/* <div className='back-btn'><img src={Images.lessThan} alt="" /></div>
-                <div className='text-content'>
-                    <h1>Set Your Security Question</h1>
-                    <p>Choose and answer a security question to help you safely
-reset your password anytime you forget it.</p>
-                </div> */}

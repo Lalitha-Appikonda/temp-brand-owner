@@ -18,15 +18,10 @@ import SecurityQuestions from "../pages/global-pages/SecurityQuestions";
 const AppRoutes = () => {
   return (
     <Routes>
-
-      
-      <Route path="/access" element={<UserAccess />}>
-
-        <Route index element={<SignUp />} />
-        <Route path="category" element={<ProductCategory />} />
-        <Route path="security-questions" element={<SecurityQuestions />} />
-        
-
+      <Route path='/' element={<UserAccess />}>
+        <Route index element={<SignUp />}/>
+        <Route path='security-questions' element={<SecurityQuestions />}/>
+        <Route path='product-category' element= {<ProductCategory />} />
       </Route>
 
     

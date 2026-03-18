@@ -338,12 +338,16 @@ h6 {
 
 
 /* ================ containers ====== */
- 
+@media (max-width: 2500px) {
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+}
  
 @media (max-width: 1440px) {
   .container {
     max-width: 1270px;
-    margin: 0 auto;
   }
 }
  
@@ -529,6 +533,7 @@ h6 {
 /* input field  */
 
 .input-group .input-wrapper input {
+  width: 100%;
   padding: 20px 24px;
   border: 1px solid rgba(var(--borders), 0.4);
   border-radius: 39px;
@@ -863,9 +868,13 @@ h6 {
 
 
 /* **************************global css *******************************************/
+.dividing-line{
+  width: 100%;
+  height: 2px;
+  border-top: 1px solid rgba(var(--dividing-line), 1);
+}
 
-
-/* product category */
+/* security questions */
 
 .user-access-conatiner{
   background-color: rgba(var(--login-bg), 1);
@@ -877,14 +886,14 @@ h6 {
   padding: 56px;
   display: flex;
   gap: 100px;
-  /* justify-content: center; */
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
   border-radius: 57px;
 }
 .user-access-conatiner .access-wrapper .main-content{
   width: 100%;
 }
-/* .security-ques-conatiner .ques-wrapper .ques-container .back-btn{
+.security-ques-text-content .back-btn{
   width: 40px;
   height: 40px;
   border:  1px solid rgba(var(--primary-text), 0.4);
@@ -892,8 +901,8 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
-/* .security-ques-conatiner .ques-wrapper .ques-container .text-content h1{
+}
+.security-ques-text-content .text-content h1{
   font-family: "creatodisplay-bold";
   line-height: 28px;
   font-size: 36px;
@@ -901,7 +910,7 @@ h6 {
   text-align: center;
   margin-top: 25px;
 }
-.security-ques-conatiner .ques-wrapper .ques-container .text-content p{
+.security-ques-text-content .text-content .choose{
   width: 330px;
   height: 50px;
   margin: 15px auto 0;
@@ -910,6 +919,81 @@ h6 {
   font-family: "creatodisplay-regular";
   text-align: center;
   color: rgba(var(--secondary-text),1);
-} */
+}
+.security-ques-text-content .text-content h6{
+  font-family: "creatodisplay-bold";
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: rgba(var(--primary-text),1);
+}
+.security-ques-text-content .text-content .ques-container{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+.security-ques-text-content .text-content .ques-container .boxes{
+  border-radius: 39px;
+  border: 1px solid rgba(var(--primary-text),0.4);
+  padding: 9px 20px ;
+  cursor: pointer;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix{
+  display: flex;
+  justify-content: space-between;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1{
+  display: flex;
+  gap: 12px;
+  /* justify-content: center; */
+  align-items: center;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .prefix-container{
+  width: 40px;
+  height: 40px;
+  border-radius: 33px;
+  background-color: rgba(var(--secondary-bg), 1) ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .prefix-container img{
+  width: 19.8px;
+  height: 19.8px;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .ques{
+  font-size: 14px;
+  line-height: 16px;
+  font-family: "creatodisplay-regular";
+  text-align: center;
+  color: rgba(var(--primary-text),1);
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .dropdowns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.security-ques-text-content .text-content .ques-container .boxes .dividing-line{
+  margin: 9px 0px 12px;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-input{
+  border: none;
+  padding-top: 5px;
+}
+.security-ques-text-content .ques-submit{
+  margin-top: 50px;
+  text-align: center;
+}
+.security-ques-text-content .ques-submit .btn-container .btn-primary{
+   width: 300px;
+   height: 50px;
+}
+
+@media (max-width:1100px) {
+.security-ques-text-content .text-content h1{
+  font-size: 30px;
+}
 
 
+}
