@@ -10,9 +10,10 @@ import Layout from '../layout/Layout'
 
 
 import { Routes, Route } from "react-router-dom";
-import SignUp from '../pages/global pages/SignUp'
-import UserAccess from '../pages/global pages/UserAccess'
-import SecurityQuestions from '../pages/global pages/SecurityQuestions'
+import SignUp from '../pages/global-pages/SignUp'
+import UserAccess from '../pages/global-pages/UserAccess'
+import SecurityQuestions from '../pages/global-pages/SecurityQuestions'
+import ProductCategory from '../pages/global-pages/ProductCategory'
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path='/' element={<UserAccess />}>
         <Route index element={<SignUp />}/>
         <Route path='security-questions' element={<SecurityQuestions />}/>
+        <Route path='product-category' element= {<ProductCategory />} />
       </Route>
       {/* <Route path="/" element={<Layout/>}>
 
