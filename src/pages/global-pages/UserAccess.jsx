@@ -23,6 +23,7 @@ const dummiCondition = isMobile && currentPath === "/security-questions"
           <div className="main-content">
            <div className='main-logo'>
                 <img className='mainlogo' src={Images.mainlogo} alt="" />
+                <img  className="mobile-logo" src={Images.mobilelogo}/>
                 </div>
             <div>
               <Outlet />

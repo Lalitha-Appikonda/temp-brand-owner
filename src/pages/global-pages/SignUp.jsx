@@ -7,47 +7,58 @@ import Buttons from './../../components/form elements/Buttons';
 
 const SignUp = () => {
   const navigate = useNavigate()
+ const rules = [
+  { text: "At least 8 characters", icon: Images.minus },
+  { text: "At least 1 special character", icon: Images.minus },
+  { text: "At least 1 number", icon: Images.minus }
+];
 
   return (
    <div className="signup-container">
+    {/* <div className='container'> */}
 
   
   <p className='logintext'>Create Your Account</p>
-  <h4 class="singing-text">
+  <h4 className="singing-text">
     Continue managing your sales, purchases, and reports by signing in securely.
   </h4>
 
  
   <div className="input-box">
-    <img src={Images.user} class="icon left"/>
+    <img src={Images.user} className="icon left"/>
     <Input  placeholder="Name"/>
   </div>
 
   
   <div className="input-box">
-    <img src={Images.user} class="icon left"/>
+    <img src={Images.user} className="icon left"/>
     <Input placeholder="Username"/>
   </div>
 
  
   <div className="input-box">
-    <img src={Images.user} class="icon left"/>
+    <img src={Images.lockicon} className="icon left"/>
     <Input placeholder="password"/>
-    <img src={Images.user} class="icon right"/>
+    <img src={Images.eyeicon} className="icon right"/>
   </div>
 
  
-  <ul className="rules">
-   <li className='rules-img'><span><img src={Images.user} className=""/></span> at least 8 characters</li>
-    <li className='rules-img'><span><img src={Images.user} className=""/></span>at least 1 special character</li>
-     <li className='rules-img'><span><img src={Images.user} className=""/></span>at least 1 number</li>
-  </ul>
+  <ul className='rules'>
+  {rules.map((rule, index) => (
+    <li key={index} className="rules-img">
+      <span>
+        <img src={rule.icon} alt="icon" />
+      </span>
+      {rule.text}
+    </li>
+  ))}
+</ul>
 
  
   <div className="input-box">
-    <img src={Images.user} class="icon left"/>
+    <img src={Images.lockicon} class="icon left"/>
     <Input  placeholder="Re-enter Password"/>
-    <img src={Images.user} class="icon right"/>
+    <img src={Images.eyeicon} class="icon right"/>
   </div>
 
  
@@ -66,7 +77,7 @@ const SignUp = () => {
 
 </div>
 
-    
+//  </div>   
 
 
   )
