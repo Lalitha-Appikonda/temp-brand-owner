@@ -9,6 +9,14 @@ export const Images = {
     crossCancle: "/assets/icons/cross-icon.svg",
     limitExceed : "/assets/icons/limit-exceed.svg",
      mainlogo:"/assets/login-sign up/Logo Side 1.png",
-    user:"/assets/login-sign up/Group.svg"
+    user:"/assets/login-sign up/Group.svg",
+    eyeicon:"/assets/login-sign up/eyeicon.svg",
+    lockicon:"/assets/login-sign up/lockicon.svg",
+    minus:"/assets/login-sign up/minus.svg",
+    mobilelogo:"/assets/login-sign up/mobile logo.svg",
+    key:"/assets/login-sign up/Union.svg",
+    greentick:"/assets/login-sign up/fi_2732657.svg",
+    wrongtick:"/assets/login-sign up/fi_2732657 (2).svg",
+    user2:"/assets/login-sign up/Group (12).svg"
 }
 

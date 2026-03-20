@@ -17,16 +17,20 @@ import ProductCategory from '../pages/global-pages/ProductCategory'
 import ApprovalWait from '../pages/global-pages/ApprovalWait'
 import AccountApproved from '../pages/global-pages/AccountApproved'
 import RejectedApproval from '../pages/global-pages/RejectedApproval'
-import Styleguide from '../Styleguide/Styleguide'
 import LimitExceed from '../pages/global-pages/LimitExceed'
+import SetNewPassword from '../pages/global-pages/SetNewPassword'
+import Login from '../Login'
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<UserAccess />}>
-        <Route index element={<SignUp />}/>
-        <Route path='security-questions' element={<SecurityQuestions />}/>
-        <Route path='product-category' element= {<ProductCategory />} />
+        <Route index element={<SignUp />} />
+        <Route path='security-questions' element={<SecurityQuestions />} />
+        <Route path='product-category' element={<ProductCategory />} />
+        <Route path="setnewpassword" element={<SetNewPassword />} />
+        <Route path="login" element={< Login/>}/>
+
       </Route>
       <Route path='waiting-approval' element={<ApprovalWait />} />
       <Route path='account-approved' element= {<AccountApproved />}/>

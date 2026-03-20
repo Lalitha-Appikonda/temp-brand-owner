@@ -22,9 +22,9 @@ const UserAccess = () => {
             {/* <img className="image" src={Images.diffImg} alt="image" /> */}
           </div>
           <div className="main-content">
-            {/* {!dummiCondition && <img src={Images.lessThan} alt="" />} */}
             <div className="main-logo">
-              {!dummiCondition && <img className="mainlogo" src={Images.mainlogo} alt="" />}
+              <img className="mainlogo" src={Images.mainlogo} alt="" />
+              <img className="mobile-logo" src={Images.mobilelogo} />
             </div>
             <div>
               <Outlet />
