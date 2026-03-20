@@ -7,5 +7,8 @@ export const Images = {
     approved : "/assets/icons/approved.svg",
     rejected : "/assets/icons/rejection.svg",
     crossCancle: "/assets/icons/cross-icon.svg",
-    limitExceed : "/assets/icons/limit-exceed.svg"
+    limitExceed : "/assets/icons/limit-exceed.svg",
+     mainlogo:"/assets/login-sign up/Logo Side 1.png",
+    user:"/assets/login-sign up/Group.svg"
 }
+
