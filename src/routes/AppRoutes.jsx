@@ -17,6 +17,8 @@ import ProductCategory from '../pages/global-pages/ProductCategory'
 import ApprovalWait from '../pages/global-pages/ApprovalWait'
 import AccountApproved from '../pages/global-pages/AccountApproved'
 import RejectedApproval from '../pages/global-pages/RejectedApproval'
+import Styleguide from '../Styleguide/Styleguide'
+import LimitExceed from '../pages/global-pages/LimitExceed'
 
 const AppRoutes = () => {
   return (
@@ -29,6 +31,7 @@ const AppRoutes = () => {
       <Route path='waiting-approval' element={<ApprovalWait />} />
       <Route path='account-approved' element= {<AccountApproved />}/>
       <Route path='account-rejected' element= {<RejectedApproval />}/>
+      <Route path='limit-exceed' element= {<LimitExceed />}/>
 
 
       {/* <Route path="/" element={<Laywout/>}>

@@ -8,22 +8,21 @@ const UserAccess = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-//   console.log(currentPath, "currentPath");
-const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+  //   console.log(currentPath, "currentPath");
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
-const dummiCondition = isMobile && currentPath === "/security-questions"
+  const dummiCondition = isMobile && currentPath === "/security-questions";
 
   return (
     <>
       <div className="user-access-conatiner">
         <div className="container access-wrapper">
           <div className="side-img">
-            <img className="image" src={Images.diffImg} alt="image" />
+            {/* <div className="image" ></div> */}
+            {/* <img className="image" src={Images.diffImg} alt="image" /> */}
           </div>
           <div className="main-content">
-            {
-                !dummiCondition && <img src={Images.lessThan} alt="" /> 
-            }
+            {!dummiCondition && <img src={Images.lessThan} alt="" />}
             <div>
               <Outlet />
             </div>

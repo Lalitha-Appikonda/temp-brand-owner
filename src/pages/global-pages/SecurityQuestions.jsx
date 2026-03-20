@@ -54,7 +54,7 @@ const SecurityQuestions = () => {
         </div>
 
         <div className="ques-submit">
-             <Buttons variant="primary">Submit</Buttons>
+             <Buttons variant="secondary">Submit</Buttons>
         </div>
 
       </div>

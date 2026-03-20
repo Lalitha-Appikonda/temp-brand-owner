@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import CheckBox from "./CheckBox";
 
-const SelectBox = ({
+const SelectWithCheckbox = ({
   label,
   name,
-  value,
+  value = [],
   onChange,
   options = [],
   placeholder = "",
@@ -12,9 +13,18 @@ const SelectBox = ({
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
 
-  const handleSelect = (item) => {
-    onChange(name, item);
-    setIsOpen(false);
+  const handleCheckboxChange = (e) => {
+    const { value: val, checked } = e.target;
+
+    let updated;
+
+    if (checked) {
+      updated = [...value, val];
+    } else {
+      updated = value.filter((item) => item !== val);
+    }
+
+    onChange(name, updated);
   };
 
   useEffect(() => {
@@ -25,10 +35,7 @@ const SelectBox = ({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -37,15 +44,13 @@ const SelectBox = ({
 
       <div className="custom-select">
         <div className={`select-wrapper ${isOpen ? "open" : ""}`}>
-          <div
-            className={`custom-dropdown ${!value ? "placeholder" : ""}`}
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          <div className="custom-dropdown" onClick={() => setIsOpen(!isOpen)}>
             <div className="dropdown-content">
               {icon && <span className="product-first-icon">{icon}</span>}
 
-              <span>{value?.label || placeholder}</span>
-
+              <span className="placeholder">
+                {value?.label || placeholder}
+              </span>
             </div>
           </div>
         </div>
@@ -53,8 +58,14 @@ const SelectBox = ({
         {isOpen && (
           <ul className="dropdown-list">
             {options.map((item, index) => (
-              <li key={index} onClick={() => handleSelect(item)}>
-                {item.label}
+              <li key={index}>
+                <CheckBox
+                  label={item.label}
+                  name={name}
+                  value={item.value}
+                  checked={value.includes(item.value)}
+                  onChange={handleCheckboxChange}
+                />
               </li>
             ))}
           </ul>
@@ -64,4 +75,4 @@ const SelectBox = ({
   );
 };
 
-export default SelectBox;
+export default SelectWithCheckbox;

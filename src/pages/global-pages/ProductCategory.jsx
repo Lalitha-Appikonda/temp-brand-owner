@@ -1,13 +1,28 @@
 import React, { useState } from 'react'
-import { FaChevronDown, FaChevronUp } from "react-icons/fa"
+import { FaChevronDown, FaChevronUp, FaTimes } from "react-icons/fa"
+import SelectBox from '../../components/form elements/SelectBox'
+import { LuBox } from 'react-icons/lu';
+import CheckBox from '../../components/form elements/CheckBox';
+import SelectWithCheckbox from '../../components/form elements/SelectWithCheckbox';
+import { Images } from '../../images/Image';
+import Buttons from '../../components/form elements/Buttons';
+import PopUp from '../../components/popup/PopUp';
 
 const ProductCategory = () => {
-  const [open, setOpen] = useState(false)
+ 
+
+  const [category, setCategory] = useState(null);
+  const [Subcategory, setSubCategory] = useState([]);
+
+
+const handleRemove = (itemToRemove) => {
+  setSubCategory((prev) =>
+    prev.filter((item) => item !== itemToRemove)
+  );
+};
 
   return (
     <div className="category-container">
-
-      <div className="logo">logo</div>
 
       <div className="title">Create Your Account</div>
 
@@ -15,57 +30,106 @@ const ProductCategory = () => {
         Continue managing your sales, purchases, and reports by signing in securely.
       </div>
 
-      <select className="select">
-        <option>Aquaculture</option>
-        <option>Agriculture</option>
-        <option>Human Medicine</option>
-        <option>Other</option>
-      </select>
-
-      <div className="custom-select">
-
-         
-        <div 
-          className="select-box"
-          onClick={() => setOpen(!open)}
-        >
-          <span>Select Types</span>
-
-          
-          {open ? <FaChevronUp /> : <FaChevronDown />}
-        </div>
-
-        {open && (
-          <div className="dropdown">
-
-            <div className="dropdown-item">
-              <input type="checkbox" /> Probiotic
-            </div>
-
-            <div className="dropdown-item">
-              <input type="checkbox" /> Minerals
-            </div>
-
-            <div className="dropdown-item">
-              <input type="checkbox" /> Medicine
-            </div>
-
-            <div className="dropdown-item">
-              <input type="checkbox" /> Feeds
-            </div>
-
-          </div>
-        )}
+      <div className='product-category-dropdown'>
+        
+        <SelectBox
+            value={category}
+            onChange={(name, value)=> setCategory(value)}
+            name="product-category"
+            options={[
+              { label: "Aquaculture", value: "aquaculture" },
+              { label: "Agriculture", value: "agriculture" },
+              { label: "Human Medicine", value: "human medicine" },
+              { label: "Other", value: "other" },
+            ]}
+            placeholder="Product Category"
+            icon={<LuBox />}
+          />
 
       </div>
 
-      <button className='button'>Next</button>
+
+      <div className='sub-product-category-dropdown'>
+      <SelectWithCheckbox 
+      value={Subcategory}
+            onChange={(name, value)=> setSubCategory(value)}
+            name="product-category"
+            icon={<LuBox />}
+            options={[
+              { label: "Probiotic", value: "probiotic" },
+              { label: "Minerals", value: "minerals" },
+              { label: "medicine", value: "medicine" },
+              { label: "Feeds", value: "feeds" },
+            ]}
+            placeholder="Product Sub-category"/>
+
+      </div>
+
+      <div className='Selected-subcategory'>
+        {Subcategory.map((item, index) => (
+          <div key={index} className='inner-product'>
+            <p>{item}</p>
+            <img className='cross-icon' src={Images.crossCancle} alt="" onClick={()=>handleRemove(item)}/>
+          </div>
+        ))}
+      </div>
+
+      <div className='next-btn'>
+        <Buttons variant="secondary" className='category-next'>Next</Buttons>
+      </div>
+
       
-      <p className='terms-conditions'>
+      <div className='terms-conditions'>
         By clicking, I confirm that I have read, understood, and agree to the 
-        <span> Terms of Service</span>
-          <span></span> of Sri Animalife Biotech Pvt Ltd.
-      </p>
+        {/* <span > Terms of Service</span>  */}
+      <PopUp trigger={<span > Terms of Service </span>} size="md" title="Terms of Service">
+      <div className='dividing-line'></div>
+          <div className='conditions'>
+            Lorem Ipsum is simply dummy text of the printing and typesetting 
+industry. Lorem Ipsum has been the industry's standard dummy text 
+ever since the 1500s, when an unknown printer took a galley of type 
+and scrambled it to make a type specimen book. It has survived not 
+only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s 
+with the release of Letraset sheets containing Lorem Ipsum passages,
+and more recently with desktop publishing software like Aldus 
+PageMaker including versions of Lorem Ipsum.
+
+Lorem Ipsum is simply dummy text of the printing and typesetting 
+industry. Lorem Ipsum has been the industry's standard dummy text 
+ever since the 1500s, when an unknown printer took a galley of type 
+and scrambled it to make a type specimen book. It has survived not 
+only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s 
+with the release of Letraset sheets containing Lorem Ipsum passages,
+and more recently with desktop publishing software like Aldus 
+PageMaker including versions of Lorem Ipsum.
+
+Lorem Ipsum is simply dummy text of the printing and typesetting 
+industry. Lorem Ipsum has been the industry's standard dummy text 
+ever since the 1500s, when an unknown printer took a galley of type 
+and scrambled it to make a type specimen book. It has survived not 
+only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s 
+with the release of Letraset sheets containing Lorem Ipsum passages,
+and more recently with desktop publishing software like Aldus 
+PageMaker including versions of Lorem Ipsum.
+
+Lorem Ipsum is simply dummy text of the printing and typesetting 
+industry. Lorem Ipsum has been the industry's standard dummy text 
+ever since the 1500s, when an unknown printer took a galley of type 
+and scrambled it to make a type specimen book. It has survived not 
+only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s 
+with the release of Letraset sheets containing Lorem Ipsum passages,
+and more recently with desktop publishing software like Aldus 
+PageMaker including versions of Lorem Ipsum.
+          </div>
+        </PopUp>
+
+        of Sri Animalife Biotech Pvt Ltd.
+      </div>
+
 
     </div>
   )
