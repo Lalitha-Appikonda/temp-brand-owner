@@ -1,7 +1,7 @@
 import React from 'react'
-import Input from './components/form elements/Input'
-import { Images } from './images/Image'
-import Buttons from './components/form elements/Buttons'
+import Input from '../../components/form elements/Input'
+import { Images } from '../../images/Image'
+import Buttons from '../../components/form elements/Buttons'
 
 const Login = () => {
     

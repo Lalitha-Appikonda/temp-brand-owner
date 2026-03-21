@@ -21,6 +21,14 @@ export const Images = {
     successful : "/assets/icons/success.svg",
 
     // nav bar
-    cart : "/assets/icons/shopping-cart.svg"
+    cart : "/assets/icons/shopping-cart.svg",
+
+    // footer
+    footlogo:"/assets/icons/Logo Side 2.svg",
+    ubm:"/assets/icons/image 2.svg",
+    facebook:"/assets/icons/fa.svg",
+    insta:"/assets/icons/in.svg",
+    tiwter:"/assets/icons/ti.svg",
+    youtube:"/assets/icons/you.svg",
 }
 

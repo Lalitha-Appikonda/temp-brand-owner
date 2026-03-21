@@ -15,9 +15,13 @@ import UserAccess from '../pages/global-pages/UserAccess'
 import SecurityQuestions from '../pages/global-pages/SecurityQuestions'
 import ProductCategory from '../pages/global-pages/ProductCategory'
 import SetNewPassword from '../pages/global-pages/SetNewPassword'
-import Login from '../Login'
+
 import StatusHandler from '../pages/global-pages/status screens/StatusHandler'
 import NavBar from '../components/navbar/NavBar'
+import Login from '../pages/global-pages/Login'
+import ForgotPassword from '../pages/global-pages/ForgotPassword'
+import Forgotaftersetup from '../pages/global-pages/Forgotaftersetup'
+import Footer from '../components/Footer'
 
 const AppRoutes = () => {
   return (
@@ -28,11 +32,13 @@ const AppRoutes = () => {
         <Route path='security-questions' element={<SecurityQuestions />} />
         <Route path="setnewpassword" element={<SetNewPassword />} />
         <Route path="login" element={< Login/>}/>
-
+         <Route path="forgotpssword" element={<ForgotPassword/>}/>
+         <Route path="forgot-aftersetup" element={<Forgotaftersetup/>}/>
       </Route>
+      
       <Route path="/status/:type" element={<StatusHandler />} />
-      <Route path='nav' element={<NavBar />} />
-
+      <Route path='nav' element={<NavBar />} />     
+      <Route path="footer" element={<Footer/>}/>
 
       {/* <Route path="/" element={<Laywout/>}>
 
