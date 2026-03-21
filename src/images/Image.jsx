@@ -17,6 +17,10 @@ export const Images = {
     key:"/assets/login-sign up/Union.svg",
     greentick:"/assets/login-sign up/fi_2732657.svg",
     wrongtick:"/assets/login-sign up/fi_2732657 (2).svg",
-    user2:"/assets/login-sign up/Group (12).svg"
+    user2:"/assets/login-sign up/Group (12).svg",
+    successful : "/assets/icons/success.svg",
+
+    // nav bar
+    cart : "/assets/icons/shopping-cart.svg"
 }
 

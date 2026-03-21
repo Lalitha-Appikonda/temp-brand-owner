@@ -4,6 +4,7 @@ import { Images } from './images/Image'
 import Buttons from './components/form elements/Buttons'
 
 const Login = () => {
+    
     return (
         <div className='login-container'>
             <p className='title-text'>Login Your Account</p>
@@ -14,9 +15,9 @@ const Login = () => {
                 <Input placeholder="Name" />
             </div>
             <div className="input-box">
-                <img src={Images.lockicon} class="icon left" />
+                <img src={Images.lockicon} className="icon left" />
                 <Input placeholder='Password' />
-                <img src={Images.eyeicon} class="icon right" />
+                <img src={Images.eyeicon} className="icon right" />
             </div>
             <div className='login-wrapper'>
                 <div className='flex-swites'>

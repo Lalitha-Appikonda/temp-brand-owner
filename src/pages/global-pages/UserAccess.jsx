@@ -8,10 +8,12 @@ const UserAccess = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  //   console.log(currentPath, "currentPath");
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
-  const dummiCondition = isMobile && currentPath === "/security-questions";
+  const hideLogo = ["/security-questions", "/setnewpassword"];
+
+  const dummiCondition =
+    isMobile && hideLogo.includes(currentPath);
 
   return (
     <>
@@ -23,8 +25,8 @@ const UserAccess = () => {
           </div>
           <div className="main-content">
             <div className="main-logo">
-              <img className="mainlogo" src={Images.mainlogo} alt="" />
-              <img className="mobile-logo" src={Images.mobilelogo} />
+              {!dummiCondition && <img className="mainlogo" src={Images.mainlogo} alt="" />}
+              {!dummiCondition && <img className="mobile-logo" src={Images.mobilelogo} />}
             </div>
             <div>
               <Outlet />

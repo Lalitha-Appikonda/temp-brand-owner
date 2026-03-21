@@ -14,28 +14,24 @@ import SignUp from '../pages/global-pages/SignUp'
 import UserAccess from '../pages/global-pages/UserAccess'
 import SecurityQuestions from '../pages/global-pages/SecurityQuestions'
 import ProductCategory from '../pages/global-pages/ProductCategory'
-import ApprovalWait from '../pages/global-pages/ApprovalWait'
-import AccountApproved from '../pages/global-pages/AccountApproved'
-import RejectedApproval from '../pages/global-pages/RejectedApproval'
-import LimitExceed from '../pages/global-pages/LimitExceed'
 import SetNewPassword from '../pages/global-pages/SetNewPassword'
 import Login from '../Login'
+import StatusHandler from '../pages/global-pages/status screens/StatusHandler'
+import NavBar from '../components/navbar/NavBar'
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<UserAccess />}>
         <Route index element={<SignUp />} />
-        <Route path='security-questions' element={<SecurityQuestions />} />
         <Route path='product-category' element={<ProductCategory />} />
+        <Route path='security-questions' element={<SecurityQuestions />} />
         <Route path="setnewpassword" element={<SetNewPassword />} />
         <Route path="login" element={< Login/>}/>
 
       </Route>
-      <Route path='waiting-approval' element={<ApprovalWait />} />
-      <Route path='account-approved' element= {<AccountApproved />}/>
-      <Route path='account-rejected' element= {<RejectedApproval />}/>
-      <Route path='limit-exceed' element= {<LimitExceed />}/>
+      <Route path="/status/:type" element={<StatusHandler />} />
+      <Route path='nav' element={<NavBar />} />
 
 
       {/* <Route path="/" element={<Laywout/>}>

@@ -56,13 +56,13 @@ const SignUp = () => {
 
  
   <div className="input-box">
-    <img src={Images.lockicon} class="icon left"/>
+    <img src={Images.lockicon} className="icon left"/>
     <Input  placeholder="Re-enter Password"/>
-    <img src={Images.eyeicon} class="icon right"/>
+    <img src={Images.eyeicon} className="icon right"/>
   </div>
 
  
-  <Buttons className='btn button'>Next</Buttons>
+  <Buttons className='btn button' onClick={()=> navigate("/product-category")}>Next</Buttons>
 
   <div className='login-texts'>
     <p> Already Have an Account?</p>

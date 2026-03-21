@@ -7,8 +7,10 @@ import SelectWithCheckbox from '../../components/form elements/SelectWithCheckbo
 import { Images } from '../../images/Image';
 import Buttons from '../../components/form elements/Buttons';
 import PopUp from '../../components/popup/PopUp';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCategory = () => {
+  const navigate = useNavigate()
  
 
   const [category, setCategory] = useState(null);
@@ -75,7 +77,7 @@ const handleRemove = (itemToRemove) => {
       </div>
 
       <div className='next-btn'>
-        <Buttons variant="secondary" className='category-next'>Next</Buttons>
+        <Buttons variant="secondary" className='category-next' onClick={()=>navigate("/security-questions")}>Next</Buttons>
       </div>
 
       

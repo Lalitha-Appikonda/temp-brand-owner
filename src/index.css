@@ -198,23 +198,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.input-box .icon {
-  position: absolute;
-  /* width: 18px; */
-  top: 50%;
-  transform: translateY(-50%);
-}
-
- .input-box .icon.left {
-  left: 15px;
-}
-
- .input-box .icon.right {
-  right: 15px;
-  cursor: pointer;
-}
-
-
 /* Reset  End HERE*/
 /*===========================================================variables colors ========================================================*/
 :root {
@@ -226,7 +209,9 @@ input::-webkit-inner-spin-button {
   --secondary-bg: 242, 242, 242;
   --green-bg: 0, 186, 0;
   --login-bg: 243, 245, 247;
-  --box-shadow: 17, 24, 39 /* dashboard */ --icon-color: 37, 61, 78;
+  /* --box-shadow: 17, 24, 39 ; */
+  /* dashobord */
+  --icon-color: 37, 61, 78;
   --like-bg: 255, 55, 48;
   --pink-bg: 247, 75, 129;
   --yellow-bg: 232, 186, 0;
@@ -238,6 +223,7 @@ input::-webkit-inner-spin-button {
   --two-star-rating: 252, 179, 1;
   --one-star-rating: 241, 101, 101;
   --borders: 0, 0, 0;
+  --count-bg : 59, 183, 126;
 
   /* popup backdrop filter */
   --popup-bg: 56, 56, 56;
@@ -253,9 +239,10 @@ input::-webkit-inner-spin-button {
   /* dashboard */
   --green-text: 1, 152, 18;
   --out-of-stock-text: 255, 78, 72;
+  --nav-border: 236, 236, 236;
 }
 
-/************ fontfamily*********** */
+/*=========================================================== fontfamily=========================================================== */
 @font-face {
   font-family: "creatodisplay-regular";
   font-style: normal;
@@ -280,9 +267,9 @@ input::-webkit-inner-spin-button {
   src: url("/assets/fonts/static/CreatoDisplay-Bold.otf") format("truetype");
 }
 
-/************ fontfamily*********** */
+/*=========================================================== fontfamily end here=========================================================== */
 
-/* *****typography for web********* */
+/* =========================================================== typography for web=========================================================== */
 
 h1 {
   font-size: 21px;
@@ -335,9 +322,14 @@ h6 {
     font-size: 10px;
   }
 }
-/* *****typography********* */
+/* =========================================================== typography end here===========================================================*/
 
-/* ================ containers ====== */
+/* =========================================================== containers ===========================================================*/
+.container{
+  width: 1270px;
+  max-width: 100%;
+  margin: 0 auto;
+}
 @media (max-width: 2500px) {
   .container {
     max-width: 1500px;
@@ -348,6 +340,7 @@ h6 {
 @media (max-width: 1440px) {
   .container {
     max-width: 1270px;
+    width: 100%;
   }
 }
 
@@ -376,7 +369,9 @@ h6 {
   }
 }
 
-/* ===============================  buttons ============================================*/
+/* =========================================================== conatiner ends here =========================================================== */
+
+/* =========================================================== buttons ===========================================================*/
 
 /**************** BASE BUTTON **************/
 .btn {
@@ -393,7 +388,7 @@ h6 {
   transition: all 0.3s ease;
 }
 
-/* double buttons */
+/**************** double buttons ****************/
 
 .double-buttons {
   position: relative;
@@ -413,7 +408,7 @@ h6 {
   color: rgba(var(--primary-bg), 1);
 }
 
-/*********************** double BUTTON HOVER / FOCUS / ACTIVE (ALL STATES) */
+/***************** double BUTTON HOVER / FOCUS / ACTIVE (ALL STATES) ****************/
 .btn-double-primary:hover,
 .btn-double-primary:focus,
 .btn-double-primary.focus,
@@ -423,7 +418,7 @@ h6 {
   color: rgba(var(--primary-bg), 1);
 }
 
-/* outline buttons */
+/**************** outline buttons ****************/
 
 /*  OUTLINE BUTTON BASE  */
 .btn[class*="btn-outline-"] {
@@ -440,7 +435,7 @@ h6 {
   color: rgba(var(--primary-bg), 1);
 }
 
-/* ********************** outline button  Hover / Focus / Active states ***********************/
+/* *************** outline button  Hover / Focus / Active states ****************/
 .btn-outline-primary:hover,
 .btn-outline-primary:focus,
 .btn-outline-primary.focus,
@@ -458,7 +453,7 @@ h6 {
   color: rgba(var(--primary-bg), 1);
 }
 
-/*  soft BUTTONS  */
+/****************  soft BUTTONS  ****************/
 .btn-primary {
   padding: 9.5px 15px;
   background-color: rgba(var(--orange-bg), 1);
@@ -481,7 +476,7 @@ h6 {
   border: 1px solid rgba(var(--orange-bg), 1);
 }
 
-/* circle buttons */
+/**************** circle buttons ****************/
 
 .btn-circle-primary {
   width: 36px;
@@ -489,7 +484,6 @@ h6 {
   border-radius: 80px;
   color: rgba(var(--primary-text), 1);
   background-color: rgba(var(--primary-bg), 1);
-  /* background-color: green; */
 }
 .btn-container .btn .arrow-icon {
   width: 15px;
@@ -536,11 +530,11 @@ h6 {
   box-shadow: none;
 }
 
-/* =================================== buttons end here =======================*/
+/* ===================================================== buttons end here ==================================================*/
 
-/* =================================== form fields ============================*/
+/* ====================================================== form fields ======================================================*/
 
-/* input field  */
+/**************** input field  ****************/
 
 .input-group .input-wrapper input {
   width: 100%;
@@ -576,8 +570,23 @@ h6 {
   color: rgba(var(--error-text), 1);
   font-size: 12px;
 }
+.input-box .icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-/* selct box */
+ .input-box .icon.left {
+  left: 15px;
+}
+
+ .input-box .icon.right {
+  right: 15px;
+  cursor: pointer;
+}
+
+/**************** selct box ****************/
+
 .select-group label {
   font-size: 14px;
   font-family: "creatodisplay-medium";
@@ -658,7 +667,8 @@ h6 {
   cursor: pointer;
 }
 
-/* text area */
+/****************  text area ****************/
+
 .textarea-group label {
   font-size: 14px;
   font-family: "creatodisplay-medium";
@@ -678,7 +688,8 @@ h6 {
   text-align: start;
 }
 
-/* checkboxes */
+/****************  checkboxes ****************/
+
 .checkbox-group .checkbox-wrapper {
   display: flex;
   align-items: center;
@@ -713,9 +724,12 @@ h6 {
   background-repeat: no-repeat;
 }
 
-/* modals popups */
+/* ====================================================== form fields ends here ======================================================*/
 
-/* ===== OVERLAY (BLUR BACKGROUND) ===== */
+/* ====================================================== modals popups ======================================================*/
+
+/* ----------  POPUP web  ---------------*/
+/*  OVERLAY (BLUR BACKGROUND)  */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -731,7 +745,6 @@ h6 {
   z-index: 9999;
 }
 
-/* ===== POPUP ===== */
 .popup-container {
   background: rgba(var(--primary-bg), 1);
   border-radius: 16px;
@@ -744,7 +757,7 @@ h6 {
   overflow: hidden;
 }
 
-/* ===== ANIMATION ===== */
+/* ANIMATION */
 @keyframes popupFade {
   from {
     transform: scale(0.95);
@@ -757,7 +770,7 @@ h6 {
   }
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 .popup-header {
   display: flex;
   justify-content: space-between;
@@ -768,10 +781,9 @@ h6 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  /* color: #111827; */
 }
 
-/* ===== CLOSE BUTTON ===== */
+/*  CLOSE BUTTON */
 .popup-close {
   border: none;
   background: transparent;
@@ -784,7 +796,7 @@ h6 {
   color: rgba(var(--primary-text), 1);
 }
 
-/* ===== BODY ===== */
+/*  BODY  */
 .popup-body {
   margin-top: 15px;
   overflow-y: auto;
@@ -794,34 +806,31 @@ h6 {
 /* .popup-cancel:hover {
   background: #f3f4f6;
 } */
-
 .popup-container.xs {
   max-width: 411px;
   width: 100%;
   height: auto;
 }
-
 .popup-container.sm {
   max-width: 447px;
   width: 100%;
   height: auto;
 }
-
 .popup-container.md {
   max-width: 753px;
   width: 100%;
   height: auto;
 }
-
 .popup-container.lg {
   max-width: 1131px;
   width: 100%;
   height: auto;
 }
-/* ===== mobile pop up ===== */
+
+/* ------- mobile pop up ------------ */
 
 @media (max-width: 768px) {
-  /* ===== OVERLAY (BLUR BACKGROUND) ===== */
+  /*  OVERLAY (BLUR BACKGROUND)  */
   .popup-overlay {
     position: unset;
     top: unset;
@@ -833,8 +842,6 @@ h6 {
     bottom: 0px;
     z-index: 9999;
   }
-
-  /* ===== POPUP ===== */
   .popup-container {
     background: rgba(var(--primary-bg), 1);
     border-radius: unset;
@@ -867,7 +874,6 @@ h6 {
   }
 }
 
-/* ===== ≤1200px ===== */
 @media (max-width: 1200px) {
   .popup-container.lg {
     max-width: 1000px;
@@ -886,7 +892,7 @@ h6 {
   }
 }
 
-/* ===== ≤992px ===== */
+
 @media (max-width: 992px) {
   .popup-container.lg {
     max-width: 850px;
@@ -905,7 +911,6 @@ h6 {
   }
 }
 
-/* ===== ≤768px ===== */
 @media (max-width: 768px) {
   .popup-container.lg {
     max-width: 650px;
@@ -925,7 +930,7 @@ h6 {
   }
 }
 
-/* ===== ≤576px ===== */
+
 @media (max-width: 576px) {
   .popup-container.lg {
     max-width: 500px;
@@ -944,15 +949,217 @@ h6 {
     max-width: 280px;
   }
 }
+/* ====================================================== modals popups ======================================================*/
 
-/* **************************global css *******************************************/
+
+/*======================================================== global pages =======================================================*/
+
+/* *****************************nav bar ************************/
+.nav-container{
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px solid black; */
+  align-items: center;
+  height: 100px;
+  /* border-bottom: 1px solid rgba(var(--nav-border), 1); */
+}
+.nav-container .nav-logo img{
+  width: 228px;
+  height: 64px;
+}
+.nav-container .nav-middle{
+  width: 859px;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-container .nav-middle .nav-links{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.nav-container .nav-middle .nav-links::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  } 
+.nav-container .nav-middle .nav-links .title{
+  font-family: "creatodisplay-medium";
+  line-height: 100%;
+  color: rgba(var(--icon-color), 1);
+  letter-spacing: 2%;
+}
+.nav-container .nav-right{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+.nav-container .nav-right .nav-circles{
+  position: relative;
+  width: 40px;
+  height: 47px;
+}
+.nav-container .nav-right .nav-circles .circles{
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgba(var(--slider-circle-bg), 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-container .nav-right .nav-circles .count{
+  width: 15px;
+  height: 15px;
+  background-color: rgba(var(--count-bg), 1);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(var(--primary-bg), 1);
+  font-size: 10px;
+  position: absolute;
+  top: 0;
+  right: 6px;
+  transform: translateY(-5px);
+}
+/* dropdowns */
+.nav-container .nav-middle .nav-links .dropdowns{
+  width: 218px;
+  height: auto;
+  border-radius: 12px;
+  position: absolute;
+  top: 160%;
+  margin-top: 8px;
+  background-color: rgba(var(--primary-bg), 1) ;
+  /* padding: 14px 17px; */
+  box-shadow: 0px 0px 4px rgba(var(--borders), 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(5px);
+  transition: all 0.2s ease;
+  z-index: 400;
+}
+.nav-container .nav-middle .nav-links .dropdowns .inner-title{
+  height: 44px;
+  font-family: "creatodisplay-medium";
+  line-height: 100%;
+  color: rgba(var(--icon-color), 1);
+  display: flex;
+  align-items: center;
+  padding-left: 17px;
+}
+.nav-container .nav-middle .nav-links:hover .dropdowns{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-container .nav-middle .nav-links:hover .title{
+  color: rgba(var(--orange-bg), 1);
+}
+.nav-container .nav-middle .nav-links:hover .icon{
+  color: rgba(var(--orange-bg), 1);
+  transform: rotate(180deg);
+}
+.nav-container .nav-middle .nav-links .offers-dropdown{
+  width: 273px;
+}
+
+/* subdropdowns */
+.nav-container .nav-middle .nav-links .dropdowns .sub-dropdowns .sub:hover{
+  background-color: rgba(var(--orange-bg), 0.12);
+}
+.nav-container .nav-middle .nav-links .dropdowns .sub-dropdowns .sub{
+  /* position: relative; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 17px;
+}
+.sub-dropdowns .sub .sub-menu {
+  position: absolute;
+  top: 0;
+  left: 95%;
+  width: 218px;
+  height: 130px;
+  background: rgba(var(--primary-bg), 1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(var(--borders), 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+.sub-dropdowns .sub:hover .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+.sub-dropdowns .sub .sub-menu .sub-menu-title h5{
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding-left: 17px;
+  font-family: "creatodisplay-medium";
+  line-height: 100%;
+  color: rgba(var(--icon-color), 1);
+}
+
+
+/* more nav adjustment*/
+.sub-dropdowns .sub .sub-menu.more-sub-menu{
+  height: 180px;
+  width: 200px;
+}
+.nav-container .nav-middle .nav-links .dropdowns.more-dropdown{
+  width: 190px;
+}
+
+/* purchase nav adjustments */
+.nav-container .nav-middle .nav-links .dropdowns.purchase-dropdown{
+  height: 130px;
+}
+.sub-dropdowns .sub .sub-menu.purchase-submenu{
+  width: 240px;
+}
+.nav-container  .nav-mobile{
+  display: none;
+}
+
+
+@media (max-width:1500px) {
+ .sub-dropdowns .sub .sub-menu {
+  left: 0%;
+  top: 100%;
+  /* width: 218px;
+  height: 130px; */
+} 
+.sub-dropdowns .sub .sub-menu.purchase-submenu{
+  width: 218px;
+}
+}
+
+
+
+
+
+
+
+
+
+/* ======================================================= login pages css ======================================================*/
 .dividing-line {
   width: 100%;
   height: 2px;
   border-top: 1px solid rgba(var(--dividing-line), 1);
 }
 
-/* user access layout */
+/********** -------- user access layout  --------**********/
 
 .user-access-conatiner {
   background-color: rgba(var(--login-bg), 1);
@@ -981,13 +1188,6 @@ h6 {
   /* background-color: red; */
 }
 
-/* .user-access-conatiner .access-wrapper .main-content{
-  width: 90%;
-} */
-/* @media (max-width: 1300px) {
-  .user-access-conatiner .access-wrapper {
-  }
-} */
 .user-access-conatiner .access-wrapper .main-content .main-logo {
   display: flex;
   justify-content: center;
@@ -1039,7 +1239,7 @@ h6 {
   }
 }
 
-/* security questions */
+/* ********* -------- security questions ---------- ************ */
 
 .security-ques-text-content .back-btn {
   width: 40px;
@@ -1059,8 +1259,8 @@ h6 {
   margin-top: 25px;
 }
 .security-ques-text-content .text-content .choose {
-  width: 330px;
-  height: 50px;
+  /* width: 330px;
+  height: 50px; */
   margin: 15px auto 0;
   font-size: 14px;
   line-height: 18px;
@@ -1074,6 +1274,7 @@ h6 {
   line-height: 18px;
   text-align: center;
   color: rgba(var(--primary-text), 1);
+  margin-top: 15px;
 }
 .security-ques-text-content .text-content .ques-container {
   display: flex;
@@ -1170,7 +1371,20 @@ h6 {
   width: 300px;
   height: 50px;
 }
-
+@media (max-width: 1350px) {
+.security-ques-text-content .text-content h1 {
+  font-size: 32px;
+}
+}
+@media (max-width: 1250px) {
+  .security-ques-text-content .text-content .ques-container .boxes .ques-prefix
+ {
+    gap: 10px;
+}
+.security-ques-text-content .text-content .ques-container .boxes .ques-prefix .row1 .ques {
+    text-align: start;
+}
+}
 @media (max-width: 1100px) {
   .security-ques-text-content .text-content h1 {
     font-size: 30px;
@@ -1214,35 +1428,35 @@ h6 {
     height: auto;
   }
 }
-/* wait time screen */
+/* *********** -------- status screens --------------************/
 
-.close-icon {
-  display: flex;
-  justify-content: flex-end;
-}
-.close-icon .icon {
-  width: 30px;
-  height: 20px;
-}
-.wait-time-screen {
+.status-screen {
   display: flex;
   flex-direction: column;
   margin: 30px 30px;
 }
-.wait-time-screen .wait-content {
+.status-screen .close-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+.status-screen .close-icon .icon {
+  width: 30px;
+  height: 20px;
+}
+.status-screen .status-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 200px;
 }
-.wait-time-screen .wait-content h1 {
+.status-screen .status-content h1 {
   margin-top: 20px;
   font-family: "creatodisplay-bold";
   line-height: 100%;
   color: rgba(var(--primary-text), 1);
 }
-.wait-time-screen .wait-content h3 {
+.status-screen .status-content h3 {
   width: 800px;
   height: 60px;
   margin: 15px auto 0;
@@ -1253,224 +1467,117 @@ h6 {
   letter-spacing: 2%;
 }
 @media (max-width: 950px) {
-  .wait-time-screen .wait-content h3 {
+.status-screen .status-content h3 {
     width: 630px;
     height: auto;
   }
 }
 @media (max-width: 768px) {
-  .wait-time-screen .wait-content {
+.status-screen .status-content {
     margin-top: 100px;
   }
-  .wait-time-screen .wait-content h3 {
+.status-screen .status-content h3 {
     width: 500px;
     height: auto;
   }
 }
 @media (max-width: 576px) {
-  .wait-time-screen .wait-content h3 {
+.status-screen .status-content h3 {
     width: 400px;
     height: auto;
   }
 }
 @media (max-width: 483px) {
-  .wait-time-screen .wait-content h3 {
+.status-screen .status-content h3 {
     width: 306px;
-    height: 60px;
+    height: auto;
   }
 }
 @media (max-width: 400px) {
-  .wait-time-screen .wait-content h3 {
+.status-screen .status-content h3 {
     width: 236px;
-    height: 60px;
+    height: auto;
   }
 }
 
-/* Account approved */
+/************* -------- Account approved  --------**************** */
+.status-screen .status-content .approved-btn{
+  margin-top: 15px;
+}
 
-.approved-screen {
-  display: flex;
-  flex-direction: column;
-  margin: 30px 30px;
-}
-.approved-screen .approved-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-}
-.approved-screen .approved-content h1 {
-  margin-top: 20px;
-  font-family: "creatodisplay-bold";
-  line-height: 100%;
-  color: rgba(var(--primary-text), 1);
-}
-.approved-screen .approved-content h3 {
-  width: 800px;
-  height: 60px;
-  margin: 15px auto 0;
-  font-family: "creatodisplay-regular";
-  line-height: 23px;
-  color: rgba(var(--secondary-text), 1);
-  text-align: center;
-  letter-spacing: 2%;
-}
-.approved-screen .approved-content div {
-  margin-top: 15px;
-}
-@media (max-width: 768px) {
-  .approved-screen .approved-content {
-    margin-top: 100px;
-  }
-}
-/* account rejected */
 
-.rejected-screen {
-  display: flex;
-  flex-direction: column;
-  margin: 30px 30px;
+/**************** -------- account rejected -------------***************/
+.status-screen .status-content .rejected-btn{
+ margin-top: 15px;
 }
-.rejected-screen .rejected-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
+.status-screen .rejected-content h3{
+ width: auto;
+ height: auto;
 }
-.rejected-screen .rejected-content h1 {
-  margin-top: 20px;
-  font-family: "creatodisplay-bold";
-  line-height: 100%;
-  color: rgba(var(--primary-text), 1);
-}
-.rejected-screen .rejected-content h3 {
-  margin-top: 15px;
-  font-family: "creatodisplay-regular";
-  line-height: 23px;
-  color: rgba(var(--secondary-text), 1);
-  text-align: center;
-  letter-spacing: 2%;
-}
-.rejected-screen .rejected-content div {
-  margin-top: 15px;
-}
-.rejected-screen .rejected-content div .btn-outline-primary {
+.status-screen .status-content .rejected-btn .btn-outline-primary {
   width: 300px;
   height: 50px;
   border-color: rgba(var(--out-of-stock-text), 1);
   color: rgba(var(--out-of-stock-text), 1);
 }
-@media (max-width: 950px) {
-  .rejected-screen .rejected-content h3 {
-    width: 630px;
-    height: auto;
-  }
-}
 @media (max-width: 768px) {
-  .rejected-screen .rejected-content {
-    margin-top: 100px;
-  }
-  .rejected-screen .rejected-content h3 {
+.status-screen .rejected-content h3 {
     width: 500px;
     height: auto;
   }
 }
 @media (max-width: 576px) {
-  .rejected-screen .rejected-content h3 {
+.status-screen .rejected-content h3 {
     width: 400px;
     height: auto;
   }
 }
 @media (max-width: 483px) {
-  .rejected-screen .rejected-content h3 {
+.status-screen .rejected-content h3 {
     width: 306px;
-    height: 60px;
+    height: auto;
   }
 }
 @media (max-width: 400px) {
-  .rejected-screen .rejected-content h3 {
+.status-screen .rejected-content h3 {
     width: 236px;
-    height: 60px;
+    height: auto;
   }
-  .rejected-screen .rejected-content div .btn-outline-primary {
+  .status-screen .status-content .rejected-btn .btn-outline-primary  {
     width: 250px;
   }
 }
 
-/* limit exceed */
+/* ************ -------- limit exceed  --------************** */
+.status-screen .status-content .limit-exceed-btn{
+    margin-top: 15px;
+}
 
-/* .limit-exceed-screen{
-display: flex;
-flex-direction: column;
-margin: 30px 30px;
-} */
-.limit-exceed-screen .limit-exceed-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-}
-.limit-exceed-screen .limit-exceed-content h1 {
-  margin-top: 20px;
-  font-family: "creatodisplay-bold";
-  line-height: 100%;
-  color: rgba(var(--primary-text), 1);
-}
-.limit-exceed-screen .limit-exceed-content h3 {
-  margin-top: 15px;
-  font-family: "creatodisplay-regular";
-  line-height: 23px;
-  color: rgba(var(--secondary-text), 1);
-  text-align: center;
-  letter-spacing: 2%;
-}
-.limit-exceed-screen .limit-exceed-content div {
-  margin-top: 15px;
-}
-.limit-exceed-screen .limit-exceed-content div .login-back {
+.status-screen .status-content .limit-exceed-btn .btn-outline-primary {
   width: 300px;
   height: 50px;
 }
-@media (max-width: 950px) {
-  .limit-exceed-screen .limit-exceed-content h3 {
-    width: 630px;
-    height: auto;
-  }
-}
-@media (max-width: 768px) {
-  .limit-exceed-screen .limit-exceed-content {
-    margin-top: 100px;
-  }
-  .limit-exceed-screen .limit-exceed-content h3 {
-    width: 500px;
-    height: auto;
-  }
-}
-@media (max-width: 576px) {
-  .limit-exceed-screen .limit-exceed-content h3 {
-    width: 400px;
-    height: auto;
-  }
-}
-@media (max-width: 483px) {
-  .limit-exceed-screen .limit-exceed-content h3 {
-    width: 306px;
-    height: 60px;
-  }
-}
 @media (max-width: 400px) {
-  .limit-exceed-screen .limit-exceed-content h3 {
-    width: 236px;
-    height: 60px;
-  }
-  .limit-exceed-screen .limit-exceed-content div .login-back {
+.status-screen .status-content .limit-exceed-btn .btn-outline-primary {
     width: 250px;
   }
 }
 
-/* #########    signup category Container ##########3 */
+/* *********** --------successfull - --------**************/
+.status-screen .status-content .success-btn{
+  margin-top: 15px;
+}
+.status-screen .status-content .success-btn .btn-outline-primary {
+  width: 300px;
+  height: 50px;
+}
+@media (max-width: 400px) {
+.status-screen .status-content .success-btn .btn-outline-primary {
+    width: 250px;
+  }
+}
+
+/* ************ -------- signup category Container  --------*********** */
 .category-container {
   width: 100%;
   margin: 40px auto;
@@ -1531,8 +1638,8 @@ margin: 30px 30px;
   margin-top: 50px;
 }
 .category-container .next-btn .category-next {
-  width: 300px;
-  height: 50px;
+  width: 100%;
+  height: 58px;
 }
 
 .category-container .terms-conditions {
@@ -1574,7 +1681,7 @@ margin: 30px 30px;
   }
 }
 
-/** signup **/
+/**************** -------- signup  --------*************/
 
 .signup-container .logintext {
   font-family: "creatodisplay-bold";
@@ -1624,7 +1731,6 @@ margin: 30px 30px;
   color: rgba(var(--secondary-text));
 
 }
-
 
 .signup-container .rules {
   text-align: left;
@@ -1684,7 +1790,7 @@ margin: 30px 30px;
 }
 
 .signup-container .terms a {
-  color: #1c2b39;
+  color: rgba((var(--primary-text), 1));
   text-decoration: underline;
 }
 @media(max-width:1200px){
@@ -1730,7 +1836,7 @@ margin: 30px 30px;
 
 }
 
-/********* set new password********** */
+/********* -------- set new password  --------********** */
 
 .setnewpassword-container .title-text{
 font-family:"creatodisplay-bold";
@@ -1858,9 +1964,7 @@ font-size:21px;
 
 }
 
-
-
-/* login */
+/* **************** --------login --------*************** */
 
 .login-container .title-text{
 font-family:"creatodisplay-bold";
@@ -1929,7 +2033,7 @@ color:rgba(var(--primary-text), 1);
 .login-container .login-wrapper .slider {
   position: absolute;
   cursor: pointer;
-  border:2px solid #ccc;
+  border:2px solid rgba(var(--primary-bg), 1);
   border-radius: 30px;
   width: 100%;
   height: 100%;
@@ -2057,3 +2161,5 @@ color:rgba(var(--primary-text), 1);
   transition: 0.3s;
 }
 }
+
+

@@ -2,8 +2,11 @@ import React from 'react'
 import Input from '../../components/form elements/Input'
 import { Images } from '../../images/Image'
 import Buttons from '../../components/form elements/Buttons';
+import { useNavigate } from 'react-router-dom';
 
 const SetNewPassword = () => {
+
+    const navigate = useNavigate()
     const setrules = [
         { text: "Use at least 8–12 characters", icon: Images.wrongtick,  },
         { text: "Mix uppercase and lowercase letters", icon: Images.wrongtick ,  },
@@ -47,7 +50,7 @@ const SetNewPassword = () => {
             </div>
             <div className='action-buttons'>
                 <Buttons className='cancel-button' variant='btn btn-outline-primary'>Cancel</Buttons>
-                <Buttons className='submit-button' variant=' btn btn-secondary'>Submit</Buttons>
+                <Buttons className='submit-button' variant=' btn btn-secondary' onClick={()=>navigate('/status/success')}>Submit</Buttons>
             </div>
 
         </div>
