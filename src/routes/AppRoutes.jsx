@@ -19,7 +19,10 @@ import AccountApproved from '../pages/global-pages/AccountApproved'
 import RejectedApproval from '../pages/global-pages/RejectedApproval'
 import LimitExceed from '../pages/global-pages/LimitExceed'
 import SetNewPassword from '../pages/global-pages/SetNewPassword'
-import Login from '../Login'
+import Login from '../pages/global-pages/Login'
+import ForgotPassword from '../pages/global-pages/ForgotPassword'
+import Forgotaftersetup from '../pages/global-pages/Forgotaftersetup'
+import Footer from '../components/Footer'
 
 const AppRoutes = () => {
   return (
@@ -30,13 +33,16 @@ const AppRoutes = () => {
         <Route path='product-category' element={<ProductCategory />} />
         <Route path="setnewpassword" element={<SetNewPassword />} />
         <Route path="login" element={< Login/>}/>
+         <Route path="forgotpssword" element={<ForgotPassword/>}/>
+         <Route path="forgot-aftersetup" element={<Forgotaftersetup/>}/>
 
       </Route>
       <Route path='waiting-approval' element={<ApprovalWait />} />
       <Route path='account-approved' element= {<AccountApproved />}/>
       <Route path='account-rejected' element= {<RejectedApproval />}/>
       <Route path='limit-exceed' element= {<LimitExceed />}/>
-
+     
+      <Route path="footer" element={<Footer/>}/>
 
       {/* <Route path="/" element={<Laywout/>}>
 
