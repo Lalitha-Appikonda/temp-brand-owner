@@ -22,6 +22,14 @@ export const Images = {
 
     // nav bar
     cart : "/assets/icons/shopping-cart.svg",
+    notification : "/assets/icons/notification.svg",
+    like : "/assets/icons/like.svg",
+    bag : "/assets/icons/bag.svg",
+    // mobile nav
+    home : "/assets/icons/home.svg",
+    uploading : "/assets/icons/product-uplaoding.svg",
+    tracking : "/assets/icons/tracking.svg",
+    profile : "/assets/icons/profile.svg",
 
     // footer
     footlogo:"/assets/icons/Logo Side 2.svg",
