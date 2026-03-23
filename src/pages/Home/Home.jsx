@@ -49,6 +49,8 @@ const Home = () => {
               </div>
               <div className="main-card">
               </div>
+              {/* <div className="main-card1">
+              </div> */}
               <div className='down-position'>
                 <div className="double-buttons">
                   <Buttons variant="double-primary" className="primary-circle-button">

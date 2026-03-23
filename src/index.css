@@ -2684,7 +2684,7 @@ h6 {
   width: 150px;
   min-width: 100%;
   height: 58px;
-  background: rgba(242, 242, 242, 1);
+  background:rgba(242, 242, 242, 1);
 }
 
 @media(max-width:1300px) {
@@ -2921,6 +2921,17 @@ h6 {
   opacity: 1;
   border-radius: 32px;
 }
+/* .home-section1 .main-card1 {
+  background-image: url(/assets/icons/Subtract\ \(1\).png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 1055px;
+  height: 456px;
+  opacity: 1;
+  border-radius: 32px;
+  display: none;
+} */
 
 .home-section1 .badge {
   display: flex;
@@ -3036,7 +3047,18 @@ color: rgba(var(--secondary-text));
     font-size:23px;
   }
   
-        .home-section1 .main-card {
-          width:360px;
+        /* .home-section1 .main-card {
+          display: none;
         }
+        .home-section1 .main-card1 {
+  background-image: url(/assets/icons/Subtract\ \(1\).png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 1055px;
+  height: 456px;
+  opacity: 1;
+  border-radius: 32px;
+  display:block;
+} */
 }
