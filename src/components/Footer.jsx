@@ -58,9 +58,9 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <Card/>
-                </div>
+                </div> */}
             </div>
         </footer>
     );
