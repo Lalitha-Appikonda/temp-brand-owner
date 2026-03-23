@@ -38,5 +38,19 @@ export const Images = {
     insta:"/assets/icons/in.svg",
     tiwter:"/assets/icons/ti.svg",
     youtube:"/assets/icons/you.svg",
+
+    //curve image
+    clippath:"/assets/icons/Subtract.svg",
+    like:"/assets/icons/_x31_8-Like.svg",
+    minline:"/assets/icons/I.svg",
+    ministar:"/assets/icons/star.svg",
+    product:"/assets/icons/product-1-1.jpg.svg",
+
+
+    //homepage
+
+    mainlogotext:"/assets/icons/Rectangle 17.svg",
+    mainlogotext1:"/assets/icons/product-1-1.jpg (1).svg",
+    backgroundbranner:"/assets/icons/Subtract.png",
 }
 

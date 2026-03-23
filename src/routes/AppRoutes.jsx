@@ -40,6 +40,8 @@ const AppRoutes = () => {
       <Route path="/status/:type" element={<StatusHandler />} />
       <Route path='nav' element={<NavBar />} />     
       <Route path="footer" element={<Footer/>}/>
+       <Route path="home" element={<Home/>} />
+
 
       <Route path='mobile' element={<MobileNav />} />
 
