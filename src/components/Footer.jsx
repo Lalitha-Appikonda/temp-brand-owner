@@ -1,5 +1,6 @@
 import React from "react";
 import { Images } from "../images/Image";
+import Card from "./card/Card";
 
 const Footer = () => {
     const images = [
@@ -13,11 +14,6 @@ const Footer = () => {
         <footer className="footer-container">
             <div className="container">
 
-
-                {/* <div className="images-wrapper">
-                    <img src={Images.footlogo} alt="logo" />
-                    <img src={Images.ubm} alt="ubm" />
-                </div> */}
                 <div className="footer-wrapper">
 
 
@@ -61,6 +57,9 @@ const Footer = () => {
                             ))}
                         </div>
                     </div>
+                </div>
+                <div>
+                    <Card/>
                 </div>
             </div>
         </footer>

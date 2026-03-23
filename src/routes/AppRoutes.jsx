@@ -22,6 +22,7 @@ import Login from '../pages/global-pages/Login'
 import ForgotPassword from '../pages/global-pages/ForgotPassword'
 import Forgotaftersetup from '../pages/global-pages/Forgotaftersetup'
 import Footer from '../components/Footer'
+import Styleguide from './../Styleguide/Styleguide';
 
 const AppRoutes = () => {
   return (
@@ -39,6 +40,8 @@ const AppRoutes = () => {
       <Route path="/status/:type" element={<StatusHandler />} />
       <Route path='nav' element={<NavBar />} />     
       <Route path="footer" element={<Footer/>}/>
+       <Route path="home" element={<Home/>} />
+
 
       {/* <Route path="/" element={<Laywout/>}>
 
