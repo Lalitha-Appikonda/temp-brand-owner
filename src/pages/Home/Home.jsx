@@ -4,6 +4,7 @@ import { Images } from '../../images/Image';
 import { FiArrowUpRight } from 'react-icons/fi';
 import Buttons from '../../components/form elements/Buttons';
 import Footer from '../../components/Footer';
+import WhyChooseUs from './WhyChooseUs';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ const Home = () => {
       text: "Empowering farmers nationwide with natural, science-backed solutions for healthier ponds and higher yields.",
     },
   ];
+
+
+  
   return (
     <div className='home-page'>
       <section className='home-section1'>
@@ -94,10 +98,17 @@ const Home = () => {
 
 
 
+      <section>
+        
+      </section>
+
+
+
 
       {/* <h2>home page</h2>
       <button onClick={()=>navigate("/products")}>products list</button> */}
       <Footer />
+      <WhyChooseUs/>
     </div>
   )
 }
