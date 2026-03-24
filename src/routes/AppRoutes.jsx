@@ -45,7 +45,7 @@ const AppRoutes = () => {
 
       <Route path='mobile' element={<MobileNav />} />
 
-      {/* <Route path="/" element={<Laywout/>}>
+      <Route path="/" element={<Layout/>}>
 
         <Route index element={<Home/>} />
 
@@ -57,7 +57,7 @@ const AppRoutes = () => {
         <Route path="address" element={<DeliveryAddress />} />
         <Route path="address/edit" element={<EditAddress />} />
 
-      </Route> */}
+      </Route>
     </Routes>
   )
 }
