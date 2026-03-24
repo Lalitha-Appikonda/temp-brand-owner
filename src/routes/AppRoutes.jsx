@@ -9,20 +9,13 @@ import Cart from "../pages/Cart/Cart";
 import DeliveryAddress from "../pages/DeliveryAddress/DeliveryAddress";
 import EditAddress from "../pages/EditAddress/EditAddress";
 
-import UserAccess from "../pages/global-pages/UserAccess";
-import ProductCategory from "../pages/global-pages/ProductCategory";
-import SignUp from "../pages/global-pages/SignUp";
-import SecurityQuestions from "../pages/global-pages/SecurityQuestions";
+ 
 
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<UserAccess />}>
-        <Route index element={<SignUp />}/>
-        <Route path='security-questions' element={<SecurityQuestions />}/>
-        <Route path='product-category' element= {<ProductCategory />} />
-      </Route>
+     
 
     
       <Route path="/" element={<Layout />}>
@@ -32,9 +25,9 @@ const AppRoutes = () => {
         <Route path="product/:id" element={<Product />} />
         <Route path="product/:id/reviews" element={<Review />} />
 
-        <Route path="cart" element={<Cart />} />
         <Route path="address" element={<DeliveryAddress />} />
         <Route path="address/edit" element={<EditAddress />} />
+        <Route  path='cart' element={<Cart />} />
 
       </Route>
 

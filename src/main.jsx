@@ -11,7 +11,7 @@ import ProductCategory from './pages/global-pages/ProductCategory';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <ProductCategory />
+      <App />
     </BrowserRouter>
   </StrictMode>,
 )
