@@ -104,11 +104,12 @@ const Styleguide = () => {
         <div style={{ display: "flex", gap: "20px" }}>
           <div className="double-buttons">
             <Buttons variant="double-primary" className="primary-circle-button">
-              Primary
+              Primary <span className="circle-button btn-circle-primary"><FiArrowUpRight /></span>
             </Buttons>
-            <Buttons variant="circle-primary" className="circle-button">
+  
+            {/* <Buttons variant="circle-primary" className="circle-button">
               <FiArrowUpRight className="arrow-icon" />
-            </Buttons>
+            </Buttons> */}
           </div>
         </div>
 

@@ -3,9 +3,7 @@ import { Images } from '../../images/Image';
 import { FiArrowUpRight } from 'react-icons/fi';
 import Buttons from '../../components/form elements/Buttons';
 import Footer from '../../components/Footer';
-import WhyChooseUs from './WhyChooseUs';
 import NavBar from "../../components/navbar/NavBar";
-import Card from "../../components/card/Card";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -137,7 +135,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <NavBar />
+      <NavBar/>
       <div className='mobile-container'>
         <div className="container ">
 
@@ -148,9 +146,26 @@ const Home = () => {
                 <img className="icons-img left" src={Images.mainlogotext} />
                 <p>Success with</p>
               </div>
-              <div className="banner-title">
-                <div className="title-imgback">
-                  <img src={Images.mainlogotext1} alt="right" className="" />
+              <p> Every Drop of Probiotic Power.</p>
+            </div>
+
+            <div className="banner-content">
+              <div className="badge">
+                <img src={Images.win} />
+                <h6>95% Success Ratio</h6>
+              </div>
+              <div className="main-card"></div>
+              <div className="down-position">
+                <div className="double-buttons">
+                  <Buttons
+                    variant="double-primary"
+                    className="primary-circle-button"
+                  >
+                    Shop Now
+                  </Buttons>
+                  <Buttons variant="circle-primary" className="circle-button">
+                    <FiArrowUpRight className="arrow-icon" />
+                  </Buttons>
                 </div>
                 <p> Every Drop of  Probiotic Power.</p>
               </div>
@@ -201,18 +216,12 @@ const Home = () => {
                     </Buttons>
                   </div>
                 </div>
+                <div className="small-card"></div>
 
-                <div className="side-cards">
-                  <div>
-                    <div className="small-card1"></div>
-                  </div>
-                  <div className="small-card"></div>
-
-                  <div>
-                    <div className="small-card2"></div>
-                  </div>
-                  <div className="small-card3"></div>
+                <div>
+                  <div className="small-card2"></div>
                 </div>
+                <div className="small-card3"></div>
               </div>
             </div>
             <div className="stats-container">
@@ -333,7 +342,7 @@ const Home = () => {
 
 
 
-      <Footer />
+      <Footer/>
       {/* <WhyChooseUs/> */}
     </div>
   );

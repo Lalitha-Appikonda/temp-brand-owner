@@ -2,8 +2,11 @@ import React from 'react'
 import Input from '../../components/form elements/Input'
 import { Images } from '../../images/Image'
 import Buttons from '../../components/form elements/Buttons'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+
+    const navigate = useNavigate()
     
     return (
         <div className='login-container'>
@@ -28,7 +31,7 @@ const Login = () => {
                     </label>
                 </div>
                 <div>
-                    <h3 className='forgot-text forgotpaaword  '>Forgot Password</h3>
+                    <h3 className='forgot-text forgotpaaword' onClick={()=> navigate('/login/forgotpssword')}>Forgot Password</h3>
                 </div>
 
             </div>

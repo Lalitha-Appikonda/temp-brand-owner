@@ -1,49 +1,80 @@
-import React from 'react'
-import { Images } from '../../images/Image'
-import SelectBox from '../form elements/SelectBox'
-import Buttons from '../form elements/Buttons'
-import { FiArrowUpRight } from 'react-icons/fi'
+import React, { useState } from "react";
+import { Images } from "../../images/Image";
+import SelectBox from "../form elements/SelectBox";
+import Buttons from "../form elements/Buttons";
+import { FiArrowUpRight } from "react-icons/fi";
+import { FcLike } from "react-icons/fc";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
-const Card = ({
-  title,
-  price,
-  oldPrice,
-  discount,
-  badge,
-  showQuantity,
-}) => {
+const Card = ({ title, price, oldPrice, discount, badge }) => {
+  const [like, setLike] = useState(false);
+
+  const [quantity, setQuantity] = useState(1);
+
+  const [showQuantity , setShowQunatity] = useState(false)
+
+  const decrease = ()=>{
+    if (quantity > 1) {
+    setQuantity(quantity - 1);
+  } else {
+    setShowQunatity(false); 
+    setQuantity(1);         
+  }
+  }
+
+  const  increase = ()=>{
+    setQuantity(quantity+1 );
+  }
+
+
+  const onAddingCart = ()=>{
+    setShowQunatity(true)
+    setQuantity(1)
+  }
   return (
-    <div className='card-context'>
-      <div className='card'>
-
-        {badge && <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>}
-
-        <div className='card-image-wrapper'>
-          <div className='image-likeback'>
-            <img src={Images.like} />
+    <div className="card-context">
+      <div className="card">
+        <div className={badge ? "wrapper " : "card-image-wrapper"}>
+          {badge && (
+            <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>
+            
+          )}
+          <div className="image-likeback">
+            <svg
+              onClick={()=>setLike(!like)}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="25"
+              height="26"
+              className={`heart ${like ? "active" : ""}`}
+            >
+              <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+            </svg>
           </div>
         </div>
 
-        <div className='image-container'>
-          <div class="rating">
+        <div className="image-container">
+          <div className="rating">
             <img src={Images.ministar} />
             <h6>5.0</h6>
             <img src={Images.minline} />
             <h6>20K</h6>
           </div>
 
-          <img src={Images.product} alt="Product" class="product-img" />
+          <img src={Images.product} alt="Product" className="product-img" />
         </div>
 
-        <h1 className='image-text'>{title}</h1>
+        <h1 className="image-text">{title}</h1>
         <div className="price-section">
           <h3 className="rupees">₹{price}</h3>
 
-          {oldPrice && <span className="old-price">₹{oldPrice}</span>}
-          {discount && <span className="discount">{discount}</span>}
+          <div className="discount-container">
+            {oldPrice && <span className="old-price">₹{oldPrice}</span>}
+            {discount && <span className="discount">{discount}</span>}
+          </div>
         </div>
 
-        <div className='select-cart'>
+        <div className="select-cart">
           <select>
             <option value="">500g</option>
             <option value="">200g</option>
@@ -53,24 +84,23 @@ const Card = ({
 
           {showQuantity ? (
             <div className="quantity">
-              <button className='reduce'>-</button>
-              <span>3</span>
-              <button className='increase'>+</button>
+              <button className="reduce" onClick={decrease}><FaMinus  className="minus"/></button>
+              <span>{quantity}</span>
+              <button className="increase" onClick={increase}><FaPlus className="plus"/></button>
             </div>
           ) : (
-            <Buttons>Add to Cart</Buttons>
+            <Buttons onClick={onAddingCart}>Add to Cart</Buttons>
           )}
         </div>
       </div>
 
-
-     <div className='btn-down'>
-      <Buttons variant="circle-secondary">
-        <FiArrowUpRight className="arrow-icon" />
-      </Buttons>
+      <div className="btn-down">
+        <Buttons variant="circle-secondary">
+          <FiArrowUpRight className="arrow-icon" />
+        </Buttons>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

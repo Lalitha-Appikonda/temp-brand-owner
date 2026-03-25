@@ -11,11 +11,16 @@ import {
 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import MobileNav from "../mobile nav/MobileNav";
+import { useMediaQuery } from "react-responsive";
 
 const NavBar = () => {
+
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [activeSubMenuDropdown, setActiveSubMenuDropdown] = useState(null);
+
+  const screen1320 = useMediaQuery({ query: "(max-width: 1320px)" });
 
   const purchase = [
     {
@@ -75,6 +80,38 @@ const NavBar = () => {
     },
   ];
 
+  const more1320 = [
+    {
+      title: "Creation",
+      submenu: [
+        "Dealer/Corporate Firm",
+        "Sales Team",
+        "Company Employs",
+        "Own Manufacturer Team",
+      ],
+    },
+    {
+      title: "Subscription",
+    },
+    {
+      title: "Payment Transaction",
+      submenu: ["Purchase Transaction", "Sale Transaction"],
+    },
+    {
+      title: "Blogs",
+    },
+    {
+      title: "Offers & Promotions",
+      submenu: ["Create Offer & Promotion", "Dealer/Corporate Target Achiever", "Sales Team Target Achiever"],
+    },
+    {
+      title: "Sales & Employs Tracking",
+    },
+
+  ];
+
+
+  const currentMore = screen1320 ? more1320 : more;
   return (
     <>
       <div className="container nav-container-wrapper">
@@ -390,7 +427,7 @@ const NavBar = () => {
               <FaChevronDown className="icon" />
 
               <div className="dropdowns more-dropdown">
-                {more.map((item, index) => (
+                {currentMore.map((item, index) => (
                   <div key={index} className="sub-dropdowns">
                     <div className="sub">
                       <h5 className="inner-title">{item.title}</h5>
@@ -440,13 +477,6 @@ const NavBar = () => {
                 </div>
             </div>
 
-
-
-
-
-
-
-
         </div>
       </div>
 
@@ -459,3 +489,5 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+

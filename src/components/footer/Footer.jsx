@@ -1,5 +1,6 @@
 import React from "react";
-import { Images } from "../images/Image";
+import { Images } from "../../images/Image";
+import Card from "../card/Card";
 
 const Footer = () => {
     const images = [
