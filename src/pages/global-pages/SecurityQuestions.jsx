@@ -58,7 +58,7 @@ const SecurityQuestions = () => {
         </div>
 
         <div className="ques-submit">
-             <Buttons variant="secondary" onClick={()=> navigate('/status/waiting')}>Submit</Buttons>
+             <Buttons variant="secondary" className="submit-ques" onClick={()=> navigate('/status/waiting')}>Submit</Buttons>
         </div>
 
       </div>

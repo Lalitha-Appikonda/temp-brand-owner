@@ -2,8 +2,10 @@ import React from 'react'
 import { Images } from '../../images/Image'
 import Input from '../../components/form elements/Input';
 import Buttons from '../../components/form elements/Buttons';
+import { useNavigate } from 'react-router-dom';
 
 const Forgotaftersetup = () => {
+  const navigate = useNavigate()
   const question = [
     " 1.  What is your favorite food?",
     " 2.  What is your first school name?",
@@ -11,7 +13,7 @@ const Forgotaftersetup = () => {
   ];
   return (
     <div className='aftersetup-container'>
-      <div className="back-btn">
+      <div className="back-btn" onClick = {()=>navigate('/login/forgotpssword')}>
         <img src={Images.lessThan} alt="" />
       </div>
       <p className='title-text'>Answer Your Security Question</p>
@@ -38,7 +40,7 @@ const Forgotaftersetup = () => {
         ))}
       </div>
 
-      <Buttons  className='submit-button' variant='btn btn-secondary'>Submit</Buttons>
+      <Buttons  className='submit-button' variant='btn btn-secondary' onClick = {()=>navigate('/login/setnewpassword')}>Submit</Buttons>
     </div>
   )
 }

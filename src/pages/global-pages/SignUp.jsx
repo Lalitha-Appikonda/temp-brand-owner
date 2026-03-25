@@ -61,7 +61,7 @@ const SignUp = () => {
       </div>
 
 
-      <Buttons className='btn button' onClick={()=> navigate("/product-category")}>Next</Buttons>
+      <Buttons className='btn button' onClick={()=> navigate("/sign-up/product-category")}>Next</Buttons>
 
       <div className='login-texts'>
         <p> Already Have an Account?</p>

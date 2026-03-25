@@ -49,7 +49,7 @@ const SetNewPassword = () => {
                 </div>
             </div>
             <div className='action-buttons'>
-                <Buttons className='cancel-button' variant='btn btn-outline-primary'>Cancel</Buttons>
+                <Buttons className='cancel-button' variant='btn btn-outline-primary' onClick={()=>navigate('/login/forgot-aftersetup')}>Cancel</Buttons>
                 <Buttons className='submit-button' variant=' btn btn-secondary' onClick={()=>navigate('/status/success')}>Submit</Buttons>
             </div>
 
