@@ -3,8 +3,12 @@ import { Images } from "../../images/Image";
 import Input from "../../components/form elements/Input";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Buttons from "../../components/form elements/Buttons";
+import { useNavigate } from "react-router-dom";
 
 const SecurityQuestions = () => {
+
+  const navigate = useNavigate();
+
   const questions = [
     "What is your favorite food?",
     "What is your mother's name?",
@@ -16,7 +20,7 @@ const SecurityQuestions = () => {
   return (
     <>
       <div className="security-ques-text-content">
-        <div className="back-btn">
+        <div className="back-btn" onClick={()=>navigate("/product-category")}>
           <img src={Images.lessThan} alt="" />
         </div>
 
@@ -54,7 +58,7 @@ const SecurityQuestions = () => {
         </div>
 
         <div className="ques-submit">
-             <Buttons variant="primary">Submit</Buttons>
+             <Buttons variant="secondary" onClick={()=> navigate('/status/waiting')}>Submit</Buttons>
         </div>
 
       </div>

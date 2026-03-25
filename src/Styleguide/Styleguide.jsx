@@ -5,6 +5,8 @@ import { FiArrowUpRight } from "react-icons/fi";
 import PopUp from "../components/popup/PopUp";
 import SelectBox from "../components/form elements/SelectBox";
 import TextArea from "../components/form elements/TextArea";
+import CheckBox from "../components/form elements/CheckBox";
+import SelectWithCheckbox from "../components/form elements/SelectWithCheckbox";
 
 const Styleguide = () => {
   const colors = [
@@ -121,7 +123,7 @@ const Styleguide = () => {
         <h2 style={{ margin: "20px" }}>Soft Buttons</h2>
         <div style={{ display: "flex", gap: "20px" }}>
           <Buttons variant="primary">Primary</Buttons>
-          {/* <Buttons variant="soft-secondary">Secondary</Buttons> */}
+          <Buttons variant="secondary">Secondary</Buttons>
         </div>
 
         <h2 style={{ margin: "20px" }}>circle Buttons</h2>
@@ -144,7 +146,7 @@ const Styleguide = () => {
 
       <div style={{ marginTop: "50px" }}>
         <h1 style={{ fontSize: "50px", textAlign: "center" }}>select box</h1>
-        <div className="select-wrapper">
+        {/* <div className="select-wrapper"> */}
           <SelectBox
             label="State"
             name="state"
@@ -153,8 +155,9 @@ const Styleguide = () => {
               { label: "Karnataka", value: "karnataka" },
               { label: "Tamil Nadu", value: "tamilnadu" },
             ]}
+            placeholder="Select State"
           />
-        </div>
+    {/* </div> */}
       </div>
 
       <div style={{ marginTop: "50px" }}>
@@ -163,7 +166,25 @@ const Styleguide = () => {
       </div>
 
       <div style={{ marginTop: "50px" }}>
-        <h1 style={{ fontSize: "50px", textAlign: "center" }}>Radio buttons</h1>
+        <h1 style={{ fontSize: "50px", textAlign: "center" }}>check boxes</h1>
+
+        <CheckBox />
+      </div>
+
+      <div style={{ marginTop: "50px" }}>
+        <h1 style={{ fontSize: "50px", textAlign: "center" }}>select box with check box</h1>
+        {/* <div className="select-wrapper"> */}
+          <SelectWithCheckbox
+            label="State"
+            name="state"
+            options={[
+              { label: "Telangana", value: "telangana" },
+              { label: "Karnataka", value: "karnataka" },
+              { label: "Tamil Nadu", value: "tamilnadu" },
+            ]}
+            placeholder="Select State"
+          />
+    {/* </div> */}
       </div>
 
 

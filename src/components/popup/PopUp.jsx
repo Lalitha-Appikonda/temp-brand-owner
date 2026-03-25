@@ -47,13 +47,13 @@ const PopUp = ({
             </div>
  
             {/* Footer */}
-            {showFooter && (
+            {/* {showFooter && (
               <div className="popup-footer">
                 <button className="popup-cancel" onClick={close}>
                   Cancel
                 </button>
               </div>
-            )}
+            )} */}
  
           </div>
         </div>

@@ -14,6 +14,7 @@ const Cart = () => {
     { id: 2, name: "AQUABISON", qty: 3, price: 30 },
   ]);
 
+ 
   const increaseQty = (id) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -22,6 +23,7 @@ const Cart = () => {
     );
   };
 
+ 
   const decreaseQty = (id) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -43,13 +45,15 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-
-      {/* LEFT */}
+      
+    
       <div className="cart-left">
+     
+
         {cartItems.map((item) => (
           <div className="cart-item" key={item.id}>
-
-            {/* LEFT SIDE */}
+            
+       
             <div className="item-left">
               <img src={productImg} alt="product" className="item-img" />
 
@@ -60,7 +64,7 @@ const Cart = () => {
                   <span>Size:</span> 500g
                 </p>
 
-                {/* CONTROLS */}
+             
                 <div className="qty-controls">
                   <div className="qty-inner">
                     <button onClick={() => decreaseQty(item.id)}>-</button>
@@ -68,21 +72,24 @@ const Cart = () => {
                     <button onClick={() => increaseQty(item.id)}>+</button>
                   </div>
 
-                  {/* DELETE POPUP */}
-                  <PopUp
-                    size="sm"
+                 
+                  <PopUp size="sm"
                     trigger={
                       <button className="delete-btn">
                         <FaTrashAlt />
                       </button>
                     }
-                    title="Remove Item"
+                    title="Remove Item" className="j"
                   >
                     {({ close }) => (
                       <div>
-                        <p>Are you sure you want to remove this item?</p>
+                        <p>
+                          Are you sure you want to remove this item?
+                        </p>
 
                         <div className="popup-actions">
+                          
+
                           <button
                             className="popup-remove-btn"
                             onClick={() => {
@@ -109,7 +116,7 @@ const Cart = () => {
               </div>
             </div>
 
-            {/* PRICE */}
+           
             <h3 className="item-price">
               ₹{item.price * item.qty}
             </h3>
@@ -117,7 +124,7 @@ const Cart = () => {
         ))}
       </div>
 
-      {/* RIGHT */}
+    
       <div className="cart-right">
         <h3>Price Details</h3>
 
