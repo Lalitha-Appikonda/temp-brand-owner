@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Images } from "../../images/Image";
 import SelectBox from "../form elements/SelectBox";
 import {
+  FaBars,
   FaChevronDown,
   FaChevronRight,
+  FaHamburger,
   FaUser,
   FaUserCircle,
 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
+import MobileNav from "../mobile nav/MobileNav";
 
 const NavBar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [activeSubMenuDropdown, setActiveSubMenuDropdown] = useState(null);
+
   const purchase = [
     {
       title: "Purchase",
@@ -67,10 +74,229 @@ const NavBar = () => {
       title: "Blogs",
     },
   ];
+
   return (
     <>
-      <div className="container">
+      <div className="container nav-container-wrapper">
         <div className="nav-container">
+          <div className="nav-hamburger-container">
+            <div
+              className="nav-hamburger"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <FaBars />
+            </div>
+            <div className="nav-hamburger-logo">
+              <img src={Images.mainlogo} alt="" />
+            </div>
+          </div>
+
+          <div className={`menu-left ${menuOpen ? "show" : ""}`}>
+            <div
+              className="nav-links"
+              onClick={() => {
+                setActiveDropdown(
+                  activeDropdown === "purchases" ? null : "purchases",
+                );
+                setActiveSubMenuDropdown(null);
+              }}
+            >
+              <h5 className="title">Purchases</h5>
+              <FaChevronDown className="icon" />
+
+              <div
+                className={`menu-left-dropdowns ${activeDropdown === "purchases" ? "show" : ""}`}
+              >
+                {purchase.map((item, index) => (
+                  <div key={index} className="sub-dropdowns">
+                    <div
+                      className="sub"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSubMenuDropdown(
+                          activeSubMenuDropdown === index ? null : index,
+                        );
+                      }}
+                    >
+                      <h5 className="inner-title">{item.title}</h5>
+                      {item.submenu && <FaChevronRight />}
+                    </div>
+
+                    {item.submenu && (
+                      <div
+                        className={`sub-menu ${activeSubMenuDropdown === index ? "show" : ""}`}
+                      >
+                        {item.submenu.map((sub, i) => (
+                          <h5 key={i}>{sub}</h5>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="nav-links"
+              onClick={() => {
+                setActiveDropdown(
+                  activeDropdown === "reports" ? null : "reports",
+                );
+                setActiveSubMenuDropdown(null);
+              }}
+            >
+              <h5 className="title">Reports</h5>
+              <FaChevronDown className="icon" />
+
+              <div
+                className={`menu-left-dropdowns ${activeDropdown === "reports" ? "show" : ""}`}
+              >
+                {reports.map((item, index) => (
+                  <div key={index} className="sub-dropdowns">
+                    <div
+                      className="sub"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSubMenuDropdown(
+                          activeSubMenuDropdown === index ? null : index,
+                        );
+                      }}
+                    >
+                      <h5 className="inner-title">{item}</h5>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="nav-links"
+              onClick={() => {
+                setActiveDropdown(
+                  activeDropdown === "productUploading"
+                    ? null
+                    : "productUploading",
+                );
+                setActiveSubMenuDropdown(null);
+              }}
+            >
+              <h5 className="title">Product Uploading</h5>
+              <FaChevronDown className="icon" />
+
+              <div
+                className={`menu-left-dropdowns ${activeDropdown === "productUploading" ? "show" : ""}`}
+              >
+                {productUploading.map((item, index) => (
+                  <div key={index} className="sub-dropdowns">
+                    <div
+                      className="sub"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSubMenuDropdown(
+                          activeSubMenuDropdown === index ? null : index,
+                        );
+                      }}
+                    >
+                      <h5 className="inner-title">{item.title}</h5>
+                      {item.submenu && <FaChevronRight />}
+                    </div>
+
+                    {item.submenu && (
+                      <div
+                        className={`sub-menu ${activeSubMenuDropdown === index ? "show" : ""}`}
+                      >
+                        {item.submenu.map((sub, i) => (
+                          <h5 key={i}>{sub}</h5>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="nav-links"
+              onClick={() => {
+                setActiveDropdown(
+                  activeDropdown === "offersPromotions"
+                    ? null
+                    : "offersPromotions",
+                );
+                setActiveSubMenuDropdown(null);
+              }}
+            >
+              <h5 className="title">Offers & Promotions</h5>
+              <FaChevronDown className="icon" />
+
+              <div
+                className={`menu-left-dropdowns ${activeDropdown === "offersPromotions" ? "show" : ""}`}
+              >
+                {offersPromotions.map((item, index) => (
+                  <div key={index} className="sub-dropdowns">
+                    <div
+                      className="sub"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSubMenuDropdown(
+                          activeSubMenuDropdown === index ? null : index,
+                        );
+                      }}
+                    >
+                      <h5 className="inner-title">{item}</h5>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="nav-links">
+              <h5 className="title">Sales & Employs Tracking</h5>
+            </div>
+
+            <div
+              className="nav-links"
+              onClick={() => {
+                setActiveDropdown(activeDropdown === "more" ? null : "more");
+                setActiveSubMenuDropdown(null);
+              }}
+            >
+              <h5 className="title">More</h5>
+              <FaChevronDown className="icon" />
+
+              <div
+                className={`menu-left-dropdowns ${activeDropdown === "more" ? "show" : ""}`}
+              >
+                {more.map((item, index) => (
+                  <div key={index} className="sub-dropdowns">
+                    <div
+                      className="sub"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSubMenuDropdown(
+                          activeSubMenuDropdown === index ? null : index,
+                        );
+                      }}
+                    >
+                      <h5 className="inner-title">{item.title}</h5>
+                      {item.submenu && <FaChevronRight />}
+                    </div>
+
+                    {item.submenu && (
+                      <div
+                        className={`sub-menu ${activeSubMenuDropdown === index ? "show" : ""}`}
+                      >
+                        {item.submenu.map((sub, i) => (
+                          <h5 key={i}>{sub}</h5>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className="nav-logo">
             <img src={Images.mainlogo} alt="" />
           </div>
@@ -92,7 +318,9 @@ const NavBar = () => {
                         <div className="sub-menu purchase-submenu">
                           <div className="sub-menu-title">
                             {item.submenu.map((sub, i) => (
-                              <h5 className="sub" key={i}>{sub}</h5>
+                              <h5 className="sub" key={i}>
+                                {sub}
+                              </h5>
                             ))}
                           </div>
                         </div>
@@ -200,21 +428,32 @@ const NavBar = () => {
           </div>
 
           {/* nav-right-mobile */}
-          {/* <div className='nav-mobile'>
-                <div className='nav-cicles-mobile'>
-                    <img src="" alt="" />
+          <div className='nav-mobile'>
+                <div className='nav-cicles-mobile1'>
+                    <img src={Images.notification} alt="" />
                     <div className='red-dot'></div>
                 </div>
-                <div className='nav-cicles-mobile'>
-                    <img src="" alt="" />
-                    <img src="" alt="" />
+                <div className='nav-cicles-mobile2'>
+                    <img src={Images.like} alt="" />
+                    <img src={Images.bag} alt="" />
                     <div className='red-dot'>8</div>
                 </div>
-            </div> */}
+            </div>
+
+
+
+
+
+
+
+
         </div>
       </div>
 
-      <div style={{borderBottom:"1px solid rgba(var(--nav-border), 1)"}}></div>
+      <div  style={{ borderBottom: "1px solid rgba(var(--nav-border), 1)" }} ></div>
+
+
+      <MobileNav />
     </>
   );
 };

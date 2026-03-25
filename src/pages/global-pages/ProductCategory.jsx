@@ -11,17 +11,17 @@ import { useNavigate } from 'react-router-dom';
 
 const ProductCategory = () => {
   const navigate = useNavigate()
- 
+
 
   const [category, setCategory] = useState(null);
   const [Subcategory, setSubCategory] = useState([]);
 
 
-const handleRemove = (itemToRemove) => {
-  setSubCategory((prev) =>
-    prev.filter((item) => item !== itemToRemove)
-  );
-};
+  const handleRemove = (itemToRemove) => {
+    setSubCategory((prev) =>
+      prev.filter((item) => item !== itemToRemove)
+    );
+  };
 
   return (
     <div className="category-container">
@@ -33,37 +33,37 @@ const handleRemove = (itemToRemove) => {
       </div>
 
       <div className='product-category-dropdown'>
-        
+
         <SelectBox
-            value={category}
-            onChange={(name, value)=> setCategory(value)}
-            name="product-category"
-            options={[
-              { label: "Aquaculture", value: "aquaculture" },
-              { label: "Agriculture", value: "agriculture" },
-              { label: "Human Medicine", value: "human medicine" },
-              { label: "Other", value: "other" },
-            ]}
-            placeholder="Product Category"
-            icon={<LuBox />}
-          />
+          value={category}
+          onChange={(name, value) => setCategory(value)}
+          name="product-category"
+          options={[
+            { label: "Aquaculture", value: "aquaculture" },
+            { label: "Agriculture", value: "agriculture" },
+            { label: "Human Medicine", value: "human medicine" },
+            { label: "Other", value: "other" },
+          ]}
+          placeholder="Product Category"
+          icon={<LuBox />}
+        />
 
       </div>
 
 
       <div className='sub-product-category-dropdown'>
-      <SelectWithCheckbox 
-      value={Subcategory}
-            onChange={(name, value)=> setSubCategory(value)}
-            name="product-category"
-            icon={<LuBox />}
-            options={[
-              { label: "Probiotic", value: "probiotic" },
-              { label: "Minerals", value: "minerals" },
-              { label: "medicine", value: "medicine" },
-              { label: "Feeds", value: "feeds" },
-            ]}
-            placeholder="Product Sub-category"/>
+        <SelectWithCheckbox
+          value={Subcategory}
+          onChange={(name, value) => setSubCategory(value)}
+          name="product-category"
+          icon={<LuBox />}
+          options={[
+            { label: "Probiotic", value: "probiotic" },
+            { label: "Minerals", value: "minerals" },
+            { label: "medicine", value: "medicine" },
+            { label: "Feeds", value: "feeds" },
+          ]}
+          placeholder="Product Sub-category" />
 
       </div>
 
@@ -71,61 +71,66 @@ const handleRemove = (itemToRemove) => {
         {Subcategory.map((item, index) => (
           <div key={index} className='inner-product'>
             <p>{item}</p>
-            <img className='cross-icon' src={Images.crossCancle} alt="" onClick={()=>handleRemove(item)}/>
+            <img className='cross-icon' src={Images.crossCancle} alt="" onClick={() => handleRemove(item)} />
           </div>
         ))}
       </div>
 
       <div className='next-btn'>
-        <Buttons variant="secondary" className='category-next' onClick={()=>navigate("/security-questions")}>Next</Buttons>
+        <Buttons variant="secondary" className='category-next' onClick={() => navigate("/security-questions")}>Next</Buttons>
       </div>
 
-      
+
       <div className='terms-conditions'>
-        By clicking, I confirm that I have read, understood, and agree to the 
+        By clicking, I confirm that I have read, understood, and agree to the
         {/* <span > Terms of Service</span>  */}
-      <PopUp trigger={<span > Terms of Service </span>} size="md" title="Terms of Service">
-      <div className='dividing-line'></div>
+        <PopUp
+          trigger={<span> Terms of Service </span>}
+          size="md"
+          title="Terms of Service"
+          className="terms-popup"
+        >
+          <div className='dividing-line'></div>
           <div className='conditions'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting 
-industry. Lorem Ipsum has been the industry's standard dummy text 
-ever since the 1500s, when an unknown printer took a galley of type 
-and scrambled it to make a type specimen book. It has survived not 
-only five centuries, but also the leap into electronic typesetting, 
-remaining essentially unchanged. It was popularised in the 1960s 
-with the release of Letraset sheets containing Lorem Ipsum passages,
-and more recently with desktop publishing software like Aldus 
-PageMaker including versions of Lorem Ipsum.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting 
-industry. Lorem Ipsum has been the industry's standard dummy text 
-ever since the 1500s, when an unknown printer took a galley of type 
-and scrambled it to make a type specimen book. It has survived not 
-only five centuries, but also the leap into electronic typesetting, 
-remaining essentially unchanged. It was popularised in the 1960s 
-with the release of Letraset sheets containing Lorem Ipsum passages,
-and more recently with desktop publishing software like Aldus 
-PageMaker including versions of Lorem Ipsum.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting 
-industry. Lorem Ipsum has been the industry's standard dummy text 
-ever since the 1500s, when an unknown printer took a galley of type 
-and scrambled it to make a type specimen book. It has survived not 
-only five centuries, but also the leap into electronic typesetting, 
-remaining essentially unchanged. It was popularised in the 1960s 
-with the release of Letraset sheets containing Lorem Ipsum passages,
-and more recently with desktop publishing software like Aldus 
-PageMaker including versions of Lorem Ipsum.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting 
-industry. Lorem Ipsum has been the industry's standard dummy text 
-ever since the 1500s, when an unknown printer took a galley of type 
-and scrambled it to make a type specimen book. It has survived not 
-only five centuries, but also the leap into electronic typesetting, 
-remaining essentially unchanged. It was popularised in the 1960s 
-with the release of Letraset sheets containing Lorem Ipsum passages,
-and more recently with desktop publishing software like Aldus 
-PageMaker including versions of Lorem Ipsum.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
           </div>
         </PopUp>
 

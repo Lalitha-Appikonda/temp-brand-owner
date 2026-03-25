@@ -61,7 +61,11 @@ const SignUp = () => {
       </div>
 
 
-      <Buttons className='btn button' onClick={()=> navigate("/product-category")}>Next</Buttons>
+
+      <div className='signin-next'>
+      <Buttons variant='secondary' onClick={()=> navigate("/product-category")}>Next</Buttons>
+
+      </div>
 
       <div className='login-texts'>
         <p> Already Have an Account?</p>
@@ -73,6 +77,8 @@ const SignUp = () => {
         By clicking, I confirm that I have read, understood, and agree to the
         <a href="#">Terms of Service</a>
       </p>
+
+
 
     </div>
 

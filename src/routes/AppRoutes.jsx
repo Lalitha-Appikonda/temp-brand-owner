@@ -22,7 +22,7 @@ import Login from '../pages/global-pages/Login'
 import ForgotPassword from '../pages/global-pages/ForgotPassword'
 import Forgotaftersetup from '../pages/global-pages/Forgotaftersetup'
 import Footer from '../components/Footer'
-import Styleguide from './../Styleguide/Styleguide';
+import MobileNav from '../components/mobile nav/MobileNav'
 
 const AppRoutes = () => {
   return (
@@ -42,6 +42,8 @@ const AppRoutes = () => {
       <Route path="footer" element={<Footer/>}/>
        <Route path="home" element={<Home/>} />
 
+
+      <Route path='mobile' element={<MobileNav />} />
 
       <Route path="/" element={<Layout/>}>
 

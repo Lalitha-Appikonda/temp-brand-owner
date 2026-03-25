@@ -22,6 +22,14 @@ export const Images = {
 
     // nav bar
     cart : "/assets/icons/shopping-cart.svg",
+    notification : "/assets/icons/notification.svg",
+    like : "/assets/icons/like.svg",
+    bag : "/assets/icons/bag.svg",
+    // mobile nav
+    home : "/assets/icons/home.svg",
+    uploading : "/assets/icons/product-uplaoding.svg",
+    tracking : "/assets/icons/tracking.svg",
+    profile : "/assets/icons/profile.svg",
 
     // footer
     footlogo:"/assets/icons/Logo Side 2.svg",
@@ -45,5 +53,9 @@ export const Images = {
     mainlogotext1:"/assets/icons/product-1-1.jpg (1).svg",
     backgroundbranner:"/assets/icons/Subtract.png",
     win:"/assets/icons/Group (1).svg",
+    mobilelogo1:"/assets/icons/Subtract (2).svg",
+    minusimage:"/assets/icons/fi_9312231.svg",
+    plusimage:"/assets/icons/Group (2).svg",
+    productbox:"/assets/icons/product-1-1.jpg (2).svg",
 }
 
