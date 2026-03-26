@@ -9,6 +9,7 @@ const SelectWithCheckbox = ({
   options = [],
   placeholder = "",
   icon,
+  className=""
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
@@ -39,7 +40,7 @@ const SelectWithCheckbox = ({
   }, []);
 
   return (
-    <div className="select-group" ref={selectRef}>
+    <div className={`select-group ${className}`} ref={selectRef}>
       {label && <label>{label}</label>}
 
       <div className="custom-select">

@@ -26,7 +26,10 @@ const PopUp = ({
  
       {/* Modal */}
       {open && (
-        <div className="popup-overlay" onClick={close}>
+       <div
+  className={`popup-overlay ${className}`}  
+  onClick={close}
+>
  
           <div
             className={`popup-container ${size} ${className}`}
