@@ -11,7 +11,7 @@ const Login = () => {
     return (
         <div className='login-container'>
             <p className='title-text'>Login Your Account</p>
-            <h3 className='sub-title-text'>Continue managing your sales, target, and
+            <h3 className='sub-title-text  login-texts'>Continue managing your sales, target, and
                 reports by signing in securely.</h3>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />

@@ -2802,6 +2802,12 @@ h6 {
   vertical-align: middle;
 }
 
+@media(max-width:1300px){
+  .signup-container .logintext {
+    font-size:34px;
+  }
+}
+
 .signup-container .terms a {
   color: rgba((var(--primary-text), 1));
   text-decoration: underline;
@@ -3103,10 +3109,30 @@ h6 {
   text-decoration: underline;
 }
 
-@media (max-width: 1200px) {
+
+
+@media (max-width:1300px) {
+  .login-container .title-text {
+    font-size: 30px;
+  }
+  .login-container .login-wrapper .forgot-text {
+    font-size:14px;
+  }
+  
+
+}
+
+@media (max-width:1200px) {
   .login-container .title-text {
     font-size: 24px;
   }
+
+   .login-container .login-wrapper .forgot-text {
+    font-size:12px;
+  }
+  
+
+
 }
 
 @media (max-width: 1000px) {
