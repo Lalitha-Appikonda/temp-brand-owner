@@ -4,16 +4,19 @@ import { Images } from '../../images/Image'
 import Buttons from './../../components/form elements/Buttons';
 import { useState } from 'react';
 import * as Yup from "yup";
+import { useContext } from 'react';
+import { SignupContext } from "../../context/SignupContext";
 
 
 
 const SignUp = () => {
+  const navigate = useNavigate()
 
   const [form,setForm]=useState({               
     name:"",
     username:"",
     password:"",
-    confirmpassword:""
+     
   });
   const [isValid,setIsValid]=useState(false);
 
@@ -21,6 +24,8 @@ const SignUp = () => {
   const [showConfirmPassword,setShowConfirmPassword]=useState(false);/* show cfm pwd state */
 
   const [errors,setErrors]=useState({});     /* errors state */
+
+  const { setSignupData } = useContext(SignupContext);
 
   const signupSchema=Yup.object({
     name:Yup.string()
@@ -56,8 +61,16 @@ const SignUp = () => {
     try{
       await signupSchema.validate(form,{abortEarly:false});
       setErrors({}); //clear errors if valid
-      // console.log("form is valid");
-      navigate("/product-category")
+
+      setSignupData((prev) => ({
+      ...prev,
+      name: form.name,
+      username: form.username,
+      password: form.password,
+      confirmpassword: form.confirmpassword
+    }));
+
+    navigate("/sign-up/product-category");
 
       
     }catch(err){
@@ -113,7 +126,7 @@ const SignUp = () => {
 
 
 
-  const navigate = useNavigate()
+  
 
   const passwordRules={
     length: form.password.length >=8,
@@ -180,7 +193,7 @@ const SignUp = () => {
 
 
      <div className='button'>
-       <Buttons className='btn btn-primary' disabled={!isValid}>Next</Buttons>
+       <Buttons type="submit" className='btn btn-primary' disabled={!isValid}>Next</Buttons>
      </div>
 
       <div className='login-texts'>

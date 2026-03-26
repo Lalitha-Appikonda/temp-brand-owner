@@ -27,9 +27,12 @@ const Input = ({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
+          
           className={`custom-input ${error ? "input-error" : ""}`}
           {...rest}
         />
+
+
       </div>
 
       {error && <p className="error-text">{error}</p>}

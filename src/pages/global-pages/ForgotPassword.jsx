@@ -2,11 +2,13 @@ import React from 'react'
 import { Images } from '../../images/Image'
 import Buttons from '../../components/form elements/Buttons'
 import Input from '../../components/form elements/Input'
+import { useNavigate } from 'react-router-dom'
 
 const ForgotPassword = () => {
+  const navigate = useNavigate()
   return (
     <div className='forgotpassword-container'>
-      <div className="back-btn">
+      <div className="back-btn" onClick = {()=>navigate('/login')}>
         <img src={Images.lessThan} alt="" />
       </div>
 
@@ -21,8 +23,8 @@ const ForgotPassword = () => {
         </div>
       </div>
       <div className='action-buttons'>
-        <Buttons className='cancel-button' variant='btn btn-outline-primary'>Cancel</Buttons>
-        <Buttons className='submit-button' variant=' btn btn-secondary'>Submit</Buttons>
+        <Buttons className='cancel-button' variant='btn btn-outline-primary' onClick = {()=>navigate('/login')}>Cancel</Buttons>
+        <Buttons className='submit-button' variant=' btn btn-secondary' onClick = {()=>navigate('/login/forgot-aftersetup')}>Submit</Buttons>
       </div>
 
     </div>
