@@ -6,28 +6,28 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-const Card = ({ title, price, oldPrice, discount, badge }) => {
+const Card = ({ title, price, oldPrice, discount, badge, image,rating, reviews }) => {
   const [like, setLike] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
 
-  const [showQuantity , setShowQunatity] = useState(false)
+  const [showQuantity, setShowQunatity] = useState(false)
 
-  const decrease = ()=>{
+  const decrease = () => {
     if (quantity > 1) {
-    setQuantity(quantity - 1);
-  } else {
-    setShowQunatity(false); 
-    setQuantity(1);         
-  }
-  }
-
-  const  increase = ()=>{
-    setQuantity(quantity+1 );
+      setQuantity(quantity - 1);
+    } else {
+      setShowQunatity(false);
+      setQuantity(1);
+    }
   }
 
+  const increase = () => {
+    setQuantity(quantity + 1);
+  }
 
-  const onAddingCart = ()=>{
+
+  const onAddingCart = () => {
     setShowQunatity(true)
     setQuantity(1)
   }
@@ -37,11 +37,11 @@ const Card = ({ title, price, oldPrice, discount, badge }) => {
         <div className={badge ? "wrapper " : "card-image-wrapper"}>
           {badge && (
             <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>
-            
+
           )}
           <div className="image-likeback">
             <svg
-              onClick={()=>setLike(!like)}
+              onClick={() => setLike(!like)}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               width="25"
@@ -54,14 +54,19 @@ const Card = ({ title, price, oldPrice, discount, badge }) => {
         </div>
 
         <div className="image-container">
-          <div className="rating">
-            <img src={Images.ministar} />
-            <h6>5.0</h6>
-            <img src={Images.minline} />
-            <h6>20K</h6>
+          {rating && (
+            <div className="rating">
+              <img src={Images.ministar} />
+              <h6>{rating}</h6>
+              <img src={Images.minline} />
+              <h6>{reviews}</h6>
+            </div>
+          )}
+          <div className="product-image-container">
+            <img src={image} alt="Product" className="product-img" />
           </div>
 
-          <img src={Images.product} alt="Product" className="product-img" />
+          
         </div>
 
         <h1 className="image-text">{title}</h1>
@@ -77,6 +82,9 @@ const Card = ({ title, price, oldPrice, discount, badge }) => {
         <div className="select-cart">
           <select>
             <option value="">500g</option>
+            <option value="">5L</option>
+            <option value="">1L</option>
+
             <option value="">200g</option>
             <option value="">1000g</option>
             <option value="">300g</option>
@@ -84,12 +92,12 @@ const Card = ({ title, price, oldPrice, discount, badge }) => {
 
           {showQuantity ? (
             <div className="quantity">
-              <button className="reduce" onClick={decrease}><FaMinus  className="minus"/></button>
+              <button className="reduce" onClick={decrease}><FaMinus className="minus" /></button>
               <span>{quantity}</span>
-              <button className="increase" onClick={increase}><FaPlus className="plus"/></button>
+              <button className="increase" onClick={increase}><FaPlus className="plus" /></button>
             </div>
           ) : (
-            <Buttons onClick={onAddingCart}>Add to Cart</Buttons>
+            <Buttons onClick={onAddingCart} className="addcart-mobile-btn">Add to Cart</Buttons>
           )}
         </div>
       </div>

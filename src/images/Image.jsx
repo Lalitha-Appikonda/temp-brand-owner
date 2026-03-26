@@ -53,8 +53,18 @@ export const Images = {
     mainlogotext1:"/assets/icons/product-1-1.jpg (1).svg",
     backgroundbranner:"/assets/icons/Subtract.png",
     win:"/assets/icons/Group (1).svg",
+    mobilelogo1:"/assets/icons/Subtract (2).svg",
+    minusimage:"/assets/icons/fi_9312231.svg",
+    plusimage:"/assets/icons/Group (2).svg",
+    productbox:"/assets/icons/product-1-1.jpg (2).svg",
+    whychooseimage:"/assets/icons/Rectangle 21.svg",
+    play:"/assets/icons/Layer_2_00000070827265553928813150000015508787529661124756_.svg",
+    plus:"/assets/icons/fi_9312231 (1).svg",
+    cross:"/assets/icons/fi_9312231 (2).svg",
+
+
 
     //product-listing
-    priceRange : "/assets/icons/price-range.svg"
+    priceRange : "/assets/icons/price-range.svg",
 }
 
