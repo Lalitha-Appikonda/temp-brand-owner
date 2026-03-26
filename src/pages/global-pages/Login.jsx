@@ -1,12 +1,81 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '../../components/form elements/Input'
 import { Images } from '../../images/Image'
 import Buttons from '../../components/form elements/Buttons'
 import { useNavigate } from 'react-router-dom'
+import axios from "axios"
+import * as Yup from "yup";
 
 const Login = () => {
 
     const navigate = useNavigate()
+    
+    const [form,setForm]=useState({
+        username:"",
+        password:""
+    })
+    const [errors,setErrors]=useState({})
+
+    const handlechange=(e)=>{
+        const {name,value}=e.target;
+
+        setForm((prev)=>({
+            ...prev,
+            [name]:value
+        }))
+    }
+    const loginSchema=Yup.object({
+        username:Yup.string()
+        .required("username is required")
+        .min(5, "minimum 5 characters"),
+        password:Yup.string()
+        .min(6,"minimum 6 characters")
+    })
+
+    const handlelogin = async () => {
+  try {
+     
+    await loginSchema.validate(form, { abortEarly: false });
+
+     
+    setErrors({});
+
+     
+    const response = await axios.post(
+      "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/login",
+      form
+    );
+
+    const { accessToken, refreshToken } = response.data;
+
+    localStorage.setItem("accesstoken", accessToken);
+    localStorage.setItem("refreshtoken", refreshToken);
+
+    navigate("/");
+
+  } catch (err) {
+
+ 
+    if (err.name === "ValidationError") {
+      const validationErrors = {};
+
+      err.inner.forEach((e) => {
+        validationErrors[e.path] = e.message;
+      });
+
+      setErrors(validationErrors);
+    }
+
+    
+    else {
+      console.log("API ERROR:", err.response?.data);
+
+      setErrors({
+        api: err.response?.data?.message || "Login failed",
+      });
+    }
+  }
+};
     
     return (
         <div className='login-container'>
@@ -15,11 +84,11 @@ const Login = () => {
                 reports by signing in securely.</h3>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />
-                <Input placeholder="Name" />
+                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange} />
             </div>
             <div className="input-box">
                 <img src={Images.lockicon} className="icon left" />
-                <Input placeholder='Password' />
+                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange} />
                 <img src={Images.eyeicon} className="icon right" />
             </div>
             <div className='login-wrapper'>
@@ -31,15 +100,15 @@ const Login = () => {
                     </label>
                 </div>
                 <div>
-                    <h3 className='forgot-text forgotpaaword' onClick={()=> navigate('/login/forgotpssword')}>Forgot Password</h3>
+                    <h3 className='forgot-text forgotpassword' onClick={() => navigate('/login/forgotpassword')}>Forgot Password</h3>
                 </div>
 
             </div>
 
-            <Buttons className='login-button' variant='btn btn-secondary'>Login</Buttons>
+            <Buttons className='login-button' variant='btn btn-secondary' onClick={handlelogin}>Login</Buttons>
             <div className='login-texts'>
                 <p> Don’t Have an Account?</p>
-                <p>Signup</p>
+                <p onClick={() => navigate('/sign-up')}>Signup</p>
 
             </div>
 

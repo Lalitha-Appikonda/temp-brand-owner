@@ -10,6 +10,7 @@ import PopUp from "../../components/popup/PopUp";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/form elements/Input";
 
+
 const ProductCategory = () => {
   const subCategoryOptions = {
     aquaculture: [

@@ -33,7 +33,7 @@ const AppRoutes = () => {
 
       <Route path="login" element={<UserAccess />} >
         <Route index element={<Login />} />
-        <Route path="forgotpssword" element={<ForgotPassword />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
         <Route path="forgot-aftersetup" element={<Forgotaftersetup />} />
         <Route path="setnewpassword" element={<SetNewPassword />} />
       </Route>
@@ -47,10 +47,13 @@ const AppRoutes = () => {
         <Route path="product/:id" element={<Product />} />
         <Route path="product/:id/reviews" element={<Review />} />
 
-        <Route path="cart" element={<Cart />} />
         <Route path="address" element={<DeliveryAddress />} />
         <Route path="address/edit" element={<EditAddress />} />
+        <Route  path='cart' element={<Cart />} />
+
       </Route>
+
+      
     </Routes>
   );
 };
