@@ -229,8 +229,12 @@ input::-webkit-inner-spin-button {
   --count-bg: 59, 183, 126;
   --footer-bg: 1, 17, 28;
 
+
   /* popup backdrop filter */
   --popup-bg: 56, 56, 56;
+
+  /* range */
+  --range-track : 201, 201, 201;
 
   /*======================================== text colors =============================================================*/
 
@@ -770,6 +774,7 @@ h6 {
   display: inline-block;
   position: relative;
   border: 1px solid rgba(var(--primary-text), 1);
+  
 }
 
 .checkbox-group .checkbox-wrapper input:checked + .custom-checkbox {
@@ -788,6 +793,67 @@ h6 {
   background-image: url("/assets/icons/correct.svg");
   background-size: contain;
   background-repeat: no-repeat;
+}
+/****************  Range ****************/
+.range-wrapper {
+  width: 100%;
+  padding: 20px 0;
+}
+.range-wrapper  .slider {
+  position: relative;
+  width: 100%;
+  height: 6px;
+}
+.range-wrapper  .slider .track {
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  background: rgba(var(--range-track), 1);
+  border-radius: 5px;
+  z-index: 1;
+}
+.range-wrapper  .slider .range {
+  top: 1px;
+  position: absolute;
+  height: 6px;
+  background: rgba(var(--primary-text), 1);
+  border-radius: 5px;
+  z-index: 2;
+}
+.range-wrapper  .slider .thumb-circle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(var(--primary-bg), 1);
+  border: 3px solid rgba(var(--primary-text), 1); 
+  z-index: 10;
+}
+.range-wrapper  .slider .thumb-circle.left {
+  left: 0%;
+}
+
+.range-wrapper  .slider .thumb {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+  appearance: none;
+  top: 3px;
+}
+.range-wrapper  .slider .thumb::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(var(--primary-bg), 1);
+  border: 3px solid rgba(var(--primary-text), 1); 
+  cursor: pointer;
+  position: relative;
+  z-index: 4;
 }
 
 /* ====================================================== form fields ends here ======================================================*/
@@ -3469,6 +3535,15 @@ h6 {
 
 
 /*================================================================================= product listing =================================================================*/
+.product-listing {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 134px;
+}
+.product-listing .product-listing-right{
+ flex: 1;
+}
 .product-listing .title{
   font-family: "creatodisplay-bold";
   line-height: 100%;
@@ -3498,3 +3573,227 @@ h6 {
   align-items: center;
   gap: 20px;
 }
+.product-listing .all-product-cards .card-context .card{
+  width: 302px;
+}
+.product-listing .all-product-cards .card-context .btn-down{
+      bottom: 18px;
+      left: 248px;
+}
+
+ 
+/* filter in product list */
+
+.filter-container{
+  min-width: 303px;
+  max-width: 303px;
+  border: 1px solid rgba(var(--borders), 0.12);
+  border-radius: 12px;
+  padding: 20px 0;
+  box-sizing: border-box;
+  /* height: 100vh;     
+  overflow-y: auto; */
+}
+.filter-container .title{
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+.filter-container .title .filter-title{
+  font-family: "creatodisplay-bold";
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+}
+.filter-container .title .clear-title{
+  font-family: "creatodisplay-medium";
+  line-height: 100%;
+  font-weight: 500;
+  color: rgba(var(--green-text), 1);
+  cursor: pointer;
+}
+
+/* results */
+.filter-container .showing-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 0 20px;
+}
+.filter-container .showing-results .result-filter{
+  padding: 8px 14px;
+  border: 1px solid rgba(var(--borders), 0.2);
+  border-radius: 39px;
+  background-color: rgba(var(--product-bg), 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+.filter-container .showing-results .result-filter h5{
+  font-family: "creatodisplay-medium";
+  line-height: 16px;
+  font-weight: 500;
+  color: rgba(var(--icon-color), 1);
+}
+.filter-container .showing-results .result-filter h5  .rating-label{
+  display: flex;
+  gap: 5px;
+}
+.filter-container .showing-results .result-filter .cross-icon{
+  font-size: 15px;
+}
+
+
+
+
+.filter-container .line{
+  margin: 20px 0;
+}
+
+/* category */
+.filter-container .category-box .category-title{
+  font-family: "creatodisplay-medium";
+  font-weight: 500;
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+  padding-left: 20px;
+  letter-spacing: 1px;
+}
+.filter-container .category-box .category-selection{
+  margin-top: 21.5px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.filter-container .category-box .category-selection .selection .category-filter-checkbox label{
+  font-family: "creatodisplay-medium";
+  font-weight: 500;
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+}
+.filter-container .category-box .category-selection .selection .category-filter-checkbox .custom-checkbox{
+  border-color: rgba(var(--borders), 0.2);
+}
+.filter-container .category-box .category-selection .selection .category-filter-checkbox input:checked + .custom-checkbox{
+  background-color: rgba(var(--green-text), 1);
+  border-color: rgba(var(--green-text), 1);
+}
+
+/* price-range */
+.filter-container .price-range-box .title{
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+.filter-container .price-range-box .title .filter-title{
+  font-family: "creatodisplay-medium";
+  font-weight: 500;
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+}
+.filter-container .price-range-box .title .clear-title{
+  font-family: "creatodisplay-medium";
+  line-height: 100%;
+  font-weight: 500;
+  color: rgba(var(--green-text), 1);
+}
+.filter-container .price-range-box .range-bar{
+  width: 255px;
+  margin: 13px auto 0;
+  position: relative;
+}
+.filter-container .price-range-box .range-bar .range{
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+.filter-container .price-range-box .range-value{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  padding: 0 28px;
+}
+.filter-container .price-range-box .range-value select{
+  width: 109px;
+  height: 40px;
+  z-index: 100;
+  border: none;
+  outline: none;
+  box-shadow: none; 
+  padding: 12px 14px;
+  appearance: none;  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 5px;
+  border:  1px solid rgba(var(--borders), 0.2);
+  background-image: url(/assets/icons/down.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.filter-container .price-range-box .range-value span{
+  font-family: "creatodisplay-medium";
+  font-weight: 500;
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+  font-size: 15px;
+}
+
+/* brand filter */
+.filter-container .filters-products{
+  padding: 0 23px;
+}
+.filter-container .filters-products .select-filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.filter-container .filters-products .select-filter h4, .filter-container .filters-products .dropdown-list li{
+  font-family: "creatodisplay-medium";
+  font-weight: 500;
+  line-height: 100%;
+  color: rgba(var(--primary-text), 1);
+  
+}
+.filter-container .filters-products .dropdown-list{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.filter-container .filters-products .dropdown-list.open{
+  max-height: 300px;
+}
+.filter-container .filters-products .dropdown-list span  .rating-label {
+  display: flex;
+  gap: 5px;
+}
+.filter-container .filters-products .dropdown-list .category-filter-checkbox input:checked + .custom-checkbox{
+  background-color: rgba(var(--green-text), 1);
+  border-color: rgba(var(--green-text), 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -53,5 +53,8 @@ export const Images = {
     mainlogotext1:"/assets/icons/product-1-1.jpg (1).svg",
     backgroundbranner:"/assets/icons/Subtract.png",
     win:"/assets/icons/Group (1).svg",
+
+    //product-listing
+    priceRange : "/assets/icons/price-range.svg"
 }
 

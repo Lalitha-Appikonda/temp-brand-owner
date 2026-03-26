@@ -20,6 +20,7 @@ import Login from "../pages/global-pages/Login";
 import ForgotPassword from "../pages/global-pages/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/Forgotaftersetup";
 import Styleguide from "../../src/Styleguide/Styleguide";
+import Range from "../components/form elements/Range";
 
 const AppRoutes = () => {
   return (
@@ -38,10 +39,11 @@ const AppRoutes = () => {
       </Route>
 
       <Route path="/status/:type" element={<StatusHandler />} />
+      <Route path="range" element={<Range />} />
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="products" element={<SecurityQuestions />} />
+        <Route path="products" element={<ProductList />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="product/:id/reviews" element={<Review />} />
 
