@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Images } from '../../images/Image';
 import { FiArrowUpRight } from 'react-icons/fi';
 import Buttons from '../../components/form elements/Buttons';
-import Footer from '../../components/Footer';
+import Footer from '../../components/footer/Footer';
 import NavBar from "../../components/navbar/NavBar";
 import { useNavigate } from "react-router-dom";
+import Card from '../../components/card/Card';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [like, setLike] = useState({});
 
   const statsData = [
     {
@@ -39,114 +41,95 @@ const Home = () => {
     },
   ];
 
-
   const products = [
-    {
-      id: 1,
-      title: "AQUA REMID",
-      price: 1200,
-      oldPrice: null,
-      discount: null,
-      badge: "Hot",
-      quantity: 3,
-      sizes: ["500g", "200g", "1000g", "300g"],
-     image: Images.product
-    },
-    {
-      id: 2,
-      title: "PROBIZYME",
-      price: 1100,
-      oldPrice: 2000,
-      discount: "45% off",
-      badge: "Sale",
-      quantity: 1,
-      sizes: ["500g", "200g", "1kg"],
-       image: Images.product
-    },
-    {
-      id: 3,
-      title: "DE - ODOPLUS",
-      price: 1700,
-      oldPrice: null,
-      discount: null,
-      badge: null,
-      quantity: 1,
-      sizes: ["500g", "1kg"],
-     image: Images.product
-    },
-    {
-      id: 4,
-      title: "UB-SPORE",
-      price: 600,
-      oldPrice: null,
-      discount: null,
-      badge: null,
-      quantity: 1,
-      sizes: ["500g"],
-       image: Images.product
-    },
-    {
-      id: 5,
-      title: "AQUABISON",
-      price: 850,
-      oldPrice: null,
-      discount: null,
-      badge: null,
-      quantity: 1,
-      sizes: ["1L", "500ml"],
-      image: Images.productbox
-    },
-    {
-      id: 6,
-      title: "POND CARE",
-      price: 1100,
-      oldPrice: null,
-      discount: null,
-      badge: null,
-      quantity: 1,
-      sizes: ["5L", "1L"],
-      image: Images.productbox
-    },
-    {
-      id: 7,
-      title: "AQUACARE",
-      price: 1080,
-      oldPrice: null,
-      discount: null,
-      badge: null,
-      quantity: 1,
-      sizes: ["1L"],
-       image: Images.productbox
-    },
-    {
-      id: 8,
-      title: "VIBRIGO",
-      price: 600,
-      oldPrice: null,
-      discount: null,
-      badge: "New",
-      quantity: 1,
-      sizes: ["500g"],
-     image: Images.productbox
-    }
+    { id: 1, title: "AQUA REMID", price: 1200, badge: "Hot", image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 2, title: "PROBIZYME", price: 1100, oldPrice: 2000, discount: "45% off", badge: "Sale", image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 3, title: "DE - ODOPLUS", price: 1700, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 4, title: "UB-SPORE", price: 600, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 5, title: "AQUABISON", price: 850, image: Images.productbox, rating: "5.0", reviews: "20K" },
+    { id: 6, title: "POND CARE", price: 1100, image: Images.productbox, rating: "5.0", reviews: "20K" },
+    { id: 7, title: "AQUACARE", price: 1080, image: Images.productbox, rating: "5.0", reviews: "20K" },
+    { id: 8, title: "VIBRIGO", price: 600, badge: "New", image: Images.productbox },
+  ];
+
+  const productsmobile = [
+    { id: 1, title: "AQUA REMID", price: 1200, badge: "Hot", image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 2, title: "PROBIZYME", price: 1100, oldPrice: 2000, discount: "45% off", badge: "Sale", image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 1, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 1, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
+
   ];
 
 
 
-  return (
-    <div className="home-page">
-      <NavBar/>
-      <div className='mobile-container'>
-        <div className="container ">
+  const [activeIndex, setActiveIndex] = useState(null);
 
-          <section className="home-section1">
-            <div className="banner-container">
-              <div className="banner-title">
-                <p> Building Aquaculture </p>
-                <img className="icons-img left" src={Images.mainlogotext} />
-                <p>Success with</p>
+  const [activeTab, setActiveTab] = useState("All");
+
+  const data = [
+    {
+      title: "Natural & Safe",
+      content:
+        "Our probiotics are designed to enhance pond health and promote sustainable aquaculture.",
+    },
+    {
+      title: "Improves Water & Gut Health",
+      content:
+        "Balances pond ecology and supports strong digestive health in shrimp and fish.",
+    },
+    {
+      title: "Boosts Growth & Feed Efficiency",
+      content:
+        "Improves nutrient absorption and increases growth performance.",
+    },
+    {
+      title: "Prevents Disease Naturally",
+      content:
+        "Strengthens immunity and reduces harmful bacteria in aquaculture systems.",
+    },
+  ];
+
+  const toggle1 = (index) => {
+    setActiveIndex(index === activeIndex ? null : index);
+  };
+
+
+
+
+
+  return (
+    <div className="container">
+      <div className="home-page">
+        <section className="home-section1">
+          <div className="banner-container">
+            <div className="banner-title">
+              <p> Building Aquaculture </p>
+              <img className="icons-img left" src={Images.mainlogotext} />
+              <p>Success with</p>
+            </div>
+            <div className="banner-title">
+              <div className="title-imgback">
+                <img src={Images.mainlogotext1} alt="right" className="" />
               </div>
               <p> Every Drop of Probiotic Power.</p>
+            </div>
+
+            <div className='mobile-version-title'>
+              <div className='first-line'>
+                <p> Building Aquaculture </p>
+                <img className="mobile-none1" src={Images.mainlogotext} />
+              </div>
+
+              <p className='second-line'>Success with Every Drop of </p>
+              <div className='third-line'>
+                <div className="title-imgback1" >
+                  <img src={Images.mainlogotext1} alt="right" className=" mobile-none" />
+                </div>
+
+                <p>Probiotic Power</p>
+
+              </div>
+
             </div>
 
             <div className="banner-content">
@@ -155,6 +138,7 @@ const Home = () => {
                 <h6>95% Success Ratio</h6>
               </div>
               <div className="main-card"></div>
+              <img src={Images.mobilelogo1} className='card-mobile-logo' />
               <div className="down-position">
                 <div className="double-buttons">
                   <Buttons
@@ -167,54 +151,15 @@ const Home = () => {
                     <FiArrowUpRight className="arrow-icon" />
                   </Buttons>
                 </div>
-                <p> Every Drop of  Probiotic Power.</p>
               </div>
 
 
 
-              <div className='mobile-version-title'>
-                <div className='first-line'>
-                  <p> Building Aquaculture </p>
-                  <img className="mobile-none1" src={Images.mainlogotext} />
-                </div>
-
-                <p className='second-line'>Success with Every Drop of </p>
-                <div className='third-line'>
-                  <div className="title-imgback1" >
-                    <img src={Images.mainlogotext1} alt="right" className=" mobile-none" />
-                  </div>
-
-                  <p>Probiotic Power</p>
-
-                </div>
-
-              </div>
 
 
-
-              <div className="banner-content">
-                <div className="badge">
-                  <img className="win-icon" src={Images.win} />
-                  <h6>95% Success Ratio</h6>
-                </div>
-
-
+              <div className="side-cards">
                 <div>
-                  <img className='mobile-logo' src={Images.mobilelogo1} />
-                </div>
-                <div className="main-card"></div>
-                <div className="down-position">
-                  <div className="double-buttons">
-                    <Buttons
-                      variant="double-primary"
-                      className="primary-circle-button  btn-background"
-                    >
-                      Shop Now
-                    </Buttons>
-                    <Buttons variant="circle-primary " className="circle-button">
-                      <FiArrowUpRight className="arrow-icon" />
-                    </Buttons>
-                  </div>
+                  <div className="small-card1"></div>
                 </div>
                 <div className="small-card"></div>
 
@@ -224,127 +169,152 @@ const Home = () => {
                 <div className="small-card3"></div>
               </div>
             </div>
-            <div className="stats-container">
-              {statsData.map((item, index) => (
-                <div className="stats-card" key={index}>
-                  <p className="cards-title">{item.number}</p>
-                  <p className="subtitle ">{item.text}</p>
-                </div>
+          </div>
+
+          <div className="stats-container">
+            {statsData.map((item, index) => (
+              <div className="stats-card" _key_={index}>
+                <p className="cards-title">{item.number}</p>
+                <p className="subtitle ">{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="stats-container1">
+            {statsDatamobile.map((item, index) => (
+              <div className="stats-card" key={index}>
+                <p className="cards-title">{item.number}</p>
+                <p className="subtitle ">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        {/*  */}
+        <div className="all-products-container">
+          <p className='all-product-text'>Our Popular Products</p>
+          <div className="products-buttons">
+            <Buttons
+              variant="outline-primary"
+              className={`tab-btn  all-btn  ${activeTab === "All" ? "active" : ""}`}
+              onClick={() => setActiveTab("All")}
+            >
+              All
+            </Buttons>
+
+            <Buttons variant="outline-primary" className={`tab-btn ${activeTab === "Probiotics" ? "active" : ""}`}onClick={() => setActiveTab("Probiotics")}> Probiotics</Buttons>
+
+            <Buttons
+              variant="outline-primary"
+              className={`tab-btn ${activeTab === "Minerals" ? "active" : ""}`}
+              onClick={() => setActiveTab("Minerals")}
+            >
+              Minerals
+            </Buttons>
+          </div> <div className="products-container">
+            {products.map((item) => (
+              <Card
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                oldPrice={item.oldPrice}
+                discount={item.discount}
+                badge={item.badge}
+                image={item.image}
+                rating={item.rating}
+                reviews={item.reviews}
+              />
+            ))}
+          </div>
+          <div className="products-container1">
+            <div className="products-container12">
+              {productsmobile.map((item) => (
+                <Card
+                  key={item.id}
+                  title={item.title}
+                  price={item.price}
+                  oldPrice={item.oldPrice}
+                  discount={item.discount}
+                  badge={item.badge}
+                  image={item.image}
+                  rating={item.rating}
+                  reviews={item.reviews}
+                />
               ))}
             </div>
+          </div>
+          <div className='view-all-product'>
+            <Buttons variant='outline-primary' className="outline-bg" >View All</Buttons>
+          </div>
+        </div>
+        <div>
 
-            <div className="stats-container1">
-              {statsDatamobile.map((item, index) => (
-                <div className="stats-card" key={index}>
-                  <p className="cards-title">{item.number}</p>
-                  <p className="subtitle ">{item.text}</p>
+          <div className="why-container">
+            <div className='mobile-whychoose'>
+              <div className='mobile-center'>
+                <p className='title'>Why Choose Us</p >
+                <h6 className="subtitle">
+                  Our probiotics are designed to enhance pond health, improve growth,
+                  and promote sustainable aquaculture.
+                </h6>
+              </div>
+            </div>
+
+            <div className="left-section">
+              <div className="image-box">
+                <img
+                  src={Images.whychooseimage}
+                  alt="product" />
+                <div className='play-border'>
+                  <img className="play-btn" src={Images.play} />
                 </div>
-              ))}
-            </div>
-          </section>
+              </div>
 
-          <div className="all-products-container">
-            <p className='all-product-text'>Our Popular Products</p>
-            <div className="products-buttons">
-              <Buttons variant="outline-primary" className="outline-bg all-btn">
-                All
-              </Buttons>
-              <Buttons variant="outline-primary">Probiotics</Buttons>
-              <Buttons variant="outline-primary">Minerals</Buttons>
+              <div className="dots">
+                <span className="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
 
-            {/* <div className='products-container'> */}
+            <div className="right-section">
+              <p className='title'>Why Choose Us</p >
+              <h6 className="subtitle">
+                Our probiotics are designed to enhance pond health, improve growth,
+                and promote sustainable aquaculture.
+              </h6>
 
-
-
-              <div className="products-container">
-                {products.map((item) => (
-                  <div className="card-context" key={item.id}>
-                    <div className="card">
-                      <div className='hot-sale'>
-
-                      {item.badge && (
-                        <div className={`badge ${item.badge.toLowerCase()}`}>
-                          {item.badge}
-                        </div>
-                      )}
-
-                      <div className="card-image-wrapper">
-                        <div className="image-likeback">
-                          <img src={Images.like} />
-                        </div>
-                      </div>
-                      </div>
-
-                      <div className="image-container">
-                        <div className="rating">
-                          <img src={Images.ministar} />
-                          <h6>5.0</h6>
-                          <img src={Images.minline} />
-                          <h6>20K</h6>
-                        </div>
-
+              <div className="accordion">
+                {data.map((item, index) => (
+                  <div className="accordion-item" key={index}>
+                    <div
+                      className="accordion-title"
+                      onClick={() => toggle1(index)}>
+                      <h1>{item.title}</h1>
+                      <span className="cross-plus-icons">
                         <img
-                          src={item.image}
-                          alt="Product"
-                          className="product-img"
+                          src={activeIndex === index ? Images.cross : Images.plus}
+                          alt="icon"
                         />
-                      </div>
-
-                      <h1 className="image-text">{item.title}</h1>
-
-                      <div className="price-section">
-                        <h3 className="rupees">₹{item.price}</h3>
-
-                        {item.oldPrice && (
-                          <span className="old-price">₹{item.oldPrice}</span>
-                        )}
-
-                        {item.discount && (
-                          <span className="discount">{item.discount}</span>
-                        )}
-                      </div>
-
-                      <div className="select-cart">
-                        <select>
-                          {item.sizes.map((size, i) => (
-                            <option key={i}>{size}</option>
-                          ))}
-                        </select>
-
-                        {item.quantity > 1 ? (
-                          <div className="quantity qun-item ">
-                            <img src={Images.minusimage}/>
-                            <span>{item.quantity}</span>
-                            <img src={Images.plusimage}/>
-                         
-                          </div>
-                        ) : (
-                          <Buttons>Add to Cart</Buttons>
-                        )}
-                      </div>
+                      </span>
                     </div>
 
-                    <div className="btn-down">
-                      <Buttons variant="circle-secondary">
-                        <FiArrowUpRight className="arrow-icon" />
-                      </Buttons>
-                    </div>
+                    {activeIndex === index && (
+                      <div className="accordion-content">
+                        <p>{item.content}</p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
-
-        {/* </div> */}
+        </div>
       </div>
-
-
-
-      <Footer/>
-      {/* <WhyChooseUs/> */}
     </div>
+
   );
 };
 

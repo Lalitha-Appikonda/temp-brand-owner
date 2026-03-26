@@ -57,5 +57,9 @@ export const Images = {
     minusimage:"/assets/icons/fi_9312231.svg",
     plusimage:"/assets/icons/Group (2).svg",
     productbox:"/assets/icons/product-1-1.jpg (2).svg",
+    whychooseimage:"/assets/icons/Rectangle 21.svg",
+    play:"/assets/icons/Layer_2_00000070827265553928813150000015508787529661124756_.svg",
+    plus:"/assets/icons/fi_9312231 (1).svg",
+    cross:"/assets/icons/fi_9312231 (2).svg"
 }
 
