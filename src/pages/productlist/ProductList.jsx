@@ -1,6 +1,7 @@
 import React from "react";
 import Buttons from "../../components/form elements/Buttons";
 import Card from "../../components/card/Card";
+import Filter from "./filter/Filter";
 
 const ProductList = () => {
   const products = [
@@ -67,31 +68,36 @@ const ProductList = () => {
     <>
       <div className="container">
         <div className="product-listing">
-          <h3 className="title">Results - All Products</h3>
-
-          <div className="sort-buttons">
-            <h5 className="sort">Sort By :</h5>
-            <div className="all-sort-btns">
-              <Buttons variant="outline-primary">Popular Products</Buttons>
-              <Buttons variant="outline-primary">Low to High</Buttons>
-              <Buttons variant="outline-primary">High to Low</Buttons>
-              <Buttons variant="outline-primary">Best Sellers</Buttons>
-              <Buttons variant="outline-primary">Newest Arrivals</Buttons>
-            </div>
+          <div>
+            <Filter />
           </div>
+          <div className="product-listing-right">
+            <h3 className="title">Results - All Products</h3>
 
-          <div className="all-product-cards">
-            {products.map((product) => (
-              <Card
-                key={product.id} 
-                title={product.title}
-                price={product.price}
-                oldPrice={product.oldPrice}
-                discount={product.discount}
-                badge={product.badge}
-                showQuantity={product.showQuantity}
-              />
-            ))}
+            <div className="sort-buttons">
+              <h5 className="sort">Sort By :</h5>
+              <div className="all-sort-btns">
+                <Buttons variant="outline-primary">Popular Products</Buttons>
+                <Buttons variant="outline-primary">Low to High</Buttons>
+                <Buttons variant="outline-primary">High to Low</Buttons>
+                <Buttons variant="outline-primary">Best Sellers</Buttons>
+                <Buttons variant="outline-primary">Newest Arrivals</Buttons>
+              </div>
+            </div>
+
+            <div className="all-product-cards">
+              {products.map((product) => (
+                <Card
+                  key={product.id}
+                  title={product.title}
+                  price={product.price}
+                  oldPrice={product.oldPrice}
+                  discount={product.discount}
+                  badge={product.badge}
+                  showQuantity={product.showQuantity}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

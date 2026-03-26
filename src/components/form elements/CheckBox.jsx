@@ -9,11 +9,12 @@ const CheckBox = ({
   required = false,
   disabled = false,
   error,
+  className= ""
 }) => {
   const id = `${name}-${value}`;
 
   return (
-    <div className="checkbox-group">
+    <div className={`checkbox-group ${className}`} >
       <label className="checkbox-wrapper" htmlFor={id}>
         <input
           type="checkbox"

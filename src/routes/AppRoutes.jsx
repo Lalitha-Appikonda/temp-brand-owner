@@ -20,6 +20,7 @@ import Login from "../pages/global-pages/Login";
 import ForgotPassword from "../pages/global-pages/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/Forgotaftersetup";
 import Styleguide from "../../src/Styleguide/Styleguide";
+import Range from "../components/form elements/Range";
 
 const AppRoutes = () => {
   return (
@@ -32,23 +33,27 @@ const AppRoutes = () => {
 
       <Route path="login" element={<UserAccess />} >
         <Route index element={<Login />} />
-        <Route path="forgotpssword" element={<ForgotPassword />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
         <Route path="forgot-aftersetup" element={<Forgotaftersetup />} />
         <Route path="setnewpassword" element={<SetNewPassword />} />
       </Route>
 
       <Route path="/status/:type" element={<StatusHandler />} />
+      <Route path="range" element={<Range />} />
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="products" element={<SecurityQuestions />} />
+        <Route path="products" element={<ProductList />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="product/:id/reviews" element={<Review />} />
 
-        <Route path="cart" element={<Cart />} />
         <Route path="address" element={<DeliveryAddress />} />
         <Route path="address/edit" element={<EditAddress />} />
+        <Route  path='cart' element={<Cart />} />
+
       </Route>
+
+      
     </Routes>
   );
 };

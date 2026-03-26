@@ -1,20 +1,147 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from './../../components/form elements/Input';
 import { Images } from '../../images/Image'
 import Buttons from './../../components/form elements/Buttons';
+import { useState } from 'react';
+import * as Yup from "yup";
+import { useContext } from 'react';
+import { SignupContext } from "../../context/SignupContext";
+
 
 
 const SignUp = () => {
   const navigate = useNavigate()
+
+  const [form,setForm]=useState({               
+    name:"",
+    username:"",
+    password:"",
+     
+  });
+  const [isValid,setIsValid]=useState(false);
+
+  const [showPassword,setShowPassword]=useState(false);/* show pwd state */
+  const [showConfirmPassword,setShowConfirmPassword]=useState(false);/* show cfm pwd state */
+
+  const [errors,setErrors]=useState({});     /* errors state */
+
+  const { setSignupData } = useContext(SignupContext);
+
+  const signupSchema=Yup.object({
+    name:Yup.string()
+    .trim()
+    .required("Name is required")
+    .min(3,"Minimum 3 characters")
+    .max(20, "maximum 20 characters only"),
+
+    username:Yup.string()
+    .trim()
+    .required("username is required")
+    .min(4,"minimum 4 characters")
+    .max(25,"max 25 charcters only")
+    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscore"),
+
+    password:Yup.string()
+    .trim()
+    .required("pwd is required")
+    .min(8,"minimum 8 characters")
+    .matches(/[0-9]/, "At least 1 number")
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"),
+
+    confirmpassword: Yup.string()
+    .required("confirm pwd is required")
+    .oneOf([Yup.ref("password")],"passwords must match")
+
+  })
+  
+
+  const handlesubmit=async (e)=>{
+    e.preventDefault();
+
+    try{
+      await signupSchema.validate(form,{abortEarly:false});
+      setErrors({}); //clear errors if valid
+
+      setSignupData((prev) => ({
+      ...prev,
+      name: form.name,
+      username: form.username,
+      password: form.password,
+      confirmpassword: form.confirmpassword
+    }));
+
+    navigate("/sign-up/product-category");
+
+      
+    }catch(err){
+      const formattedErrors={};
+      err.inner.forEach((error)=>{
+        formattedErrors[error.path]=error.message;
+      })
+      setErrors(formattedErrors)
+    }
+  }
+
+
+
+    // if (!isValid){
+    //   return;
+    // }
+
+    // try{
+    //   const response=await fetch("signup api ",{
+    //   method:"POST"
+    // })
+    // const data=await response.json();
+    // console.log(data);
+    // }catch(error){
+    //   console.log(error)
+    // }
+
+  
+
+
+
+  const handlechange= async (e)=>{
+    const {name, value}=e.target;
+    const updatedForm={
+      ...form,
+      [name]:value
+    };
+    setForm(updatedForm);
+
+
+
+    setErrors((prev)=>({    /* to remove errors while typing */
+      ...prev,
+      [name]:""
+    }));
+    try{
+      await signupSchema.validate(updatedForm,{abortEarly:false})
+      setIsValid(true)
+    }catch{
+      setIsValid(false)
+    }
+  }
+
+
+
+  
+
+  const passwordRules={
+    length: form.password.length >=8,
+    number:/[0-9]/.test(form.password),
+    special:/[!@#$%^&*(),.?":{}|<>]/.test(form.password)
+  }
   const rules = [
-    { text: "At least 8 characters", icon: Images.minus },
-    { text: "At least 1 special character", icon: Images.minus },
-    { text: "At least 1 number", icon: Images.minus }
+    { text: "At least 8 characters",valid:passwordRules.length},
+    { text: "At least 1 special character", valid:passwordRules.special},
+    { text: "At least 1 number", valid:passwordRules.number }
   ];
 
+ 
   return (
-    <div className="signup-container">
+    <form className="signup-container" onSubmit={handlesubmit}>
       {/* <div className='container'> */}
 
 
@@ -26,27 +153,30 @@ const SignUp = () => {
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
-        <Input placeholder="Name" />
+        <Input placeholder="Name" name="name" value={form.name} onChange={handlechange} />
       </div>
+      {errors.name && <p className='errors'>{errors.name}</p> }
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
-        <Input placeholder="Username" />
+        <Input placeholder="Username" name="username" value={form.username} onChange={handlechange}/>
       </div>
+      {errors.username  && <p className='errors'>{errors.username}</p> }
 
 
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
-        <Input placeholder="password" />
-        <img src={Images.eyeicon} className="icon right" />
+        <Input placeholder="password" name="password" value={form.password} type={showPassword ? "text" :"password"} onChange={handlechange} />
+        <img src={showPassword? Images.eyeclose:Images.eyeicon} onClick={()=>setShowPassword((prev)=>!prev)} className="icon right" />
       </div>
+      {errors.password && <p className='errors'>{errors.password}</p> }
 
 
       <ul className='rules'>
         {rules.map((rule, index) => (
           <li key={index} className="rules-img">
             <span>
-              <img src={rule.icon} alt="icon" />
+              <img src={rule.valid ? Images.greentick: Images.minus} alt="icon" />
             </span>
             {rule.text}
           </li>
@@ -56,16 +186,15 @@ const SignUp = () => {
 
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
-        <Input placeholder="Re-enter Password" />
-        <img src={Images.eyeicon} className="icon right" />
+        <Input placeholder="Re-enter Password" name="confirmpassword" value={form.confirmpassword} type={showConfirmPassword ? "text":"password"} onChange={handlechange}/>
+        <img src={showConfirmPassword ? Images.eyeclose:Images.eyeicon} className="icon right" onClick={()=>setShowConfirmPassword(prev=>!prev)}/>
       </div>
+      {errors.confirmpassword && <p className='errors'>{errors.confirmpassword}</p> }
 
 
-
-      <div className='signin-next'>
-      <Buttons variant='secondary' onClick={()=> navigate("/product-category")}>Next</Buttons>
-
-      </div>
+     <div className='button'>
+       <Buttons type="submit" className='btn btn-primary' disabled={!isValid}>Next</Buttons>
+     </div>
 
       <div className='login-texts'>
         <p> Already Have an Account?</p>
@@ -77,15 +206,16 @@ const SignUp = () => {
         By clicking, I confirm that I have read, understood, and agree to the
         <a href="#">Terms of Service</a>
       </p>
+      <div className='parent-div'>
+        <div className='child-div'></div>
+      </div>
 
-
-
-    </div>
+    </form>
 
     //  </div>   
 
 
   )
-}
 
+};
 export default SignUp
