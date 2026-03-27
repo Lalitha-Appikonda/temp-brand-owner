@@ -39,7 +39,6 @@ const AppRoutes = () => {
       </Route>
 
       <Route path="/status/:type" element={<StatusHandler />} />
-      <Route path="range" element={<Range />} />
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />

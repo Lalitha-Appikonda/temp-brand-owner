@@ -63,10 +63,14 @@ export const Images = {
     play:"/assets/icons/Layer_2_00000070827265553928813150000015508787529661124756_.svg",
     plus:"/assets/icons/fi_9312231 (1).svg",
     cross:"/assets/icons/fi_9312231 (2).svg",
-
-
+     promtioncard:"/assets/icons/Subtract (2).png",
+     whatsapp:"/assets/icons/fi_5968841.svg",
+    mail:"/assets/icons/fi_2965306.svg", 
+    mobilepromtioncard:"/assets/icons/Subtract (3).svg",
+    
 
     //product-listing
     priceRange : "/assets/icons/price-range.svg",
+    cartBag : "/assets/icons/cart-bag.svg"
 }
 

@@ -6,6 +6,7 @@ import Footer from '../../components/footer/Footer';
 import NavBar from "../../components/navbar/NavBar";
 import { useNavigate } from "react-router-dom";
 import Card from '../../components/card/Card';
+import Styleguide from './../../Styleguide/Styleguide';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -152,11 +153,6 @@ const Home = () => {
                   </Buttons>
                 </div>
               </div>
-
-
-
-
-
               <div className="side-cards">
                 <div>
                   <div className="small-card1"></div>
@@ -189,7 +185,7 @@ const Home = () => {
             ))}
           </div>
         </section>
-        {/*  */}
+        {/*innersection2  */}
         <div className="all-products-container">
           <p className='all-product-text'>Our Popular Products</p>
           <div className="products-buttons">
@@ -201,7 +197,7 @@ const Home = () => {
               All
             </Buttons>
 
-            <Buttons variant="outline-primary" className={`tab-btn ${activeTab === "Probiotics" ? "active" : ""}`}onClick={() => setActiveTab("Probiotics")}> Probiotics</Buttons>
+            <Buttons variant="outline-primary" className={`tab-btn ${activeTab === "Probiotics" ? "active" : ""}`} onClick={() => setActiveTab("Probiotics")}> Probiotics</Buttons>
 
             <Buttons
               variant="outline-primary"
@@ -247,7 +243,7 @@ const Home = () => {
           </div>
         </div>
         <div>
-
+          {/*innersection3  */}
           <div className="why-container">
             <div className='mobile-whychoose'>
               <div className='mobile-center'>
@@ -255,6 +251,9 @@ const Home = () => {
                 <h6 className="subtitle">
                   Our probiotics are designed to enhance pond health, improve growth,
                   and promote sustainable aquaculture.
+                </h6>
+                <h6 className="mobile-sub">
+                  Our probiotics are designed to enhance pond health, improve growth, and promote  sustainable aquaculture —  trusted by dealers, corporates, and farmers nationwide.
                 </h6>
               </div>
             </div>
@@ -271,7 +270,7 @@ const Home = () => {
 
               <div className="dots">
                 <span className="active"></span>
-                <span></span>
+                <span ></span>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -311,6 +310,50 @@ const Home = () => {
               </div>
             </div>
           </div>
+
+
+          {/*innersection4  */}
+
+
+          <section className='promotion-section'>
+            <div>
+              <div className='promotion-wrapper'>
+                <div className='promotion-button'>
+                  <div className='double-dotted-buttons'>
+                    <div className="double-buttons">
+                      <Buttons variant="double-primary" className="primary-circle-button">
+                        View All Offers <span className="circle-button btn-circle-primary"><FiArrowUpRight /></span>
+                      </Buttons>
+                    </div>
+                    <div className='mobile-button'>
+                      <Buttons  variant="circle-secondary">
+                      <FiArrowUpRight className="arrow-icon" />
+                    </Buttons>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div className='promtion-card'>
+                  <img src={Images.promtioncard} />
+                </div>
+                <div className='promtion-card1'>
+                  <img src={Images.mobilepromtioncard} />
+                </div>
+              </div>
+              <div className="dots">
+                <span className="active"></span>
+                <span ></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+            </div>
+
+          </section>
+
+
         </div>
       </div>
     </div>
