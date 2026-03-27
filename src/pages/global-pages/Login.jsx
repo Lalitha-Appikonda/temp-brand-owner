@@ -108,11 +108,12 @@ const Login = () => {
                 reports by signing in securely.</h3>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />
-                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange} error={errors.username} />
+                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange}   />
             </div>
+            {errors.username && <p className='error-text'>{errors.username}</p> }
             <div className="input-box">
                 <img src={Images.lockicon} className="icon left" />
-                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange} error={errors.password} type={showPassword? "text":"password"} />
+                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} />
                 <img 
                     src={showPassword ? Images.eyeclose : Images.eyeicon}
                     className="icon right" 
@@ -120,6 +121,7 @@ const Login = () => {
                     style={{ cursor: "pointer" }}
                     />
              </div>
+             {errors.password && <p className='error-text'>{errors.password}</p> }
             <div className='login-wrapper'>
                 <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>

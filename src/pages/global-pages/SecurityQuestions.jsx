@@ -1,69 +1,189 @@
-  import React, { useState } from "react";
-  import { Images } from "../../images/Image";
-  import Input from "../../components/form elements/Input";
-  import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-  import Buttons from "../../components/form elements/Buttons";
-  import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Images } from "../../images/Image";
+import Input from "../../components/form elements/Input";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Buttons from "../../components/form elements/Buttons";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { SignupContext } from "../../context/SignupContext";
+import * as Yup from "yup";
 
-  const SecurityQuestions = ( ) => {
+const BASE_URL =
+  "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1";
 
-    const navigate = useNavigate();
+const SecurityQuestions = () => {
+  const navigate = useNavigate();
+  const { signupData, setSignupData } = useContext(SignupContext);
 
-    const questions = [
-      "What is your favorite food?",
-      "What is your mother's name?",
-      "What is your father's name?",
-      "What is your first school name?",
-      "What is your best friend's name?",
-    ];
-    const [open, setOpen] = useState(null);
-    return (
-      <>
-        <div className="security-ques-text-content">
-          <div className="back-btn" onClick={()=>navigate("/product-category")}>
-            <img src={Images.lessThan} alt="" />
-          </div>
+  const [questions, setQuestions] = useState([]);
+  const [open, setOpen] = useState(null);
+  const [answers, setAnswers] = useState({});
 
-          <div className="text-content">
-            <h1>Set Your Security Question</h1>
-            <p className="choose">
-              Choose and answer a security question to help you safely reset your
-              password anytime you forget it.
-            </p>
-            <h6>Answer any 3 of 5 questions</h6>
-            <div className="ques-container">
-              {questions.map((q, index) => (
-                <div className="boxes" key={index}>
-                  <div className="ques-prefix" onClick={() => setOpen(open === index ? null : index)}>
-                    <div className="row1">
-                      <div className="prefix-container">
-                        <img src={Images.quesIcon} alt="" />
-                      </div>
-                      <p className="ques">{q}</p>
-                    </div>
-                    <div className="dropdowns">
-                      {open === index ? <FaChevronUp /> : <FaChevronDown />}
-                    </div>
-                  </div>
 
-                  {open === index && (
-                    <div>
-                      <div className="dividing-line"></div>
-                      <Input className="ques-input" placeholder="Enter Answer" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+  console.log("SIGNUP DATA 👉", signupData);
 
-          <div className="ques-submit">
-              <Buttons variant="secondary" className="submit-ques" onClick={()=> navigate('/status/waiting')}>Submit</Buttons>
-          </div>
 
-        </div>
-      </>
-    );
+  const securitySchema=Yup.object().shape({
+    answers: Yup.array()
+    .min(3, "Please answer at least 3 questions"),
+  })
+
+  // ########### FETCH QUESTIONS
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const res = await axios.get(
+          `${BASE_URL}/unAuth/getAllQuestions`
+        );
+
+        console.log("API RESPONSE 👉", res.data);
+
+        setQuestions(res.data?.questions || []);
+      } catch (err) {
+        console.log("Error fetching questions", err);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
+  // ✅ HANDLE ANSWERS
+  const handleAnswerChange = (id, value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
 
-  export default SecurityQuestions;
+ const handleSubmit = async () => {
+  const filledAnswers = Object.entries(answers)
+    .filter(([_, ans]) => ans?.trim() !== "")
+    .map(([questionId, answer]) => ({
+      questionId: Number(questionId),
+      answer: answer.trim(),
+    }));
+
+  try {
+    // ✅ Yup validation
+    await securitySchema.validate(
+      { answers: filledAnswers },
+      { abortEarly: false }
+    );
+
+    // ✅ Prepare payload
+    const finalData = {
+      brandOwnerName: signupData.name,
+      username: signupData.username,
+      password: signupData.password,
+      passwordVerify: signupData.confirmpassword,
+      productCategory: Number(signupData.category?.id),
+      categoryName: signupData.category?.name,
+      productSubCategory: signupData.subcategory.map(
+        (item) => Number(item.id)
+      ),
+      subCategoryName: signupData.subcategory.map(
+        (item) => item.name
+      ),
+      roleId: 2,
+      answers: filledAnswers,
+    };
+
+    console.log("FINAL PAYLOAD 👉", finalData);
+
+    // ✅ API call
+    const res = await axios.post(
+      `${BASE_URL}/unAuth/signup`,
+      finalData
+    );
+
+    console.log("Signup Success 👉", res.data);
+
+    navigate("/status/waiting");
+
+  } catch (err) {
+    // ✅ Handles BOTH validation + API errors
+    console.log("Error 👉", err);
+
+    if (err.name === "ValidationError") {
+      alert(err.errors[0]); // show first validation error
+    }
+  }
+};
+  return (
+    <div className="security-ques-text-content">
+      <div
+        className="back-btn"
+        onClick={() => navigate("/product-category")}
+      >
+        <img src={Images.lessThan} alt="" />
+      </div>
+
+      <div className="text-content">
+        <h1>Set Your Security Question</h1>
+
+        <p className="choose">
+          Choose and answer a security question to help you safely reset your
+          password anytime.
+        </p>
+
+        <h6>Answer any 3 of {questions.length}</h6>
+
+        <div className="ques-container">
+          {questions.map((q, index) => (
+            <div className="boxes" key={q.id}>
+              <div
+                className="ques-prefix"
+                onClick={() =>
+                  setOpen(open === index ? null : index)
+                }
+              >
+                <div className="row1">
+                  <div className="prefix-container">
+                    <img src={Images.quesIcon} alt="" />
+                  </div>
+                  <p className="ques">{q.question}</p>
+                </div>
+
+                <div className="dropdowns">
+                  {open === index ? (
+                    <FaChevronUp />
+                  ) : (
+                    <FaChevronDown />
+                  )}
+                </div>
+              </div>
+
+              {open === index && (
+                <div>
+                  <div className="dividing-line"></div>
+
+                  <Input
+                    className="ques-input"
+                    placeholder="Enter Answer"
+                    value={answers[q.id] || ""}
+                    onChange={(e) =>
+                      handleAnswerChange(q.id, e.target.value)
+                    }
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="ques-submit">
+        <Buttons
+          variant="secondary"
+          className="submit-ques"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Buttons>
+      </div>
+    </div>
+  );
+
+}
+export default SecurityQuestions;

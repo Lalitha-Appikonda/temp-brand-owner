@@ -16,6 +16,7 @@ const SignUp = () => {
     name:"",
     username:"",
     password:"",
+    confirmpassword:""
      
   });
   const [isValid,setIsValid]=useState(false);
@@ -43,13 +44,13 @@ const SignUp = () => {
 
     password:Yup.string()
     .trim()
-    .required("pwd is required")
+    .required("password is required")
     .min(8,"minimum 8 characters")
     .matches(/[0-9]/, "At least 1 number")
     .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"), // Pattern wrong
 
     confirmpassword: Yup.string()
-    .required("confirm pwd is required")
+    .required("confirm password is required")
     .oneOf([Yup.ref("password")],"passwords must match")
 
   })
@@ -155,13 +156,13 @@ const SignUp = () => {
         <img src={Images.user} className="icon left" />
         <Input placeholder="Name" name="name" value={form.name} onChange={handlechange} />
       </div>
-      {errors.name && <p className='errors'>{errors.name}</p> }
+      {errors.name && <p className='error-text'>{errors.name}</p> }
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
         <Input placeholder="Username" name="username" value={form.username} onChange={handlechange}/>
       </div>
-      {errors.username  && <p className='errors'>{errors.username}</p> }
+      {errors.username  && <p className='error-text'>{errors.username}</p> }
 
 
       <div className="input-box">
@@ -169,7 +170,7 @@ const SignUp = () => {
         <Input placeholder="password" name="password" value={form.password} type={showPassword ? "text" :"password"} onChange={handlechange} />
         <img src={showPassword? Images.eyeclose:Images.eyeicon} onClick={()=>setShowPassword((prev)=>!prev)} className="icon right" />
       </div>
-      {errors.password && <p className='errors'>{errors.password}</p> }
+      {errors.password && <p className='error-text'>{errors.password}</p> }
 
 
       <ul className='rules'>
@@ -189,7 +190,7 @@ const SignUp = () => {
         <Input placeholder="Re-enter Password" name="confirmpassword" value={form.confirmpassword} type={showConfirmPassword ? "text":"password"} onChange={handlechange}/>
         <img src={showConfirmPassword ? Images.eyeclose:Images.eyeicon} className="icon right" onClick={()=>setShowConfirmPassword(prev=>!prev)}/>
       </div>
-      {errors.confirmpassword && <p className='errors'>{errors.confirmpassword}</p> }
+      {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> }
 
 
      <div className='signin-next'>
