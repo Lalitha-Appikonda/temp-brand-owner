@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Images } from '../../images/Image';
 import { FiArrowUpRight } from 'react-icons/fi';
 import Buttons from '../../components/form elements/Buttons';
@@ -7,6 +7,7 @@ import NavBar from "../../components/navbar/NavBar";
 import { useNavigate } from "react-router-dom";
 import Card from '../../components/card/Card';
 import Styleguide from './../../Styleguide/Styleguide';
+import Input from '../../components/form elements/Input';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -94,8 +95,62 @@ const Home = () => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
+  const slides = [
+    { id: 1, img: Images.promtioncard },
+    { id: 2, img: Images.promtioncard },
+    { id: 3, img: Images.promtioncard },
+    { id: 4, img: Images.promtioncard },
+    { id: 5, img: Images.promtioncard },
+    { id: 6, img: Images.promtioncard },
+  ];
+
+  const mobileslide=[
+     { id: 1, img: Images.promtioncard },
+    { id: 2, img: Images.promtioncard },
+    { id: 3, img: Images.promtioncard },
+    { id: 4, img: Images.promtioncard },
+    { id: 5, img: Images.promtioncard },
+    { id: 6, img: Images.promtioncard },
+  ]
 
 
+
+
+
+  // Current Slide State
+  const [current, setCurrent] = useState(0);
+
+  //  Auto Slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+
+  // WHY CHOOSE IMAGES
+  const whyImages = [
+    { id: 1, img: Images.whychooseimage },
+    { id: 2, img: Images.whychooseimage },
+    { id: 3, img: Images.whychooseimage },
+    { id: 4, img: Images.whychooseimage },
+    { id: 5, img: Images.whychooseimage },
+    { id: 6, img: Images.whychooseimage },
+  ];
+
+  // CURRENT INDEX
+  const [whyCurrent, setWhyCurrent] = useState(0);
+
+  // AUTO SLIDE
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWhyCurrent((prev) => (prev + 1) % whyImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
 
   return (
@@ -138,7 +193,9 @@ const Home = () => {
                 <img src={Images.win} />
                 <h6>95% Success Ratio</h6>
               </div>
-              <div className="main-card"></div>
+              <div className="main-card">
+                <img src={Images.brannerswed}/>
+              </div>
               <img src={Images.mobilelogo1} className='card-mobile-logo' />
               <div className="down-position">
                 <div className="double-buttons">
@@ -157,12 +214,16 @@ const Home = () => {
                 <div>
                   <div className="small-card1"></div>
                 </div>
-                <div className="small-card"></div>
+                <div className="small-card">
+                  <img src={Images.brannerslide1}/>
+                </div>
 
                 <div>
                   <div className="small-card2"></div>
                 </div>
-                <div className="small-card3"></div>
+                <div className="small-card3">
+                  <img src={Images.brannerslide2}/>
+                </div>
               </div>
             </div>
           </div>
@@ -259,23 +320,35 @@ const Home = () => {
             </div>
 
             <div className="left-section">
-              <div className="image-box">
-                <img
-                  src={Images.whychooseimage}
-                  alt="product" />
-                <div className='play-border'>
-                  <img className="play-btn" src={Images.play} />
-                </div>
+
+              {/* ✅ Carousel */}
+              <div className="why-carousel">
+                {whyImages.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className={`image-box ${index === whyCurrent ? "active" : ""}`}
+                  >
+                    <img src={item.img} alt="product" />
+
+                    {/* play button */}
+                    <div className="play-border">
+                      <img className="play-btn" src={Images.play} />
+                    </div>
+                  </div>
+                ))}
               </div>
 
+              {/* ✅ Dots */}
               <div className="dots">
-                <span className="active"></span>
-                <span ></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                {whyImages.map((_, index) => (
+                  <span
+                    key={index}
+                    className={whyCurrent === index ? "active" : ""}
+                    onClick={() => setWhyCurrent(index)}
+                  ></span>
+                ))}
               </div>
+
             </div>
 
             <div className="right-section">
@@ -315,45 +388,102 @@ const Home = () => {
           {/*innersection4  */}
 
 
-          <section className='promotion-section'>
+          <section className="promotion-section">
             <div>
-              <div className='promotion-wrapper'>
-                <div className='promotion-button'>
-                  <div className='double-dotted-buttons'>
+
+              <div className="promotion-wrapper">
+
+                {/*  Button */}
+                <div className="promotion-button">
+                  <div className="double-dotted-buttons">
+
                     <div className="double-buttons">
                       <Buttons variant="double-primary" className="primary-circle-button">
-                        View All Offers <span className="circle-button btn-circle-primary"><FiArrowUpRight /></span>
+                        View All Offers
+                        <span className="circle-button btn-circle-primary">
+                          <FiArrowUpRight />
+                        </span>
                       </Buttons>
                     </div>
-                    <div className='mobile-button'>
-                      <Buttons  variant="circle-secondary">
-                      <FiArrowUpRight className="arrow-icon" />
-                    </Buttons>
+
+                    <div className="mobile-button">
+                      <Buttons variant="circle-secondary">
+                        <FiArrowUpRight className="arrow-icon" />
+                      </Buttons>
                     </div>
-                    
+
                   </div>
                 </div>
-                <div className='promtion-card'>
-                  <img src={Images.promtioncard} />
+
+                {/*  Carousel */}
+                <div className="carousel-wrapper">
+                  {slides.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`promtion-card   ${index === current ? "active" : ""}`}
+                    >
+                      <img  className='promote-mobile' src={item.img} alt="promotion" />
+                    </div>
+                  ))}
                 </div>
-                <div className='promtion-card1'>
+
+                  <div className='promtion-card1'>
                   <img src={Images.mobilepromtioncard} />
                 </div>
+
               </div>
+
+              {/*  Dots */}
               <div className="dots">
-                <span className="active"></span>
-                <span ></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                {slides.map((_, index) => (
+                  <span
+                    key={index}
+                    className={current === index ? "active" : ""}
+                    onClick={() => setCurrent(index)}
+                  ></span>
+                ))}
               </div>
 
             </div>
-
           </section>
 
 
+
+          <section className='reference-program'>
+            <p className='title1'>Join Our Referral Program!</p>
+            <h4 className='subtitle1'>Invite Dealers and Corporate farmers to join Unique Biotech’s online store and earn exclusive cashback on every referral.</h4>
+            <div className='whats-box'>
+              <div className='whatsapp-box'>
+                <img src={Images.mail} />
+              </div>
+              <div className='whatsapp-box'>
+                <img src={Images.whatsapp} />
+              </div>
+            </div>
+            <div className='whats-wrapper'>
+              <div className="whats-input-wrapper">
+                <Input placeholder='Enter refer member mail' />
+              </div>
+              <div>
+                <div className='button-in-button'>
+                  <div className="double-buttons">
+                    <Buttons variant="double-primary" className="primary-circle-button">
+                      Send Link <span className="circle-button btn-circle-primary"><FiArrowUpRight /></span>
+                    </Buttons>
+                  </div>
+
+
+                </div>
+
+                <div className='reference-mobile'>
+                  <Buttons variant="circle-secondary">
+                    <FiArrowUpRight className="arrow-icon" />
+                  </Buttons>
+                </div>
+              </div>
+            </div>
+
+          </section>
         </div>
       </div>
     </div>

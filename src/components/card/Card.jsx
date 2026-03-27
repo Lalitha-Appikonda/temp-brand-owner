@@ -89,6 +89,7 @@ const Card = ({ title, price, oldPrice, discount, badge, image,rating, reviews }
             <option value="">1000g</option>
             <option value="">300g</option>
           </select>
+          
 
           {showQuantity ? (
             <div className="quantity">
