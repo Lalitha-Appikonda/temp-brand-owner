@@ -19,8 +19,6 @@ import StatusHandler from "../pages/global-pages/status screens/StatusHandler";
 import Login from "../pages/global-pages/Login";
 import ForgotPassword from "../pages/global-pages/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/Forgotaftersetup";
-import Styleguide from "../../src/Styleguide/Styleguide";
-import Range from "../components/form elements/Range";
 
 const AppRoutes = () => {
   return (
