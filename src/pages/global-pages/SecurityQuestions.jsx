@@ -13,20 +13,29 @@ const BASE_URL =
 
 const SecurityQuestions = () => {
   const navigate = useNavigate();
-  const { signupData, setSignupData } = useContext(SignupContext);
-
+  const { signupData, setSignupData } = useContext(SignupContext); 
   const [questions, setQuestions] = useState([]);
   const [open, setOpen] = useState(null);
   const [answers, setAnswers] = useState({});
+  const [error,setError]=useState("");
 
 
-  console.log("SIGNUP DATA 👉", signupData);
+  console.log("SIGNUP DATA ", signupData);
 
 
-  const securitySchema=Yup.object().shape({
-    answers: Yup.array()
-    .min(3, "Please answer at least 3 questions"),
-  })
+    const securitySchema = Yup.object().shape({
+      answers: Yup.array()
+        .test(
+          "min-answered",
+          "Please answer at least 3 questions",
+          (answers = []) => {
+            const valid = answers.filter(
+              (a) => a.answer && a.answer.trim() !== ""
+            );
+            return valid.length >= 3;
+          }
+        )
+    });
 
   // ########### FETCH QUESTIONS
 
@@ -37,7 +46,7 @@ const SecurityQuestions = () => {
           `${BASE_URL}/unAuth/getAllQuestions`
         );
 
-        console.log("API RESPONSE 👉", res.data);
+        console.log("API RESPONSE ", res.data);
 
         setQuestions(res.data?.questions || []);
       } catch (err) {
@@ -48,7 +57,7 @@ const SecurityQuestions = () => {
     fetchQuestions();
   }, []);
 
-  // ✅ HANDLE ANSWERS
+  //  HANDLE ANSWERS
   const handleAnswerChange = (id, value) => {
     setAnswers((prev) => ({
       ...prev,
@@ -58,20 +67,20 @@ const SecurityQuestions = () => {
 
  const handleSubmit = async () => {
   const filledAnswers = Object.entries(answers)
-    .filter(([_, ans]) => ans?.trim() !== "")
+     
     .map(([questionId, answer]) => ({
       questionId: Number(questionId),
-      answer: answer.trim(),
+      answer:(answer || "").trim(),
     }));
 
   try {
-    // ✅ Yup validation
+    //  Yup validation
     await securitySchema.validate(
       { answers: filledAnswers },
       { abortEarly: false }
     );
 
-    // ✅ Prepare payload
+    //  Prepare payload
     const finalData = {
       brandOwnerName: signupData.name,
       username: signupData.username,
@@ -89,24 +98,24 @@ const SecurityQuestions = () => {
       answers: filledAnswers,
     };
 
-    console.log("FINAL PAYLOAD 👉", finalData);
+    console.log("FINAL PAYLOAD ", finalData);
 
-    // ✅ API call
+    //  API call
     const res = await axios.post(
       `${BASE_URL}/unAuth/signup`,
       finalData
     );
 
-    console.log("Signup Success 👉", res.data);
+    console.log("Signup Success ", res.data);
 
     navigate("/status/waiting");
 
   } catch (err) {
-    // ✅ Handles BOTH validation + API errors
-    console.log("Error 👉", err);
+    //  Handles BOTH validation + API errors
+    console.log("Error ", err);
 
     if (err.name === "ValidationError") {
-      alert(err.errors[0]); // show first validation error
+       setError(err.errors[0]);
     }
   }
 };
@@ -128,6 +137,7 @@ const SecurityQuestions = () => {
         </p>
 
         <h6>Answer any 3 of {questions.length}</h6>
+        
 
         <div className="ques-container">
           {questions.map((q, index) => (
@@ -171,6 +181,7 @@ const SecurityQuestions = () => {
             </div>
           ))}
         </div>
+        {error && <p className="error-text">{error}</p>}
       </div>
 
       <div className="ques-submit">
