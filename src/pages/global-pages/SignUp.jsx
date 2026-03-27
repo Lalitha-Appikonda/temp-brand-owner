@@ -48,7 +48,7 @@ const SignUp = () => {
     .required("pwd is required")
     .min(8,"minimum 8 characters")
     .matches(/[0-9]/, "At least 1 number")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"),
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"), // Pattern wrong
 
     confirmpassword: Yup.string()
     .required("confirm pwd is required")
@@ -195,12 +195,12 @@ const SignUp = () => {
 
 
      <div className='signin-next'>
-       <Buttons type="submit" className='btn btn-primary' disabled={!isValid}>Next</Buttons>
+       <Buttons type="submit" className='btn btn-primary'  >Next</Buttons>
      </div>
 
       <div className='login-texts'>
         <p> Already Have an Account?</p>
-        <p>Login</p>
+        <p onClick={() => navigate('/login')} >Login</p>
 
       </div>
 

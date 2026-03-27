@@ -5,7 +5,7 @@
   import Buttons from "../../components/form elements/Buttons";
   import { useNavigate } from "react-router-dom";
 
-  const SecurityQuestions = () => {
+  const SecurityQuestions = ( ) => {
 
     const navigate = useNavigate();
 
