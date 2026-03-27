@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../components/form elements/Input";
 import Buttons from "../components/form elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -7,6 +7,7 @@ import SelectBox from "../components/form elements/SelectBox";
 import TextArea from "../components/form elements/TextArea";
 import CheckBox from "../components/form elements/CheckBox";
 import SelectWithCheckbox from "../components/form elements/SelectWithCheckbox";
+import RadioButton from "../components/form elements/RadioButton";
 
 const Styleguide = () => {
   const colors = [
@@ -32,6 +33,19 @@ const Styleguide = () => {
     { name: "rgba(88,63,255)", bg: "rgba(var(--green-text))" },
     { name: "rgba(255,78,72)", bg: "rgba(var(--out-of-stock-text))" },
   ];
+
+
+  const [gender, setGender] = useState("");
+
+  const options = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+  ];
+
+  const handleChange = (e) => {
+    setGender(e.target.value);
+  };
+
   return (
     <>
       <div>
@@ -186,6 +200,18 @@ const Styleguide = () => {
             placeholder="Select State"
           />
     {/* </div> */}
+      </div>
+
+      <div style={{ marginTop: "50px" }}>
+        <h1 style={{ fontSize: "50px", textAlign: "center" }}>Radio Buttons</h1>
+
+        <RadioButton
+        label="Select Gender"
+        name="gender"
+        options={options}
+        value={gender}
+        onChange={handleChange}
+      />
       </div>
 
 

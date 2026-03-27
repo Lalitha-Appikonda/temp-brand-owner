@@ -14,19 +14,17 @@ const SelectWithCheckbox = ({
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
 
-  const handleCheckboxChange = (e) => {
-    const { value: val, checked } = e.target;
+ const handleCheckboxChange = (option, checked) => {
+  let updated;
 
-    let updated;
+  if (checked) {
+    updated = [...value, option]; // ✅ full object
+  } else {
+    updated = value.filter((item) => item.value !== option.value);
+  }
 
-    if (checked) {
-      updated = [...value, val];
-    } else {
-      updated = value.filter((item) => item !== val);
-    }
-
-    onChange(name, updated);
-  };
+  onChange(name, updated);
+};
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -50,7 +48,9 @@ const SelectWithCheckbox = ({
               {icon && <span className="product-first-icon">{icon}</span>}
 
               <span className="placeholder">
-                {value?.label || placeholder}
+                {value.length > 0
+                  ? value.map(item => item.label).join(", ")
+                  : placeholder}
               </span>
             </div>
           </div>
@@ -64,8 +64,8 @@ const SelectWithCheckbox = ({
                   label={item.label}
                   name={name}
                   value={item.value}
-                  checked={value.includes(item.value)}
-                  onChange={handleCheckboxChange}
+                  checked={value.some(v => v.value === item.value)} // ✅ FIX
+                  onChange={(e) => handleCheckboxChange(item, e.target.checked)} // ✅ FIX
                 />
               </li>
             ))}

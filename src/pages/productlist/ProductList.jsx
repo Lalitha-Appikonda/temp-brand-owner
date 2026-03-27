@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Buttons from "../../components/form elements/Buttons";
 import Card from "../../components/card/Card";
 import Filter from "./filter/Filter";
@@ -10,10 +10,11 @@ import { TbArrowsUpDown } from "react-icons/tb";
 import { TiFilter } from "react-icons/ti";
 import { PiLineVertical } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import PopUp from "../../components/popup/PopUp";
+import RadioButton from "../../components/form elements/RadioButton";
 
 const ProductList = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const products = [
     {
       id: 1,
@@ -101,14 +102,27 @@ const ProductList = () => {
     },
   ];
 
+  const [sort, setSort] = useState("");
+  
+    const options = [
+      { label: "Relevance", value: "relevance" },
+      { label: "Popularity", value: "popularity" },
+      { label: "Price - Low to High", value: "price - low to high" },
+      { label: "Price - High to Low", value: "price - high to low" },
+      { label: "Newest First", value: "newest first" },
+    ];
+  
+    const handleChange = (e) => {
+      setSort(e.target.value);
+    };
+
   return (
     <>
       <div className="container">
         <div className="products-list">
-
           <div className="mobile-product-listing">
             <div className="title-arrows-back">
-              <FaArrowLeft  onClick={()=>navigate('/')}/>
+              <FaArrowLeft onClick={() => navigate("/")} />
               <h1>Probiotics</h1>
             </div>
 
@@ -116,7 +130,7 @@ const ProductList = () => {
               <div className="product-list-search">
                 <FaSearch className="icon" />
               </div>
-              <div className="cart-container">
+              <div className="cart-container-wrapper">
                 <CiHeart className="icon" />
                 <div className="bag">
                   <img src={Images.cartBag} alt="" />
@@ -188,10 +202,28 @@ const ProductList = () => {
           </div>
 
           <div className="filters-in-mobile">
-            <div className="down-filters-title">
-              <TbArrowsUpDown className="icon" />
-              <h3>SORT</h3>
-            </div>
+            <PopUp
+              trigger={
+                <div className="down-filters-title">
+                  <TbArrowsUpDown className="icon" />
+                  <h3>SORT</h3>
+                </div>
+              }
+              size="md"
+              title="Sort By"
+              className="sort-popup"
+            >
+              <div className="dividing-line"></div>
+              <div className="sort-options">
+                <RadioButton
+                  name="sorting"
+                  options={options}
+                  value={sort}
+                  onChange={handleChange}
+                  className="sorting-popup"
+                />
+              </div>
+            </PopUp>
             <div className="pipe">
               <PiLineVertical />
             </div>
@@ -200,7 +232,6 @@ const ProductList = () => {
               <h3>FILTER</h3>
             </div>
           </div>
-
         </div>
       </div>
     </>

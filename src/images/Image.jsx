@@ -79,6 +79,10 @@ export const Images = {
 
     //product-listing
     priceRange : "/assets/icons/price-range.svg",
-    cartBag : "/assets/icons/cart-bag.svg"
+    cartBag : "/assets/icons/cart-bag.svg",
+
+
+    // cart
+    addCartImage : "/assets/icons/add-to-cart-product-image.svg"
 }
 
