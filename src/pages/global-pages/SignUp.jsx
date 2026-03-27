@@ -6,6 +6,8 @@ import { useState } from 'react';
 import * as Yup from "yup";
 import { useContext } from 'react';
 import { SignupContext } from "../../context/SignupContext";
+import PopUp from '../../components/popup/PopUp';
+import TermsAndConditions from './TermsAndConditions';
 
 
 
@@ -192,7 +194,7 @@ const SignUp = () => {
       {errors.confirmpassword && <p className='errors'>{errors.confirmpassword}</p> }
 
 
-     <div className='button'>
+     <div className='signin-next'>
        <Buttons type="submit" className='btn btn-primary' disabled={!isValid}>Next</Buttons>
      </div>
 
@@ -202,9 +204,18 @@ const SignUp = () => {
 
       </div>
 
-      <p className="terms">
+      <p className="terms terms-conditions">
         By clicking, I confirm that I have read, understood, and agree to the
-        <a href="#">Terms of Service</a>
+        <PopUp
+          trigger={<span> Terms of Service </span>}
+          size="md"
+          title="Terms of Service"
+          className="terms-popup"
+        >
+          <div className='dividing-line'></div>
+          <TermsAndConditions />
+        </PopUp>
+        of Sri Animalife Biotech Pvt Ltd.
       </p>
       <div className='parent-div'>
         <div className='child-div'></div>
