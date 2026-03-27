@@ -95,6 +95,9 @@ const Home = () => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
+// promotioncard images
+
+
   const slides = [
     { id: 1, img: Images.promtioncard },
     { id: 2, img: Images.promtioncard },
@@ -104,18 +107,14 @@ const Home = () => {
     { id: 6, img: Images.promtioncard },
   ];
 
-  const mobileslide=[
-     { id: 1, img: Images.promtioncard },
-    { id: 2, img: Images.promtioncard },
-    { id: 3, img: Images.promtioncard },
-    { id: 4, img: Images.promtioncard },
-    { id: 5, img: Images.promtioncard },
-    { id: 6, img: Images.promtioncard },
-  ]
-
-
-
-
+  // const mobileslide=[
+  //    { id: 1, img: Images.promtioncard },
+  //   { id: 2, img: Images.promtioncard },
+  //   { id: 3, img: Images.promtioncard },
+  //   { id: 4, img: Images.promtioncard },
+  //   { id: 5, img: Images.promtioncard },
+  //   { id: 6, img: Images.promtioncard },
+  // ]
 
   // Current Slide State
   const [current, setCurrent] = useState(0);
