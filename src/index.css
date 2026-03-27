@@ -493,7 +493,7 @@ h6 {
 
 /****************  soft BUTTONS  ****************/
 .btn-primary {
-  padding: 9.5px 15px;
+  padding: 19px 15px;
   background-color: rgba(var(--orange-bg), 1);
   color: rgba(var(--primary-bg), 1);
 }
@@ -2671,7 +2671,9 @@ h6 {
   /* width: 464px;
   height: 70; */
 }
-
+.signup-container .signin-next .btn-container{
+  width: 100%;
+}
 .signup-container .rules-img {
   display: flex;
   gap: 10px;
@@ -3036,6 +3038,18 @@ h6 {
 .login-container .login-texts p:nth-child(2) {
   color: rgba(var(--orange-bg), 1);
   text-decoration: underline;
+}
+
+
+@media (max-width:1300px) {
+.login-container .title-text {
+font-size: 30px;
+}
+.login-container .login-wrapper .forgot-text {
+font-size:14px;
+}
+
+
 }
 
 @media (max-width: 1200px) {

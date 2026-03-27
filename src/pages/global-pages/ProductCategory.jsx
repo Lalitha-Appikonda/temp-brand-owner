@@ -1,48 +1,131 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaChevronDown, FaChevronUp, FaTimes } from "react-icons/fa";
 import SelectBox from "../../components/form elements/SelectBox";
 import { LuBox } from "react-icons/lu";
-import CheckBox from "../../components/form elements/CheckBox";
 import SelectWithCheckbox from "../../components/form elements/SelectWithCheckbox";
 import { Images } from "../../images/Image";
 import Buttons from "../../components/form elements/Buttons";
 import PopUp from "../../components/popup/PopUp";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/form elements/Input";
-
+import { useContext } from "react";
+import { SignupContext } from "../../context/SignupContext";
+import axios from "axios";
 
 const ProductCategory = () => {
-  const subCategoryOptions = {
-    aquaculture: [
-      { label: "Probiotic", value: "probiotic" },
-      { label: "Minerals", value: "minerals" },
-      { label: "Feeds", value: "feeds" },
-      { label: "Medicine", value: "medicine" },
-    ],
-    agriculture: [
-      { label: "Fertilizers", value: "fertilizers" },
-      { label: "Seeds", value: "seeds" },
-      { label: "Pesticides", value: "pesticides" },
-    ],
-    "human medicine": [
-      { label: "Tablets", value: "tablets" },
-      { label: "Syrups", value: "syrups" },
-      { label: "Injections", value: "injections" },
-    ],
-    other: [{ label: "Others", value: "other" }],
-  };
+
+   
   const navigate = useNavigate();
 
   const [category, setCategory] = useState(null);
   const [Subcategory, setSubCategory] = useState([]);
+  
+
+  const [categories,setCategories]=useState([]);
+  const [subCategories,setSubCategories]=useState([]);
+
+  useEffect(()=>{
+    const fetchCategories=async ()=>{
+      try{
+        const res=await axios.get("https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories");
+        console.log(res)
+        console.log(res.data)
+         
+         const formatted = [
+                  ...res.data.data.map((item) => ({
+                    label: item.category_name,
+                    value: item.id
+                  })),
+                  { label: "Other", value: "other" }    
+                ];
+        setCategories(formatted)
+      }catch(err){
+        console.log("error fetch categories",err)
+      }
+    }
+    fetchCategories();
+  },[])
+
+
+
+  useEffect(()=>{
+    if(!category || category.value==="other") return;
+
+    setSubCategories([])
+
+    const fetchSubCategories=async ()=>{
+      try{
+      const res=await axios.post("https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getSubCategories",
+        {
+          categoryId:category.value
+        }
+      )
+      const formatted=[
+        ...res.data.message.map((item)=>({
+        label:item.sub_category_name,
+        value:item.id
+      })),
+      {label:"other", value:"other"}
+    ]
+      setSubCategories(formatted)
+    }catch(err){
+      console.log("error fetching subcategories",err)
+    }
+  }
+  fetchSubCategories();
+},[category]);
+
+  const {signupData,setSignupData}=useContext(SignupContext);
 
   const [otherCategory, setOtherCategory] = useState("");
   const [otherSubCategory, setOtherSubCategory] = useState("");
 
   const handleRemove = (itemToRemove) => {
-    setSubCategory((prev) => prev.filter((item) => item !== itemToRemove));
+    setSubCategory((prev) => prev.filter((item) => item.value !== itemToRemove.value));
+  };
+    
+    const handleNext = () => {
+    const finalCategory =
+      category?.value === "other"
+        ? otherCategory
+        : category?.value;
+
+    let finalSubCategory = Subcategory
+      .filter((item) =>item && item.value && item.value !== "other")
+      .map((item) => item.value);
+
+    if (
+      Subcategory.some((item) => item.value === "other") &&
+      otherSubCategory
+    ) {
+      finalSubCategory.push(otherSubCategory);
+    }
+
+    setSignupData((prev) => ({
+      ...prev,
+      category: finalCategory,
+      subcategory: finalSubCategory,
+    }));
+
+    navigate("/sign-up/security-questions");
   };
 
+    const handlechange = (value) => {
+      console.log("RAW value:", value);
+
+      if (!Array.isArray(value)) {
+        setSubCategory([]);
+        return;
+      }
+
+      const clean = value.filter(item => item && item.value);
+
+      const unique = Array.from(
+        new Map(clean.map(item => [item.value, item])).values()
+      );
+
+      setSubCategory(unique);
+    };
   return (
     <div className="category-container">
       <div className="title">Create Your Account</div>
@@ -61,13 +144,8 @@ const ProductCategory = () => {
             setOtherSubCategory("");
           }}
           name="product-category"
-          options={[
-            { label: "Aquaculture", value: "aquaculture" },
-            { label: "Agriculture", value: "agriculture" },
-            { label: "Human Medicine", value: "human medicine" },
-            { label: "Other", value: "other" },
-          ]}
           placeholder="Product Category"
+          options={categories}
           icon={<LuBox />}
         />
 
@@ -89,15 +167,17 @@ const ProductCategory = () => {
       <div className="sub-product-category-dropdown">
         <SelectWithCheckbox
           value={Subcategory}
-          onChange={(name, value) => setSubCategory(value)}
+          onChange={handlechange}
           name="product-category"
           icon={<LuBox />}
-          options={subCategoryOptions[category?.value] || []}
+          options={subCategories}
           placeholder="Product Sub-category"
+          
+          
         />
 
         <div className="others-input-conatiner">
-          {Subcategory.includes("other") && (
+          {Subcategory.some(item=>item.value==="other") && (
             <div className="input-box">
               <LuBox className="icon left" />
               <Input
@@ -112,9 +192,9 @@ const ProductCategory = () => {
       </div>
 
       <div className="Selected-subcategory">
-        {Subcategory.filter((item) => item !== "other").map((item, index) => (
+        {Subcategory.filter((item) => item.value !== "other").map((item, index) => (
           <div key={index} className="inner-product">
-            <p>{item}</p>
+            <p>{item.label}</p>
             <img
               className="cross-icon"
               src={Images.crossCancle}
@@ -129,7 +209,7 @@ const ProductCategory = () => {
         <Buttons
           variant="secondary"
           className="category-next"
-          onClick={() => navigate("/sign-up/security-questions")}
+          onClick={handleNext}
         >
           Next
         </Buttons>
