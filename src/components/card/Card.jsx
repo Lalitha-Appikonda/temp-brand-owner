@@ -33,7 +33,7 @@ const Card = ({ title, price, oldPrice, discount, badge, image,rating, reviews }
   }
   return (
     <div className="card-context">
-      <div className="card">
+      <div className="card card-desktop ">
         <div className={badge ? "wrapper " : "card-image-wrapper"}>
           {badge && (
             <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>

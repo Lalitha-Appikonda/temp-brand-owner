@@ -192,7 +192,7 @@ const SignUp = () => {
       {errors.confirmpassword && <p className='errors'>{errors.confirmpassword}</p> }
 
 
-     <div className='button'>
+     <div className='signin-next'>
        <Buttons type="submit" className='btn btn-primary' disabled={!isValid}>Next</Buttons>
      </div>
 
