@@ -54,11 +54,16 @@ export const Images = {
     mainlogotext:"/assets/icons/Rectangle 17.svg",
     mainlogotext1:"/assets/icons/product-1-1.jpg (1).svg",
     backgroundbranner:"/assets/icons/Subtract.png",
+    brannerswed:"/assets/icons/Subtract (3).png",
+    brannerslide1:"/assets/icons/Rectangle 14.svg",
+    brannerslide2:"/assets/icons/Rectangle 16.svg",
+
     win:"/assets/icons/Group (1).svg",
     mobilelogo1:"/assets/icons/Subtract (2).svg",
     minusimage:"/assets/icons/fi_9312231.svg",
     plusimage:"/assets/icons/Group (2).svg",
     productbox:"/assets/icons/product-1-1.jpg (2).svg",
+    dropdown:"/assets/icons/dropsown.svg",
     whychooseimage:"/assets/icons/Rectangle 21.svg",
     play:"/assets/icons/Layer_2_00000070827265553928813150000015508787529661124756_.svg",
     plus:"/assets/icons/fi_9312231 (1).svg",
@@ -67,7 +72,10 @@ export const Images = {
      whatsapp:"/assets/icons/fi_5968841.svg",
     mail:"/assets/icons/fi_2965306.svg", 
     mobilepromtioncard:"/assets/icons/Subtract (3).svg",
-    
+
+
+    // whatappimage:"/assets/icons/whatapp (1).svg",
+    // email:"public/assets/icons/whatapp (2).svg"
 
     //product-listing
     priceRange : "/assets/icons/price-range.svg",
