@@ -13,12 +13,12 @@ import SignUp from "../pages/global-pages/signup Total/SignUp";
 import UserAccess from "../pages/global-pages/UserAccess";
 import SecurityQuestions from "../pages/global-pages/signup Total/SecurityQuestions";
 import ProductCategory from "../pages/global-pages/signup Total/ProductCategory";
-import SetNewPassword from "../pages/global-pages/SetNewPassword";
+import SetNewPassword from "../pages/global-pages/login Total/SetNewPassword";
 
 import StatusHandler from "../pages/global-pages/status screens/StatusHandler";
 import Login from "../pages/global-pages/Login";
-import ForgotPassword from "../pages/global-pages/ForgotPassword";
-import Forgotaftersetup from "../pages/global-pages/Forgotaftersetup";
+import ForgotPassword from "../pages/global-pages/login Total/ForgotPassword";
+import Forgotaftersetup from "../pages/global-pages/login Total/Forgotaftersetup";
 import Register from "../pages/global-pages/signup Total/Register";
 import SigningIn from "../pages/global-pages/login Total/SigningIn";
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import ForgotPassword from '../ForgotPassword';
-import Forgotaftersetup from '../Forgotaftersetup';
-import SetNewPassword from '../SetNewPassword';
+import ForgotPassword from './ForgotPassword';
+import Forgotaftersetup from './Forgotaftersetup';
+import SetNewPassword from './SetNewPassword';
 
 const SigningIn = () => {
 
