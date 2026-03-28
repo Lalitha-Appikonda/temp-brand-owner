@@ -16,6 +16,7 @@ const Login = () => {
     })
     const [errors,setErrors]=useState({})
     const [showPassword,setShowPassword]=useState(false);
+    
 
     const [isValid, setIsValid] = useState(false);
 
@@ -53,7 +54,7 @@ const Login = () => {
         password:Yup.string()
         .trim()
         .required(" password required")
-        .min(6,"minimum 6 characters")
+        .min(6,"minimum 6 characters")  //have to write one more validation here , if the user enter wrong credentials then it will show error 
     })
 
     const handlelogin = async () => {
@@ -70,12 +71,12 @@ const Login = () => {
       form
     );
 
-    const { accessToken, refreshToken } = response.data;
+    const { accessToken, refreshToken,userId } = response.data;
 
     localStorage.setItem("accesstoken", accessToken);
     localStorage.setItem("refreshtoken", refreshToken);
 
-    navigate("/");
+    navigate("/sign-up/");
 
   } catch (err) {
 

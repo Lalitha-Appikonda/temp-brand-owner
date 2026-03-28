@@ -42,7 +42,7 @@ const SignUp = () => {
     .required("username is required")
     .min(4,"minimum 4 characters")
     .max(25,"max 25 charcters only")
-    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscore"),
+    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscore"),    //have to write one more validation here to display as username already exits
 
     password:Yup.string()
     .trim()
