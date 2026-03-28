@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Images } from "../../images/Image";
-import Input from "../../components/form elements/Input";
+import { Images } from "../../../images/Image";
+import Input from "../../../components/form elements/Input";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import Buttons from "../../components/form elements/Buttons";
+import Buttons from "../../../components/form elements/Buttons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { SignupContext } from "../../context/SignupContext";
+import { SignupContext } from "../../../context/SignupContext";
 import * as Yup from "yup";
 
 const BASE_URL =
   "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1";
 
-const SecurityQuestions = () => {
+const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
   const navigate = useNavigate();
   const { signupData, setSignupData } = useContext(SignupContext); 
   const [questions, setQuestions] = useState([]);
@@ -123,7 +123,7 @@ const SecurityQuestions = () => {
     <div className="security-ques-text-content">
       <div
         className="back-btn"
-        onClick={() => navigate("/product-category")}
+        onClick={() => prevStep()}
       >
         <img src={Images.lessThan} alt="" />
       </div>
@@ -141,7 +141,7 @@ const SecurityQuestions = () => {
 
         <div className="ques-container">
           {questions.map((q, index) => (
-            <div className="boxes" key={q.id}>
+            <div className={`boxes ${open === index ? "change-boxes" : ""}`} key={q.id}>
               <div
                 className="ques-prefix"
                 onClick={() =>

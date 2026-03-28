@@ -1,26 +1,22 @@
 import { useNavigate } from 'react-router-dom'
-import Input from './../../components/form elements/Input';
-import { Images } from '../../images/Image'
-import Buttons from './../../components/form elements/Buttons';
+import Input from '../../../components/form elements/Input';
+import { Images } from '../../../images/Image'
+import Buttons from '../../../components/form elements/Buttons';
 import { useState } from 'react';
 import * as Yup from "yup";
 import { useContext } from 'react';
-import { SignupContext } from "../../context/SignupContext";
-import PopUp from '../../components/popup/PopUp';
-import TermsAndConditions from './TermsAndConditions';
+import { SignupContext } from "../../../context/SignupContext";
+import PopUp from '../../../components/popup/PopUp';
+import TermsAndConditions from '../TermsAndConditions';
 
 
 
-const SignUp = () => {
+const SignUp = ({ formData, setFormData, nextStep }) => {
   const navigate = useNavigate()
 
-  const [form,setForm]=useState({               
-    name:"",
-    username:"",
-    password:"",
-    confirmpassword:""
-     
-  });
+  const form = formData;
+  const setForm = setFormData;
+
   const [isValid,setIsValid]=useState(false);
 
   const [showPassword,setShowPassword]=useState(false);/* show pwd state */
@@ -73,7 +69,7 @@ const SignUp = () => {
       confirmpassword: form.confirmpassword
     }));
 
-    navigate("/sign-up/product-category");
+    navigate(nextStep());
 
       
     }catch(err){

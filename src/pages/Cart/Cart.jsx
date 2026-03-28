@@ -5,6 +5,7 @@ import PopUp from "../../components/popup/PopUp";
 import { Images } from "../../images/Image";
 import { HiOutlineTrash } from "react-icons/hi";
 import Buttons from "../../components/form elements/Buttons";
+import Card from "../../components/card/Card";
 
 const productImg = "/assets/products/product-1.png";
 
@@ -22,6 +23,93 @@ const Cart = () => {
     // { id: 8, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
     // { id: 9, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
   ]);
+
+  const products = [
+    {
+      id: 1,
+      title: "Probizyme",
+      price: 1100,
+      oldPrice: 2000,
+      discount: "45% OFF",
+      badge: "Sale",
+      image: Images.product,
+      showQuantity: true,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 2,
+      title: "De - ODOPLUS",
+      price: 1700,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 3,
+      title: "ub-SPORE",
+      price: 600,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 4,
+      title: "AquabISON",
+      price: 850,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 5,
+      title: "Pond Care",
+      price: 1100,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 6,
+      title: "AquaCare",
+      price: 1080,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 7,
+      title: "De - ODOPLUS",
+      price: 1700,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 8,
+      title: "ub-SPORE",
+      price: 600,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+    {
+      id: 9,
+      title: "AquabISON",
+      price: 850,
+      showQuantity: false,
+      image: Images.product,
+      rating: "5.0",
+      reviews: "20K",
+    },
+  ];
 
   const increaseQty = (id) => {
     setCartItems((prev) =>
@@ -173,17 +261,41 @@ const Cart = () => {
               </div>
 
               <div className="pay-btn-conatienr">
-              {/* <button>
+                {/* <button>
                 {" "}
                 Proceed to Pay
               </button> */}
-              <Buttons className="pay-btn" onClick={() => navigate("/address")}>Proceed to Pay</Buttons>
+                <Buttons
+                  className="pay-btn"
+                  onClick={() => navigate("/address")}
+                >
+                  Proceed to Pay
+                </Buttons>
+              </div>
             </div>
-            </div>
-
-            
           </div>
         </div>
+
+       
+          <div className="cart-bottom-cards">
+            <div className="cart-cards">
+              {products.map((product) => (
+                <Card
+                  key={product.id}
+                  title={product.title}
+                  price={product.price}
+                  oldPrice={product.oldPrice}
+                  discount={product.discount}
+                  badge={product.badge}
+                  showQuantity={product.showQuantity}
+                  image={product.image}
+                  rating={product.rating}
+                  reviews={product.reviews}
+                />
+              ))}
+            </div>
+          </div>
+      
       </div>
     </div>
   );
