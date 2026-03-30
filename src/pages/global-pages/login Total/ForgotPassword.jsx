@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { Images } from '../../images/Image'
-import Buttons from '../../components/form elements/Buttons'
-import Input from '../../components/form elements/Input'
+import Input from "../../../components/form-elements/Input";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import * as Yup from "yup"
+import { Images } from '../../../images/Image';
+import Buttons from '../../../components/form-elements/Buttons';
 
-const ForgotPassword = () => {
-  const [username, setusername]=useState("");
+const ForgotPassword = ({ formData, setFormData, nextStep }) => {
+
+  const [username,setusername]=useState("")
   const navigate = useNavigate()
 
   const usernameSchema=Yup.string()
@@ -22,27 +23,45 @@ const ForgotPassword = () => {
     setusername(e.target.value);
   }
 
-  const handlesubmit= async (e)=>{
-      e.preventDefault();
-       
+ const handlesubmit = async (e) => {
+  e.preventDefault();
 
-      try{
+  try {
+    await usernameSchema.validate(username);
 
-        await usernameSchema.validate(username);
+    // to  get User
+    const userRes = await axios.post(
+      "https://b17q02g4-5051.asse.devtunnels.ms/rest2/0.1/unAuth/getUser",
+      { username }
+    );
 
-        const res=await axios.post("https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getUser",
-          {
-            username:username
-          }
-        )
-        console.log(res.data)
+    console.log("User Response:", userRes.data);
 
-        navigate("/sign-up/security-questions")
+    //  exatract id
+    const userId = userRes.data.id; // or userRes.data.userId
 
-      }catch(error){
-        console.log("error", error);
+
+
+    
+    const quesRes = await axios.get(
+      `https://b17q02g4-5051.asse.devtunnels.ms/rest2/0.1/unAuth/getQuestions/${userId}`
+    );
+
+    console.log("Questions:", quesRes.data);
+
+    y
+    navigate("/forgot-after-setup", {
+      state: {
+        questions: quesRes.data,
+        userId: userId
       }
+    });
+
+  } catch (error) {
+    console.log("error", error);
+    alert(error.message || "Something went wrong");
   }
+};
   
   
   return (
