@@ -259,7 +259,7 @@ const handlechange = (name, value) => {
 
       <div className="next-btn">
         <Buttons
-          variant="secondary"
+          variant="primary"
           className="category-next"
           onClick={handleNext}
         >

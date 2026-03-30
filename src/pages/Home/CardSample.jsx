@@ -1,0 +1,76 @@
+import React from 'react'
+import ReviewCard from '../../components/card/ReviewCard';
+import PhotoCarousel from '../../components/card/PhotoCarousel';
+import { Images } from '../../images/Image';
+import RatingReview from '../../components/card/RatingReview';
+
+  const reviews = [
+    {
+      rating: "4.5",
+      text: "Product is good",
+      images: [Images.reviewproduct,Images.reviewproduct,Images.reviewproduct],
+      name: "Shylaja Shankar",
+      role: "Certified Dealer,",
+      date: "Jan 2024",
+      likes: "10",
+      dislikes: "2",
+             reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
+
+    },
+    // {
+    //   rating: "7.0",
+    //   text: "Nice quality",
+    //   images: [Images.reviewproduct,Images.reviewproduct,Images.reviewproduct],
+    //   name: "Ravi",
+    //   role: "Certified Dealer,",
+    //   date: "Feb 2024",
+    //   likes: "5",
+    //   comments: "1",
+    //    reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
+    // },
+   
+  ];
+const images = [
+  "/images/p1.jpg",
+  "/images/p2.jpg",
+  "/images/p3.jpg",
+  "/images/p4.jpg",
+  "/images/p5.jpg",
+];
+const CardSample = () => {
+  return (
+    <div>
+       {reviews.map((item, index) => (
+        <ReviewCard
+          key={index}
+          rating={item.rating}
+          reviewText={item.reviewText}
+          text={item.text}
+          images={item.images}
+          userName={item.name}
+          role={item.role}
+          date={item.date}
+          likes={item.likes}
+          dislikes={item.dislikes}
+        />
+      ))}
+
+
+
+    <div style={{marginBottom:"300px"}}>
+      <PhotoCarousel
+          title="Customer Photos"
+          count={500}
+          images={images}
+        />
+    </div>
+    <div style={{padding:"50px "}}>
+        <RatingReview/>
+    </div>
+    
+    </div>
+
+  )
+}
+
+export default CardSample

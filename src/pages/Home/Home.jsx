@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Card from '../../components/card/Card';
 import Styleguide from './../../Styleguide/Styleguide';
 import Input from '../../components/form elements/Input';
+import PhotoCarousel from '../../components/card/PhotoCarousel';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -62,8 +63,6 @@ const Home = () => {
 
   ];
 
-
-
   const [activeIndex, setActiveIndex] = useState(null);
 
   const [activeTab, setActiveTab] = useState("All");
@@ -95,7 +94,7 @@ const Home = () => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
-// promotioncard images
+  // promotioncard images
 
 
   const slides = [
@@ -192,10 +191,18 @@ const Home = () => {
                 <img src={Images.win} />
                 <h6>95% Success Ratio</h6>
               </div>
+
+              {/* web branner */}
+
               <div className="main-card">
-                <img src={Images.brannerswed}/>
+                {/* <img src={Images.brannerswed}/> */}
               </div>
-              <img src={Images.mobilelogo1} className='card-mobile-logo' />
+
+              {/* mobile branner */}
+              <div className='card-mobile-logo'>
+                {/* <img src={Images.mobilelogo1} /> */}
+              </div>
+
               <div className="down-position">
                 <div className="double-buttons">
                   <Buttons
@@ -214,14 +221,14 @@ const Home = () => {
                   <div className="small-card1"></div>
                 </div>
                 <div className="small-card">
-                  <img src={Images.brannerslide1}/>
+                  <img src={Images.brannerslide1} />
                 </div>
 
                 <div>
                   <div className="small-card2"></div>
                 </div>
                 <div className="small-card3">
-                  <img src={Images.brannerslide2}/>
+                  <img src={Images.brannerslide2} />
                 </div>
               </div>
             </div>
@@ -320,7 +327,7 @@ const Home = () => {
 
             <div className="left-section">
 
-              {/* ✅ Carousel */}
+              {/*  Carousel */}
               <div className="why-carousel">
                 {whyImages.map((item, index) => (
                   <div
@@ -337,7 +344,7 @@ const Home = () => {
                 ))}
               </div>
 
-              {/* ✅ Dots */}
+              {/*  Dots */}
               <div className="dots">
                 {whyImages.map((_, index) => (
                   <span
@@ -421,12 +428,12 @@ const Home = () => {
                       key={item.id}
                       className={`promtion-card   ${index === current ? "active" : ""}`}
                     >
-                      <img  className='promote-mobile' src={item.img} alt="promotion" />
+                      <img className='promote-mobile' src={item.img} alt="promotion" />
                     </div>
                   ))}
                 </div>
 
-                  <div className='promtion-card1'>
+                <div className='promtion-card1'>
                   <img src={Images.mobilepromtioncard} />
                 </div>
 
@@ -482,7 +489,7 @@ const Home = () => {
               </div>
             </div>
 
-          </section>
+          </section>          
         </div>
       </div>
     </div>

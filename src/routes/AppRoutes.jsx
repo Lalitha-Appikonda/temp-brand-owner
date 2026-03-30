@@ -19,6 +19,7 @@ import StatusHandler from "../pages/global-pages/status screens/StatusHandler";
 import Login from "../pages/global-pages/Login";
 import ForgotPassword from "../pages/global-pages/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/Forgotaftersetup";
+import CardSample from "../pages/Home/CardSample";
 
 const AppRoutes = () => {
   return (
@@ -47,6 +48,7 @@ const AppRoutes = () => {
         <Route path="address" element={<DeliveryAddress />} />
         <Route path="address/edit" element={<EditAddress />} />
         <Route  path='cart' element={<Cart />} />
+         <Route  path='samplecards' element={<CardSample />} />
 
       </Route>
 
