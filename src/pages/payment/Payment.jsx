@@ -135,7 +135,7 @@ const Payment = () => {
 
           {/* <p className="title">Shopping Cart</p> */}
           <div className="inner-container">
-            <div className="left-section">
+            <div className={`left-section ${(page === '/address' ? "left-section-address" : "")}`}>
               {page === "/cart" && (
                 <CartItems cartItems={cartItems} setCartItems={setCartItems} />
               )}
@@ -149,6 +149,7 @@ const Payment = () => {
 
           {page === "/cart" && (
             <div className="cart-card-bottom">
+              
               <div className="cart-cards">
                 {products.map((product) => (
                   <Card

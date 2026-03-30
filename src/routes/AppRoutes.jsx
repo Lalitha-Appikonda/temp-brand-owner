@@ -17,6 +17,8 @@ import Register from "../pages/global-pages/signup Total/Register";
 import SigningIn from "../pages/global-pages/login Total/SigningIn";
 import Login from "../pages/global-pages/login Total/Login";
 import Payment from "../pages/payment/Payment";
+import CardSample from "../pages/Home/CardSample";
+import MobileCart from "../pages/payment/MobileCart";
 
 const AppRoutes = () => {
   return (
@@ -44,6 +46,8 @@ const AppRoutes = () => {
         <Route  path='samplecards' element={<CardSample />} />
 
       </Route>
+
+      <Route path="mobile" element={<MobileCart />}/>
 
     </Routes>
   );
