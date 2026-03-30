@@ -152,23 +152,23 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
-        <Input placeholder="Name" name="name" value={form.name} onChange={handlechange} />
+        <Input placeholder="Name" name="name" value={form.name} onChange={handlechange} error={errors.name}/>
       </div>
-      {errors.name && <p className='error-text'>{errors.name}</p> }
+      {/* {errors.name && <p className='error-text'>{errors.name}</p> } */}
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
-        <Input placeholder="Username" name="username" value={form.username} onChange={handlechange}/>
+        <Input placeholder="Username" name="username" value={form.username} onChange={handlechange} error={errors.username}/>
       </div>
-      {errors.username  && <p className='error-text'>{errors.username}</p> }
+      {/* {errors.username  && <p className='error-text'>{errors.username}</p> } */}
 
 
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
-        <Input placeholder="password" name="password" value={form.password} type={showPassword ? "text" :"password"} onChange={handlechange} />
+        <Input placeholder="password" name="password" value={form.password} type={showPassword ? "text" :"password"} onChange={handlechange}  error={errors.password}/>
         <img src={showPassword? Images.eyeclose:Images.eyeicon} onClick={()=>setShowPassword((prev)=>!prev)} className="icon right" />
       </div>
-      {errors.password && <p className='error-text'>{errors.password}</p> }
+      {/* {errors.password && <p className='error-text'>{errors.password}</p> } */}
 
 
       <ul className='rules'>
@@ -185,10 +185,10 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
 
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
-        <Input placeholder="Re-enter Password" name="confirmpassword" value={form.confirmpassword} type={showConfirmPassword ? "text":"password"} onChange={handlechange}/>
+        <Input placeholder="Re-enter Password" name="confirmpassword" value={form.confirmpassword} type={showConfirmPassword ? "text":"password"} onChange={handlechange} error={errors.confirmpassword}/>
         <img src={showConfirmPassword ? Images.eyeclose:Images.eyeicon} className="icon right" onClick={()=>setShowConfirmPassword(prev=>!prev)}/>
       </div>
-      {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> }
+      {/* {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> } */}
 
 
      <div className='signin-next'>

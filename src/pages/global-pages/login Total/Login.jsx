@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import Input from '../../components/form elements/Input'
-import { Images } from '../../images/Image'
-import Buttons from '../../components/form elements/Buttons'
+
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import * as Yup from "yup";
+import Input from '../../../components/form elements/Input'
+import { Images } from '../../../images/Image';
+import Buttons from '../../../components/form elements/Buttons';
 
 const Login = () => {
 

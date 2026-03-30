@@ -21,7 +21,7 @@ const UserAccess = () => {
         <div className="container access-wrapper">
           <div className="side-img">
             {/* <div className="image" ></div> */}
-            {/* <img className="image" src={Images.diffImg} alt="image" /> */}
+            <img className="image" src={Images.diffImg} alt="image" />
           </div>
           <div className="main-content">
             <div className="main-logo">

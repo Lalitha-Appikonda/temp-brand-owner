@@ -6,6 +6,8 @@ import { Images } from "../../images/Image";
 import { HiOutlineTrash } from "react-icons/hi";
 import Buttons from "../../components/form elements/Buttons";
 import Card from "../../components/card/Card";
+import PriceDetails from "../payment/component/PriceDetails";
+import CartItems from "../payment/CartItems";
 
 const productImg = "/assets/products/product-1.png";
 
@@ -140,10 +142,10 @@ const Cart = () => {
       <div className="cart-container">
         <p className="title">Shopping Cart</p>
         <div className="cart-wrapper">
-          <div className="cart-left">
+          {/* <div className="cart-left">
             {cartItems.map((item) => (
-              <>
-                <div className="cart-item" key={item.id}>
+              <div key={item.id}>
+                <div className="cart-item">
                   <div className="item-left">
                     <img
                       src={Images.addCartImage}
@@ -219,83 +221,40 @@ const Cart = () => {
                 </div>
 
                 <div className="dividing-line line"></div>
-              </>
+              </div>
             ))}
-          </div>
+          </div> */}
 
-          <div className="cart-right">
-            <h2>Price Details</h2>
+          <CartItems
+            cartItems={cartItems}
+            increaseQty={increaseQty}
+            decreaseQty={decreaseQty}
+            removeItem={removeItem}
+          />
 
-            <div className="dividing-line"></div>
-
-            <div className="price-details">
-              <div className="price-row">
-                <span className="content-left">
-                  Total Price ({cartItems.length} items)
-                </span>
-                <div className="content-right">
-                  <span className="dollar">₹</span>
-                  <span className="amount">{total}</span>
-                </div>
-              </div>
-
-              <div className="price-row">
-                <span className="content-left">Discount</span>
-                <div className="content-right discount-content-right">
-                  <span className="minus">-</span>
-                  <span className="dollar">₹</span>
-                  <span className="amount">{Math.floor(total * 0.1)}</span>
-                </div>
-              </div>
-
-              <div className="dividing-line"></div>
-
-              <div className="price-row total">
-                <span className="content-left">Total Payable Amount</span>
-                <div className="content-right">
-                  <span className="dollar">₹</span>
-                  <span className="amount">
-                    {total - Math.floor(total * 0.1)}
-                  </span>
-                </div>
-              </div>
-
-              <div className="pay-btn-conatienr">
-                {/* <button>
-                {" "}
-                Proceed to Pay
-              </button> */}
-                <Buttons
-                  className="pay-btn"
-                  onClick={() => navigate("/address")}
-                >
-                  Proceed to Pay
-                </Buttons>
-              </div>
-            </div>
-          </div>
+          {/* <div>
+            <PriceDetails cartItems={cartItems} total={total} />
+          </div> */}
         </div>
 
-       
-          <div className="cart-bottom-cards">
-            <div className="cart-cards">
-              {products.map((product) => (
-                <Card
-                  key={product.id}
-                  title={product.title}
-                  price={product.price}
-                  oldPrice={product.oldPrice}
-                  discount={product.discount}
-                  badge={product.badge}
-                  showQuantity={product.showQuantity}
-                  image={product.image}
-                  rating={product.rating}
-                  reviews={product.reviews}
-                />
-              ))}
-            </div>
+        <div className="cart-bottom-cards">
+          <div className="cart-cards">
+            {products.map((product) => (
+              <Card
+                key={product.id}
+                title={product.title}
+                price={product.price}
+                oldPrice={product.oldPrice}
+                discount={product.discount}
+                badge={product.badge}
+                showQuantity={product.showQuantity}
+                image={product.image}
+                rating={product.rating}
+                reviews={product.reviews}
+              />
+            ))}
           </div>
-      
+        </div>
       </div>
     </div>
   );
