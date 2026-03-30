@@ -20,7 +20,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   const categorySchema = Yup.object().shape({
     category: Yup.object().nullable().required("category is required"),
     subcategory: Yup.array().min(1, "select at least one subcategory"),
-    panNumber: Yup.string().required("PAN is required"),
+    panNumber:Yup.string().trim().required("pan is required").matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,"Invalid PAN format (e.g., ABCDE1234F)"),
+    gstNumber:Yup.string().trim().required("gst is required").matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,"Invalid GST format (e.g., 22ABCDE1234F1Z5)")
+
     
   });
 
@@ -39,7 +41,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          "https://b17q02g4-5051.asse.devtunnels.ms/rest2/0.1/unAuth/getCategories",  
+          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories",  
         );
         console.log(res);
         console.log(res.data);
@@ -67,7 +69,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
     const fetchSubCategories = async () => {
       try {
         const res = await axios.post(
-          "https://b17q02g4-5051.asse.devtunnels.ms/rest2/0.1/unAuth/getSubCategories",
+          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getSubCategories",
           {
             categoryId: category.value === "other" ? 0 : Number(category.value),
           },
@@ -278,7 +280,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
               className="gst-pan-input"
               onChange={(e) => setPanNumber(e.target.value)}
             />
+             {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)}
           </div>
+         
 
           <div className="input-box">
             <LuBox className="icon left" />
@@ -288,6 +292,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
               className="gst-pan-input"
                onChange={(e) => setGstNumber(e.target.value)}
             />
+             {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)}
           </div>
         </div>
       </div>

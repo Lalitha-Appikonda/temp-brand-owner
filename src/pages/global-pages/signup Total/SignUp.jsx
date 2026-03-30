@@ -31,19 +31,22 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
     .trim()
     .required("Name is required")
     .min(3,"Minimum 3 characters")
-    .max(20, "maximum 20 characters only"),
+    .max(20, "maximum 20 characters only")
+    .matches(/^[A-Za-z ]+$/, "Only letters and spaces allowed")
+    .test("no multiple-spaces","no extra spaces allowed",(value)=> !/\s{2,}/.test(value || "")),
 
     username:Yup.string()
     .trim()
     .required("username is required")
     .min(4,"minimum 4 characters")
     .max(25,"max 25 charcters only")
-    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscore"),    //have to write one more validation here to display as username already exits
+    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscore"),   //have to write one more validation here to display as username already exits
 
     password:Yup.string()
     .trim()
     .required("password is required")
     .min(8,"minimum 8 characters")
+    .max(16,"maximum 16 characters")
     .matches(/[0-9]/, "At least 1 number")
     .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"), // Pattern wrong
 

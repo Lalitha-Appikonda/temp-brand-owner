@@ -32,7 +32,6 @@ const AppRoutes = () => {
       </Route>
       <Route path="/forgot-after-setup" element={<Forgotaftersetup />} />
       <Route path="/reset-password" element={<SetNewPassword />} />
-
       <Route path="login" element={<UserAccess />} >
         <Route index element={<Login />} />
         <Route path="forgotpassword" element={<ForgotPassword />} />

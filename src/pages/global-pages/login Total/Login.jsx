@@ -68,7 +68,7 @@ const Login = () => {
 
      
     const response = await axios.post(
-      "https://b17q02g4-5051.asse.devtunnels.ms/rest2/0.1/unAuth/login",
+      "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/login",
       form
     );
 
@@ -96,9 +96,11 @@ const Login = () => {
     else {
       console.log("API ERROR:", err.response?.data);
 
+      const apiMsg=err.response?.data?.message || err.response?.data?.error || " Invalid username or password";
+
       setErrors({
-        api: err.response?.data?.message || "Login failed",
-      });
+        api:apiMsg
+      })
     }
   }
 };
@@ -124,6 +126,7 @@ const Login = () => {
                     />
              </div>
              {errors.password && <p className='error-text'>{errors.password}</p> }
+             {errors.api && <p className="error-text">{errors.api}</p>}
             <div className='login-wrapper'>
                 <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>
@@ -137,7 +140,7 @@ const Login = () => {
                 </div>
 
             </div>
-
+            
             <Buttons className='login-button' variant='btn btn-secondary' onClick={handlelogin} >Login</Buttons>
             <div className='login-texts'>
                 <p> Don’t Have an Account?</p>
