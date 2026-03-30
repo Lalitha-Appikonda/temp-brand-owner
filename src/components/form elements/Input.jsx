@@ -35,7 +35,7 @@ const Input = ({
 
       </div>
 
-      {error && <p className="error-text">{error}</p>}
+      {error && <p className="error-text ">{error}</p>}
       
     </div>
   );

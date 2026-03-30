@@ -124,20 +124,20 @@ const Login = () => {
              </div>
              {errors.password && <p className='error-text'>{errors.password}</p> }
             <div className='login-wrapper'>
-                <div className='flex-swites'>
+                {/* <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>
                     <label className="switch">
                         <input type="checkbox" id="toggle" />
                         <span className="slider"></span>
                     </label>
-                </div>
+                </div> */}
                 <div>
                     <h3 className='forgot-text forgotpassword' onClick={() => navigate('/login/forgotpassword')}>Forgot Password</h3>
                 </div>
 
             </div>
 
-            <Buttons className='login-button' variant='btn btn-secondary' onClick={handlelogin} >Login</Buttons>
+            <Buttons className='btn login-button' variant='primary' onClick={handlelogin} >Login</Buttons>
             <div className='login-texts'>
                 <p> Don’t Have an Account?</p>
                 <p onClick={() => navigate('/sign-up')}>Signup</p>
