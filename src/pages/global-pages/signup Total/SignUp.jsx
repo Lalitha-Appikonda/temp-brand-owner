@@ -194,7 +194,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       {/* {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> } */}
 
       <div className='signin-next'>
-        <Buttons type="submit" className='btn btn-primary'  >Next</Buttons>
+        <Buttons type="submit"   className= {`btn ${isValid ? "btn-primary":"btn-secondary"}`}  >Next</Buttons>
       </div>
 
       <div className='login-texts'>
