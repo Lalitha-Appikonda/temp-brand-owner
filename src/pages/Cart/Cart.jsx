@@ -4,7 +4,7 @@ import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import PopUp from "../../components/popup/PopUp";
 import { Images } from "../../images/Image";
 import { HiOutlineTrash } from "react-icons/hi";
-import Buttons from "../../components/form elements/Buttons";
+import Buttons from "../../components/form-elements/Buttons";
 import Card from "../../components/card/Card";
 import PriceDetails from "../payment/component/PriceDetails";
 import CartItems from "../payment/CartItems";

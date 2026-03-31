@@ -4,7 +4,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import PopUp from "../../components/popup/PopUp";
 import { HiOutlineTrash } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import Buttons from "../../components/form elements/Buttons";
+import Buttons from "../../components/form-elements/Buttons";
 
 const CartItems = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();

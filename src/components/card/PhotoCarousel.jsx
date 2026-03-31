@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Buttons from "../form elements/Buttons";
+import Buttons from "../form-elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { Images } from "../../images/Image";

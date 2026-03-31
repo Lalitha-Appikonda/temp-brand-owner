@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Buttons from "../../components/form elements/Buttons";
+import Buttons from "../../components/form-elements/Buttons";
 import { BsPlusLg } from "react-icons/bs";
 
 const DeliveryAddress = () => {

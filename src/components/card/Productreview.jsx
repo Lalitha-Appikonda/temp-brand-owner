@@ -1,5 +1,5 @@
 import React from 'react'
-import Buttons from '../form elements/Buttons'
+import Buttons from '../../components/form-elements/Buttons';
 
 const Productreview = () => {
   return (

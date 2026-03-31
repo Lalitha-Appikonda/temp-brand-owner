@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StatusScreen from "./StatusScreen";
 import { Images } from "../../../images/Image";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const StatusHandler = () => {
-  const { type } = useParams();
+  
   const navigate = useNavigate();
+  const [type,setType]=useState("waiting")
+
+  const location = useLocation();
+  const username = location.state?.username;
 
   const config = {
     waiting: {
@@ -14,7 +20,6 @@ const StatusHandler = () => {
       message:
         "You have successfully submitted your details. Please wait for management approval. Once your account is approved. you can login using your username and password. ",
     },
-
     approved: {
       image: Images.approved,
       title: "Account Approved",
@@ -52,10 +57,44 @@ const StatusHandler = () => {
       action: () => navigate("/login"),
     },
   };
-
   const data = config[type];
 
+    useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        const response = await axios.post(
+          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getStatus",
+          {username}
+        );
 
+        console.log(response.data);
+
+        const status = response.data?.message.status;
+
+        if (status === 1) {
+          setType("approved");
+        } else if (status === 2) {
+          setType("rejected");
+        } else {
+          setType("waiting");
+        }
+
+      } catch (err) {
+        console.error(err);
+        setType("rejected");
+      }
+    };
+
+    checkStatus(); 
+  }, []);
+    useEffect(() => {
+        if (type === "approved") {
+          // wait 2 seconds so user can see success screen
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        }
+      }, [type]);
   return (
     <StatusScreen
       type={type}

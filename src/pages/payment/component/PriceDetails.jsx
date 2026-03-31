@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Buttons from "../../../components/form elements/Buttons";
+import Buttons from "../../../components/form-elements/Buttons";
 
 const PriceDetails = ({ cartItems, total }) => {
   const navigate = useNavigate();

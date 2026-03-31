@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Buttons from "../../components/form elements/Buttons";
+import Buttons from "../../components/form-elements/Buttons";
 import Card from "../../components/card/Card";
 import Filter from "./filter/Filter";
 import { Images } from "../../images/Image";
@@ -11,7 +11,7 @@ import { TiFilter } from "react-icons/ti";
 import { PiLineVertical } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../../components/popup/PopUp";
-import RadioButton from "../../components/form elements/RadioButton";
+import RadioButton from "../../components/form-elements/RadioButton";
 
 const ProductList = () => {
   const navigate = useNavigate();

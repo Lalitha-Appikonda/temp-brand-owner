@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Images } from "../../images/Image";
-import SelectBox from "../form elements/SelectBox";
-import Buttons from "../form elements/Buttons";
+import SelectBox from "../form-elements/SelectBox";
+import Buttons from "../form-elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { FaMinus, FaPlus } from "react-icons/fa";

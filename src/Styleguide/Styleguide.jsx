@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Input from "../components/form elements/Input";
-import Buttons from "../components/form elements/Buttons";
+import Input from "../components/form-elements/Input";
+import Buttons from "../components/form-elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
 import PopUp from "../components/popup/PopUp";
-import SelectBox from "../components/form elements/SelectBox";
-import TextArea from "../components/form elements/TextArea";
-import CheckBox from "../components/form elements/CheckBox";
-import SelectWithCheckbox from "../components/form elements/SelectWithCheckbox";
-import RadioButton from "../components/form elements/RadioButton";
+import SelectBox from "../components/form-elements/SelectBox";
+import TextArea from "../components/form-elements/TextArea";
+import CheckBox from "../components/form-elements/CheckBox";
+import SelectWithCheckbox from "../components/form-elements/SelectWithCheckbox";
+import RadioButton from "../components/form-elements/RadioButton";
 
 const Styleguide = () => {
   const colors = [
@@ -83,6 +83,7 @@ const Styleguide = () => {
         </h1>
         <Input placeholder="Enter refer member mail" />
       </div>
+    
 
       <div style={{ textAlign: "center", margin: "20px" }}>
         <p style={{ fontSize: "40px", fontWeight: "900" }}>typography</p>
@@ -134,6 +135,7 @@ const Styleguide = () => {
             Primary with background
           </Buttons>
         </div>
+      
 
         <h2 style={{ margin: "20px" }}>Soft Buttons</h2>
         <div style={{ display: "flex", gap: "20px" }}>

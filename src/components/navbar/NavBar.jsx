@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Images } from "../../images/Image";
-import SelectBox from "../form elements/SelectBox";
+import SelectBox from "../form-elements/SelectBox";
 import {
   FaBars,
   FaChevronDown,
