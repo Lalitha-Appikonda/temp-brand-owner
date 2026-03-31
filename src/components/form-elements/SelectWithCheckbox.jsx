@@ -9,7 +9,8 @@ const SelectWithCheckbox = ({
   options = [],
   placeholder = "",
   icon,
-  className=""
+  className="",
+  disabled=false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
@@ -43,7 +44,7 @@ const SelectWithCheckbox = ({
 
       <div className="custom-select">
         <div className={`select-wrapper ${isOpen ? "open" : ""}`}>
-          <div className="custom-dropdown" onClick={() => setIsOpen(!isOpen)}>
+          <div className={`custom-dropdown ${disabled ?"disabled":""}`} onClick={() => {if(disabled) return; setIsOpen(!isOpen)}}>
             <div className="dropdown-content">
               {icon && <span className="product-first-icon">{icon}</span>}
 

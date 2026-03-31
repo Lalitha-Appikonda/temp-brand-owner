@@ -17,28 +17,42 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
   const { signupData, setSignupData } = useContext(SignupContext); 
   const [questions, setQuestions] = useState([]);
   const [open, setOpen] = useState(null);
-  const [answers, setAnswers] = useState({});
+  
   const [error,setError]=useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
 
-
+  const answers = formData.answers || {};
   console.log("SIGNUP DATA ", signupData);
 
 
-    const securitySchema = Yup.object().shape({
-      answers: Yup.array()
-        .test(
-          "min-answered",
-          "Please answer at least 3 questions",
-          (answers = []) => {
-            const valid = answers.filter(
-              (a) => a.answer && a.answer.trim() !== ""
-            );
-            return valid.length >= 3;
-          }
-        ),
-        
-         
-    });
+
+
+   const securitySchema = Yup.object().shape({
+  answers: Yup.array()
+    .of(
+      Yup.object().shape({
+        questionId: Yup.number()
+          .typeError("Invalid question")
+          .required("Question ID is required"),
+
+        answer: Yup.string()
+          .typeError("Answer must be a string")
+          .trim()
+          .min(3, "Answer must be at least 3 characters")
+          .max(25, "Answer cannot exceed 25 characters")
+          .required("Answer is required"),
+      })
+    )
+    .min(3, "Please answer at least 3 questions")
+    .test(
+      "unique-questions",
+      "Duplicate questions are not allowed",
+      (answers = []) => {
+        const ids = answers.map((a) => a.questionId);
+        return new Set(ids).size === ids.length;
+      }
+    ),
+});
 
   // ########### FETCH QUESTIONS
 
@@ -62,19 +76,27 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
 
   //  HANDLE ANSWERS
   const handleAnswerChange = (id, value) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
+  if (value.startsWith(" ")) return;
+
+  const cleanedValue = value.replace(/\s{2,}/g, " ");
+
+  setFormData((prev) => ({
+    ...prev,
+    answers: {
+      ...prev.answers,
+      [id]: cleanedValue,
+    },
+  }));
+};
 
  const handleSubmit = async () => {
   const filledAnswers = Object.entries(answers)
-     
-    .map(([questionId, answer]) => ({
-      questionId: Number(questionId),
-      answer:(answer || "").trim(),
-    }));
+  .filter(([_, answer]) => answer && answer.trim() !== "")
+  .map(([questionId, answer]) => ({
+    questionId: Number(questionId),
+    answer: answer.trim(),
+    
+  }));
 
   try {
     //  Yup validation
@@ -113,17 +135,55 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
 
     console.log("Signup Success ", res.data);
 
-    navigate("/status/waiting");
+    navigate("/status/waiting",{state: { username: formData.username }});
 
   } catch (err) {
     //  Handles BOTH validation + API errors
     console.log("Error ", err);
 
-    if (err.name === "ValidationError") {
-       setError(err.errors[0]);
+     if (err.name === "ValidationError") {
+  const errors = {};
+
+  err.inner.forEach((e) => {
+    const index = e.path?.match(/\d+/)?.[0];
+
+    if (index !== undefined) {
+      const qId = filledAnswers[index]?.questionId;
+
+      if (qId) {
+        errors[qId] = e.message;
+      }
+    }
+  });
+
+  setFieldErrors(errors);
+
+  if (err.errors.length > 0) {
+    setError(err.errors[0]);
+  }
+}else{
+      const apiMessage = err.response?.data?.message;
+
+if (typeof apiMessage === "string") {
+  if (apiMessage.toLowerCase().includes("active")) {
+    setError("Account already exists. Please login.");
+  } else {
+    setError(apiMessage);
+  }
+} else {
+  setError("Something went wrong");
+}
+       
     }
   }
 };
+
+
+  const answeredCount=Object.values(answers).filter(
+    (answer)=> answer && answer.trim() !==""
+  ).length;
+
+
   return (
     <div className="security-ques-text-content">
       <div
@@ -147,12 +207,16 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
         <div className="ques-container">
           {questions.map((q, index) => (
             <div className={`boxes ${open === index ? "change-boxes" : ""}`} key={q.id}>
-              <div
-                className="ques-prefix"
-                onClick={() =>
-                  setOpen(open === index ? null : index)
-                }
-              >
+              <div             
+                  className="ques-prefix"
+                  onClick={() => {
+                    const isAnswered = answers[q.id]?.trim();
+
+                    if (answeredCount >= 3 && !isAnswered) return; 
+
+                    setOpen(open === index ? null : index);
+                  }}
+>
                 <div className="row1">
                   <div className="prefix-container">
                     <img src={Images.quesIcon} alt="" />
@@ -177,10 +241,13 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
                     className="ques-input"
                     placeholder="Enter Answer"
                     value={answers[q.id] || ""}
+                    maxLength={25}
                     onChange={(e) =>
                       handleAnswerChange(q.id, e.target.value)
                     }
+                    disabled={answeredCount >=3 && !answers[q.id]?.trim()}
                   />
+                  {fieldErrors[q.id] && (<p className="error-text">{fieldErrors[q.id]}</p>)}
                 </div>
               )}
             </div>
@@ -191,12 +258,14 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
 
       <div className="ques-submit">
         <Buttons
-          variant="secondary"
-          className="submit-ques"
-          onClick={handleSubmit}
-        >
-          Submit
-        </Buttons>
+            className={`submit-ques ${
+              answeredCount >= 3 ? "btn-primary" : "btn-secondary"
+            }`}
+            disabled={false}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Buttons>
       </div>
     </div>
   );

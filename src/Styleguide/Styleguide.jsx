@@ -83,6 +83,7 @@ const Styleguide = () => {
         </h1>
         <Input placeholder="Enter refer member mail" />
       </div>
+    
 
       <div style={{ textAlign: "center", margin: "20px" }}>
         <p style={{ fontSize: "40px", fontWeight: "900" }}>typography</p>
@@ -151,6 +152,7 @@ const Styleguide = () => {
           </Buttons>
         </div>
       </div>
+     
 
       <div style={{ marginTop: "50px" }}>
         <h1 style={{ fontSize: "50px", textAlign: "center" }}>popups</h1>

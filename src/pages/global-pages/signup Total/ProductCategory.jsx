@@ -16,26 +16,48 @@ import * as Yup from "yup";
 
 const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
-  const categorySchema = Yup.object().shape({
-    category: Yup.object().nullable().required("category is required"),
-    subcategory: Yup.array().min(1, "select at least one subcategory"),
-    panNumber:Yup.string().trim().required("pan is required").matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,"Invalid PAN format (e.g., ABCDE1234F)"),
-    gstNumber:Yup.string().trim().required("gst is required").matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,"Invalid GST format (e.g., 22ABCDE1234F1Z5)")
+const categorySchema = Yup.object().shape({
+  category: Yup.object().nullable().required("category is required"),
 
-    
-  });
+  subcategory: Yup.array().min(1, "select at least one subcategory"),
+
+  panNumber: Yup.string()
+    .trim()
+    .required("pan is required")
+    .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format"),
+
+  gstNumber: Yup.string()
+    .trim()
+    .required("gst is required")
+    .matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, "Invalid GST format"),
+
+  otherCategory: Yup.string().when("category", {
+    is: (val) => val?.value === "other",
+    then: (schema) => schema.required("Enter category"),
+  }),
+
+  otherSubCategory: Yup.string().when("subcategory", {
+    is: (sub) => sub?.some((item) => item.value === "other"),
+    then: (schema) => schema.required("Enter subcategory"),
+  }),
+});
 
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState(null);
-  const [Subcategory, setSubCategory] = useState([]);
+  // const [category, setCategory] = useState(null);
+  // const [Subcategory, setSubCategory] = useState([]);
 
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
 
-  const [panNumber, setPanNumber] = useState("");
-  const [gstNumber, setGstNumber] = useState("");
+  // const [panNumber, setPanNumber] = useState("");
+  // const [gstNumber, setGstNumber] = useState("");
+  const category = formData.category;
+  const Subcategory = formData.subcategory;
+  const panNumber = formData.panNumber;
+  const gstNumber = formData.gstNumber;
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -97,13 +119,35 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   const [otherCategory, setOtherCategory] = useState("");
   const [otherSubCategory, setOtherSubCategory] = useState("");
 
+  useEffect(() => {
+  const validate = async () => {
+    try {
+       const valid = await categorySchema.isValid({
+          category,
+          subcategory: Subcategory,
+          panNumber,
+          gstNumber,
+          otherCategory,
+          otherSubCategory
+        });
+
+        setIsValid(valid);
+    } catch {
+      setIsValid(false);
+    }
+  };
+
+  validate();
+}, [category, Subcategory, panNumber, gstNumber, otherCategory, otherSubCategory]);
+console.log("isValid:", isValid);
   const handleRemove = (itemToRemove) => {
-    setSubCategory((prev) =>
+    setFormData((prev) =>
       prev.filter((item) => item.value !== itemToRemove.value),
     );
   };
 
-  const handleNext = async () => {
+  const handleNext = async (e) => {
+    e.preventDefault();
     try {
       // validate
       await categorySchema.validate(
@@ -111,7 +155,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
           category: category,
           subcategory: Subcategory,
           panNumber,
-          gstNumber
+          gstNumber,
+          otherCategory,
+          otherSubCategory
         },
         { abortEarly: false },
       );
@@ -159,25 +205,33 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   };
 
   const handlechange = (name, value) => {
-    console.log("RAW value:", value); // now correct array
+  const clean = value.filter((item) => item && item.value);
 
-    if (!Array.isArray(value)) {
-      setSubCategory([]);
-      return;
-    }
+  const unique = Array.from(
+    new Map(clean.map((item) => [item.value, item])).values()
+  );
 
-    const clean = value.filter((item) => item && item.value);
+  setFormData((prev) => ({
+    ...prev,
+    subcategory: unique,
+  }));
+};
 
-    const unique = Array.from(
-      new Map(clean.map((item) => [item.value, item])).values(),
-    );
+  // const handlechange = (name, value) => {
+  //   console.log("RAW value:", value); // now correct array
 
-    setSubCategory(unique);
+  //   if (!Array.isArray(value)) {
+  //     setSubCategory([]);
+  //     return;
+  //   }
 
-    setErrors((prev) => ({ ...prev, subcategory: "" }));
-  };
+ 
+
+
+
+
   return (
-    <div className="category-container">
+    <form className="category-container" onSubmit={handleNext}>
       <div
         className="back-btn"
         onClick={() => prevStep()}
@@ -197,11 +251,11 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
           <SelectBox
             value={category}
             onChange={(name, data) => {
-              setCategory(data);
-              setSubCategory([]);
-              setOtherSubCategory("");
-              setErrors((prev) => ({ ...prev, category: "" }));
-              console.log(data);
+              setFormData((prev)=>({
+                ...prev,
+                category:data,
+                subcategory:[],
+              }));
             }}
             name="product-category"
             placeholder="Product Category"
@@ -219,8 +273,11 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
                   placeholder="Enter Product category"
                   className="other-input"
                   onChange={(e) => setOtherCategory(e.target.value)}
+                  maxLength={25}
                 />
+                 {errors.otherCategory && (<p className="error-text">{errors.otherCategory}</p>)}
               </div>
+              
             )}
           </div>
         </div>
@@ -232,6 +289,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
             name="product-category"
             icon={<LuBox />}
             options={subCategories}
+            disabled={!category}
             placeholder="Product Sub-category"
           />
           {errors.subcategory && (
@@ -247,7 +305,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
                   placeholder="Enter Product Sub-category"
                   className="other-input"
                   onChange={(e) => setOtherSubCategory(e.target.value)}
+                  maxLength={25}
                 />
+                {errors.otherSubCategory && (<p className="error-text">{errors.otherSubCategory}</p>)}
               </div>
             )}
           </div>
@@ -278,7 +338,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
               value={panNumber}
               placeholder="Enter Pan Card Number"
               className="gst-pan-input"
-              onChange={(e) => setPanNumber(e.target.value)}
+              onChange={(e) => setFormData((prev)=>({...prev,panNumber:e.target.value.toUpperCase(),}))}
+              onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+              maxLength={10}
             />
              {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)}
           </div>
@@ -290,7 +352,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
                value={gstNumber}
               placeholder="Enter GST Number"
               className="gst-pan-input"
-               onChange={(e) => setGstNumber(e.target.value)}
+               onChange={(e) => setFormData((prev)=>({...prev,gstNumber:e.target.value.toUpperCase(),}))}
+               onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+               maxLength={15}
             />
              {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)}
           </div>
@@ -299,9 +363,10 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
 
       <div className="next-btn">
         <Buttons
-          variant="secondary"
-          className="category-next"
-          onClick={handleNext}
+          type="submit"
+          
+          className={`btn ${isValid ? "btn-primary":"btn-secondary"}`}
+           
         >
           Next
         </Buttons>
@@ -321,7 +386,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
         </PopUp>
         of Sri Animalife Biotech Pvt Ltd.
       </div>
-    </div>
+    </form>
   );
 };
 

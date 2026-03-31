@@ -10,12 +10,12 @@ const RadioButton = ({
 }) => {
   return (
     <div className="radio-wrapper">
-      <label className="radio-label">{label}</label>
+      {label && <label className="radio-label">{label}</label>}
 
       <div className={`radio-group ${className}`}>
         {options.map((opt, index) => (
           <label key={index} className="radio-item">
-            <span className="label-text">{opt.label}</span>
+            {opt.label && <span className="label-text">{opt.label}</span>}
             <input  type="radio" name={name} value={opt.value} checked={value === opt.value}  onChange={onChange} />
             <span className="custom-radio"></span>
           </label>

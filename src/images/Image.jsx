@@ -93,6 +93,22 @@ dislike:"/assets/icons/handdislike.svg",
 reviewproduct:"/assets/icons/reviewcardimage.svg",
 reviewline:"/assets/icons/Vector 21.svg",
 bluestar:"/assets/icons/bluestar.svg",
+innerproduct:"/assets/icons/innerproduct.svg",
+rightarrow:"/assets/icons/right-arrow.svg",
+leftarrow:"/assets/icons/leftarrow.svg",
+rightcurve:"/assets/icons/Subtract (4).svg",
+leftcurve:"/assets/icons/Subtract (5).svg",
+orangecart:"/assets/icons/orangecart.svg",
+cartheart:"/assets/icons/carthart.svg",
+itemsbackground:"/assets/icons/Subtract (6).svg",
+productlistimage:"/assets/icons/Rectangle 32.svg",
+productlistimg1:"/assets/icons/img1.svg",
+productlistimg2:"/assets/icons/img2.svg",
+productlistimg3:"/assets/icons/img3.svg",
+productlistimg4:"/assets/icons/img4.svg",
+productlistimg5:"/assets/icons/img5.svg",
+productlistimg6:"/assets/icons/img6.svg",
+
 
 }
 

@@ -29,19 +29,21 @@ const ForgotPassword = () => {
       try{
         await usernameSchema.validate(username);
 
-        const response=await axios.post("https://jjnxd5h1-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getUser",
+        const response=await axios.post("https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getUser",
           {
             username
           }
         )
         console.log(response.data)
-        const userId=response.data.id;
+        console.log("FULL RESPONSE:", response);
+        const userId=response.data.data;
+        console.log(userId)
 
         const getresponse=await axios.get(`https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getQuestions/${userId}`)
         const questions = getresponse.data; 
         console.log(getresponse.data)
         
-        navigate("/forgot-after-setup",{
+        navigate("/login/forgot-after-setup",{
           state:{userId,questions}
         })
 
@@ -76,7 +78,7 @@ const ForgotPassword = () => {
                   <label className='label-text'>Username</label>
                   <div className="input-box">
                     <img src={Images.user2} className="icon left" />
-                    <Input placeholder='Enter username' name="username" value={username} onChange={handlechange}/>
+                    <Input placeholder='Enter username' name="username" value={username} maxLength={25} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()}/>
 
                   </div>
                   {error && <p className='error-text'>{error}</p> }
