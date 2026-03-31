@@ -6749,8 +6749,6 @@ h6 {
 }
 
 
-
-
 /* mobile cart */
 .mobile-cart-container .header{
   display: flex;
@@ -6976,12 +6974,12 @@ h6 {
   color: rgba(var(--primary-text), 1);
 }
 .mobile-cart-container .cart-products-mobile .mobile-cart-block .cart-block-right .amount .currency {
-  font-size: 16px;
+  font-size: 10px;
   position: relative;
   font-weight: 900;
 }
 .mobile-cart-container .cart-products-mobile .mobile-cart-block .cart-block-right .amount .price{
-  font-size: 22px;
+  font-size: 15px;
   position: relative;
   top: 5px;
 }

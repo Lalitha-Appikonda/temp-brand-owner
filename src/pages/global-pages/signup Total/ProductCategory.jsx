@@ -368,6 +368,7 @@ console.log("isValid:", isValid);
               onChange={(e) => setFormData((prev)=>({...prev,panNumber:e.target.value.toUpperCase(),}))}
               onKeyDown={(e)=>e.key === " " && e.preventDefault()}
               maxLength={10}
+              error={errors.panNumber}
             />
             {/* {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)} */}
           </div>
@@ -381,6 +382,7 @@ console.log("isValid:", isValid);
                onChange={(e) => setFormData((prev)=>({...prev,gstNumber:e.target.value.toUpperCase(),}))}
                onKeyDown={(e)=>e.key === " " && e.preventDefault()}
                maxLength={15}
+               error={errors.gstNumber}
             />
             {/* {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)} */}
           </div>
