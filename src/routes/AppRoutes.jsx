@@ -19,6 +19,7 @@ import Login from "../pages/global-pages/login Total/Login";
 import Payment from "../pages/payment/Payment";
 import CardSample from "../pages/Home/CardSample";
 import MobileCart from "../pages/payment/MobileCart";
+import ProductInnerPage from "../pages/Home/ProductInnerPage";
 
 const AppRoutes = () => {
   return (
@@ -36,6 +37,7 @@ const AppRoutes = () => {
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="productinnerpage" element={<ProductInnerPage/>}/>
         <Route path="products" element={<ProductList />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="product/:id/reviews" element={<Review />} />
@@ -43,7 +45,7 @@ const AppRoutes = () => {
 
         <Route path="cart" element={<Payment />} />
         <Route path="address" element={<Payment />} />
-        <Route  path='samplecards' element={<CardSample />} />
+        <Route  path='samplecards' element={<CardSample/>} />
 
       </Route>
 

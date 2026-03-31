@@ -152,6 +152,7 @@ const Styleguide = () => {
           </Buttons>
         </div>
       </div>
+     
 
       <div style={{ marginTop: "50px" }}>
         <h1 style={{ fontSize: "50px", textAlign: "center" }}>popups</h1>
