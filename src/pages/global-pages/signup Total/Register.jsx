@@ -16,6 +16,8 @@ const Register = () => {
     confirmpassword: "",
     category: null,
     subcategory: [],
+    panNumber:"",
+    gstNumber:"",
     answers: {}
   });
   return (

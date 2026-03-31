@@ -111,7 +111,7 @@ const SetNewPassword = () => {
             <label className="label-text">New Password</label>
             <div className="input-box">
               <img src={Images.key} className="icon left" />
-              <Input type={showPassword?"text":"password"} onChange={handlechange} value={formData?.newPassword || ""} name="newPassword"/>
+              <Input type={showPassword?"text":"password"} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16}  value={formData?.newPassword || ""} name="newPassword"/>
               <img src={showPassword ?Images.eyeclose: Images.eyeicon} className="icon right" onClick={()=>setShowPassword(prev=>!prev)}/>
             </div>
              {error.newPassword && <p className="error-text">{error.newPassword}</p> }
@@ -131,7 +131,7 @@ const SetNewPassword = () => {
             <label className="label-text">Confirm New Password</label>
             <div className="input-box">
               <img src={Images.lockicon} className="icon left" />
-              <Input name="confirmPassword"  value={formData?.confirmPassword || ""} onChange={handlechange}
+              <Input name="confirmPassword" maxLength={16} value={formData?.confirmPassword || ""} onChange={handlechange}
                 placeholder="Enter" type={showConfirmPassword ? "text" :"password"}
               
                 

@@ -79,7 +79,7 @@ const Login = () => {
     localStorage.setItem("accesstoken", accessToken);
     localStorage.setItem("refreshtoken", refreshToken);
 
-    navigate("/sign-up/");
+    navigate("/");
 
   } catch (err) {
 
@@ -114,12 +114,12 @@ const Login = () => {
                 reports by signing in securely.</h3>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />
-                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange}   />
+                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={25}   />
             </div>
             {errors.username && <p className='error-text'>{errors.username}</p> }
             <div className="input-box">
                 <img src={Images.lockicon} className="icon left" />
-                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} />
+                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16}/>
                 <img 
                     src={showPassword ? Images.eyeclose : Images.eyeicon}
                     className="icon right" 

@@ -14,9 +14,12 @@ const Forgotaftersetup = () => {
 
    const location=useLocation();
    const userId=location.state?.userId;
-   const questions=location.state?.questions || [];
+   const questions=location.state?.questions?.data || [];
    console.log(userId)
    console.log(questions)
+
+   // to flatten the array of arrays into a single array
+const flatQuestions = questions.flat(); // ES2019+
 
    const navigate=useNavigate()
 
@@ -66,7 +69,7 @@ const Forgotaftersetup = () => {
         
        )
        console.log(response.data)
-       navigate("/reset-password",{
+       navigate("/login/reset-password",{
         state:{userId}
        })
 
@@ -94,7 +97,7 @@ const Forgotaftersetup = () => {
         </h3>
 
         <div className="ques-container">
-          {questions.map((q, index) => (
+          {flatQuestions.map((q, index) => (
             <div className="boxes" key={index}>
               <div>
                 <div className="row1">

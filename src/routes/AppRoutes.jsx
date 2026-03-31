@@ -17,10 +17,12 @@ import Register from "../pages/global-pages/signup Total/Register";
 import SigningIn from "../pages/global-pages/login Total/SigningIn";
 import Login from "../pages/global-pages/login Total/Login";
 import Payment from "../pages/payment/Payment";
+ 
 import MobileCart from "../pages/payment/MobileCart";
 import ProductInnerPage from "../pages/Home/ProductInnerPage";
 import ForgotPassword from "../pages/global-pages/login Total/ForgotPassword";
-import WelcomePage from "../pages/global-pages/WelcomePage";
+import Forgotaftersetup from "../pages/global-pages/login Total/Forgotaftersetup";
+import SetNewPassword from "../pages/global-pages/login Total/SetNewPassword";
 
 
 const AppRoutes = () => {
@@ -33,6 +35,8 @@ const AppRoutes = () => {
       <Route path="login" element={<UserAccess />}>
         <Route index element={<Login />} />
         <Route path="forgotpassword" element={<ForgotPassword />} />
+        <Route path="forgot-after-setup" element={<Forgotaftersetup />} />
+        <Route path="reset-password" element={<SetNewPassword />} />
       </Route>
 
       <Route path="/status/:type" element={<StatusHandler />} />

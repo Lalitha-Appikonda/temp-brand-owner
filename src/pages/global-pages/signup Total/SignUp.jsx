@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../../../components/form-elements/Input";
 import { Images } from "../../../images/Image";
 import Buttons from "../../../components/form-elements/Buttons";
 import { useState } from "react";
@@ -8,6 +7,7 @@ import { useContext } from "react";
 import { SignupContext } from "../../../context/SignupContext";
 import PopUp from "../../../components/popup/PopUp";
 import TermsAndConditions from "../TermsAndConditions";
+import Input from "../../../components/form-elements/Input";
 
 const SignUp = ({ formData, setFormData, nextStep }) => {
   const navigate = useNavigate();
@@ -28,30 +28,31 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
   const signupSchema=Yup.object({
     name:Yup.string()
     .trim()
-    .required("Name is required")
-    .min(3,"Minimum 3 characters")
-    .max(20, "maximum 20 characters only")
-    .matches(/^[A-Za-z ]+$/, "Only letters and spaces allowed")
-    .test("no multiple-spaces","no extra spaces allowed",(value)=> !/\s{2,}/.test(value || "")),
+    
+    .min(5,"*Minimum 5 characters")
+    .max(20, "*Maximum 20 characters only")
+    .matches(/^[A-Za-z ]+$/, "*Only letters and spaces allowed")
+    .required("*Name is required")
+    .test("*No multiple-spaces","no extra spaces allowed",(value)=> !/\s{2,}/.test(value || "")),
 
     username:Yup.string()
     .trim()
-    .required("username is required")
-    .min(4,"minimum 4 characters")
-    .max(25,"max 25 charcters only")
-    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscore"),   //have to write one more validation here to display as username already exits
-
+    .min(5,"*Minimum 5 characters")
+    .max(25,"*Max 25 charcters only")
+    .matches(/^[a-zA-Z0-9_]+$/, "*Only letters, numbers, underscore")   //have to write one more validation here to display as username already exits
+    .required("*Username is required"),
     password:Yup.string()
     .trim()
-    .required("password is required")
-    .min(8,"minimum 8 characters")
-    .max(16,"maximum 16 characters")
+    
+    .min(8,"*Minimum 8 characters")
+    .max(16,"*Maximum 16 characters")
     .matches(/[0-9]/, "At least 1 number")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"), // Pattern wrong
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, "*At least 1 special character")
+    .required("*Password is required"), // Pattern wrong
 
     confirmpassword: Yup.string()
-      .required("confirm password is required")
-      .oneOf([Yup.ref("password")], "passwords must match"),
+      .required("*Confirm password is required")
+      .oneOf([Yup.ref("password")], "*Passwords must match"),
   });
 
   const handlesubmit = async (e) => {
@@ -142,6 +143,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           value={form.name}
           onChange={handlechange}
           error={errors.name}
+          maxLength={20}
         />
       </div>
       {/* {errors.name && <p className='error-text'>{errors.name}</p> } */}
@@ -154,6 +156,8 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           value={form.username}
           onChange={handlechange}
           error={errors.username}
+          maxLength={25}
+          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
         />
       </div>
       {/* {errors.username  && <p className='error-text'>{errors.username}</p> } */}
@@ -167,6 +171,8 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           type={showPassword ? "text" : "password"}
           onChange={handlechange}
           error={errors.password}
+          maxLength={16}
+          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
         />
         <img
           src={showPassword ? Images.eyeclose : Images.eyeicon}
@@ -199,6 +205,8 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           type={showConfirmPassword ? "text" : "password"}
           onChange={handlechange}
           error={errors.confirmpassword}
+          maxLength={16}
+          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
         />
         <img
           src={showConfirmPassword ? Images.eyeclose : Images.eyeicon}
@@ -208,10 +216,8 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       </div>
       {/* {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> } */}
 
-      <div className="signin-next">
-        <Buttons type="submit" className="btn btn-primary">
-          Next
-        </Buttons>
+      <div className='signin-next'>
+        <Buttons type="submit"   className= {`btn ${isValid ? "btn-primary":"btn-secondary"}`}  >Next</Buttons>
       </div>
 
       <div className="login-texts">
