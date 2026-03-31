@@ -3,6 +3,7 @@ import ReviewCard from '../../components/card/ReviewCard';
 import PhotoCarousel from '../../components/card/PhotoCarousel';
 import { Images } from '../../images/Image';
 import RatingReview from '../../components/card/RatingReview';
+import Styleguide from './../../Styleguide/Styleguide';
 
   const reviews = [
     {
@@ -31,11 +32,11 @@ import RatingReview from '../../components/card/RatingReview';
    
   ];
 const images = [
-  "/images/p1.jpg",
-  "/images/p2.jpg",
-  "/images/p3.jpg",
-  "/images/p4.jpg",
-  "/images/p5.jpg",
+  Images.rightcurve,
+  Images.innerproduct,
+  Images.innerproduct,
+  Images.innerproduct,
+  Images.leftcurve,
 ];
 const CardSample = () => {
   return (
@@ -55,6 +56,9 @@ const CardSample = () => {
         />
       ))}
 
+    <div style={{padding:"50px "}}>
+        <RatingReview/>
+    </div>
 
 
     <div style={{marginBottom:"300px"}}>
@@ -64,9 +68,7 @@ const CardSample = () => {
           images={images}
         />
     </div>
-    <div style={{padding:"50px "}}>
-        <RatingReview/>
-    </div>
+    <Styleguide/>
     
     </div>
 

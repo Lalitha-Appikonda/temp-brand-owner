@@ -1,41 +1,42 @@
 import React, { useRef } from "react";
+import Buttons from "../form elements/Buttons";
+import { FiArrowUpRight } from "react-icons/fi";
+import { IoMdArrowDroprightCircle } from "react-icons/io";
+import { Images } from "../../images/Image";
 
 const PhotoCarousel = ({ title = "Customer Photos", count = 0, images = [] }) => {
   const scrollRef = useRef();
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({
-      left: -200,
-      behavior: "smooth",
-    });
-  };
+  // const scrollLeft = () => {
+  //   scrollRef.current.scrollBy({
+  //     left: -200,
+  //     behavior: "smooth",
+  //   });
+  // };
 
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({
-      left: 200,
-      behavior: "smooth",
-    });
-  };
+  // const scrollRight = () => {
+  //   scrollRef.current.scrollBy({
+  //     left: 200,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   return (
     <div className="carousel-container">
-      
-      {/* Header */}
+
       <div className="carousel-header">
-        <h3>
+        <h2>
           {title} ({count})
-        </h3>
-        <button className="see-all-btn">See All Photo</button>
+        </h2>
+        <Buttons variant="outline-primary" className="see-all-btn">See All Photo</Buttons>
       </div>
 
-      {/* Slider */}
       <div className="carousel-wrapper">
-        
-        <button className="nav-btn left" onClick={scrollLeft}>
-          ←
-        </button>
-
-        <div className="carousel" ref={scrollRef}>
+        <div>
+          <Buttons variant="circle-secondary-mini" className="nav-btn right"  ><img src={Images.rightarrow} /></Buttons>
+        </div>
+        {/* ref={scrollRef} */}
+        <div className="carousel" >
           {images.map((img, index) => (
             <div className="card" key={index}>
               <img src={img} alt="product" />
@@ -43,10 +44,9 @@ const PhotoCarousel = ({ title = "Customer Photos", count = 0, images = [] }) =>
           ))}
         </div>
 
-        <button className="nav-btn right" onClick={scrollRight}>
-          →
-        </button>
-
+        <div>
+          <Buttons variant="circle-secondary-mini" className="nav-btn left"><img src={Images.leftarrow} /></Buttons>
+        </div>
       </div>
     </div>
   );
