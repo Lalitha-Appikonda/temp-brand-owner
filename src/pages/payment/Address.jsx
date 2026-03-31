@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import RadioButton from "../../components/form elements/RadioButton";
-import Buttons from "../../components/form elements/Buttons";
-import Input from "../../components/form elements/Input";
 import { FiEdit2 } from "react-icons/fi";
 import { HiOutlineTrash } from "react-icons/hi";
-import TextArea from "../../components/form elements/TextArea";
+import Buttons from "../../components/form-elements/Buttons";
+import RadioButton from "../../components/form-elements/RadioButton";
+import Input from "../../components/form-elements/Input";
+import TextArea from "../../components/form-elements/TextArea";
 
 const Address = () => {
   const [checkedAddress, setCheckedAddress] = useState("");

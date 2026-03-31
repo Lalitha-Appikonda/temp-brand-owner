@@ -83,6 +83,8 @@ export const Images = {
 
     // cart
     addCartImage : "/assets/icons/add-to-cart-product-image.svg",
+    cartLikeMobile : "assets/icons/cart-like.svg",
+    cartMobileproduct: "/assets/icons/cart-mobile-img.jpg",
 
 
 //product uploading

@@ -20,10 +20,20 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   const categorySchema = Yup.object().shape({
     category: Yup.object().nullable().required("category is required"),
     subcategory: Yup.array().min(1, "select at least one subcategory"),
-    panNumber:Yup.string().trim().required("pan is required").matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,"Invalid PAN format (e.g., ABCDE1234F)"),
-    gstNumber:Yup.string().trim().required("gst is required").matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,"Invalid GST format (e.g., 22ABCDE1234F1Z5)")
-
-    
+    panNumber: Yup.string()
+      .trim()
+      .required("pan is required")
+      .matches(
+        /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+        "Invalid PAN format (e.g., ABCDE1234F)",
+      ),
+    gstNumber: Yup.string()
+      .trim()
+      .required("gst is required")
+      .matches(
+        /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+        "Invalid GST format (e.g., 22ABCDE1234F1Z5)",
+      ),
   });
 
   const navigate = useNavigate();
@@ -41,7 +51,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories",  
+          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories",
         );
         console.log(res);
         console.log(res.data);
@@ -65,6 +75,8 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
     if (!category) return;
 
     setSubCategories([]);
+    setSubCategory([]);
+    setOtherSubCategory("");
 
     const fetchSubCategories = async () => {
       try {
@@ -80,6 +92,11 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
             value: item.id,
           })),
         ];
+
+        //   const formatted = res.data.message.map((item) => ({
+        //   label: item.sub_category_name,
+        //   value: item.id,
+        // }));
 
         if (category.value === "other") {
           formatted.push({ label: "other", value: "other" });
@@ -111,7 +128,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
           category: category,
           subcategory: Subcategory,
           panNumber,
-          gstNumber
+          gstNumber,
         },
         { abortEarly: false },
       );
@@ -139,8 +156,8 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
         ...prev,
         category: finalCategory,
         subcategory: finalSubCategory,
-        panNumber:panNumber,
-        GSTNumber:gstNumber,
+        panNumber: panNumber,
+        GSTNumber: gstNumber,
       }));
 
       console.log(" SAVED CATEGORY .....", finalCategory);
@@ -178,10 +195,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   };
   return (
     <div className="category-container">
-      <div
-        className="back-btn"
-        onClick={() => prevStep()}
-      >
+      <div className="back-btn" onClick={() => prevStep()}>
         <img src={Images.lessThan} alt="" />
       </div>
 
@@ -208,7 +222,11 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
             options={categories}
             icon={<LuBox />}
           />
-          {errors.category && <p className="error-text product-category-error">{errors.category}</p>}
+          {errors.category && (
+            <p className="error-text product-category-error">
+              {errors.category}
+            </p>
+          )}
 
           <div className="others-input-conatiner">
             {category?.value === "other" && (
@@ -225,7 +243,9 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
           </div>
         </div>
 
-        <div className="sub-product-category-dropdown">
+        <div
+          className={`sub-product-category-dropdown ${category?.value === "other" ? "sub-category-select" : ""}`}
+        >
           <SelectWithCheckbox
             value={Subcategory}
             onChange={handlechange}
@@ -235,10 +255,18 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
             placeholder="Product Sub-category"
           />
           {errors.subcategory && (
-            <p className="error-text product-category-error">{errors.subcategory}</p>
+            <p className="error-text product-category-error">
+              {errors.subcategory}
+            </p>
           )}
 
-          <div className="others-input-conatiner">
+          <div
+            className={`others-input-conatiner ${
+              Subcategory.some((item) => item.value !== "other")
+                ? "sub-category-other-input"
+                : ""
+            }`}
+          >
             {Subcategory.some((item) => item.value === "other") && (
               <div className="input-box">
                 <LuBox className="icon left" />
@@ -271,7 +299,13 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
           </div>
         )}
 
-        <div className="pan-gst-container">
+        <div
+          className={`pan-gst-container ${
+            Subcategory.some((item) => item.value === "other")
+              ? "pan-card-input-down"
+              : ""
+          }`}
+        >
           <div className="input-box">
             <LuBox className="icon left" />
             <Input
@@ -279,20 +313,21 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
               placeholder="Enter Pan Card Number"
               className="gst-pan-input"
               onChange={(e) => setPanNumber(e.target.value)}
+              error={errors.panNumber}
             />
-             {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)}
+            {/* {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)} */}
           </div>
-         
 
           <div className="input-box">
             <LuBox className="icon left" />
             <Input
-               value={gstNumber}
+              value={gstNumber}
               placeholder="Enter GST Number"
               className="gst-pan-input"
-               onChange={(e) => setGstNumber(e.target.value)}
+              onChange={(e) => setGstNumber(e.target.value)}
+              error={errors.gstNumber}
             />
-             {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)}
+            {/* {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)} */}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../../../components/form elements/Input";
+import Input from "../../../components/form-elements/Input";
 import { Images } from "../../../images/Image";
-import Buttons from "../../../components/form elements/Buttons";
+import Buttons from "../../../components/form-elements/Buttons";
 import { useState } from "react";
 import * as Yup from "yup";
 import { useContext } from "react";

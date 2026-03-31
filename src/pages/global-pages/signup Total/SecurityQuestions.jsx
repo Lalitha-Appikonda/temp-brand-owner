@@ -185,8 +185,9 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
               )}
             </div>
           ))}
+          {error && <p className="error-text">{error}</p>}
         </div>
-        {error && <p className="error-text">{error}</p>}
+        {/* {error && <p className="error-text">{error}</p>} */}
       </div>
 
       <div className="ques-submit">

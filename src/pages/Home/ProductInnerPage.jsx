@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Images } from '../../images/Image'
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import Buttons from '../../components/form elements/Buttons';
+import Buttons from '../../components/form-elements/Buttons';
 import { useNavigate } from "react-router-dom";
 
 const ProductInnerPage = () => {

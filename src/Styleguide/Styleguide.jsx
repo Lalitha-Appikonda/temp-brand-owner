@@ -135,6 +135,7 @@ const Styleguide = () => {
             Primary with background
           </Buttons>
         </div>
+      
 
         <h2 style={{ margin: "20px" }}>Soft Buttons</h2>
         <div style={{ display: "flex", gap: "20px" }}>
