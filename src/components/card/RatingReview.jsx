@@ -1,6 +1,6 @@
 import React from 'react'
 import { Images } from '../../images/Image'
-import Buttons from '../form elements/Buttons';
+import Buttons from '../form-elements/Buttons';
 
 const RatingReview = () => {
 

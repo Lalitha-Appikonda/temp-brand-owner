@@ -1,5 +1,6 @@
 import React from "react";
 import Home from "../pages/Home/Home";
+import CardSample from "../pages/Home/CardSample";
 import ProductList from "../pages/productlist/ProductList";
 import Product from "../pages/product/Product";
 import Review from "../pages/review/Review";
@@ -12,7 +13,6 @@ import { Routes, Route } from "react-router-dom";
 import UserAccess from "../pages/global-pages/UserAccess";
 
 import StatusHandler from "../pages/global-pages/status screens/StatusHandler";
-
 import Register from "../pages/global-pages/signup Total/Register";
 import SigningIn from "../pages/global-pages/login Total/SigningIn";
 import Login from "../pages/global-pages/login Total/Login";
@@ -20,6 +20,8 @@ import Payment from "../pages/payment/Payment";
 import CardSample from "../pages/Home/CardSample";
 import MobileCart from "../pages/payment/MobileCart";
 import ProductInnerPage from "../pages/Home/ProductInnerPage";
+import ForgotPassword from "../pages/global-pages/login Total/ForgotPassword";
+
 
 const AppRoutes = () => {
   return (
@@ -30,7 +32,7 @@ const AppRoutes = () => {
 
       <Route path="login" element={<UserAccess />}>
         <Route index element={<Login />} />
-        <Route path="forgotpassword" element={<SigningIn />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
       </Route>
 
       <Route path="/status/:type" element={<StatusHandler />} />

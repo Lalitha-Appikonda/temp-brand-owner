@@ -2,7 +2,7 @@ import React from "react";
 import { FaTimes } from "react-icons/fa";
 
 
-import Buttons from "../../../components/form elements/Buttons";
+import Buttons from "../../../components/form-elements/Buttons";
 
 const StatusScreen = ({
   type,

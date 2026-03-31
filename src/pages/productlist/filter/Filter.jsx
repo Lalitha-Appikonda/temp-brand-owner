@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CheckBox from "../../../components/form elements/CheckBox";
-import Range from "../../../components/form elements/Range";
+import CheckBox from "../../../components/form-elements/CheckBox";
+import Range from "../../../components/form-elements/Range";
 import { Images } from "../../../images/Image";
 import { FaChevronDown, FaStar, FaTimes } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";

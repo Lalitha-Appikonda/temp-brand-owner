@@ -4,7 +4,7 @@ import PriceDetails from "./component/PriceDetails";
 import { useLocation } from "react-router-dom";
 import Address from "./Address";
 import { BsPlusLg } from "react-icons/bs";
-import Buttons from "../../components/form elements/Buttons";
+import Buttons from "../../components/form-elements/Buttons";
 import Card from "../../components/card/Card";
 import { Images } from "../../images/Image";
 

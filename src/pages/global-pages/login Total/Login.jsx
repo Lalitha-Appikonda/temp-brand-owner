@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import * as Yup from "yup";
-import Input from '../../../components/form elements/Input'
+
 import { Images } from '../../../images/Image';
-import Buttons from '../../../components/form elements/Buttons';
+
+import Input from '../../../components/form-elements/Input';
+import Buttons from '../../../components/form-elements/Buttons';
 
 const Login = () => {
 
@@ -17,6 +19,7 @@ const Login = () => {
     })
     const [errors,setErrors]=useState({})
     const [showPassword,setShowPassword]=useState(false);
+    
 
     const [isValid, setIsValid] = useState(false);
 
@@ -54,7 +57,7 @@ const Login = () => {
         password:Yup.string()
         .trim()
         .required(" password required")
-        .min(6,"minimum 6 characters")
+        .min(6,"minimum 6 characters")  //have to write one more validation here , if the user enter wrong credentials then it will show error 
     })
 
     const handlelogin = async () => {
@@ -71,12 +74,12 @@ const Login = () => {
       form
     );
 
-    const { accessToken, refreshToken } = response.data;
+    const { accessToken, refreshToken,userId } = response.data;
 
     localStorage.setItem("accesstoken", accessToken);
     localStorage.setItem("refreshtoken", refreshToken);
 
-    navigate("/");
+    navigate("/sign-up/");
 
   } catch (err) {
 
@@ -95,9 +98,11 @@ const Login = () => {
     else {
       console.log("API ERROR:", err.response?.data);
 
+      const apiMsg=err.response?.data?.message || err.response?.data?.error || " Invalid username or password";
+
       setErrors({
-        api: err.response?.data?.message || "Login failed",
-      });
+        api:apiMsg
+      })
     }
   }
 };
@@ -123,6 +128,7 @@ const Login = () => {
                     />
              </div>
              {errors.password && <p className='error-text'>{errors.password}</p> }
+             {errors.api && <p className="error-text">{errors.api}</p>}
             <div className='login-wrapper'>
                 {/* <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>

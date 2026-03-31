@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Images } from '../../images/Image';
 import { FiArrowUpRight } from 'react-icons/fi';
-import Buttons from '../../components/form elements/Buttons';
+import Buttons from '../../components/form-elements/Buttons';
 import Footer from '../../components/footer/Footer';
 import NavBar from "../../components/navbar/NavBar";
 import { useNavigate } from "react-router-dom";
 import Card from '../../components/card/Card';
 import Styleguide from './../../Styleguide/Styleguide';
-import Input from '../../components/form elements/Input';
+import Input from '../../components/form-elements/Input';
 import PhotoCarousel from '../../components/card/PhotoCarousel';
 
 const Home = () => {

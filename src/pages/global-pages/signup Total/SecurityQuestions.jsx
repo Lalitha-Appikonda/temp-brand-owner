@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Images } from "../../../images/Image";
-import Input from "../../../components/form elements/Input";
+import Input from "../../../components/form-elements/Input";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import Buttons from "../../../components/form elements/Buttons";
+import Buttons from "../../../components/form-elements/Buttons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SignupContext } from "../../../context/SignupContext";
 import * as Yup from "yup";
+ 
 
 const BASE_URL =
   "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1";
@@ -34,7 +35,9 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
             );
             return valid.length >= 3;
           }
-        )
+        ),
+        
+         
     });
 
   // ########### FETCH QUESTIONS
@@ -95,6 +98,8 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
         (item) => item.name
       ),
       roleId: 2,
+      panNumber: signupData.panNumber,
+      GSTNumber: signupData.GSTNumber,
       answers: filledAnswers,
     };
 
