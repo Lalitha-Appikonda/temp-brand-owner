@@ -208,7 +208,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
             options={categories}
             icon={<LuBox />}
           />
-          {errors.category && <p className="error-text">{errors.category}</p>}
+          {errors.category && <p className="error-text product-category-error">{errors.category}</p>}
 
           <div className="others-input-conatiner">
             {category?.value === "other" && (
@@ -235,7 +235,7 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
             placeholder="Product Sub-category"
           />
           {errors.subcategory && (
-            <p className="error-text">{errors.subcategory}</p>
+            <p className="error-text product-category-error">{errors.subcategory}</p>
           )}
 
           <div className="others-input-conatiner">

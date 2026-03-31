@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import * as Yup from "yup";
-import { Images } from '../../../images/Image'
+
+import { Images } from '../../../images/Image';
+
 import Input from '../../../components/form-elements/Input';
 import Buttons from '../../../components/form-elements/Buttons';
 
@@ -128,20 +130,20 @@ const Login = () => {
              {errors.password && <p className='error-text'>{errors.password}</p> }
              {errors.api && <p className="error-text">{errors.api}</p>}
             <div className='login-wrapper'>
-                <div className='flex-swites'>
+                {/* <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>
                     <label className="switch">
                         <input type="checkbox" id="toggle" />
                         <span className="slider"></span>
                     </label>
-                </div>
+                </div> */}
                 <div>
                     <h3 className='forgot-text forgotpassword' onClick={() => navigate('/login/forgotpassword')}>Forgot Password</h3>
                 </div>
 
             </div>
-            
-            <Buttons className='login-button' variant='btn btn-secondary' onClick={handlelogin} >Login</Buttons>
+
+            <Buttons className='btn login-button' variant='primary' onClick={handlelogin} >Login</Buttons>
             <div className='login-texts'>
                 <p> Don’t Have an Account?</p>
                 <p onClick={() => navigate('/sign-up')}>Signup</p>

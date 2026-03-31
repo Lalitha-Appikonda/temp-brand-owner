@@ -1,6 +1,6 @@
 export const Images = {
     // login
-    // diffImg : "/assets/login-sign up/diff-img.png",
+    diffImg : "/assets/login-sign up/diff-img.png",
     lessThan : "/assets/icons/less-than-icon.svg",
     quesIcon : "/assets/icons/ques-icon.svg",
     waitTime : "/assets/icons/wait-time.svg",
@@ -74,8 +74,7 @@ export const Images = {
     mobilepromtioncard:"/assets/icons/Subtract (3).svg",
 
 
-    // whatappimage:"/assets/icons/whatapp (1).svg",
-    // email:"public/assets/icons/whatapp (2).svg"
+    
 
     //product-listing
     priceRange : "/assets/icons/price-range.svg",
@@ -83,6 +82,17 @@ export const Images = {
 
 
     // cart
-    addCartImage : "/assets/icons/add-to-cart-product-image.svg"
+    addCartImage : "/assets/icons/add-to-cart-product-image.svg",
+
+
+//product uploading
+
+certified:"/assets/icons/fi_8861199.svg",
+handlike:"/assets/icons/handlike.svg",
+dislike:"/assets/icons/handdislike.svg",
+reviewproduct:"/assets/icons/reviewcardimage.svg",
+reviewline:"/assets/icons/Vector 21.svg",
+bluestar:"/assets/icons/bluestar.svg",
+
 }
 
