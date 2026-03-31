@@ -108,7 +108,11 @@ productlistimg3:"/assets/icons/img3.svg",
 productlistimg4:"/assets/icons/img4.svg",
 productlistimg5:"/assets/icons/img5.svg",
 productlistimg6:"/assets/icons/img6.svg",
-
+buynow:"/assets/icons/buynow.svg",
+mobilelike:"/assets/icons/mobilelike.svg",
+orangearrow:"/assets/icons/orangearrow.svg",
+blueleft:"/assets/icons/blueleft.svg",
+blueright:"/assets/icons/blueright.svg",
 
 }
 

@@ -4,6 +4,7 @@ import PhotoCarousel from '../../components/card/PhotoCarousel';
 import { Images } from '../../images/Image';
 import RatingReview from '../../components/card/RatingReview';
 import Styleguide from './../../Styleguide/Styleguide';
+import Productreview from '../../components/card/Productreview';
 
   const reviews = [
     {
@@ -18,17 +19,17 @@ import Styleguide from './../../Styleguide/Styleguide';
              reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
 
     },
-    // {
-    //   rating: "7.0",
-    //   text: "Nice quality",
-    //   images: [Images.reviewproduct,Images.reviewproduct,Images.reviewproduct],
-    //   name: "Ravi",
-    //   role: "Certified Dealer,",
-    //   date: "Feb 2024",
-    //   likes: "5",
-    //   comments: "1",
-    //    reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
-    // },
+    {
+      rating: "7.0",
+      text: "Nice quality",
+      images: [Images.reviewproduct,Images.reviewproduct,Images.reviewproduct],
+      name: "Ravi",
+      role: "Certified Dealer,",
+      date: "Feb 2024",
+      likes: "5",
+      comments: "1",
+       reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
+    },
    
   ];
 const images = [
@@ -55,6 +56,10 @@ const CardSample = () => {
           dislikes={item.dislikes}
         />
       ))}
+
+      {/* <div>
+        <Productreview/>
+      </div> */}
 
     <div style={{padding:"50px "}}>
         <RatingReview/>

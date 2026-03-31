@@ -4,7 +4,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { Images } from "../../images/Image";
 
-const PhotoCarousel = ({ title = "Customer Photos", count = 0, images = [] }) => {
+const PhotoCarousel = ({ title = "Customer Photos", count = 0, image = [] }) => {
   const scrollRef = useRef();
 
   // const scrollLeft = () => {
@@ -37,7 +37,7 @@ const PhotoCarousel = ({ title = "Customer Photos", count = 0, images = [] }) =>
         </div>
         {/* ref={scrollRef} */}
         <div className="carousel" >
-          {images.map((img, index) => (
+          {image.map((img, index) => (
             <div className="card" key={index}>
               <img src={img} alt="product" />
             </div>
