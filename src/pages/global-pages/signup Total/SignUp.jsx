@@ -1,28 +1,27 @@
-import { useNavigate } from 'react-router-dom'
-import Input from '../../../components/form elements/Input';
-import { Images } from '../../../images/Image'
-import Buttons from '../../../components/form elements/Buttons';
-import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Input from "../../../components/form elements/Input";
+import { Images } from "../../../images/Image";
+import Buttons from "../../../components/form elements/Buttons";
+import { useState } from "react";
 import * as Yup from "yup";
-import { useContext } from 'react';
+import { useContext } from "react";
 import { SignupContext } from "../../../context/SignupContext";
-import PopUp from '../../../components/popup/PopUp';
-import TermsAndConditions from '../TermsAndConditions';
-
-
+import PopUp from "../../../components/popup/PopUp";
+import TermsAndConditions from "../TermsAndConditions";
 
 const SignUp = ({ formData, setFormData, nextStep }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const form = formData;
   const setForm = setFormData;
 
-  const [isValid,setIsValid]=useState(false);
+  const [isValid, setIsValid] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);/* show pwd state */
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);/* show cfm pwd state */
+  const [showPassword, setShowPassword] = useState(false); /* show pwd state */
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false); /* show cfm pwd state */
 
-  const [errors, setErrors] = useState({});     /* errors state */
+  const [errors, setErrors] = useState({}); /* errors state */
 
   const { setSignupData } = useContext(SignupContext);
 
@@ -49,10 +48,8 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
 
     confirmpassword: Yup.string()
       .required("confirm password is required")
-      .oneOf([Yup.ref("password")], "passwords must match")
-
-  })
-
+      .oneOf([Yup.ref("password")], "passwords must match"),
+  });
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -66,22 +63,18 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
         name: form.name,
         username: form.username,
         password: form.password,
-        confirmpassword: form.confirmpassword
+        confirmpassword: form.confirmpassword,
       }));
 
-    navigate(nextStep());
-
-
+      navigate(nextStep());
     } catch (err) {
       const formattedErrors = {};
       err.inner.forEach((error) => {
         formattedErrors[error.path] = error.message;
-      })
-      setErrors(formattedErrors)
+      });
+      setErrors(formattedErrors);
     }
-  }
-
-
+  };
 
   // if (!isValid){
   //   return;
@@ -97,107 +90,130 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
   //   console.log(error)
   // }
 
-
-
-
-
   const handlechange = async (e) => {
     const { name, value } = e.target;
     const updatedForm = {
       ...form,
-      [name]: value
+      [name]: value,
     };
     setForm(updatedForm);
 
-
-
-    setErrors((prev) => ({    /* to remove errors while typing */
-      ...prev,
-      [name]: ""
+    setErrors((prev) => ({
+      /* to remove errors while typing */ ...prev,
+      [name]: "",
     }));
     try {
-      await signupSchema.validate(updatedForm, { abortEarly: false })
-      setIsValid(true)
+      await signupSchema.validate(updatedForm, { abortEarly: false });
+      setIsValid(true);
     } catch {
-      setIsValid(false)
+      setIsValid(false);
     }
-  }
-
-
-
-
+  };
 
   const passwordRules = {
     length: form.password.length >= 8,
     number: /[0-9]/.test(form.password),
-    special: /[!@#$%^&*(),.?":{}|<>]/.test(form.password)
-  }
+    special: /[!@#$%^&*(),.?":{}|<>]/.test(form.password),
+  };
   const rules = [
     { text: "At least 8 characters", valid: passwordRules.length },
     { text: "At least 1 special character", valid: passwordRules.special },
-    { text: "At least 1 number", valid: passwordRules.number }
+    { text: "At least 1 number", valid: passwordRules.number },
   ];
-
 
   return (
     <form className="signup-container" onSubmit={handlesubmit}>
       {/* <div className='container'> */}
 
-
-      <p className='logintext'>Create Your Account</p>
+      <p className="logintext">Create Your Account</p>
       <h4 className="singing-text">
-        Continue managing your sales, purchases, and reports by signing in securely.
+        Continue managing your sales, purchases, and reports by signing in
+        securely.
       </h4>
-
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
-        <Input placeholder="Name" name="name" value={form.name} onChange={handlechange} error={errors.name}/>
+        <Input
+          placeholder="Name"
+          name="name"
+          value={form.name}
+          onChange={handlechange}
+          error={errors.name}
+        />
       </div>
       {/* {errors.name && <p className='error-text'>{errors.name}</p> } */}
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
-        <Input placeholder="Username" name="username" value={form.username} onChange={handlechange} error={errors.username}/>
+        <Input
+          placeholder="Username"
+          name="username"
+          value={form.username}
+          onChange={handlechange}
+          error={errors.username}
+        />
       </div>
       {/* {errors.username  && <p className='error-text'>{errors.username}</p> } */}
 
-
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
-        <Input placeholder="password" name="password" value={form.password} type={showPassword ? "text" :"password"} onChange={handlechange}  error={errors.password}/>
-        <img src={showPassword? Images.eyeclose:Images.eyeicon} onClick={()=>setShowPassword((prev)=>!prev)} className="icon right" />
+        <Input
+          placeholder="password"
+          name="password"
+          value={form.password}
+          type={showPassword ? "text" : "password"}
+          onChange={handlechange}
+          error={errors.password}
+        />
+        <img
+          src={showPassword ? Images.eyeclose : Images.eyeicon}
+          onClick={() => setShowPassword((prev) => !prev)}
+          className="icon right"
+        />
       </div>
       {/* {errors.password && <p className='error-text'>{errors.password}</p> } */}
 
-
-      <ul className='rules'>
+      <ul className="rules">
         {rules.map((rule, index) => (
           <li key={index} className="rules-img">
             <span>
-              <img src={rule.valid ? Images.greentick : Images.minus} alt="icon" />
+              <img
+                src={rule.valid ? Images.greentick : Images.minus}
+                alt="icon"
+              />
             </span>
             {rule.text}
           </li>
         ))}
       </ul>
 
-
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
-        <Input placeholder="Re-enter Password" name="confirmpassword" value={form.confirmpassword} type={showConfirmPassword ? "text":"password"} onChange={handlechange} error={errors.confirmpassword}/>
-        <img src={showConfirmPassword ? Images.eyeclose:Images.eyeicon} className="icon right" onClick={()=>setShowConfirmPassword(prev=>!prev)}/>
+        <Input
+          placeholder="Re-enter Password"
+          name="confirmpassword"
+          value={form.confirmpassword}
+          type={showConfirmPassword ? "text" : "password"}
+          onChange={handlechange}
+          error={errors.confirmpassword}
+        />
+        <img
+          src={showConfirmPassword ? Images.eyeclose : Images.eyeicon}
+          className="icon right"
+          onClick={() => setShowConfirmPassword((prev) => !prev)}
+        />
       </div>
       {/* {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> } */}
 
-      <div className='signin-next'>
-        <Buttons type="submit" className='btn btn-primary'  >Next</Buttons>
+      <div className="signin-next">
+        <Buttons type="submit" className="btn btn-primary">
+          Next
+        </Buttons>
       </div>
 
-      <div className='login-texts'>
+      <div className="login-texts">
         <p> Already Have an Account?</p>
-        <p onClick={() => navigate('/login')} >Login</p>
-
+        <p onClick={() => navigate("/login")}>Login</p>
       </div>
 
       <p className="terms terms-conditions">
@@ -208,23 +224,17 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           title="Terms of Service"
           className="terms-popup"
         >
-          <div className='dividing-line'></div>
+          <div className="dividing-line"></div>
           <TermsAndConditions />
         </PopUp>
         of Sri Animalife Biotech Pvt Ltd.
       </p>
-      <div className='parent-div'>
-        <div className='child-div'></div>
+      <div className="parent-div">
+        <div className="child-div"></div>
       </div>
-
     </form>
 
-    //  </div>   
-
-
-  )
-
+    //  </div>
+  );
 };
-export default SignUp
-
-
+export default SignUp;
