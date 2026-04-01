@@ -3,7 +3,7 @@ import ReviewCard from '../../components/card/ReviewCard';
 import PhotoCarousel from '../../components/card/PhotoCarousel';
 import { Images } from '../../images/Image';
 import RatingReview from '../../components/card/RatingReview';
-import Styleguide from './../../Styleguide/Styleguide';
+import Styleguide from '../../Styleguide/Styleguide';
 
   const reviews = [
     {

@@ -850,14 +850,18 @@ h6 {
 /****************  checkboxes ****************/
 
 .checkbox-group .checkbox-wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  position: relative;
 }
 
 .checkbox-wrapper input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .checkbox-group .checkbox-wrapper .custom-checkbox {

@@ -9,16 +9,17 @@ const CheckBox = ({
   required = false,
   disabled = false,
   error,
-  className= ""
+  className = "",
+  id,
 }) => {
-  const id = `${name}-${value}`;
+  const checkboxId = id || `checkbox-${Math.random().toString(36).slice(2, 9)}`;
 
   return (
-    <div className={`checkbox-group ${className}`} >
-      <label className="checkbox-wrapper" htmlFor={id}>
+    <div className={`checkbox-group ${className}`}>
+      <label className="checkbox-wrapper" htmlFor={checkboxId}>
         <input
           type="checkbox"
-          id={id}
+          id={checkboxId}
           name={name}
           value={value}
           checked={checked}
@@ -29,7 +30,7 @@ const CheckBox = ({
 
         <span className="custom-checkbox"></span>
 
-        <span className="label-text">{label}</span>
+        {label && <span className="label-text">{label}</span>}
       </label>
 
       {error && <p className="error-text">{error}</p>}

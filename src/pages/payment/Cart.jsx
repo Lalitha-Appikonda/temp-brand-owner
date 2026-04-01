@@ -6,7 +6,7 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Buttons from "../../components/form-elements/Buttons";
 
-const CartItems = ({ cartItems, setCartItems }) => {
+const Cart = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
 
   const increaseQty = (id) => {
@@ -123,4 +123,4 @@ const CartItems = ({ cartItems, setCartItems }) => {
   );
 };
 
-export default CartItems;
+export default Cart;

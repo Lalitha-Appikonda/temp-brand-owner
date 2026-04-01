@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { FaPlus, FaRegHeart } from "react-icons/fa";
+import { FaPlus, FaRegHeart, FaTimes } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import CheckBox from "../../components/form-elements/CheckBox";
 import { HiOutlineTrash } from "react-icons/hi";
 
 import { Images } from "../../images/Image";
-import { MdArrowDropDown } from "react-icons/md";
 import Buttons from "../../components/form-elements/Buttons";
 import Card from "../../components/card/Card";
-import PopUp from "../../components/popup/popup";
-import Input from "../../components/form-elements/Input";
+import CartProductsMobile from "./component/CartProductsMobile";
+import { IoBagHandleOutline } from "react-icons/io5";
 
 const MobileCart = () => {
   const [mobileCartItems, setMobileCartItems] = useState([
@@ -111,8 +110,27 @@ const MobileCart = () => {
     },
   ];
 
-  const [showInput, setShowInput] = useState(false);
-  const [EnterQty, setEnterQty] = useState("");
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleSelectAll = () => {
+    if (selectedItems.length === mobileCartItems.length) {
+      setSelectedItems([]);
+    } else {
+      setSelectedItems(mobileCartItems.map((item) => item.id));
+    }
+  };
+
+  const handleSelectItem = (id) => {
+    setSelectedItems((prev) =>
+      prev.includes(id)
+        ? prev.filter((itemId) => itemId !== id)
+        : [...prev, id],
+    );
+  };
+
+  const selectedPrice = mobileCartItems
+  .filter((item) => selectedItems.includes(item.id))
+  .reduce((sum, item) => sum + item.price * item.qty, 0);
 
   return (
     <>
@@ -154,10 +172,14 @@ const MobileCart = () => {
           <div className="selected-wrapper">
             <div className="selected-left">
               <div>
-                <CheckBox />
+                <CheckBox 
+                id="select-all-cart-items"
+                checked={selectedItems.length === mobileCartItems.length}
+                onChange={handleSelectAll}
+                />
               </div>
               <p>
-                1/3 Items Selected <span>(₹1200)</span>
+                {selectedItems.length}/{mobileCartItems.length} Selected <span>(₹{selectedPrice})</span>
               </p>
             </div>
             <div className="selected-right">
@@ -169,105 +191,8 @@ const MobileCart = () => {
 
         <div className="cart-products-mobile">
           {mobileCartItems.map((item) => (
-            <div key={item.id} className="mobile-cart-block">
-              <div className="cart-block-left">
-                <div className="left-wrapper">
-                  <div className="checkBox-block">
-                    <CheckBox />
-                  </div>
-                  <div className="image-block">
-                    <img
-                      className="product-img"
-                      src={Images.cartMobileproduct}
-                      alt={item.name}
-                    />
-                  </div>
-                </div>
-
-                <PopUp
-                  trigger={
-                    <div className="qunatity">
-                      Qty: {item.qty}
-                      <span>
-                        <MdArrowDropDown />
-                      </span>
-                    </div>
-                  }
-                  size="sm"
-                  title={showInput ? "Enter Quantity" : "Select Quantity"}
-                >
-                  {!showInput ? (
-                    <div className="popup-quantity-select-wrapper">
-                      <div className="select-quantity">
-                        <div className="quantity">1</div>
-                        <div className="quantity">2</div>
-                        <div className="quantity">3</div>
-                        <div className="quantity hide2">4</div>
-                        <div className="quantity hide">5</div>
-
-                        <div
-                          className="quantity"
-                          onClick={() => setShowInput(true)}
-                        >
-                          <FaPlus />
-                        </div>
-                      </div>
-
-                      <div className="quantity-apply-button-container">
-                        <Buttons variant="primary">Apply</Buttons>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="custom-quantity-wrapper">
-
-                      <Input 
-                      type="number"
-                        value={EnterQty}
-                        onChange={(e) => setEnterQty(e.target.value)}
-                        placeholder="Enter quantity"/>
-
-                      <div className="quantity-input-button-group">
-                        <div className="input-buttons-cart">
-                          <Buttons
-                          variant="outline-primary"
-                          onClick={() => { setShowInput(false); setEnterQty("");}}> Back </Buttons>
-
-                        </div>
-                        <div className="input-buttons-cart">
-                          <Buttons variant="primary">Apply</Buttons>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </PopUp>
-              </div>
-
-              <div className="cart-block-right">
-                <h1 className="title">{item.name}</h1>
-                <h4 className="stock">{item.stock}</h4>
-                <h4 className="size">
-                  Size: <span>500g</span>
-                </h4>
-
-                <div className="image-container">
-                  <div className="rating">
-                    <img src={Images.ministar} alt="" />
-                    <h6>5.0</h6>
-                    <img src={Images.minline} alt="" />
-                    <h6>20k</h6>
-                  </div>
-                </div>
-
-                <h1 className="amount">
-                  <span className="currency">₹</span>
-                  <span className="price">{item.price}</span>
-                </h1>
-              </div>
-
-              <div className="delete-cart-product">
-                <HiOutlineTrash />
-              </div>
-            </div>
+            <CartProductsMobile key={item.id} item={item} checked={selectedItems.includes(item.id)}
+    onChange={() => handleSelectItem(item.id)}/>
           ))}
         </div>
 
@@ -309,6 +234,7 @@ const MobileCart = () => {
                 image={product.image}
                 rating={product.rating}
                 reviews={product.reviews}
+                cusBtnIcon={<IoBagHandleOutline />}
               />
             ))}
           </div>

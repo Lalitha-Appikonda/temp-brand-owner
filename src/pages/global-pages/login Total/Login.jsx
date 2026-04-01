@@ -110,13 +110,13 @@ const Login = () => {
     return (
         <div className='login-container'>
             <p className='title-text'>Login Your Account</p>
-            <h3 className='sub-title-text  login-texts'>Continue managing your sales, target, and
-                reports by signing in securely.</h3>
+            <h3 className='sub-title-text  login-texts'>Continue managing your sales, target, and reports by signing in securely.</h3>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />
-                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={25}   />
+                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={25} error={errors.username}  />
             </div>
-            {errors.username && <p className='error-text'>{errors.username}</p> }
+            {/* {errors.username && <p className='error-text'>{errors.username}</p> } */}
+
             <div className="input-box">
                 <img src={Images.lockicon} className="icon left" />
                 <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16}/>
@@ -129,6 +129,8 @@ const Login = () => {
              </div>
              {errors.password && <p className='error-text'>{errors.password}</p> }
              {errors.api && <p className="error-text">{errors.api}</p>}
+
+             
             <div className='login-wrapper'>
                 {/* <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>
