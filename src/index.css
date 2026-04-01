@@ -2557,6 +2557,7 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .security-ques-text-content .text-content{
   min-height: 540px;

@@ -19,28 +19,28 @@ const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   const [isValid, setIsValid] = useState(false);
 
 const categorySchema = Yup.object().shape({
-  category: Yup.object().nullable().required("category is required"),
+  category: Yup.object().nullable().required("*Category is required"),
 
-  subcategory: Yup.array().min(1, "select at least one subcategory"),
+  subcategory: Yup.array().min(1, "*Select at least one subcategory"),
 
   panNumber: Yup.string()
     .trim()
-    .required("pan is required")
-    .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format"),
+    .required("*Pan is required")
+    .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "*Invalid PAN format"),
 
   gstNumber: Yup.string()
     .trim()
-    .required("gst is required")
-    .matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, "Invalid GST format"),
+    .required("*Gst is required")
+    .matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, "*Invalid GST format"),
 
   otherCategory: Yup.string().when("category", {
     is: (val) => val?.value === "other",
-    then: (schema) => schema.required("Enter category"),
+    then: (schema) => schema.required("*Enter category"),
   }),
 
   otherSubCategory: Yup.string().when("subcategory", {
     is: (sub) => sub?.some((item) => item.value === "other"),
-    then: (schema) => schema.required("Enter subcategory"),
+    then: (schema) => schema.required("*Enter subcategory"),
   }),
 });
 
