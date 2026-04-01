@@ -215,6 +215,7 @@ console.log("isValid:", isValid);
     ...prev,
     subcategory: unique,
   }));
+  setErrors((prev) => ({ ...prev, subcategory: "" }));
 };
 
   // const handlechange = (name, value) => {
@@ -224,6 +225,7 @@ console.log("isValid:", isValid);
   //     setSubCategory([]);
   //     return;
   //   }
+  
 
  
 
@@ -256,6 +258,7 @@ console.log("isValid:", isValid);
                 category:data,
                 subcategory:[],
               }));
+              setErrors((prev) => ({ ...prev, category: "", subcategory: "" }));
             }}
             name="product-category"
             placeholder="Product Category"
@@ -272,7 +275,12 @@ console.log("isValid:", isValid);
                   value={otherCategory}
                   placeholder="Enter Product category"
                   className="other-input"
-                  onChange={(e) => setOtherCategory(e.target.value)}
+                  onChange={(e) => {
+                    setOtherCategory(e.target.value);
+
+                    // Clear error as soon as typing starts
+                    setErrors((prev) => ({ ...prev, otherCategory: "" }));
+                  }}
                   maxLength={25}
                 />
                  {errors.otherCategory && (<p className="error-text">{errors.otherCategory}</p>)}
@@ -304,8 +312,13 @@ console.log("isValid:", isValid);
                   value={otherSubCategory}
                   placeholder="Enter Product Sub-category"
                   className="other-input"
-                  onChange={(e) => setOtherSubCategory(e.target.value)}
-                  maxLength={25}
+                   onChange={(e) => {
+                      setOtherSubCategory(e.target.value);
+
+                      // Clear error as soon as typing starts
+                      setErrors((prev) => ({ ...prev, otherSubCategory: "" }));
+                    }}
+                   maxLength={25}
                 />
                 {errors.otherSubCategory && (<p className="error-text">{errors.otherSubCategory}</p>)}
               </div>
@@ -313,23 +326,23 @@ console.log("isValid:", isValid);
           </div>
         </div>
 
-        {Subcategory.length > 0 && (
-          <div className="Selected-subcategory">
-            {Subcategory.filter((item) => item.value !== "other").map(
-              (item, index) => (
-                <div key={index} className="inner-product">
-                  <p>{item.label}</p>
-                  <img
-                    className="cross-icon"
-                    src={Images.crossCancle}
-                    alt=""
-                    onClick={() => handleRemove(item)}
-                  />
-                </div>
-              ),
-            )}
-          </div>
-        )}
+     {Subcategory.length > 0 && (
+        <div className="Selected-subcategory">
+          {Subcategory.filter((item) => item.value !== "other").map(
+            (item, index) => (
+              <div key={index} className="inner-product">
+                <p>{item.label}</p>
+                <img
+                  className="cross-icon"
+                  src={Images.crossCancle}
+                  alt=""
+                  onClick={() => handleRemove(item)}
+                />
+              </div>
+            ),
+          )}
+        </div>
+      )}
 
         <div className="pan-gst-container">
           <div className="input-box">
@@ -338,8 +351,23 @@ console.log("isValid:", isValid);
               value={panNumber}
               placeholder="Enter Pan Card Number"
               className="gst-pan-input"
-              onChange={(e) => setFormData((prev)=>({...prev,panNumber:e.target.value.toUpperCase(),}))}
-              onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+              onChange={(e)=>{
+                setFormData((prev)=>({
+                  ...prev,
+                  panNumber:e.target.value.toUpperCase(),
+                }));
+                setErrors((prev)=>({...prev,panNumber:""}))
+              }}
+                onKeyDown={(e) => {
+                // Allow only letters and numbers
+                if (!/[a-zA-Z0-9]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight") {
+                  e.preventDefault();
+                }
+              }}
               maxLength={10}
             />
              {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)}
@@ -352,8 +380,24 @@ console.log("isValid:", isValid);
                value={gstNumber}
               placeholder="Enter GST Number"
               className="gst-pan-input"
-               onChange={(e) => setFormData((prev)=>({...prev,gstNumber:e.target.value.toUpperCase(),}))}
-               onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+              onChange={(e) => {
+              setFormData((prev) => ({
+                ...prev,
+                gstNumber: e.target.value.toUpperCase(),
+              }));
+              //  clear GST error as soon as typing
+              setErrors((prev) => ({ ...prev, gstNumber: "" }));
+            }}
+                onKeyDown={(e) => {
+                // Allow only letters and numbers
+                if (!/[a-zA-Z0-9]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight") {
+                  e.preventDefault();
+                }
+              }}
                maxLength={15}
             />
              {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)}
