@@ -9,23 +9,24 @@ const SelectWithCheckbox = ({
   options = [],
   placeholder = "",
   icon,
-  className="",
-  disabled=false
+  className = "",
+  disabled = false,
+  hideSelected = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
 
- const handleCheckboxChange = (option, checked) => {
-  let updated;
+  const handleCheckboxChange = (option, checked) => {
+    let updated;
 
-  if (checked) {
-    updated = [...value, option]; // ✅ full object
-  } else {
-    updated = value.filter((item) => item.value !== option.value);
-  }
+    if (checked) {
+      updated = [...value, option]; // ✅ full object
+    } else {
+      updated = value.filter((item) => item.value !== option.value);
+    }
 
-  onChange(name, updated);
-};
+    onChange(name, updated);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -44,14 +45,22 @@ const SelectWithCheckbox = ({
 
       <div className="custom-select">
         <div className={`select-wrapper ${isOpen ? "open" : ""}`}>
-          <div className={`custom-dropdown ${disabled ?"disabled":""}`} onClick={() => {if(disabled) return; setIsOpen(!isOpen)}}>
+          <div
+            className={`custom-dropdown ${disabled ? "disabled" : ""}`}
+            onClick={() => {
+              if (disabled) return;
+              setIsOpen(!isOpen);
+            }}
+          >
             <div className="dropdown-content">
               {icon && <span className="product-first-icon">{icon}</span>}
 
               <span className="placeholder">
-                {value.length > 0
-                  ? value.map(item => item.label).join(", ")
-                  : placeholder}
+                {hideSelected
+                  ? placeholder
+                  : value.length > 0
+                    ? value.map((item) => item.label).join(", ")
+                    : placeholder}
               </span>
             </div>
           </div>
@@ -65,7 +74,7 @@ const SelectWithCheckbox = ({
                   label={item.label}
                   name={name}
                   value={item.value}
-                  checked={value.some(v => v.value === item.value)} // ✅ FIX
+                  checked={value.some((v) => v.value === item.value)} // ✅ FIX
                   onChange={(e) => handleCheckboxChange(item, e.target.checked)} // ✅ FIX
                 />
               </li>

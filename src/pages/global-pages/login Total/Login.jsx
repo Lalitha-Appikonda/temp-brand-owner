@@ -52,12 +52,12 @@ const Login = () => {
     const loginSchema=Yup.object({
         username:Yup.string()
         .trim()
-        .required("username is required")
-        .min(5, "minimum 5 characters"),
+        .min(5, "*Minimum 5 characters")
+        .required("*Username is required"),
         password:Yup.string()
         .trim()
-        .required(" password required")
-        .min(6,"minimum 6 characters")  //have to write one more validation here , if the user enter wrong credentials then it will show error 
+        .min(6,"*Minimum 6 characters")
+        .required(" *Password required")  //have to write one more validation here , if the user enter wrong credentials then it will show error 
     })
 
     const handlelogin = async () => {
@@ -119,7 +119,7 @@ const Login = () => {
 
             <div className="input-box">
                 <img src={Images.lockicon} className="icon left" />
-                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16}/>
+                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16} error={errors.password}/>
                 <img 
                     src={showPassword ? Images.eyeclose : Images.eyeicon}
                     className="icon right" 
@@ -127,10 +127,11 @@ const Login = () => {
                     style={{ cursor: "pointer" }}
                     />
              </div>
-             {errors.password && <p className='error-text'>{errors.password}</p> }
              {errors.api && <p className="error-text">{errors.api}</p>}
 
              
+              
+          
             <div className='login-wrapper'>
                 {/* <div className='flex-swites'>
                     <h3 className='forgot-text' >Remember me</h3>
@@ -147,7 +148,7 @@ const Login = () => {
 
             <Buttons className='btn login-button' variant='primary' onClick={handlelogin} >Login</Buttons>
             <div className='login-texts'>
-                <p> Don’t Have an Account?</p>
+                <p> Don't Have an Account?</p>
                 <p onClick={() => navigate('/sign-up')}>Signup</p>
 
             </div>
