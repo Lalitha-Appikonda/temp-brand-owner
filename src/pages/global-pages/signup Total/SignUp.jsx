@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Images } from "../../../images/Image";
 import Buttons from "../../../components/form-elements/Buttons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { SignupContext } from "../../../context/SignupContext";
@@ -79,6 +79,20 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       setErrors(formattedErrors);
     }
   };
+  
+
+    useEffect(() => {
+      const validate = async () => {
+        try {
+          await signupSchema.validate(form, { abortEarly: false });
+          setIsValid(true);
+        } catch {
+          setIsValid(false);
+        }
+      };
+
+      validate();
+    }, [form]);
 
   // if (!isValid){
   //   return;
@@ -153,6 +167,9 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
               ) {
                 e.preventDefault();
               }
+              if (e.key === " " && form.name.slice(-1) === " ") {
+      e.preventDefault();
+    }
             }}
           
             maxLength={20}
