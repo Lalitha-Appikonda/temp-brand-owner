@@ -8,6 +8,7 @@ import PhotoCarousel from '../../components/card/PhotoCarousel';
 import ReviewCard from '../../components/card/ReviewCard';
 import Productreview from '../../components/card/Productreview';
 import Card from '../../components/card/Card';
+import { FiHeart } from 'react-icons/fi';
 
 const ProductInnerPage = () => {
 
@@ -189,260 +190,299 @@ const ProductInnerPage = () => {
         { id: 4, title: "UB-SPORE", price: 600, image: Images.product, rating: "5.0", reviews: "20K" },
 
     ];
+
     return (
 
-        <div className='container' >
+        <div>
+            <div className='container' >
+                <div className='product-page'>
 
-            <div className='product-page'>
+                    {/*----- product inner page first section ----*/}
+                    <div className='product-inner-page'>
+                        <div>
 
-                 {/*----- product inner page first section ----*/}
-                <div className='product-inner-page'>
-                    <div>
+                            {/* webcontainer */}
+                            <div className='product-image-container'>
+                                <div className='product-image-carousels'>
+                                    <Buttons onClick={prevImage} variant="circle-secondary-mini" disabled={activeIndexs === 0} className="nav-btn left"><img src={Images.leftarrow} /></Buttons>
 
-                        {/* webcontainer */}
-                        <div className='product-image-container'>
-                            <div className='product-image-carousels'>
+                                    <Buttons onClick={nextImage} variant="circle-secondary-mini" disabled={activeIndexs === images.length - 1} className="nav-btn right"  ><img src={Images.rightarrow} /></Buttons>
+                                </div>
+                                <div className="main-image">
+                                    <img className='main-product-image' src={images[activeIndexs]} alt="product" />
+
+                                    <div className="thumbnails">
+                                        {images.map((img, index) => (
+                                            <img
+                                                key={index}
+                                                src={img}
+                                                alt=""
+                                                className={activeIndexs === index ? "active" : ""}
+                                                onClick={() => setActiveIndexs(index)}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* mobileversion */}
+
+                        <div className="card2">
+                            <div className="main-image mobile-main-image">
+                                <div className='mobile-main-images'>
+                                    <img className='main-product-image' src={images[activeIndexs]} alt="product" />
+                                    <div className="rating">
+                                        <img src={Images.ministar} />
+                                        <h6>5.0</h6>
+                                        <img src={Images.minline} />
+                                        <h6>20k</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div></div> */}
+                        <div className='mobile-buttons'>
+                            <div className='mobile-arrow-btns'>
                                 <Buttons onClick={prevImage} variant="circle-secondary-mini" disabled={activeIndexs === 0} className="nav-btn left"><img src={Images.leftarrow} /></Buttons>
-
                                 <Buttons onClick={nextImage} variant="circle-secondary-mini" disabled={activeIndexs === images.length - 1} className="nav-btn right"  ><img src={Images.rightarrow} /></Buttons>
                             </div>
-                            <div className="main-image">
-                                <img className='main-product-image' src={images[activeIndexs]} alt="product" />
+                        </div>
+                        <div className="thumbnails mobile-thumbnails">
+                            <div className='mobile-thumbnails-container'>
+                                {images.map((img, index) => (
+                                    <img
+                                        key={index}
+                                        src={img}
+                                        alt=""
+                                        className={activeIndexs === index ? "active" : ""}
+                                        onClick={() => setActiveIndexs(index)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                        <div>
+                            <p className='product-title'>AquaRemid</p>
+                            <div className='product-rating'>
+                                <span className='inner-product-rating'>
+                                    <img src={Images.ministar} />4.4
+                                </span>
+                                <h6>2,446 Ratings & Review </h6>
+                            </div>
+                            <div className="product-info">
 
-                                <div className="thumbnails">
-                                    {images.map((img, index) => (
-                                        <img
-                                            key={index}
-                                            src={img}
-                                            alt=""
-                                            className={activeIndexs === index ? "active" : ""}
-                                            onClick={() => setActiveIndexs(index)}
-                                        />
-                                    ))}
+
+                                <div className='product-price'>
+                                    <span className='rupee-symbol'>₹</span>
+                                    <span className='product-price-value'>1200</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    {/* mobileversion */}
-
-                    <div className="card2">
-                        <div className="main-image mobile-main-image">
-                            <div className='mobile-main-images'>
-                                <img className='main-product-image' src={images[activeIndexs]} alt="product" />
-                                <div className="rating">
-                                    <img src={Images.ministar} />
-                                    <h6>5.0</h6>
-                                    <img src={Images.minline} />
-                                    <h6>20k</h6>
+                                <div className='product-weight-container'>
+                                    <div className={`product-weight ${selectedWeight === "500g" ? "active" : ""}`} onClick={() => setSelectedWeight("500g")}>
+                                        <h5>500g</h5>
+                                    </div>
+                                    <div className={`product-weight ${selectedWeight === "1kg" ? "active" : ""}`} onClick={() => setSelectedWeight("1kg")}>
+                                        <h5>1kg</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div></div> */}
-                    <div className='mobile-buttons'>
-                        <div className='mobile-arrow-btns'>
-                            <Buttons onClick={prevImage} variant="circle-secondary-mini" disabled={activeIndexs === 0} className="nav-btn left"><img src={Images.leftarrow} /></Buttons>
-                            <Buttons onClick={nextImage} variant="circle-secondary-mini" disabled={activeIndexs === images.length - 1} className="nav-btn right"  ><img src={Images.rightarrow} /></Buttons>
-                        </div>
-                    </div>
-                    <div className="thumbnails mobile-thumbnails">
-                        <div className='mobile-thumbnails-container'>
-                            {images.map((img, index) => (
-                                <img
-                                    key={index}
-                                    src={img}
-                                    alt=""
-                                    className={activeIndexs === index ? "active" : ""}
-                                    onClick={() => setActiveIndexs(index)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-                    <div>
-                        <p className='product-title'>AquaRemid</p>
-                        <div className='product-rating'>
-                            <span className='inner-product-rating'>
-                                <img src={Images.ministar} />4.4
-                            </span>
-                            <h6>2,446 Ratings & Review </h6>
-                        </div>
-                        <div className='product-price'>
-                            <span className='rupee-symbol'>₹</span>
-                            <span className='product-price-value'>1200</span>
-                        </div>
-                        <div className='product-weight-container'>
-                            <div
-                                className={`product-weight ${selectedWeight === "500g" ? "active" : ""}`}
-                                onClick={() => setSelectedWeight("500g")}
-                            >
-                                <h5>500g</h5>
+
                             </div>
 
-                            <div
-                                className={`product-weight ${selectedWeight === "1kg" ? "active" : ""}`}
-                                onClick={() => setSelectedWeight("1kg")}
-                            >
-                                <h5>1kg</h5>
+                            <div className="stepper">
+                                <button onClick={decrease} className="minus"><FaMinus className="minus-width " /></button>
+                                <span className="count">{count}</span>
+                                <button onClick={increase} className="minus"><FaPlus className="plus-width" /></button>
                             </div>
-                        </div>
-                        <div className="stepper">
-                            <button onClick={decrease} className="minus"><FaMinus className="minus-width " /></button>
-                            <span className="count">{count}</span>
-                            <button onClick={increase} className="minus"><FaPlus className="plus-width" /></button>
-                        </div>
 
-                        {/* webbuttons */}
+                            {/* webbuttons */}
 
-                        <div className='product-action-btns'>
-                            <Buttons className='add-to-cart-btn' variant='primary' onClick={() => navigate("/cart")} >
-                                Add to Cart  <span className='cart-icon'>
-                                    <img src={Images.orangecart} />
-                                </span>
-                            </Buttons>
-                            <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
-                                Add to Wishlist <span className='heart-icon'>
-                                    <img src={Images.cartheart} onClick={tooglelike} className={` heart ${like ? " active" : ""}`} />
-                                </span>
-                            </Buttons>
-
-                        </div>
-
-
-                        {/* mobilebuttons */}
-
-                        <div className=' mobile-product-action-btns'>
-                            <div className='mobile-product-action-btns-container'>
-                                <span className='buy-icon'>
-                                    <img src={Images.mobilelike} onClick={tooglelike} className={` heart ${like ? " active" : ""}`} />
-                                </span>
-
-                                <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
-                                    Buy Now <span className='buy-icon'>
-                                        <img src={Images.buynow} />
-                                    </span>
-                                </Buttons>
+                            <div className='product-action-btns'>
                                 <Buttons className='add-to-cart-btn' variant='primary' onClick={() => navigate("/cart")} >
                                     Add to Cart  <span className='cart-icon'>
                                         <img src={Images.orangecart} />
                                     </span>
                                 </Buttons>
+                                <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
+                                    Add to Wishlist <span className='heart-icon'>
+                                        <div className="image-likeback">
+                                <svg
+                                    onClick={() => setlike(!like)}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="25"
+                                    height="26"
+                                    className={`heart ${like ? "active" : ""}`}
+                                >
+                                    <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+                                </svg>
                             </div>
-                        </div>
+                                        {/* <img src={Images.cartheart} onClick={tooglelike} className={` heart ${like ? " active" : ""}`} /> */}
+                                    </span>
+                                </Buttons>
 
-                        <h5 className='product-description-title'>SOIL & WATER PROBIOTIC</h5>
-                        <ul>
-                            <li className='product-description-text'>Unique blend of scientifically proven, non-pathogenic probiotic strains of Bacillus species,
-                                Lactobacillus
-                                species, Aspergillus & Saccharomyces species.
-                            </li>
-                        </ul>
-                        <div className="accordion">
-                            {data.map((item, index) => (
-                                <div className="benefits-box" key={index}>
+                            </div>
+                            {/* mobilebuttons */}
 
-                                    <div className="header" onClick={() => toggle(index)}>
-                                        <h2>{item.title}</h2>
-                                        <span className="close-btn">
-                                            <img
-                                                src={activeIndex === index ? Images.cross : Images.plus}
-                                                alt="icon"
-                                            />
+                            <div className='soil-water'>
+                                <h5 className='product-description-title'>SOIL & WATER PROBIOTIC</h5>
+                                <ul>
+                                    <li className='product-description-text'>Unique blend of scientifically proven, non-pathogenic probiotic strains of Bacillus species,
+                                        Lactobacillus
+                                        species, Aspergillus & Saccharomyces species.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className='soil-flex-mobile'>
+                                <div className=' mobile-product-action-btns'>
+                                    <div className='mobile-product-action-btns-container'>
+                                        <span className='buy-icon'>
+                                           <div className="image-likeback">
+                                <svg
+                                    onClick={() => setlike(!like)}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="25"
+                                    height="26"
+                                    className={`heart ${like ? "active" : ""}`}
+                                >
+                                    <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+                                </svg>
+                            </div>
+
                                         </span>
+
+                                        <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
+                                            Buy Now <span className='buy-icon'>
+                                                <img src={Images.buynow} />
+                                            </span>
+                                        </Buttons>
+                                        <Buttons className='add-to-cart-btn' variant='primary' onClick={() => navigate("/cart")} >
+                                            Add to Cart  <span className='cart-icon'>
+                                                <img src={Images.orangecart} />
+                                            </span>
+                                        </Buttons>
+                                    </div>
+                                </div>
+                                <div className='soil-water-web'>
+                                    <h5 className='product-description-title'>SOIL & WATER PROBIOTIC</h5>
+                                    <ul>
+                                        <li className='product-description-text'>Unique blend of scientifically proven, non-pathogenic probiotic strains of Bacillus species,
+                                            Lactobacillus
+                                            species, Aspergillus & Saccharomyces species.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="accordion">
+                                {data.map((item, index) => (
+                                    <div className="benefits-box" key={index}>
+
+                                        <div className="header" onClick={() => toggle(index)}>
+                                            <h2>{item.title}</h2>
+                                            <span className="close-btn">
+                                                <img
+                                                    src={activeIndex === index ? Images.cross : Images.plus}
+                                                    alt="icon"
+                                                />
+                                            </span>
+
+                                        </div>
+
+
+                                        {activeIndex === index && (
+                                            <ul className="benefits-list">
+                                                {item.content.map((point, i) => (
+                                                    <li key={i}>{point}</li>
+                                                ))}
+                                            </ul>
+
+                                        )}
+
                                     </div>
 
-                                    {activeIndex === index && (
-                                        <ul className="benefits-list">
-                                            {item.content.map((point, i) => (
-                                                <li key={i}>{point}</li>
-                                            ))}
-                                        </ul>
-                                    )}
 
-                                </div>
-                            ))}
-                        </div>
-
-                    </div>
-                </div>
-
-                {/*--- WEB  review and rating ----*/}
-                <div className='web-review-rating-container'>
-                    <div className='product-reviewrating-container'>
-                        <div>
-                            <div className='line-review'><RatingReview /></div>
-                            <div className="dividing-line "></div>
-                            <div>
-                                <Productreview />
-                            </div>
-                        </div>
-
-                        <div className='product-review-right'>
-                            <div className='customer-photo-carousel'>
-
-                                <PhotoCarousel
-                                    title="Customer Photos"
-                                    count={500}
-                                    image={image}
-                                />
-                            </div>
-                            <div className="dividing-line "></div>
-                            <h2 className='customer-reviews-title'>Customer Reviews (80)</h2>
-                            <div>
-                                {reviews.map((item, index) => (
-                                    <ReviewCard
-                                        key={index}
-                                        rating={item.rating}
-                                        reviewText={item.reviewText}
-                                        text={item.text}
-                                        images={item.images}
-                                        userName={item.name}
-                                        role={item.role}
-                                        date={item.date}
-                                        likes={item.likes}
-                                        dislikes={item.dislikes}
-                                    />
                                 ))}
-                            </div>
-                            <span className='dividing-see-all-reviews'>See All Reviews<img src={Images.orangearrow} /></span>
-                            <div className="dividing-line "></div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-               {/*---- mobileversion review and rating---- */}
-                <div className='mobileversion-rating-review-container'>
-                    <div onClick={togglereview} className="review-header">
-                        <p>Ratings & Reviews</p>
-                        <span >
-                            <img
-                                src={activeReview ? Images.uparrow : Images.downarrow}
-                                alt="toggle"
-                            />
-                        </span>
-                    </div>
-
-                    {activeReview && (
-                        <div className="review-content">
-                            <div className='review-tops'>
-                                <span className='star-ratings'>
-                                    4.4<img className='fourstar' src={Images.ministar} />
-                                </span>
-                                <div className='buyers-reviwes'>
-                                    <span className='buyers-reviwes-mobiles'>35 Ratings  I  80 Reviews<img src={Images.leftcrossarrow} /></span>
-                                    <h6 className='verified-text'>20.8k Verified Buyers</h6>
+                    {/*--- WEB  review and rating ----*/}
+                    <div className='web-review-rating-container'>
+                        <div className='product-reviewrating-container'>
+                            <div>
+                                <div className='line-review'><RatingReview /></div>
+                                <div className="dividing-line "></div>
+                                <div>
+                                    <Productreview />
                                 </div>
+                            </div>
 
+                            <div className='product-review-right'>
+                                <div className='customer-photo-carousel'>
+
+                                    <PhotoCarousel
+                                        title="Customer Photos"
+                                        count={500}
+                                        image={image}
+                                    />
+                                </div>
+                                <div className="dividing-line "></div>
+                                <h2 className='customer-reviews-title'>Customer Reviews (80)</h2>
+                                <div>
+                                    {reviews.map((item, index) => (
+                                        <ReviewCard
+                                            key={index}
+                                            rating={item.rating}
+                                            reviewText={item.reviewText}
+                                            text={item.text}
+                                            images={item.images}
+                                            userName={item.name}
+                                            role={item.role}
+                                            date={item.date}
+                                            likes={item.likes}
+                                            dislikes={item.dislikes}
+                                        />
+                                    ))}
+                                </div>
+                                <span className='dividing-see-all-reviews'>See All Reviews<img src={Images.orangearrow} /></span>
+                                <div className="dividing-line "></div>
 
                             </div>
-                            <div className='customer-photo-review'>
-                                <h4>Customer Photos</h4>
-                                <span className='buyers-reviwes-see-all'>See All<img src={Images.leftcrossarrow} /></span>
-                            </div>
-                            <div className='customer-review-mobile-container'>
-                                {/* <div className="customer-review-mobile-image" >
+                        </div>
+                    </div>
+                    {/*---- mobileversion review and rating---- */}
+                    <div className='mobileversion-rating-review-container'>
+                        <div onClick={togglereview} className="review-header">
+                            <p>Ratings & Reviews</p>
+                            <span >
+                                <img
+                                    src={activeReview ? Images.uparrow : Images.downarrow}
+                                    alt="toggle"
+                                />
+                            </span>
+                        </div>
+
+                        {activeReview && (
+                            <div className="review-content">
+                                <div className='review-tops'>
+                                    <span className='star-ratings'>
+                                        4.4<img className='fourstar' src={Images.ministar} />
+                                    </span>
+                                    <div className='buyers-reviwes'>
+                                        <span className='buyers-reviwes-mobiles'>35 Ratings  I  80 Reviews<img src={Images.leftcrossarrow} /></span>
+                                        <h6 className='verified-text'>20.8k Verified Buyers</h6>
+                                    </div>
+
+
+                                </div>
+                                <div className='customer-photo-review'>
+                                    <h4>Customer Photos</h4>
+                                    <span className='buyers-reviwes-see-all'>See All<img src={Images.leftcrossarrow} /></span>
+                                </div>
+                                <div className='customer-review-mobile-container'>
+                                    {/* <div className="customer-review-mobile-image" >
                                 {imagemobile.map((img, index) => (
                                     <div className="card" key={index}>
                                         <img src={img} alt="product" />
@@ -451,112 +491,123 @@ const ProductInnerPage = () => {
                                 ))}
                             </div>
                             <h3 className='customer-review-mobile-image-number'>+494</h3> */}
-                            </div>
-
-
-                            <div>
-                                <div className="image-stack">
-
-                                    {/* First 3 images */}
-                                    {imagemobile.slice(0, 3).map((img, i) => (
-                                        <img key={i} src={img} alt="product" />
-                                    ))}
-
-                                    {/* 4th image with overlay + count */}
-                                    {imagemobile.length > 3 && (
-                                        <div
-                                            className="more-count"
-                                            style={{
-                                                backgroundImage: `url(${imagemobile[3]})`,
-                                            }}
-                                        >
-                                            <span>+{imagemobile.length - 3}</span>
-                                        </div>
-                                    )}
-
                                 </div>
+                                <div>
+                                    <div className="image-stack">
+
+                                        {/* First 3 images */}
+                                        {imagemobile.slice(0, 3).map((img, i) => (
+                                            <img key={i} src={img} alt="product" />
+                                        ))}
+
+                                        {/* 4th image with overlay + count */}
+                                        {imagemobile.length > 3 && (
+                                            <div
+                                                className="more-count"
+                                                style={{
+                                                    backgroundImage: `url(${imagemobile[3]})`,
+                                                }}
+                                            >
+                                                <span>+{imagemobile.length - 3}</span>
+                                            </div>
+                                        )}
+
+                                    </div>
+                                </div>
+
+                                <h2 className='customer-reviews-title'>Customer Reviews (80)</h2>
+                                <div>
+                                    {reviewsmobile.map((item, index) => (
+                                        <ReviewCard
+                                            key={index}
+                                            rating={item.rating}
+                                            reviewText={item.reviewText}
+                                            text={item.text}
+                                            images={item.images}
+                                            userName={item.name}
+                                            role={item.role}
+                                            date={item.date}
+                                            likes={item.likes}
+                                            dislikes={item.dislikes}
+                                        />
+                                    ))}
+                                </div>
+
                             </div>
+                        )}
 
-                            <h2 className='customer-reviews-title'>Customer Reviews (80)</h2>
-                            <div>
-                                {reviewsmobile.map((item, index) => (
-                                    <ReviewCard
-                                        key={index}
-                                        rating={item.rating}
-                                        reviewText={item.reviewText}
-                                        text={item.text}
-                                        images={item.images}
-                                        userName={item.name}
-                                        role={item.role}
-                                        date={item.date}
-                                        likes={item.likes}
-                                        dislikes={item.dislikes}
-                                    />
-                                ))}
-                            </div>
-
-                        </div>
-                    )}
-
-                    <span className='overall-mobile-sell all'>
-                        See All 80 Reviews<img src={Images.orangeleft} />
-                    </span>
+                        <span className='overall-mobile-sell all'>
+                            See All 80 Reviews<img src={Images.orangeleft} />
+                        </span>
 
 
 
-                </div>
-                {/* cards both versions */}
-                <div className='product-bottom-section'>
-                    {/* web circle buttons */}
-                    <div className='product-popular-products-container'>
-
-                        <p className='product-section-title'>Our Popular Products</p>
-                        <div className='product-blue-arrow'>
-                            <Buttons variant="circle-secondary-miniwhite"><img src={Images.blueleft} /></Buttons>
-                            <Buttons variant="circle-secondary-miniwhite"><img src={Images.blueright} /></Buttons>
-
-                        </div>
                     </div>
-                    <div className="products-container">
-                        {products.map((item) => (
-                            <Card
-                                key={item.id}
-                                title={item.title}
-                                price={item.price}
-                                oldPrice={item.oldPrice}
-                                discount={item.discount}
-                                badge={item.badge}
-                                image={item.image}
-                                rating={item.rating}
-                                reviews={item.reviews}
-                            />
-                        ))}
-                    </div>
-                     <div className='bottom-mobile-version-button'>
-                        <div className=' mobile-product-action-btns'>
-                            <div className='mobile-product-action-btns-container'>
-                                <span className='buy-icon'>
-                                    <img src={Images.mobilelike} onClick={tooglelike} className={` heart ${like ? " active" : ""}`} />
-                                </span>
+                    {/* cards both versions */}
+                    <div className='product-bottom-section'>
+                        {/* web circle buttons */}
+                        <div className='product-popular-products-container'>
 
-                                <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
-                                    Buy Now <span className='buy-icon'>
-                                        <img src={Images.buynow} />
-                                    </span>
-                                </Buttons>
-                                <Buttons className='add-to-cart-btn' variant='primary' onClick={() => navigate("/cart")} >
-                                    Add to Cart  <span className='cart-icon'>
-                                        <img src={Images.orangecart} />
-                                    </span>
-                                </Buttons>
+                            <p className='product-section-title'>Our Popular Products</p>
+                            <div className='product-blue-arrow'>
+                                <Buttons variant="circle-secondary-miniwhite"><img src={Images.blueleft} /></Buttons>
+                                <Buttons variant="circle-secondary-miniwhite"><img src={Images.blueright} /></Buttons>
+
                             </div>
                         </div>
+                        <div className="products-container">
+                            {products.map((item) => (
+                                <Card
+                                    key={item.id}
+                                    title={item.title}
+                                    price={item.price}
+                                    oldPrice={item.oldPrice}
+                                    discount={item.discount}
+                                    badge={item.badge}
+                                    image={item.image}
+                                    rating={item.rating}
+                                    reviews={item.reviews}
+                                />
+                            ))}
+                        </div>
 
-                     </div>
 
+                    </div>
                 </div>
             </div>
+            <div className='bottom-mobile-version-button'>
+                <div className=' mobile-product-action-btns'>
+                    <div className='mobile-product-action-btns-containers'>
+                        <span className='buy-icon'>
+                            <div className="image-likeback">
+                                <svg
+                                    onClick={() => setlike(!like)}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="25"
+                                    height="26"
+                                    className={`heart ${like ? "active" : ""}`}
+                                >
+                                    <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+                                </svg>
+                            </div>
+                            {/* <img src={Images.mobilelike} onClick={tooglelike} className={` heart ${like ? " active" : ""}`} /> */}
+                        </span>
 
+                        <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
+                            Buy Now <span className='buy-icon'>
+                                <img src={Images.buynow} />
+                            </span>
+                        </Buttons>
+                        <Buttons className='add-to-cart-btn' variant='primary' onClick={() => navigate("/cart")} >
+                            Add to Cart  <span className='cart-icon'>
+                                <img src={Images.orangecart} />
+                            </span>
+                        </Buttons>
+                    </div>
+                </div>
+
+            </div>
         </div>
     )
 }

@@ -116,7 +116,7 @@ const flatQuestions = questions.flat(); // ES2019+
         <Buttons
           type="submit"
           className="submit-button"
-          variant="btn btn-secondary"
+          variant="secondary"
         >
           Submit
         </Buttons>

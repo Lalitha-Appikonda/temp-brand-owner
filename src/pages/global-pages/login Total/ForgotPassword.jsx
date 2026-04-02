@@ -85,7 +85,7 @@ const ForgotPassword = () => {
               </div>
               <div className='action-buttons'>
                 <Buttons type="button" className='cancel-button' variant='btn btn-outline-primary' onClick = {()=>navigate('/login')}>Cancel</Buttons>
-                <Buttons type="submit" className='submit-button' variant=' btn btn-secondary'>Submit</Buttons>
+                <Buttons type="submit" className='submit-button' variant='secondary'>Submit</Buttons>
               </div>
       </form>
 
