@@ -10,7 +10,7 @@ const Footer = () => {
 
   const hiddenFooter = useMediaQuery({ query: "(max-width:768px)" });
 
-  const hideFooter = ["/products" , "/cart"];
+  const hideFooter = ["/products" , "/cart" , "/productinnerpage"];
 
   const Condition = hiddenFooter && hideFooter.includes(currentPath);
 

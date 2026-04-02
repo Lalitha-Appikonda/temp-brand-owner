@@ -73,11 +73,17 @@ const Card = ({
           <div className="product-image-container">
             <img src={image} alt="Product" className="product-img" />
           </div>
+
+
         </div>
 
         <h1 className="image-text">{title}</h1>
         <div className="price-section">
-          <h3 className="rupees">₹{price}</h3>
+          {/* <h3 className="rupees">₹{price}</h3> */}
+          <div className='product-price'>
+            <span className='rupee-symbol'>₹</span>
+            <span className='product-price-value'>{price}</span>
+          </div>
 
           <div className="discount-container">
             {oldPrice && <span className="old-price">₹{oldPrice}</span>}
@@ -87,14 +93,23 @@ const Card = ({
 
         <div className="select-cart">
           <select>
-            <option value="">500g</option>
             <option value="">5L</option>
             <option value="">1L</option>
-
+            <option value="">500g</option>
             <option value="">200g</option>
             <option value="">1000g</option>
             <option value="">300g</option>
           </select>
+
+
+          {/* <div className="custom-select">
+            <select>
+              <option>500g</option>
+              <option>1kg</option>
+              <option>2kg</option>
+            </select>
+          </div> */}
+
 
           {showQuantity ? (
             <div className="quantity">

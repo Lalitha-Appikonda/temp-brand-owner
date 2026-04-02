@@ -273,7 +273,8 @@ const Home = () => {
             >
               Minerals
             </Buttons>
-          </div> <div className="products-container">
+          </div> 
+          <div className="products-container">
             {products.map((item) => (
               <Card
                 key={item.id}

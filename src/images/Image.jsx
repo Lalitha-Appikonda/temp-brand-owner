@@ -83,6 +83,17 @@ export const Images = {
 
   //product uploading
 
+  //product-listing
+  priceRange: "/assets/icons/price-range.svg",
+  cartBag: "/assets/icons/cart-bag.svg",
+
+  // cart
+  addCartImage: "/assets/icons/add-to-cart-product-image.svg",
+  cartLikeMobile: "assets/icons/cart-like.svg",
+  cartMobileproduct: "/assets/icons/cart-mobile-img.jpg",
+
+  //product uploading
+
   certified: "/assets/icons/fi_8861199.svg",
   handlike: "/assets/icons/handlike.svg",
   dislike: "/assets/icons/handdislike.svg",
@@ -90,6 +101,7 @@ export const Images = {
   reviewline: "/assets/icons/Vector 21.svg",
   bluestar: "/assets/icons/bluestar.svg",
   innerproduct: "/assets/icons/innerproduct.svg",
+  opactityimage: "/assets/icons/opacityimage.svg",
   rightarrow: "/assets/icons/right-arrow.svg",
   leftarrow: "/assets/icons/leftarrow.svg",
   rightcurve: "/assets/icons/Subtract (4).svg",
@@ -104,4 +116,13 @@ export const Images = {
   productlistimg4: "/assets/icons/img4.svg",
   productlistimg5: "/assets/icons/img5.svg",
   productlistimg6: "/assets/icons/img6.svg",
+  buynow: "/assets/icons/buynow.svg",
+  mobilelike: "/assets/icons/mobilelike.svg",
+  orangearrow: "/assets/icons/orangearrow.svg",
+  orangeleft: "/assets/icons/Vectororange.svg",
+  blueleft: "/assets/icons/blueleft.svg",
+  blueright: "/assets/icons/blueright.svg",
+  downarrow: "/assets/icons/downarrow.svg",
+  uparrow: "/assets/icons/uparrow.svg",
+  leftcrossarrow: "/assets/icons/16.svg",
 };
