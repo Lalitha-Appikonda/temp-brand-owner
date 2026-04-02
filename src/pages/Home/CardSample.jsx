@@ -73,7 +73,15 @@ const CardSample = () => {
           images={images}
         />
     </div>
-    <Styleguide/>
+    {/* <Styleguide/> */}
+
+
+
+    <div>
+      <div>
+        <img className='how-item-img'  src={Images.product}/>
+      </div>
+    </div>
     
     </div>
 
