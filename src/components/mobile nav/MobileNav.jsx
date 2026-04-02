@@ -10,7 +10,7 @@ const MobileNav = () => {
 
   const hiddenMobileNav = useMediaQuery({ query: "(max-width:768px)" });
 
-  const hideMobileNav = ["/products"];
+  const hideMobileNav = ["/products" , "/cart"];
 
   const Condition = hiddenMobileNav && hideMobileNav.includes(currentPath);
   return (

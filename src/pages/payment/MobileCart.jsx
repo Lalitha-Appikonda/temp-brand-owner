@@ -9,13 +9,51 @@ import Buttons from "../../components/form-elements/Buttons";
 import Card from "../../components/card/Card";
 import CartProductsMobile from "./component/CartProductsMobile";
 import { IoBagHandleOutline } from "react-icons/io5";
+import PopUp from "../../components/popup/PopUp";
+import DeletePopup from "./component/DeletePop";
+import { useLocation, useNavigate } from "react-router-dom";
+import MobileHeader from "../../components/mobileHeader/MobileHeader";
+import ProductButtons from "../../components/productSortingButtons/ProductButtons";
 
 const MobileCart = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const navigate = useNavigate()
+
   const [mobileCartItems, setMobileCartItems] = useState([
-    { id: 1, name: "AQUAREMID", qty: 2, price: 300, stock: "In stock" },
-    { id: 2, name: "AQUABISON", qty: 3, price: 30, stock: "In stock" },
-    { id: 3, name: "AQUABISON", qty: 3, price: 30, stock: "In stock" },
-    { id: 4, name: "AQUABISON", qty: 3, price: 30, stock: "In stock" },
+    {
+      id: 1,
+      name: "AQUAREMID",
+      qty: 2,
+      price: 300,
+      stock: "stock",
+      discount: "10",
+    },
+    {
+      id: 2,
+      name: "AQUABISON",
+      qty: 3,
+      price: 30,
+      stock: "In stock",
+      discount: "3",
+    },
+    {
+      id: 3,
+      name: "AQUABISON",
+      qty: 3,
+      price: 30,
+      stock: "In stock",
+      discount: "6",
+    },
+    {
+      id: 4,
+      name: "AQUABISON",
+      qty: 3,
+      price: 30,
+      stock: "In stock",
+      discount: "2",
+    },
     // { id: 5, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
     // { id: 6, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
     // { id: 7, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
@@ -112,6 +150,7 @@ const MobileCart = () => {
 
   const [selectedItems, setSelectedItems] = useState([]);
 
+  // Select all checkbox
   const handleSelectAll = () => {
     if (selectedItems.length === mobileCartItems.length) {
       setSelectedItems([]);
@@ -120,6 +159,7 @@ const MobileCart = () => {
     }
   };
 
+  // single checkbox
   const handleSelectItem = (id) => {
     setSelectedItems((prev) =>
       prev.includes(id)
@@ -128,42 +168,91 @@ const MobileCart = () => {
     );
   };
 
-  const selectedPrice = mobileCartItems
-  .filter((item) => selectedItems.includes(item.id))
-  .reduce((sum, item) => sum + item.price * item.qty, 0);
+  // Update quantity from child
+  const updateQuantity = (id, newQty) => {
+    if (!newQty || newQty <= 0) return;
+
+    setMobileCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, qty: Number(newQty) } : item,
+      ),
+    );
+  };
+
+  // Total Qty
+  const selectedTotalQty = mobileCartItems
+    .filter((item) => selectedItems.includes(item.id))
+    .reduce((count, item) => count + item.qty, 0);
+
+  // Total Price
+  const totalPrice = mobileCartItems
+    .filter((item) => selectedItems.includes(item.id))
+    .reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  // Discount (10%)
+  const discount = totalPrice * 0.1;
+
+  // total delete
+  const handleDeleteAll = () => {
+    setMobileCartItems((prev) =>
+      prev.filter((item) => !selectedItems.includes(item.id)),
+    );
+
+    setSelectedItems([]);
+  };
+
+  // selected items delete
+
+  const handleSelectedDelete = (id) => {
+    setMobileCartItems((prev) => prev.filter((item) => item.id !== id));
+    setSelectedItems((prev) => prev.filter((itemId) => itemId !== id));
+  };
+
+  // delete all, whishlist all icon disabled
+  const isDisabled = selectedItems.length === 0;
+
+  // place order
+
+  const handlePlaceOrder = () => {
+  if (selectedItems.length === 0) return;
+
+  const selectedCartItems = mobileCartItems.filter((item) =>
+    selectedItems.includes(item.id)
+  );
+
+  const hasOutOfStock = selectedCartItems.some(
+    (item) => item.stock !== "In stock"
+  );
+
+  if (!hasOutOfStock) {
+    navigate("/address");
+  } 
+};
 
   return (
     <>
       <div className="mobile-cart-container">
-        <div className="header">
-          <div className="header-left">
-            <FaArrowLeft />
-            <h1>Shopping Bag</h1>
-          </div>
-          <div className="haeder-right">
-            <FaRegHeart className="icon" />
-          </div>
-        </div>
+        <MobileHeader title="Shopping Bag" wishlist={true}/>
 
         <div className="progress-indication-container">
-          <div className="progress-line"></div>
+          <div className={`progress-line ${currentPath === "/cart" ? "active" : ""}`}></div>
 
-          <div className="step active">
-            <div className="circle"></div>
+          <div className= "step">
+            <div className={`circle ${currentPath === "/cart" ? "active" : ""}` }></div>
             <span>Bag</span>
           </div>
 
-          <div className="progress-line"></div>
+          <div className={`progress-line ${currentPath === "/address" ? "active" : ""}`}></div>
 
-          <div className="step">
-            <div className="circle"></div>
+          <div className= "step" >
+            <div className={`circle ${currentPath === "/address" ? "active" : ""}` }></div>
             <span>Address</span>
           </div>
 
-          <div className="progress-line"></div>
+          <div className={`progress-line ${currentPath === "/payment" ? "active" : ""}`}></div>
 
           <div className="step">
-            <div className="circle"></div>
+            <div className={`circle ${currentPath === "/payment" ? "active" : ""}` }></div>
             <span>Payment</span>
           </div>
         </div>
@@ -172,27 +261,99 @@ const MobileCart = () => {
           <div className="selected-wrapper">
             <div className="selected-left">
               <div>
-                <CheckBox 
-                id="select-all-cart-items"
-                checked={selectedItems.length === mobileCartItems.length}
-                onChange={handleSelectAll}
+                <CheckBox
+                  id="select-all-cart-items"
+                  checked={
+                    selectedItems.length > 0 ||
+                    selectedItems.length === mobileCartItems.length
+                  }
+                  onChange={handleSelectAll}
+                  className={
+                    selectedItems.length > 0 &&
+                    selectedItems.length < mobileCartItems.length
+                      ? "check-box-icon-change"
+                      : ""
+                  }
                 />
               </div>
               <p>
-                {selectedItems.length}/{mobileCartItems.length} Selected <span>(₹{selectedPrice})</span>
+                {selectedItems.length}/{mobileCartItems.length} Selected{" "}
+                <span>(₹{totalPrice})</span>
               </p>
             </div>
             <div className="selected-right">
-              <img src={Images.cartLikeMobile} alt="" />
-              <HiOutlineTrash />
+              {isDisabled ? (
+                <img
+                  src={Images.cartLikeMobile}
+                  alt=""
+                  style={{
+                    opacity: 0.5,
+                    cursor: "not-allowed",
+                  }}
+                />
+              ) : (
+                <DeletePopup
+                  trigger={
+                    <img
+                      src={Images.cartLikeMobile}
+                      alt=""
+                      style={{
+                        pointerEvents: isDisabled ? "none" : "auto",
+                        opacity: isDisabled ? 0.5 : 1,
+                        cursor: isDisabled ? "not-allowed" : "pointer",
+                      }}
+                    />
+                  }
+                  title={` Move ${selectedItems.length} items to wishlist `}
+                  description={`Do you want to move these ${selectedItems.length} items from your bag?`}
+                  onRemove={close}
+                  imageElement={<img src={Images.cartLikeMobile2} alt="" />}
+                  type="cancel"
+                />
+              )}
+
+              {isDisabled ? (
+                <HiOutlineTrash
+                  className="delete-icon"
+                  style={{
+                    opacity: 0.5,
+                    cursor: "not-allowed",
+                  }}
+                />
+              ) : (
+                <DeletePopup
+                  trigger={
+                    <HiOutlineTrash
+                      className="delete-icon"
+                      style={{
+                        pointerEvents: isDisabled ? "none" : "auto",
+                        opacity: isDisabled ? 0.5 : 1,
+                        cursor: isDisabled ? "not-allowed" : "pointer",
+                      }}
+                    />
+                  }
+                  title={`Remove ${selectedItems.length} items`}
+                  description={`Do you want to remove these ${selectedItems.length} items from your bag?`}
+                  onRemove={handleDeleteAll}
+                  iconElement={<HiOutlineTrash />}
+                  type="delete"
+                />
+              )}
             </div>
           </div>
         </div>
 
         <div className="cart-products-mobile">
           {mobileCartItems.map((item) => (
-            <CartProductsMobile key={item.id} item={item} checked={selectedItems.includes(item.id)}
-    onChange={() => handleSelectItem(item.id)}/>
+            <CartProductsMobile
+              key={item.id}
+              item={item}
+              checked={selectedItems.includes(item.id)}
+              onChange={() => handleSelectItem(item.id)}
+              onUpdateQty={updateQuantity}
+              selectedDelete={handleSelectedDelete}
+              selectedItems={selectedItems}
+            />
           ))}
         </div>
 
@@ -200,26 +361,7 @@ const MobileCart = () => {
 
         <div className="other-cart-product-items">
           <h1>You may also like</h1>
-          <div className="other-products-button-block">
-            <Buttons
-              variant="outline-primary"
-              className="cart-others-mobile-products-btn"
-            >
-              All
-            </Buttons>
-            <Buttons
-              variant="outline-primary"
-              className="cart-others-mobile-products-btn"
-            >
-              Probiotics
-            </Buttons>
-            <Buttons
-              variant="outline-primary"
-              className="cart-others-mobile-products-btn"
-            >
-              Minerals
-            </Buttons>
-          </div>
+          <ProductButtons className="cart-mobile-buttons" />
 
           <div className="cart-mobile-products-block">
             {products.map((product) => (
@@ -243,35 +385,35 @@ const MobileCart = () => {
         <div className="dividing-space"></div>
 
         <div className="price-details-cart-mobile">
-          <h2 className="title">Price Details (2 Items)</h2>
+          <h2 className="title">Price Details ({selectedTotalQty} Items)</h2>
           <div className="dividing-line"></div>
           <div className="price-content">
             <div className="details">
-              <h3>Total Price (5 items)</h3>
-              <h2>₹7200</h2>
+              <h3>Total Price ({selectedTotalQty} items)</h3>
+              <h2>₹{totalPrice}</h2>
             </div>
 
             <div className="details ">
               <h3>Discount on Price</h3>
-              <h2 className="discount-amount">-₹600</h2>
+              <h2 className="discount-amount">-₹{discount}</h2>
             </div>
 
             <div className="dividing-line"></div>
 
             <div className="total-amount">
-              <h2>Total Price (5 items)</h2>
-              <h2>₹6600</h2>
+              <h2>Total Price ({selectedTotalQty} items)</h2>
+              <h2>₹{totalPrice}</h2>
             </div>
           </div>
         </div>
 
         <div className="place-order-mobile-wrapper">
           <div>
-            <h4>7200</h4>
-            <h1>₹6600</h1>
+            <h4>{totalPrice}</h4>
+            <h1>₹{totalPrice - discount}</h1>
           </div>
           <div className="mobile-place-order-button-container">
-            <Buttons>Place Order</Buttons>
+            <Buttons onClick={handlePlaceOrder}>Place Order</Buttons>
           </div>
         </div>
       </div>

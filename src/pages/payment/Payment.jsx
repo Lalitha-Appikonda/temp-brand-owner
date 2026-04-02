@@ -8,11 +8,19 @@ import { BsPlusLg } from "react-icons/bs";
 import Card from "../../components/card/Card";
 import { Images } from "../../images/Image";
 import Buttons from "../../components/form-elements/Buttons";
+import { useMediaQuery } from "react-responsive";
+import MobileCart from "./MobileCart";
 
 const Payment = () => {
   const location = useLocation();
 
-  const page = location.pathname;
+  const currentpage = location.pathname;
+
+  const mobileCartRoutes = ["/cart"];
+
+  const MobileCartVisible = useMediaQuery({ query: "(max-width:768px)" });
+
+  const isMobileCart = MobileCartVisible && mobileCartRoutes.includes(currentpage);
 
   const [cartItems, setCartItems] = useState([
     { id: 1, name: "AQUAREMID", qty: 2, price: 300, stock: "In stock" },
@@ -114,64 +122,65 @@ const Payment = () => {
   ];
   const total = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
   return (
-    <>
+    <div className="payment-container">
       <div className="container">
-        <div className="layout">
-          <div className="title-button-row">
-            <p className="title">
-              {page === "/cart" && "Shopping Cart"}
-              {page === "/address" && "Delivery Address"}
-            </p>
-            {page === "/address" && (
-              <div className="new-address-button-wrapper">
-                <Buttons variant="outline-primary" className="new-adddress">
-                  <span className="button-content">
-                    Add New Address
-                    <BsPlusLg className="icon" />
-                  </span>
-                </Buttons>
+        {isMobileCart ? (<MobileCart />) : (
+          <div className="layout">
+            <div className="title-button-row">
+              <p className="title">
+                {currentpage === "/cart" && "Shopping Cart"}
+                {currentpage === "/address" && "Delivery Address"}
+              </p>
+              {currentpage === "/address" && (
+                <div className="new-address-button-wrapper">
+                  <Buttons variant="outline-primary" className="new-adddress">
+                    <span className="button-content">
+                      Add New Address
+                      <BsPlusLg className="icon" />
+                    </span>
+                  </Buttons>
+                </div>
+              )}
+            </div>
+            <div className="inner-container">
+              <div
+                className={`left-section ${currentpage === "/address" ? "left-section-address" : ""}`}
+              >
+                {currentpage === "/cart" && (
+                  <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                )}
+
+                {currentpage === "/address" && <Address />}
+              </div>
+              <div className="right-section">
+                <PriceDetails cartItems={cartItems} total={total} />
+              </div>
+            </div>
+
+            {currentpage === "/cart" && (
+              <div className="cart-card-bottom">
+                <div className="cart-cards">
+                  {products.map((product) => (
+                    <Card
+                      key={product.id}
+                      title={product.title}
+                      price={product.price}
+                      oldPrice={product.oldPrice}
+                      discount={product.discount}
+                      badge={product.badge}
+                      showQuantity={product.showQuantity}
+                      image={product.image}
+                      rating={product.rating}
+                      reviews={product.reviews}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </div>
-
-          {/* <p className="title">Shopping Cart</p> */}
-          <div className="inner-container">
-            <div className={`left-section ${(page === '/address' ? "left-section-address" : "")}`}>
-              {page === "/cart" && (
-                <Cart cartItems={cartItems} setCartItems={setCartItems} />
-              )}
-
-              {page === "/address" && <Address />}
-            </div>
-            <div className="right-section">
-              <PriceDetails cartItems={cartItems} total={total} />
-            </div>
-          </div>
-
-          {page === "/cart" && (
-            <div className="cart-card-bottom">
-              
-              <div className="cart-cards">
-                {products.map((product) => (
-                  <Card
-                    key={product.id}
-                    title={product.title}
-                    price={product.price}
-                    oldPrice={product.oldPrice}
-                    discount={product.discount}
-                    badge={product.badge}
-                    showQuantity={product.showQuantity}
-                    image={product.image}
-                    rating={product.rating}
-                    reviews={product.reviews}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
