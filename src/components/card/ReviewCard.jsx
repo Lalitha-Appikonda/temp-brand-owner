@@ -53,7 +53,11 @@ const ReviewCard = ({
                 <h6 className="review-text">
                     {reviewText}
                 </h6>
+                 <span className="mobiledate">{date}</span>
             </div>
+             <h6 className="review-text-mobile">
+                    {reviewText}
+                </h6>
 
             <div className="review-images">
                 {images.map((img, index) => (
@@ -73,9 +77,9 @@ const ReviewCard = ({
                 </div>
 
                 <div className="actions">
-                    <span className="certified"  ><img onClick={handleLike} src={Images.handlike} style={{ color: action === "like" ? "blue" : "black", cursor: "pointer" }}
+                    <span className="certified"  ><img className="tumb" onClick={handleLike} src={Images.handlike} style={{ color: action === "like" ? "blue" : "black", cursor: "pointer" }}
                     />{likes}</span>
-                    <span className="certified"><img onClick={handleDislike} src={Images.dislike} />{dislikes}</span>
+                    <span className="certified"><img className="tumb"  onClick={handleDislike} src={Images.dislike} />{dislikes}</span>
                 </div>
             </div>
             <div className="dividing-line"></div>
