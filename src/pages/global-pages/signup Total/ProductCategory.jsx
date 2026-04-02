@@ -13,34 +13,35 @@ import { useContext } from "react";
 import { SignupContext } from "../../../context/SignupContext";
 import axios from "axios";
 import * as Yup from "yup";
+import SelectedSubCategory from "./component/SelectedSubCategory";
 
 const ProductCategory = ({ formData, setFormData, nextStep, prevStep }) => {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
 const categorySchema = Yup.object().shape({
-  category: Yup.object().nullable().required("category is required"),
+  category: Yup.object().nullable().required("*Category is required"),
 
-  subcategory: Yup.array().min(1, "select at least one subcategory"),
+  subcategory: Yup.array().min(1, "*Select at least one subcategory"),
 
   panNumber: Yup.string()
     .trim()
-    .required("pan is required")
-    .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format"),
+    .required("*Pan is required")
+    .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "*Invalid PAN format"),
 
   gstNumber: Yup.string()
     .trim()
-    .required("gst is required")
-    .matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, "Invalid GST format"),
+    .required("*Gst is required")
+    .matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, "*Invalid GST format"),
 
   otherCategory: Yup.string().when("category", {
     is: (val) => val?.value === "other",
-    then: (schema) => schema.required("Enter category"),
+    then: (schema) => schema.required("*Enter category"),
   }),
 
   otherSubCategory: Yup.string().when("subcategory", {
     is: (sub) => sub?.some((item) => item.value === "other"),
-    then: (schema) => schema.required("Enter subcategory"),
+    then: (schema) => schema.required("*Enter subcategory"),
   }),
 });
 
@@ -63,7 +64,7 @@ const categorySchema = Yup.object().shape({
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories",
+          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories",  
         );
         console.log(res);
         console.log(res.data);
@@ -87,8 +88,6 @@ const categorySchema = Yup.object().shape({
     if (!category) return;
 
     setSubCategories([]);
-    setSubCategory([]);
-    setOtherSubCategory("");
 
     const fetchSubCategories = async () => {
       try {
@@ -104,11 +103,6 @@ const categorySchema = Yup.object().shape({
             value: item.id,
           })),
         ];
-
-        //   const formatted = res.data.message.map((item) => ({
-        //   label: item.sub_category_name,
-        //   value: item.id,
-        // }));
 
         if (category.value === "other") {
           formatted.push({ label: "other", value: "other" });
@@ -192,8 +186,8 @@ console.log("isValid:", isValid);
         ...prev,
         category: finalCategory,
         subcategory: finalSubCategory,
-        panNumber: panNumber,
-        GSTNumber: gstNumber,
+        panNumber:panNumber,
+        GSTNumber:gstNumber,
       }));
 
       console.log(" SAVED CATEGORY .....", finalCategory);
@@ -222,6 +216,7 @@ console.log("isValid:", isValid);
     ...prev,
     subcategory: unique,
   }));
+  setErrors((prev) => ({ ...prev, subcategory: "" }));
 };
 
   // const handlechange = (name, value) => {
@@ -231,6 +226,7 @@ console.log("isValid:", isValid);
   //     setSubCategory([]);
   //     return;
   //   }
+  
 
  
 
@@ -263,17 +259,14 @@ console.log("isValid:", isValid);
                 category:data,
                 subcategory:[],
               }));
+              setErrors((prev) => ({ ...prev, category: "", subcategory: "" }));
             }}
             name="product-category"
             placeholder="Product Category"
             options={categories}
             icon={<LuBox />}
           />
-          {errors.category && (
-            <p className="error-text product-category-error">
-              {errors.category}
-            </p>
-          )}
+          {errors.category && <p className="error-text product-category-error">{errors.category}</p>}
 
           <div className="others-input-conatiner">
             {category?.value === "other" && (
@@ -283,19 +276,23 @@ console.log("isValid:", isValid);
                   value={otherCategory}
                   placeholder="Enter Product category"
                   className="other-input"
-                  onChange={(e) => setOtherCategory(e.target.value)}
+                  onChange={(e) => {
+                    setOtherCategory(e.target.value);
+
+                    // Clear error as soon as typing starts
+                    setErrors((prev) => ({ ...prev, otherCategory: "" }));
+                  }}
                   maxLength={25}
+                  error={errors.otherCategory}
                 />
-                 {errors.otherCategory && (<p className="error-text">{errors.otherCategory}</p>)}
+                 {/* {errors.otherCategory && (<p className="error-text">{errors.otherCategory}</p>)} */}
               </div>
               
             )}
           </div>
         </div>
 
-        <div
-          className={`sub-product-category-dropdown ${category?.value === "other" ? "sub-category-select" : ""}`}
-        >
+        <div className={`sub-product-category-dropdown ${category?.value === "other" ? "sub-category-select" : ""}`}>
           <SelectWithCheckbox
             value={Subcategory}
             onChange={handlechange}
@@ -304,20 +301,17 @@ console.log("isValid:", isValid);
             options={subCategories}
             disabled={!category}
             placeholder="Product Sub-category"
+            hideSelected={true}
           />
           {errors.subcategory && (
-            <p className="error-text product-category-error">
-              {errors.subcategory}
-            </p>
+            <p className="error-text product-category-error">{errors.subcategory}</p>
           )}
 
-          <div
-            className={`others-input-conatiner ${
+          <div className={`others-input-conatiner ${
               Subcategory.some((item) => item.value !== "other")
                 ? "sub-category-other-input"
                 : ""
-            }`}
-          >
+            }`}>
             {Subcategory.some((item) => item.value === "other") && (
               <div className="input-box">
                 <LuBox className="icon left" />
@@ -325,64 +319,87 @@ console.log("isValid:", isValid);
                   value={otherSubCategory}
                   placeholder="Enter Product Sub-category"
                   className="other-input"
-                  onChange={(e) => setOtherSubCategory(e.target.value)}
-                  maxLength={25}
+                   onChange={(e) => {
+                      setOtherSubCategory(e.target.value);
+
+                      // Clear error as soon as typing starts
+                      setErrors((prev) => ({ ...prev, otherSubCategory: "" }));
+                    }}
+                   maxLength={25}
                 />
-                {errors.otherSubCategory && (<p className="error-text">{errors.otherSubCategory}</p>)}
+                {/* {errors.otherSubCategory && (<p className="error-text">{errors.otherSubCategory}</p>)} */}
               </div>
             )}
           </div>
         </div>
 
         {Subcategory.length > 0 && (
-          <div className="Selected-subcategory">
-            {Subcategory.filter((item) => item.value !== "other").map(
-              (item, index) => (
-                <div key={index} className="inner-product">
-                  <p>{item.label}</p>
-                  <img
-                    className="cross-icon"
-                    src={Images.crossCancle}
-                    alt=""
-                    onClick={() => handleRemove(item)}
-                  />
-                </div>
-              ),
-            )}
-          </div>
+          <SelectedSubCategory Subcategory={Subcategory} resetTrigger={Subcategory}/>
         )}
 
-        <div
-          className={`pan-gst-container ${
+        <div className={`pan-gst-container ${
             Subcategory.some((item) => item.value === "other")
               ? "pan-card-input-down"
               : ""
-          }`}
-        >
+          }`}>
           <div className="input-box">
             <LuBox className="icon left" />
             <Input
               value={panNumber}
               placeholder="Enter Pan Card Number"
               className="gst-pan-input"
-              onChange={(e) => setFormData((prev)=>({...prev,panNumber:e.target.value.toUpperCase(),}))}
-              onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+              onChange={(e)=>{
+                setFormData((prev)=>({
+                  ...prev,
+                  panNumber:e.target.value.toUpperCase(),
+                }));
+                setErrors((prev)=>({...prev,panNumber:""}))
+              }}
+                onKeyDown={(e) => {
+                // Allow only letters and numbers
+                if (!/[a-zA-Z0-9]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight") {
+                  e.preventDefault();
+                }
+              }}
               maxLength={10}
+               error={errors.panNumber}
             />
-            {/* {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)} */}
+             {/* {errors.panNumber && (<p className="error-text">{errors.panNumber}</p>)} */}
           </div>
+         
 
           <div className="input-box">
             <LuBox className="icon left" />
             <Input
-              value={gstNumber}
+               value={gstNumber}
               placeholder="Enter GST Number"
               className="gst-pan-input"
-               onChange={(e) => setFormData((prev)=>({...prev,gstNumber:e.target.value.toUpperCase(),}))}
-               onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+              onChange={(e) => {
+              setFormData((prev) => ({
+                ...prev,
+                gstNumber: e.target.value.toUpperCase(),
+              }));
+              //  clear GST error as soon as typing
+              setErrors((prev) => ({ ...prev, gstNumber: "" }));
+            }}
+                onKeyDown={(e) => {
+                // Allow only letters and numbers
+                if (!/[a-zA-Z0-9]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight") {
+                  e.preventDefault();
+                }
+              }}
                maxLength={15}
+               error={errors.gstNumber}
             />
-            {/* {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)} */}
+             {/* {errors.gstNumber && (<p className="error-text">{errors.gstNumber}</p>)} */}
           </div>
         </div>
       </div>

@@ -1,12 +1,11 @@
 import React from "react";
-import Home from "../pages/Home/Home";
-import CardSample from "../pages/Home/CardSample";
+import Home from "../pages/home/Home";
+import CardSample from "../pages/home/CardSample";
 import ProductList from "../pages/productlist/ProductList";
 import Product from "../pages/product/Product";
 import Review from "../pages/review/Review";
-import Cart from "../pages/Cart/Cart";
-import DeliveryAddress from "../pages/DeliveryAddress/DeliveryAddress";
-import EditAddress from "../pages/EditAddress/EditAddress";
+import DeliveryAddress from "../pages/deliveryAddress/DeliveryAddress";
+import EditAddress from "../pages/editAddress/EditAddress";
 import Layout from "../layout/Layout";
 
 import { Routes, Route } from "react-router-dom";
@@ -19,7 +18,7 @@ import Login from "../pages/global-pages/login Total/Login";
 import Payment from "../pages/payment/Payment";
  
 import MobileCart from "../pages/payment/MobileCart";
-import ProductInnerPage from "../pages/Home/ProductInnerPage";
+import ProductInnerPage from "../pages/home/ProductInnerPage";
 import ForgotPassword from "../pages/global-pages/login Total/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/login Total/Forgotaftersetup";
 import SetNewPassword from "../pages/global-pages/login Total/SetNewPassword";

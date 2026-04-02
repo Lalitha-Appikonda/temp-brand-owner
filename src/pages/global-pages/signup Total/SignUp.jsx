@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Images } from "../../../images/Image";
 import Buttons from "../../../components/form-elements/Buttons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { SignupContext } from "../../../context/SignupContext";
@@ -79,6 +79,20 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       setErrors(formattedErrors);
     }
   };
+  
+
+    useEffect(() => {
+      const validate = async () => {
+        try {
+          await signupSchema.validate(form, { abortEarly: false });
+          setIsValid(true);
+        } catch {
+          setIsValid(false);
+        }
+      };
+
+      validate();
+    }, [form]);
 
   // if (!isValid){
   //   return;
@@ -138,13 +152,28 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       <div className="input-box">
         <img src={Images.user} className="icon left" />
         <Input
-          placeholder="Name"
-          name="name"
-          value={form.name}
-          onChange={handlechange}
-          error={errors.name}
-          maxLength={20}
-        />
+            placeholder="Name"
+            name="name"
+            value={form.name}
+            onChange={handlechange}
+            onKeyDown={(e) => {
+              // allow letters and space only
+              if (
+                !/[a-zA-Z ]/.test(e.key) && // only letters and space
+                e.key !== "Backspace" &&
+                e.key !== "Tab" &&
+                e.key !== "ArrowLeft" &&
+                e.key !== "ArrowRight"
+              ) {
+                e.preventDefault();
+              }
+              if (e.key === " " && form.name.slice(-1) === " ") {
+      e.preventDefault();
+    }
+            }}
+          
+            maxLength={20}
+          />
       </div>
       {/* {errors.name && <p className='error-text'>{errors.name}</p> } */}
 
@@ -157,8 +186,18 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           onChange={handlechange}
           error={errors.username}
           maxLength={25}
-          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
-        />
+          onKeyDown={(e) => {
+            if (
+                !/[a-zA-Z0-9_]/.test(e.key) &&
+                e.key !== "Backspace" &&
+                e.key !== "Tab" &&
+                e.key !== "ArrowLeft" &&
+                e.key !== "ArrowRight"
+              ) {
+                e.preventDefault();
+              }
+            }}
+          />
       </div>
       {/* {errors.username  && <p className='error-text'>{errors.username}</p> } */}
 
@@ -199,7 +238,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       <div className="input-box">
         <img src={Images.lockicon} className="icon left" />
         <Input
-          placeholder="Re-enter Password"
+          placeholder="Confirm Password"
           name="confirmpassword"
           value={form.confirmpassword}
           type={showConfirmPassword ? "text" : "password"}

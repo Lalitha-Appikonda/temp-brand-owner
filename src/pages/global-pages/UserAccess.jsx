@@ -12,8 +12,7 @@ const UserAccess = () => {
 
   const hideLogo = ["/security-questions", "/setnewpassword"];
 
-  const dummiCondition =
-    isMobile && hideLogo.includes(currentPath);
+  const dummiCondition = isMobile && hideLogo.includes(currentPath);
 
   return (
     <>
@@ -22,11 +21,18 @@ const UserAccess = () => {
           <div className="side-img">
             {/* <div className="image" ></div> */}
             <img className="image" src={Images.diffImg} alt="image" />
+            <p className="title">Simplify management with our dashboard.</p>
+            <p className="sub-title">Get complete control over operations, performance, and
+business growth from one powerful panel.</p>
           </div>
           <div className="main-content">
             <div className="main-logo">
-              {!dummiCondition && <img className="mainlogo" src={Images.mainlogo} alt="" />}
-              {!dummiCondition && <img className="mobile-logo" src={Images.mobilelogo} />}
+              {!dummiCondition && (
+                <img className="mainlogo" src={Images.mainlogo} alt="" />
+              )}
+              {!dummiCondition && (
+                <img className="mobile-logo" src={Images.mobilelogo} />
+              )}
             </div>
             <div>
               <Outlet />

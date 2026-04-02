@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import CartItems from "./CartItems";
+import Cart from "./Cart";
 import PriceDetails from "./component/PriceDetails";
 import { useLocation } from "react-router-dom";
 import Address from "./Address";
 import { BsPlusLg } from "react-icons/bs";
-import Buttons from "../../components/form-elements/Buttons";
+
 import Card from "../../components/card/Card";
 import { Images } from "../../images/Image";
+import Buttons from "../../components/form-elements/Buttons";
 
 const Payment = () => {
   const location = useLocation();
@@ -137,7 +138,7 @@ const Payment = () => {
           <div className="inner-container">
             <div className={`left-section ${(page === '/address' ? "left-section-address" : "")}`}>
               {page === "/cart" && (
-                <CartItems cartItems={cartItems} setCartItems={setCartItems} />
+                <Cart cartItems={cartItems} setCartItems={setCartItems} />
               )}
 
               {page === "/address" && <Address />}

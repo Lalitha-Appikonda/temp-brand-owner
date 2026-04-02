@@ -4,14 +4,24 @@ import SelectBox from "../form-elements/SelectBox";
 import Buttons from "../form-elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 
-const Card = ({ title, price, oldPrice, discount, badge, image, rating, reviews }) => {
+const Card = ({
+  title,
+  price,
+  oldPrice,
+  discount,
+  badge,
+  image,
+  rating,
+  reviews,
+  cusBtnIcon = null
+}) => {
   const [like, setLike] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
 
-  const [showQuantity, setShowQunatity] = useState(false)
+  const [showQuantity, setShowQunatity] = useState(false);
 
   const decrease = () => {
     if (quantity > 1) {
@@ -20,24 +30,22 @@ const Card = ({ title, price, oldPrice, discount, badge, image, rating, reviews 
       setShowQunatity(false);
       setQuantity(1);
     }
-  }
+  };
 
   const increase = () => {
     setQuantity(quantity + 1);
-  }
-
+  };
 
   const onAddingCart = () => {
-    setShowQunatity(true)
-    setQuantity(1)
-  }
+    setShowQunatity(true);
+    setQuantity(1);
+  };
   return (
     <div className="card-context">
       <div className="card card-desktop ">
         <div className={badge ? "wrapper " : "card-image-wrapper"}>
           {badge && (
             <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>
-
           )}
           <div className="image-likeback">
             <svg
@@ -105,19 +113,25 @@ const Card = ({ title, price, oldPrice, discount, badge, image, rating, reviews 
 
           {showQuantity ? (
             <div className="quantity">
-              <button className="reduce" onClick={decrease}><FaMinus className="minus" /></button>
+              <button className="reduce" onClick={decrease}>
+                <FaMinus className="minus" />
+              </button>
               <span>{quantity}</span>
-              <button className="increase" onClick={increase}><FaPlus className="plus" /></button>
+              <button className="increase" onClick={increase}>
+                <FaPlus className="plus" />
+              </button>
             </div>
           ) : (
-            <Buttons onClick={onAddingCart} className="addcart-mobile-btn">Add to Cart</Buttons>
+            <Buttons onClick={onAddingCart} className="addcart-mobile-btn">
+              Add to Cart
+            </Buttons>
           )}
         </div>
       </div>
 
       <div className="btn-down">
         <Buttons variant="circle-secondary">
-          <FiArrowUpRight className="arrow-icon" />
+          {cusBtnIcon || <FiArrowUpRight className="arrow-icon" />}
         </Buttons>
       </div>
     </div>

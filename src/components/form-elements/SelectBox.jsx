@@ -44,7 +44,7 @@ const SelectBox = ({
             <div className="dropdown-content">
               {icon && <span className="product-first-icon">{icon}</span>}
 
-              <span>{value?.label || placeholder}</span>
+              <span className="value-placeholder">{value?.label || placeholder}</span>
 
             </div>
           </div>
