@@ -8,7 +8,8 @@ import { SignupContext } from "../../../context/SignupContext";
 import PopUp from "../../../components/popup/PopUp";
 import TermsAndConditions from "../TermsAndConditions";
 import Input from "../../../components/form-elements/Input";
-
+import axios from "axios";
+const BASE_URL = "http://localhost:5051/rest2/0.1";
 const SignUp = ({ formData, setFormData, nextStep }) => {
   const navigate = useNavigate();
 
@@ -22,6 +23,13 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
     useState(false); /* show cfm pwd state */
 
   const [errors, setErrors] = useState({}); /* errors state */
+
+  //chekc username alraedy exists or not
+  const [usernameError,setUsernameError]=useState("");
+  
+  //until username exists or not so loading state
+  const [checkingUsername,setCheckingUsername]=useState(false);
+
 
   const { setSignupData } = useContext(SignupContext);
 
@@ -110,6 +118,10 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
 
   const handlechange = async (e) => {
     const { name, value } = e.target;
+    
+    if(name==="username"){
+      setUsernameError("")
+    }
     const updatedForm = {
       ...form,
       [name]: value,
@@ -139,6 +151,52 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
     { text: "At least 1 number", valid: passwordRules.number },
   ];
 
+const checkUsernameAvailability = async (username) => {
+  try {
+    setCheckingUsername(true);
+
+    if (username.length < 5) {
+      setCheckingUsername(false);
+      return;
+    }
+
+    const res = await axios.post(
+      `${BASE_URL}/unAuth/checkUsername`,
+      { username: username.trim() },
+      {
+        validateStatus: (status) => status === 200 || status === 422,
+      }
+    );
+
+    console.log("STATUS:", res.status);
+    console.log("RESPONSE:", res.data);
+
+    if (res.status === 200) {
+      setUsernameError(""); // username available
+    } else if (res.status === 422) {
+      setUsernameError("Username already exists"); //  username taken
+    }
+  } catch (error) {
+    console.log("USERNAME CHECK ERROR:", error);
+    setUsernameError("Something went wrong");
+  } finally {
+    setCheckingUsername(false);
+  }
+};
+
+
+ 
+
+  useEffect(()=>{
+    if(!form.username || errors.username) return;
+    const timer=setTimeout(() => {
+      checkUsernameAvailability(form.username)
+    }, 500);
+    return()=>clearTimeout(timer);
+  },[form.username,errors.username])
+
+  const isFormReady = isValid && !usernameError && !checkingUsername;
+
   return (
     <form className="signup-container" onSubmit={handlesubmit}>
       {/* <div className='container'> */}
@@ -156,8 +214,12 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
             name="name"
             value={form.name}
             onChange={handlechange}
+            error={errors.name}
             onKeyDown={(e) => {
               // allow letters and space only
+              if (e.key === " " && form.name.length === 0) {
+                e.preventDefault();
+              }
               if (
                 !/[a-zA-Z ]/.test(e.key) && // only letters and space
                 e.key !== "Backspace" &&
@@ -184,7 +246,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           name="username"
           value={form.username}
           onChange={handlechange}
-          error={errors.username}
+          error={errors.username || usernameError}
           maxLength={25}
           onKeyDown={(e) => {
             if (
@@ -256,7 +318,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       {/* {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> } */}
 
       <div className='signin-next'>
-        <Buttons type="submit"   className= {`btn ${isValid ? "btn-primary":"btn-secondary"}`}  >Next</Buttons>
+        <Buttons type="submit"   className= {`btn ${isFormReady ? "btn-primary":"btn-secondary"}`}  >Next</Buttons>
       </div>
 
       <div className="login-texts">

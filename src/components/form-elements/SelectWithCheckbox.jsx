@@ -74,8 +74,8 @@ const SelectWithCheckbox = ({
                   label={item.label}
                   name={name}
                   value={item.value}
-                  checked={value.some((v) => v.value === item.value)} // ✅ FIX
-                  onChange={(e) => handleCheckboxChange(item, e.target.checked)} // ✅ FIX
+                  checked={value.some((v) => v.value === item.value)} //  
+                  onChange={(e) => handleCheckboxChange(item, e.target.checked)} //  
                 />
               </li>
             ))}

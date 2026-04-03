@@ -10,13 +10,20 @@ import axios from "axios";
 const Forgotaftersetup = () => {
 
   const [answer,setanswer]=useState({});
+  const [apiError, setApiError] = useState("");
+
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  const [isValid, setIsValid] = useState(false);
    
 
    const location=useLocation();
    const userId=location.state?.userId;
    const questions=location.state?.questions?.data || [];
-   console.log(userId)
-   console.log(questions)
+  useEffect(() => {
+  console.log("userId:", userId);
+  console.log("questions:", questions);
+}, []);
 
    // to flatten the array of arrays into a single array
 const flatQuestions = questions.flat(); // ES2019+
@@ -31,57 +38,126 @@ const flatQuestions = questions.flat(); // ES2019+
 
 
    //validation 
+   const getValidationSchema = () => {
+    const shape = {};
 
-   const getValidationSchema =()=>{
-    const shape={}
+    flatQuestions.forEach((q) => {
+      shape[String(q.id)] = Yup.string()
+        .trim()
+        .min(3, "Answer must be at least 3 characters")
+        .max(25, "Max 25 characters")
+        .required(`Answer for "${q.question}" is required`);
+    });
 
-    questions.forEach((q)=>{
-      shape[q.qid]=Yup.string().trim().required("Answers are required")
-    })
-    return Yup.object().shape(shape)
-   }
+    return Yup.object().shape(shape);
+  };
 
-   const handlechange=(e, qid)=>{
-    setanswer((prev)=>({
-      ...prev,
-      [qid]:e.target.value
-    }))
-   }
+  useEffect(() => {
+  if (flatQuestions.length === 0) return;
+
+  const validateForm = async () => {
+    const schema = getValidationSchema();
+    try {
+      await schema.validate(answer, { abortEarly: false });
+      setIsValid(true);
+    } catch {
+      setIsValid(false);
+    }
+  };
+
+  validateForm();
+}, [answer, flatQuestions]);
+
+const isFormReady =
+  isValid &&
+  flatQuestions.length > 0 &&
+  flatQuestions.every((q) =>
+    answer[String(q.id)]?.trim()
+  );
+
+ const handlechange = (e, id) => {
+  const key = String(id);
+
+  setanswer((prev) => ({
+    ...prev,
+    [key]: e.target.value,
+  }));
+
+  setFieldErrors((prev) => ({
+    ...prev,
+    [key]: "",
+  }));
+};
 
    const handlesubmit= async (e)=>{
     e.preventDefault();
 
     try {
+      setApiError(""); //clear old error
        const schema=getValidationSchema();
        await schema.validate(answer,{abortEarly:false})
 
        const payload={
-        answers:Object.entries(answer).map(([qid,ans])=>({
-          qid:Number(qid),
-          answer:ans
+        answers:Object.entries(answer).map(([id,ans])=>({
+          qid:Number(id),
+          answer:ans.trim()
         }))
        }
        console.log(payload);
 
-       const response=await axios.post(`https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/attemptAnswers/${userId}`,
+       const response=await axios.post(`http://localhost:5051/rest2/0.1/unAuth/attemptAnswers/${userId}`,
         
           payload
         
        )
        console.log(response.data)
+       console.log("FINAL PAYLOAD:", payload);
        navigate("/login/reset-password",{
         state:{userId}
        })
 
        
     } catch (error) {
-      if (error.name==="ValidationError"){
-        console.log(error)
-      }
-      
-    }
+  if (error.name === "ValidationError") {
+    const errorsObj = {};
+
+    error.inner.forEach((err) => {
+      errorsObj[String(err.path)] = err.message;
+    });
+
+    setFieldErrors(errorsObj);
+    return;
+  }
+
+  const message = error.response?.data?.message;
+  const lowerMsg = message?.toLowerCase() || "";
+
+  // (limit exceed handling)
+  if (
+    message?.toLowerCase().includes("limit") ||
+    message?.toLowerCase().includes("attempt") ||
+    error.response?.status === 429 ||
+    lowerMsg.includes("blocked") ||
+    lowerMsg.includes("exceed")
+  ) {
+     setApiError("");
+     
+    navigate(`/status/limit-exceed`, {
+      state: { type: "limit-exceed",
+        username: location.state?.username
+       }
+    });
+    return;
+  }
+
+  // normal API error
+  if (message) {
+    setApiError(message);
+  }
+}
 
    }
+   console.log("fieldErrors:", fieldErrors);
 
   return (
     <form onSubmit={handlesubmit}>
@@ -98,7 +174,7 @@ const flatQuestions = questions.flat(); // ES2019+
 
         <div className="ques-container">
           {flatQuestions.map((q, index) => (
-            <div className="boxes" key={index}>
+            <div className="boxes" key={q.id}>
               <div>
                 <div className="row1">
                   <img src={Images.quesIcon} alt="" />
@@ -106,20 +182,51 @@ const flatQuestions = questions.flat(); // ES2019+
                 </div>
 
                 <div className="ans-input">
-                  <Input placeholder="Answer" onChange={(e)=>handlechange(e,q.qid)} />
+                  <Input placeholder="Answer"
+                   onChange={(e)=>handlechange(e,q.id)}
+                   value={answer[String(q.id)] || ""}
+                   maxLength={25}
+                   error={fieldErrors[String(q.id)]} 
+                   onKeyDown={(e) => {
+                    if (
+                      !/[a-zA-Z ]/.test(e.key) &&
+                      e.key !== "Backspace" &&
+                      e.key !== "Tab" &&
+                      e.key !== "ArrowLeft" &&
+                      e.key !== "ArrowRight"
+                    ) {
+                      e.preventDefault();
+                    }
+                    if (e.key === " " && answer[String(q.id)]?.length === 0) {
+                      e.preventDefault();
+                    }
+
+                    // prevent double space
+                    if (e.key === " " && answer[String(q.id)]?.slice(-1) === " ") {
+                      e.preventDefault();
+                    }
+                  }}
+                  
+                    />
+                    {apiError && <p className="error-text">{apiError}</p>}
                 </div>
-              </div>
+               </div>
             </div>
           ))}
         </div>
+         
+         
+            
+          
 
         <Buttons
-          type="submit"
-          className="submit-button"
-          variant="btn btn-secondary"
-        >
-          Submit
-        </Buttons>
+            type="submit"
+            className="submit-button"
+            variant={`btn ${isFormReady ? "btn-primary" : "btn-secondary"}`}
+            
+          >
+            Submit
+          </Buttons>
       </div>
     </form>
   );

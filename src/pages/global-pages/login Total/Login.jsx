@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
@@ -12,6 +12,7 @@ import Buttons from '../../../components/form-elements/Buttons';
 const Login = () => {
 
     const navigate = useNavigate()
+
     
     const [form,setForm]=useState({
         username:"",
@@ -22,6 +23,7 @@ const Login = () => {
     
 
     const [isValid, setIsValid] = useState(false);
+    const [isApiValid, setIsApiValid] = useState(true);
 
     const togglePassword = () => {
         setShowPassword((prev) => !prev);
@@ -29,6 +31,7 @@ const Login = () => {
 
     const handlechange= async(e)=>{
         const {name,value}=e.target;
+        setIsApiValid(true);
 
         const updatedForm={
             ...form,
@@ -38,15 +41,11 @@ const Login = () => {
 
         setErrors((prev)=>({
             ...prev,
-            [name]:" " // clear errors
+            [name]:"", // clear errors
+            api:""
         }));
          
-        try{
-            await loginSchema.validate(updatedForm,{abortEarly:false})
-            setIsValid(true);
-        }catch{
-            setIsValid(false)
-        }
+       
         
     }
     const loginSchema=Yup.object({
@@ -70,7 +69,7 @@ const Login = () => {
 
      
     const response = await axios.post(
-      "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/login",
+      "http://localhost:5051/rest2/0.1/unAuth/login",
       form
     );
 
@@ -102,10 +101,23 @@ const Login = () => {
 
       setErrors({
         api:apiMsg
-      })
+      });
+       setIsApiValid(false);
     }
   }
 };
+
+    useEffect(()=>{
+        const validate=async()=>{
+            try{
+                await loginSchema.validate(form,{abortEarly:false})
+                setIsValid(true);
+            }catch{
+                setIsValid(false)
+            }
+        };
+        validate();
+    },[form])
     
     return (
         <div className='login-container'>
@@ -113,22 +125,40 @@ const Login = () => {
             <h3 className='sub-title-text  login-texts'>Continue managing your sales, target, and reports by signing in securely.</h3>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />
-                <Input placeholder="Name" name="username" value={form.username} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={25} error={errors.username}  />
+                <Input placeholder="Name" 
+                name="username" 
+                value={form.username} 
+                onChange={handlechange} 
+                maxLength={16}
+                 error={errors.username}
+                 onKeyDown={(e) => {
+                if (
+                    !/[a-zA-Z0-9_]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight"
+                ) {
+                    e.preventDefault();
+                }
+                }}
+              />
             </div>
             {/* {errors.username && <p className='error-text'>{errors.username}</p> } */}
 
             <div className="input-box">
                 <img src={Images.lockicon} className="icon left" />
-                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16} error={errors.password}/>
+                <Input placeholder='Password' name="password" value={form.password} onChange={handlechange}   type={showPassword? "text":"password"} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={15} error={errors.password}/>
                 <img 
                     src={showPassword ? Images.eyeclose : Images.eyeicon}
                     className="icon right" 
                     onClick={togglePassword}
                     style={{ cursor: "pointer" }}
                     />
+                    <p className="error-text">{errors.api}</p>
+                    {errors.api && <p className="error-text">{errors.api}</p>}
              </div>
-             {errors.api && <p className="error-text">{errors.api}</p>}
-
+ 
              
               
           
@@ -145,8 +175,10 @@ const Login = () => {
                 </div>
 
             </div>
+            <div className="next-btn">
+                <Buttons type="submit" className= {`btn ${isValid && isApiValid? " btn-primary":" btn-secondary"}`}  onClick={handlelogin} >Login</Buttons>
 
-            <Buttons className='btn login-button' variant='primary' onClick={handlelogin} >Login</Buttons>
+            </div>
             <div className='login-texts'>
                 <p> Don't Have an Account?</p>
                 <p onClick={() => navigate('/sign-up')}>Signup</p>

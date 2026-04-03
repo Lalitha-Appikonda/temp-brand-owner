@@ -10,7 +10,7 @@ import * as Yup from "yup";
 
 
 const BASE_URL =
-  "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1";
+  "http://localhost:5051/rest2/0.1";
 
 const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
             .required("*Answer is required"),
         })
       )
-      .min(3, "*Please answer at least 3 questions")
+      .min(3, "*Please answer exactly 3 questions")
       .test(
         "unique-questions",
         "Duplicate questions are not allowed",
@@ -53,6 +53,12 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
         }
       ),
   });
+
+
+  const isAnswersValid =
+  Object.values(answers).filter(
+    (ans) => ans && ans.trim().length >= 3
+  ).length >= 3;
 
   // ########### FETCH QUESTIONS
 
@@ -242,6 +248,22 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
                     placeholder="Enter Answer"
                     value={answers[q.id] || ""}
                     maxLength={25}
+                    onKeyDown={(e) => {
+                    if (
+                      !/[a-zA-Z ]/.test(e.key) &&
+                      e.key !== "Backspace" &&
+                      e.key !== "Tab" &&
+                      e.key !== "ArrowLeft" &&
+                      e.key !== "ArrowRight"
+                    ) {
+                      e.preventDefault();
+                    }
+
+                    // prevent double space
+                    if (e.key === " " && answers[q.id]?.slice(-1) === " ") {
+                      e.preventDefault();
+                    }
+                  }}
                     onChange={(e) =>
                       handleAnswerChange(q.id, e.target.value)
                     }
@@ -259,7 +281,7 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
 
       <div className="ques-submit">
         <Buttons
-          className={`submit-ques ${answeredCount >= 3 ? "btn-primary" : "btn-secondary"
+          className={`submit-ques ${isAnswersValid ? "btn-primary" : "btn-secondary"
             }`}
           disabled={false}
           onClick={handleSubmit}

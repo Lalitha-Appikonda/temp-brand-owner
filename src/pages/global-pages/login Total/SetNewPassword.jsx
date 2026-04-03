@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../../components/form-elements/Input";
 import { Images } from "../../../images/Image";
 import Buttons from "../../../components/form-elements/Buttons";
@@ -18,6 +18,8 @@ const SetNewPassword = () => {
   const navigate = useNavigate();
   const location=useLocation();
   const userId=location.state?.userId || localStorage.getItem("userId");
+
+  const [isValid, setIsValid] = useState(false);
  
   const password=formData?.newPassword || ""
     const passwordRules = {
@@ -45,15 +47,45 @@ const SetNewPassword = () => {
   ]
     
 
-  const handlechange=(e)=>{
-    const {name,value}=e.target;
+  const handlechange = async (e) => {
+    const { name, value } = e.target;
 
-    setFormData({
+    const updatedForm = {
       ...formData,
-       [name]:value
-    })
-  }
+      [name]: value,
+    };
 
+    setFormData(updatedForm);
+
+    // clear error while typing
+    setError((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+
+    try {
+      await newpasswordschema.validate(updatedForm, { abortEarly: false });
+      setIsValid(true);
+    } catch {
+      setIsValid(false);
+    }
+  };
+
+
+  useEffect(() => {
+    const validate = async () => {
+      try {
+        await newpasswordschema.validate(formData, { abortEarly: false });
+        setIsValid(true);
+      } catch {
+        setIsValid(false);
+      }
+    };
+
+    validate();
+  }, [formData]);
+
+  const isFormReady = isValid;
 
   const handleSubmit= async (e)=>{
     e.preventDefault();
@@ -62,13 +94,13 @@ const SetNewPassword = () => {
       await newpasswordschema.validate(formData,{ abortEarly:false})
       setError({}) // to clear errors
 
-      const res=await axios.post(`https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/newPassword/${userId}`,
+      const res=await axios.post(`http://localhost:5051/rest2/0.1/unAuth/newPassword/${userId}`,
       {
         newPassword: formData.newPassword,
         confirmPassword: formData.confirmPassword,
       })
       console.log(res.data)
-      navigate("/status/success")
+      navigate("/login")
     }catch(err){
        if (err.inner){
         const newErrors={};
@@ -113,8 +145,9 @@ const SetNewPassword = () => {
               <img src={Images.key} className="icon left" />
               <Input type={showPassword?"text":"password"} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()} maxLength={16}  value={formData?.newPassword || ""} name="newPassword"/>
               <img src={showPassword ?Images.eyeclose: Images.eyeicon} className="icon right" onClick={()=>setShowPassword(prev=>!prev)}/>
+              {error.newPassword && <p className="error-text">{error.newPassword}</p> }
             </div>
-             {error.newPassword && <p className="error-text">{error.newPassword}</p> }
+             
 
           </div>
           <ul className="rules">
@@ -137,20 +170,22 @@ const SetNewPassword = () => {
                 
               />
               <img src={showConfirmPassword ? Images.eyeclose: Images.eyeicon} className="icon right" onClick={()=> setShowConfirmPassword(prev=>!prev)} />
+              {error.confirmPassword && <p className="error-text">{error.confirmPassword}</p> }
             </div>
-            {error.confirmPassword && <p className="error-text">{error.confirmPassword}</p> }
+            
           </div>
           <div className="action-buttons">
             <Buttons
               className="cancel-button"
               variant="btn btn-outline-primary"
-              onClick={() => prevStep()}
+              onClick={() => navigate(-1)}
             >
               Cancel
             </Buttons>
             <Buttons
               className="submit-button"
-              variant=" btn btn-secondary"
+              variant={`btn ${isFormReady ? "btn-primary" : "btn-secondary"}`}
+              disabled={!isFormReady}
                type="submit"
             >
               Submit
@@ -217,7 +252,7 @@ export default SetNewPassword;
 //         await signupSchema.validate({newPassword,confirmPassword},{abortEarly:false})
 
 
-//         const res=await axios.post(`https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/newPassword/${userId}`,{
+//         const res=await axios.post(`http://localhost:5051/rest2/0.1/unAuth/newPassword/${userId}`,{
 //           newPassword,confirmPassword
 //         })
 //         navigate("/login")
