@@ -8,10 +8,11 @@ import { useLocation } from "react-router-dom";
 const StatusHandler = () => {
   
   const navigate = useNavigate();
-  const [type,setType]=useState("waiting")
-
   const location = useLocation();
+  const initialType = location.state?.type || "waiting";
   const username = location.state?.username;
+
+  const [type, setType] = useState(initialType);
 
   const config = {
     waiting: {
@@ -60,10 +61,11 @@ const StatusHandler = () => {
   const data = config[type];
 
     useEffect(() => {
+       if (type === "limit-exceed") return;
     const checkStatus = async () => {
       try {
         const response = await axios.post(
-          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getStatus",
+          "http://localhost:5051/rest2/0.1/unAuth/getStatus",
           {username}
         );
 
@@ -86,7 +88,9 @@ const StatusHandler = () => {
     };
 
     checkStatus(); 
-  }, []);
+  }, [type]);
+
+  
     useEffect(() => {
         if (type === "approved") {
           // wait 2 seconds so user can see success screen

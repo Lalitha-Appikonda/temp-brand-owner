@@ -64,7 +64,7 @@ const categorySchema = Yup.object().shape({
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getCategories",  
+          "http://localhost:5051/rest2/0.1/unAuth/getCategories",  
         );
         console.log(res);
         console.log(res.data);
@@ -92,7 +92,7 @@ const categorySchema = Yup.object().shape({
     const fetchSubCategories = async () => {
       try {
         const res = await axios.post(
-          "https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getSubCategories",
+          "http://localhost:5051/rest2/0.1/unAuth/getSubCategories",
           {
             categoryId: category.value === "other" ? 0 : Number(category.value),
           },
@@ -284,6 +284,22 @@ console.log("isValid:", isValid);
                   }}
                   maxLength={25}
                   error={errors.otherCategory}
+                  onKeyDown={(e) => {
+                  if (
+                    !/[a-zA-Z ]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight"
+                  ) {
+                    e.preventDefault();
+                  }
+
+                  // prevent multiple spaces
+                  if (e.key === " " && otherCategory.slice(-1) === " ") {
+                    e.preventDefault();
+                  }
+                }}
                 />
                  {/* {errors.otherCategory && (<p className="error-text">{errors.otherCategory}</p>)} */}
               </div>
@@ -325,7 +341,24 @@ console.log("isValid:", isValid);
                       // Clear error as soon as typing starts
                       setErrors((prev) => ({ ...prev, otherSubCategory: "" }));
                     }}
-                   maxLength={25}
+                    error={errors.otherSubCategory}
+                   maxLength={35}
+                   onKeyDown={(e) => {
+                  if (
+                    !/[a-zA-Z ,\-]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Tab" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight"
+                  ) {
+                    e.preventDefault();
+                  }
+
+                  // prevent multiple spaces
+                  if (e.key === " " && otherSubCategory.slice(-1) === " ") {
+                    e.preventDefault();
+                  }
+                }}
                 />
                 {/* {errors.otherSubCategory && (<p className="error-text">{errors.otherSubCategory}</p>)} */}
               </div>

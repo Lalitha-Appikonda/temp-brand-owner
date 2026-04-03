@@ -10,57 +10,67 @@ const ForgotPassword = () => {
 
    const [username,setusername]=useState("");
    const [error,setError]=useState("");
+   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [isValid, setIsValid] = useState(false);
+  const isFormReady = isValid && username.trim().length >= 3;
+
 
   const navigate = useNavigate()
 
   const usernameSchema=Yup.string()
     .trim()
+    .min(3, "Minimum 3 characters") 
     .required("enter username")
   
-    const handlechange=(e)=>{
-      setusername(e.target.value)
-      setError("");
+    const handlechange = async (e) => {
+        const value = e.target.value;
+        setusername(value);
+        
+        if(isSubmitted){
+          setError("")
+        }
 
-    }
+        try {
+          await usernameSchema.validate(value);
+          setIsValid(true);
+        } catch (err) {
+          setIsValid(false);
+        }
+      };
 
-    const handlesubmit= async (e)=>{
+    const handlesubmit = async (e) => {
       e.preventDefault();
-      
-      try{
+      setIsSubmitted(true); //  
+
+      try {
         await usernameSchema.validate(username);
 
-        const response=await axios.post("https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getUser",
-          {
-            username
-          }
-        )
-        console.log(response.data)
-        console.log("FULL RESPONSE:", response);
-        const userId=response.data.data;
-        console.log(userId)
+        const response = await axios.post(
+          "http://localhost:5051/rest2/0.1/unAuth/getUser",
+          { username }
+        );
 
-        const getresponse=await axios.get(`https://v3n2pcp3-5051.inc1.devtunnels.ms/rest2/0.1/unAuth/getQuestions/${userId}`)
-        const questions = getresponse.data; 
-        console.log(getresponse.data)
-        
-        navigate("/login/forgot-after-setup",{
-          state:{userId,questions}
-        })
+        const userId = response.data.data.id;
 
-      }catch(err){
-        console.log(err)
+        const getresponse = await axios.get(
+          `http://localhost:5051/rest2/0.1/unAuth/getQuestions/${userId}`
+        );
 
-        if(err.name === "ValidationError"){
+        const questions = getresponse.data;
+
+        navigate("/login/forgot-after-setup", {
+          state: { userId, questions },
+        });
+
+      } catch (err) {
+        if (err.name === "ValidationError") {
           setError(err.message);
-        }else{
-          setError(err.response?.data?.message || "user not found")
+        } else {
+          setError(err.response?.data?.message || "user not found");
         }
       }
-
-      
-
-    }
-  
+    };
 
  
   
@@ -78,14 +88,21 @@ const ForgotPassword = () => {
                   <label className='label-text'>Username</label>
                   <div className="input-box">
                     <img src={Images.user2} className="icon left" />
-                    <Input placeholder='Enter username' name="username" value={username} maxLength={25} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()}/>
-
+                    <Input placeholder='Enter username' name="username" value={username} maxLength={16} onChange={handlechange} onKeyDown={(e)=>e.key === " " && e.preventDefault()}/>
+                    {isSubmitted && error && (<p className='error-text'>{error}</p>)}
                   </div>
-                  {error && <p className='error-text'>{error}</p> }
+                  
               </div>
               <div className='action-buttons'>
                 <Buttons type="button" className='cancel-button' variant='btn btn-outline-primary' onClick = {()=>navigate('/login')}>Cancel</Buttons>
-                <Buttons type="submit" className='submit-button' variant='secondary'>Submit</Buttons>
+                <Buttons
+                  type="submit"
+                  className="submit-button"
+                  variant={`btn ${isFormReady ? "btn-primary" : "btn-secondary"}`}
+                   
+                >
+                  Submit
+                </Buttons>
               </div>
       </form>
 
