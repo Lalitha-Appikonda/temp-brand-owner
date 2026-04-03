@@ -10,6 +10,7 @@ import { Images } from "../../images/Image";
 import Buttons from "../../components/form-elements/Buttons";
 import { useMediaQuery } from "react-responsive";
 import MobileCart from "./MobileCart";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const Payment = () => {
   const location = useLocation();
@@ -142,7 +143,7 @@ const Payment = () => {
                 </div>
               )}
             </div>
-            <div className="inner-container">
+            {cartItems.length > 0  && <div className="inner-container">
               <div
                 className={`left-section ${currentpage === "/address" ? "left-section-address" : ""}`}
               >
@@ -155,7 +156,7 @@ const Payment = () => {
               <div className="right-section">
                 <PriceDetails cartItems={cartItems} total={total} />
               </div>
-            </div>
+            </div>}
 
             {currentpage === "/cart" && (
               <div className="cart-card-bottom">
@@ -172,6 +173,7 @@ const Payment = () => {
                       image={product.image}
                       rating={product.rating}
                       reviews={product.reviews}
+                      cusBtnIcon = {<HiOutlineTrash  className="icon"/>}
                     />
                   ))}
                 </div>

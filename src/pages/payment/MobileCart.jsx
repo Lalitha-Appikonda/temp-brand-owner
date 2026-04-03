@@ -19,7 +19,7 @@ const MobileCart = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [mobileCartItems, setMobileCartItems] = useState([
     {
@@ -213,46 +213,63 @@ const MobileCart = () => {
 
   // place order
 
-  const handlePlaceOrder = () => {
-  if (selectedItems.length === 0) return;
+//   const handlePlaceOrder = () => {
+//   const selectedCartProducts = mobileCartItems.filter((item) =>
+//     selectedItems.includes(item.id)
+//   );
 
-  const selectedCartItems = mobileCartItems.filter((item) =>
-    selectedItems.includes(item.id)
-  );
+//   if (selectedCartProducts.length === 0) {
+//     return;
+//   }
 
-  const hasOutOfStock = selectedCartItems.some(
-    (item) => item.stock !== "In stock"
-  );
+//   const hasOutOfStock = selectedCartProducts.some(
+//     (item) => item.stock.toLowerCase() !== "in stock"
+//   );
 
-  if (!hasOutOfStock) {
-    navigate("/address");
-  } 
-};
+//   if (hasOutOfStock) {
+//     setShowStockPopup(true);
+//     return;
+//   }
+
+//   navigate("/address");
+// };
 
   return (
     <>
       <div className="mobile-cart-container">
-        <MobileHeader title="Shopping Bag" wishlist={true}/>
+        <MobileHeader title="Shopping Bag" wishlist={true} />
 
         <div className="progress-indication-container">
-          <div className={`progress-line ${currentPath === "/cart" ? "active" : ""}`}></div>
+          <div
+            className={`progress-line ${currentPath === "/cart" ? "active" : ""}`}
+          ></div>
 
-          <div className= "step">
-            <div className={`circle ${currentPath === "/cart" ? "active" : ""}` }></div>
+          <div className="step">
+            <div
+              className={`circle ${currentPath === "/cart" ? "active" : ""}`}
+            ></div>
             <span>Bag</span>
           </div>
 
-          <div className={`progress-line ${currentPath === "/address" ? "active" : ""}`}></div>
+          <div
+            className={`progress-line ${currentPath === "/address" ? "active" : ""}`}
+          ></div>
 
-          <div className= "step" >
-            <div className={`circle ${currentPath === "/address" ? "active" : ""}` }></div>
+          <div className="step">
+            <div
+              className={`circle ${currentPath === "/address" ? "active" : ""}`}
+            ></div>
             <span>Address</span>
           </div>
 
-          <div className={`progress-line ${currentPath === "/payment" ? "active" : ""}`}></div>
+          <div
+            className={`progress-line ${currentPath === "/payment" ? "active" : ""}`}
+          ></div>
 
           <div className="step">
-            <div className={`circle ${currentPath === "/payment" ? "active" : ""}` }></div>
+            <div
+              className={`circle ${currentPath === "/payment" ? "active" : ""}`}
+            ></div>
             <span>Payment</span>
           </div>
         </div>
@@ -413,8 +430,21 @@ const MobileCart = () => {
             <h1>₹{totalPrice - discount}</h1>
           </div>
           <div className="mobile-place-order-button-container">
-            <Buttons onClick={handlePlaceOrder}>Place Order</Buttons>
+            <Buttons>Place Order</Buttons>
           </div>
+          {/* {hasOutOfStock ? (
+            <PopUp
+              trigger={<div className="mobile-place-order-button-container"><Buttons>Place Order</Buttons> </div>}
+              title="Out of Stock"
+            >
+              <p>
+                Some selected items are out of stock. Please remove them before
+                placing the order.
+              </p>
+            </PopUp>
+          ) : (
+            <div className="mobile-place-order-button-container"><Buttons onClick={() => navigate("/address")}>Place Order</Buttons></div>
+          )} */}
         </div>
       </div>
     </>

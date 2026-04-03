@@ -1,6 +1,6 @@
 export const Images = {
   // login
-  diffImg: "/assets/login-sign up/diff-img.png",
+  // diffImg: "/assets/login-sign up/diff-img.png",
   lessThan: "/assets/icons/less-than-icon.svg",
   quesIcon: "/assets/icons/ques-icon.svg",
   waitTime: "/assets/icons/wait-time.svg",
@@ -20,6 +20,7 @@ export const Images = {
   wrongtick: "/assets/login-sign up/fi_2732657 (2).svg",
   user2: "/assets/login-sign up/Group (12).svg",
   successful: "/assets/icons/success.svg",
+  person : "/assets/login-sign up/person.svg",
 
   // nav bar
   cart: "/assets/icons/shopping-cart.svg",

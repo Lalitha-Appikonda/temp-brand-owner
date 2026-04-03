@@ -25,30 +25,34 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
 
   const { setSignupData } = useContext(SignupContext);
 
-  const signupSchema=Yup.object({
-    name:Yup.string()
-    .trim()
-    
-    .min(5,"*Minimum 5 characters")
-    .max(20, "*Maximum 20 characters only")
-    .matches(/^[A-Za-z ]+$/, "*Only letters and spaces allowed")
-    .required("*Name is required")
-    .test("*No multiple-spaces","no extra spaces allowed",(value)=> !/\s{2,}/.test(value || "")),
+  const signupSchema = Yup.object({
+    name: Yup.string()
+      .trim()
 
-    username:Yup.string()
-    .trim()
-    .min(5,"*Minimum 5 characters")
-    .max(25,"*Max 25 charcters only")
-    .matches(/^[a-zA-Z0-9_]+$/, "*Only letters, numbers, underscore")   //have to write one more validation here to display as username already exits
-    .required("*Username is required"),
-    password:Yup.string()
-    .trim()
-    
-    .min(8,"*Minimum 8 characters")
-    .max(16,"*Maximum 16 characters")
-    .matches(/[0-9]/, "At least 1 number")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, "*At least 1 special character")
-    .required("*Password is required"), // Pattern wrong
+      .min(5, "*Minimum 5 characters")
+      .max(20, "*Maximum 20 characters only")
+      .matches(/^[A-Za-z ]+$/, "*Only letters and spaces allowed")
+      .required("*Name is required")
+      .test(
+        "*No multiple-spaces",
+        "no extra spaces allowed",
+        (value) => !/\s{2,}/.test(value || ""),
+      ),
+
+    username: Yup.string()
+      .trim()
+      .min(5, "*Minimum 5 characters")
+      .max(25, "*Max 25 charcters only")
+      .matches(/^[a-zA-Z0-9_]+$/, "*Only letters, numbers, underscore") //have to write one more validation here to display as username already exits
+      .required("*Username is required"),
+    password: Yup.string()
+      .trim()
+
+      .min(8, "*Minimum 8 characters")
+      .max(16, "*Maximum 16 characters")
+      .matches(/[0-9]/, "At least 1 number")
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, "*At least 1 special character")
+      .required("*Password is required"), // Pattern wrong
 
     confirmpassword: Yup.string()
       .required("*Confirm password is required")
@@ -79,20 +83,19 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       setErrors(formattedErrors);
     }
   };
-  
 
-    useEffect(() => {
-      const validate = async () => {
-        try {
-          await signupSchema.validate(form, { abortEarly: false });
-          setIsValid(true);
-        } catch {
-          setIsValid(false);
-        }
-      };
+  useEffect(() => {
+    const validate = async () => {
+      try {
+        await signupSchema.validate(form, { abortEarly: false });
+        setIsValid(true);
+      } catch {
+        setIsValid(false);
+      }
+    };
 
-      validate();
-    }, [form]);
+    validate();
+  }, [form]);
 
   // if (!isValid){
   //   return;
@@ -143,7 +146,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
     <form className="signup-container" onSubmit={handlesubmit}>
       {/* <div className='container'> */}
 
-      <p className="logintext">Create Your Account</p>
+      <h2 className="logintext">Create Your Account</h2>
       <h4 className="singing-text">
         Continue managing your sales, purchases, and reports by signing in
         securely.
@@ -152,28 +155,27 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       <div className="input-box">
         <img src={Images.user} className="icon left" />
         <Input
-            placeholder="Name"
-            name="name"
-            value={form.name}
-            onChange={handlechange}
-            onKeyDown={(e) => {
-              // allow letters and space only
-              if (
-                !/[a-zA-Z ]/.test(e.key) && // only letters and space
-                e.key !== "Backspace" &&
-                e.key !== "Tab" &&
-                e.key !== "ArrowLeft" &&
-                e.key !== "ArrowRight"
-              ) {
-                e.preventDefault();
-              }
-              if (e.key === " " && form.name.slice(-1) === " ") {
-      e.preventDefault();
-    }
-            }}
-          
-            maxLength={20}
-          />
+          placeholder="Name"
+          name="name"
+          value={form.name}
+          onChange={handlechange}
+          onKeyDown={(e) => {
+            // allow letters and space only
+            if (
+              !/[a-zA-Z ]/.test(e.key) && // only letters and space
+              e.key !== "Backspace" &&
+              e.key !== "Tab" &&
+              e.key !== "ArrowLeft" &&
+              e.key !== "ArrowRight"
+            ) {
+              e.preventDefault();
+            }
+            if (e.key === " " && form.name.slice(-1) === " ") {
+              e.preventDefault();
+            }
+          }}
+          maxLength={20}
+        />
       </div>
       {/* {errors.name && <p className='error-text'>{errors.name}</p> } */}
 
@@ -188,16 +190,16 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           maxLength={25}
           onKeyDown={(e) => {
             if (
-                !/[a-zA-Z0-9_]/.test(e.key) &&
-                e.key !== "Backspace" &&
-                e.key !== "Tab" &&
-                e.key !== "ArrowLeft" &&
-                e.key !== "ArrowRight"
-              ) {
-                e.preventDefault();
-              }
-            }}
-          />
+              !/[a-zA-Z0-9_]/.test(e.key) &&
+              e.key !== "Backspace" &&
+              e.key !== "Tab" &&
+              e.key !== "ArrowLeft" &&
+              e.key !== "ArrowRight"
+            ) {
+              e.preventDefault();
+            }
+          }}
+        />
       </div>
       {/* {errors.username  && <p className='error-text'>{errors.username}</p> } */}
 
@@ -211,7 +213,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           onChange={handlechange}
           error={errors.password}
           maxLength={16}
-          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+          onKeyDown={(e) => e.key === " " && e.preventDefault()}
         />
         <img
           src={showPassword ? Images.eyeclose : Images.eyeicon}
@@ -245,7 +247,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
           onChange={handlechange}
           error={errors.confirmpassword}
           maxLength={16}
-          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
+          onKeyDown={(e) => e.key === " " && e.preventDefault()}
         />
         <img
           src={showConfirmPassword ? Images.eyeclose : Images.eyeicon}
@@ -255,8 +257,13 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       </div>
       {/* {errors.confirmpassword && <p className='error-text'>{errors.confirmpassword}</p> } */}
 
-      <div className='signin-next'>
-        <Buttons type="submit"   className= {`btn ${isValid ? "btn-primary":"btn-secondary"}`}  >Next</Buttons>
+      <div className="signin-next">
+        <Buttons
+          type="submit"
+          className={`btn ${isValid ? "btn-primary" : "btn-secondary"}`}
+        >
+          Next
+        </Buttons>
       </div>
 
       <div className="login-texts">
