@@ -9,6 +9,7 @@ import ReviewCard from '../../components/card/ReviewCard';
 import Productreview from '../../components/card/Productreview';
 import Card from '../../components/card/Card';
 import { FiHeart } from 'react-icons/fi';
+import MobileHeader from '../../components/mobileHeader/MobileHeader';
 
 const ProductInnerPage = () => {
 
@@ -197,6 +198,8 @@ const ProductInnerPage = () => {
             <div className='container' >
                 <div className='product-page'>
 
+                    <MobileHeader wishlist={true} cart={true}/>
+
                     {/*----- product inner page first section ----*/}
                     <div className='product-inner-page'>
                         <div>
@@ -307,17 +310,17 @@ const ProductInnerPage = () => {
                                 <Buttons className='add-to-wishlist-btn' variant='outline-primary'>
                                     Add to Wishlist <span className='heart-icon'>
                                         <div className="image-likeback">
-                                <svg
-                                    onClick={() => setlike(!like)}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    width="25"
-                                    height="26"
-                                    className={`heart ${like ? "active" : ""}`}
-                                >
-                                    <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
-                                </svg>
-                            </div>
+                                            <svg
+                                                onClick={() => setlike(!like)}
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="25"
+                                                height="26"
+                                                className={`heart ${like ? "active" : ""}`}
+                                            >
+                                                <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+                                            </svg>
+                                        </div>
                                         {/* <img src={Images.cartheart} onClick={tooglelike} className={` heart ${like ? " active" : ""}`} /> */}
                                     </span>
                                 </Buttons>
@@ -338,18 +341,18 @@ const ProductInnerPage = () => {
                                 <div className=' mobile-product-action-btns'>
                                     <div className='mobile-product-action-btns-container'>
                                         <span className='buy-icon'>
-                                           <div className="image-likeback">
-                                <svg
-                                    onClick={() => setlike(!like)}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    width="25"
-                                    height="26"
-                                    className={`heart ${like ? "active" : ""}`}
-                                >
-                                    <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
-                                </svg>
-                            </div>
+                                            <div className="image-likeback">
+                                                <svg
+                                                    onClick={() => setlike(!like)}
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    width="25"
+                                                    height="26"
+                                                    className={`heart ${like ? "active" : ""}`}
+                                                >
+                                                    <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+                                                </svg>
+                                            </div>
 
                                         </span>
 

@@ -126,4 +126,7 @@ export const Images = {
   downarrow: "/assets/icons/downarrow.svg",
   uparrow: "/assets/icons/uparrow.svg",
   leftcrossarrow: "/assets/icons/16.svg",
+  // popup product inner page
+
+  yellowstar:"/assets/icons/yellowstar.svg",
 };

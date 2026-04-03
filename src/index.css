@@ -292,11 +292,11 @@ input::-webkit-inner-spin-button {
 /* =========================================================== typography for web=========================================================== */
 
 h1 {
-  font-size: 21px;
+  font-size:35px;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 21px;
 }
 
 h3 {
@@ -315,7 +315,6 @@ h6 {
   font-size: 13px;
 }
 
-@media (max-width: 1200px) {}
 
 @media (max-width: 768px) {
   h1 {
@@ -698,6 +697,14 @@ h6 {
   border-radius: 39px;
   font-size: 15px;
 }
+.input-group label{
+  font-family:"creatodisplay-medium";
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+color:rgba(var(--primary-text)) ;
+padding-bottom:11px ; 
+}
 
 .input-group .input-wrapper input ::placeholder {
   color: rgba(var(--secondary-text), 1);
@@ -738,11 +745,11 @@ h6 {
 }
 
 .input-box .icon.left {
-  left: 15px;
+  left:25px;
 }
 
 .input-box .icon.right {
-  right: 15px;
+  right:25px;
   cursor: pointer;
 }
 
@@ -2299,6 +2306,7 @@ h6 {
   text-transform: uppercase;
   color: rgba(var(--primary-text));
   padding-top: 14px;
+  padding-left:20px;
 }
 
 .card-context .card .price-section {
@@ -2326,6 +2334,7 @@ h6 {
   font-family: "creatodisplay-bold";
   font-weight: 700;
   color: rgba(var(--primary-text), 1);
+  padding-left:20px;
 }
  
 .card-context .card .price-section .product-price-value {
@@ -2358,6 +2367,7 @@ h6 {
 .card-context .card .select-cart {
   display: flex;
   gap: 25px;
+  padding-left:20px;
 }
 
 .card-context .card .select-cart select {
@@ -2509,7 +2519,10 @@ h6 {
   .card-context .card .price-section .product-price-value {
   font-size: 15px;
 }
+ 
 }
+
+
 
 /* ***************************************** mobile header component *******************************************/
 
@@ -3572,7 +3585,7 @@ h6 {
 
 .signup-container .input-box input {
   min-width: 100%;
-  padding: 18px 45px;
+  padding: 18px 55px;
   border-radius: 30px;
   border: none;
   outline: none;
@@ -3604,7 +3617,7 @@ h6 {
   text-align: left;
   font-size: 12px;
   color: rgba(var(--secondary-text), 1);
-  margin: 10px 0 0px 15px;
+  margin:5px 0 0px 15px;
 }
 
 .signup-container .rules li {
@@ -3648,15 +3661,17 @@ h6 {
 .signup-container .terms {
   font-family: "creatodisplay-regular";
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
   text-align: center;
   vertical-align: middle;
+  color:rgba(var(--secondary-text))
+
 }
 
-.signup-container .terms span {
-  color: rgba((var(--primary-text), 1));
-  text-decoration: underline;
+.signup-container .terms-signin{
+    color:rgba(var(--primary-text)) ;
+    text-decoration: underline;
   cursor: pointer;
 }
 
@@ -3714,7 +3729,6 @@ h6 {
 .setnewpassword-container .title-text {
   font-family: "creatodisplay-bold";
   font-weight: 700;
-  font-size: 35px;
   line-height: 28px;
   text-align: center;
   color: rgba(var(--primary-text), 1);
@@ -3871,7 +3885,7 @@ h6 {
 
 .login-container .input-box input {
   min-width: 100%;
-  padding: 18px 45px;
+  padding: 18px 60px;
   border-radius: 30px;
   border: none;
   outline: none;
@@ -4815,7 +4829,7 @@ h6 {
     padding-bottom: 12px;
     padding-left: 17px;
     border-width: 1px;
-    top: 54px;
+    top:31px;
 
   }
 
@@ -4834,7 +4848,7 @@ h6 {
 
   .home-page .home-section1 .down-position {
     position: absolute;
-    bottom: 9px;
+    bottom:-40px;
     right: 2px;
   }
 
@@ -4872,7 +4886,7 @@ h6 {
 
   .home-page .home-section1 .btn-double-primary {
     padding: 19px 14px 24px 33px;
-    width: 190px;
+    width:160px;
   }
 
   .home-page .home-section1 .circle-button {
@@ -5115,7 +5129,7 @@ h6 {
   .home-page .all-products-container .products-container12 {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content:start;
     align-items: center;
     gap: 20px;
 
@@ -8214,7 +8228,6 @@ h6 {
 
 
 
-
 .product-page .product-inner-page {
   display: flex;
   gap: 17px;
@@ -8689,7 +8702,7 @@ h6 {
   .product-page .product-inner-page {
     display: flex;
     gap: 0px;
-    padding: 180px 0px 0px 0px;
+    padding:80px 0px 0px 0px;
     justify-content: center;
     align-items: center;
   }
@@ -9297,4 +9310,33 @@ color:rgba(var(--primary-bg))
 
 
 
+.how-item-img{
+  width:124px;
+height:124px;
+}
+.howitem-row{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.yellowstars{
+  display: flex;
+}
+.howitem-title{
+  font-family:"creatodisplay-bold";
+font-weight: 700;
+font-size: 25px;
+color:rgba(var(--primary-text)) ;
+}
+.howitem-subtitle{
+  font-family:"cratodisplay-regular";
+font-weight: 400;
+font-size: 14px;
+color:rgba(var(--primary-text)) ;
+padding-bottom:15px;
+background-color: red;
+}
 
+
+
+ 

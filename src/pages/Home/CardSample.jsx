@@ -5,33 +5,36 @@ import { Images } from '../../images/Image';
 import RatingReview from '../../components/card/RatingReview';
 import Styleguide from './../../Styleguide/Styleguide';
 import Productreview from '../../components/card/Productreview';
+import Input from '../../components/form-elements/Input';
+import TextArea from '../../components/form-elements/TextArea';
+import Buttons from '../../components/form-elements/Buttons';
 
-  const reviews = [
-    {
-      rating: "4.5",
-      text: "Product is good",
-      images: [Images.reviewproduct,Images.reviewproduct,Images.reviewproduct],
-      name: "Shylaja Shankar",
-      role: "Certified Dealer,",
-      date: "Jan 2024",
-      likes: "10",
-      dislikes: "2",
-             reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
+const reviews = [
+  {
+    rating: "4.5",
+    text: "Product is good",
+    images: [Images.reviewproduct, Images.reviewproduct, Images.reviewproduct],
+    name: "Shylaja Shankar",
+    role: "Certified Dealer,",
+    date: "Jan 2024",
+    likes: "10",
+    dislikes: "2",
+    reviewText: "I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
 
-    },
-    {
-      rating: "7.0",
-      text: "Nice quality",
-      images: [Images.reviewproduct,Images.reviewproduct,Images.reviewproduct],
-      name: "Ravi",
-      role: "Certified Dealer,",
-      date: "Feb 2024",
-      likes: "5",
-      comments: "1",
-       reviewText:"I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
-    },
-   
-  ];
+  },
+  {
+    rating: "7.0",
+    text: "Nice quality",
+    images: [Images.reviewproduct, Images.reviewproduct, Images.reviewproduct],
+    name: "Ravi",
+    role: "Certified Dealer,",
+    date: "Feb 2024",
+    likes: "5",
+    comments: "1",
+    reviewText: "I really liked it. The colour also looks good. The product is really good but the only problem is it is thin. The chance of it getting damage is high but if you use is it a bit carefully then it is good to go."
+  },
+
+];
 const images = [
   Images.rightcurve,
   Images.innerproduct,
@@ -39,10 +42,18 @@ const images = [
   Images.innerproduct,
   Images.leftcurve,
 ];
+
+// const starimage = [
+//   Images.yellowstar,
+//   Images.yellowstar,
+//   Images.yellowstar,
+//   Images.yellowstar,
+//   Images.yellowstar,
+// ]
 const CardSample = () => {
   return (
     <div>
-       {reviews.map((item, index) => (
+      {reviews.map((item, index) => (
         <ReviewCard
           key={index}
           rating={item.rating}
@@ -61,20 +72,53 @@ const CardSample = () => {
         <Productreview/>
       </div> */}
 
-    <div style={{padding:"50px "}}>
-        <RatingReview/>
-    </div>
+      <div style={{ padding: "50px " }}>
+        <RatingReview />
+      </div>
 
 
-    <div style={{marginBottom:"300px"}}>
-      <PhotoCarousel
+      <div style={{ marginBottom: "300px" }}>
+        <PhotoCarousel
           title="Customer Photos"
           count={500}
           images={images}
         />
-    </div>
-    <Styleguide/>
-    
+      </div>
+      {/* <Styleguide/> */}
+
+
+
+      <div>
+        <div className='howitem-row'>
+          <img className='how-item-img' src={Images.product} />
+          <div>
+            <p className='howitem-title' >How was the item?</p>
+            <h5 className='howitem-subtitle' >Aquaremid - Unique Biotech Pvt Ltd</h5>
+            <div className='yellowstars'>
+              {[...Array(5)].map((_, index) => (
+              <img className='yellowstars' key={index} src={Images.yellowstar} alt="star" width="20" />
+            ))}
+            </div>
+          </div>
+        </div>
+        <div>
+         
+          <Input placeholder='eg; Good Quality' label="Title your review (Required)" />
+        </div>
+        <div>
+         
+          <TextArea placeholder='eg; Good Quality' label="Write your review" />
+        </div>
+        <div>
+          
+          <Input type="file" label="Share a photo or video"/>
+        </div>
+        <div>
+          <Buttons variant='outline-primary'>Cancel</Buttons>
+           <Buttons variant='primary'>Submit</Buttons>
+        </div>
+      </div>
+
     </div>
 
   )
