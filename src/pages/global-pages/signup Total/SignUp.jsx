@@ -143,7 +143,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
     <form className="signup-container" onSubmit={handlesubmit}>
       {/* <div className='container'> */}
 
-      <p className="logintext">Create Your Account</p>
+      <h1 className="logintext">Create Your Account</h1>
       <h4 className="singing-text">
         Continue managing your sales, purchases, and reports by signing in
         securely.
@@ -267,7 +267,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       <p className="terms terms-conditions">
         By clicking, I confirm that I have read, understood, and agree to the
         <PopUp
-          trigger={<span> Terms of Service </span>}
+          trigger={<span className="terms-signin"> Terms of Service </span>}
           size="md"
           title="Terms of Service"
           className="terms-popup"

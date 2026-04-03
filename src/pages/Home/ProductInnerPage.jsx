@@ -9,6 +9,7 @@ import ReviewCard from '../../components/card/ReviewCard';
 import Productreview from '../../components/card/Productreview';
 import Card from '../../components/card/Card';
 import { FiHeart } from 'react-icons/fi';
+import MobileHeader from '../../components/mobileHeader/MobileHeader';
 
 const ProductInnerPage = () => {
 
@@ -196,6 +197,8 @@ const ProductInnerPage = () => {
         <div>
             <div className='container' >
                 <div className='product-page'>
+
+                    <MobileHeader wishlist={true} cart={true}/>
 
                     {/*----- product inner page first section ----*/}
                     <div className='product-inner-page'>

@@ -12,6 +12,8 @@ import { PiLineVertical } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../../components/popup/PopUp";
 import RadioButton from "../../components/form-elements/RadioButton";
+import MobileHeader from "../../components/mobileHeader/MobileHeader";
+import ProductButtons from "../../components/productSortingButtons/ProductButtons";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -120,38 +122,11 @@ const ProductList = () => {
     <>
       <div className="container">
         <div className="products-list">
-          <div className="mobile-product-listing">
-            <div className="title-arrows-back">
-              <FaArrowLeft onClick={() => navigate("/")} />
-              <h1>Probiotics</h1>
-            </div>
 
-            <div className="mobile-right-products-list">
-              <div className="product-list-search">
-                <FaSearch className="icon" />
-              </div>
-              <div className="cart-container-wrapper">
-                <CiHeart className="icon" />
-                <div className="bag">
-                  <img src={Images.cartBag} alt="" />
-                  <div className="dot-circle">8</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MobileHeader title="Probiotics" search={true} cart={true} wishlist={true} />
 
           <div className="product-buttons-in-mobile">
-            <div className="all-buttons">
-              <Buttons variant="outline-primary" className="products-btn">
-                All
-              </Buttons>
-              <Buttons variant="outline-primary" className="products-btn">
-                Probiotics
-              </Buttons>
-              <Buttons variant="outline-primary" className="products-btn">
-                Minerals
-              </Buttons>
-            </div>
+            <ProductButtons />
           </div>
 
           <div className="product-listing">

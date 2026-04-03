@@ -26,7 +26,8 @@ const NavBar = () => {
 
   const hiddenNav = useMediaQuery({ query: "(max-width:768px)" });
 
-  const hideNav = ["/products", "/productinnerpage"];
+  const hideNav = ["/products" , "/cart" ,"/productinnerpage"];
+
 
   const Condition = hiddenNav && hideNav.includes(currentPath);
 

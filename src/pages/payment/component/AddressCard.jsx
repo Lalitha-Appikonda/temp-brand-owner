@@ -18,6 +18,9 @@ const AddressCard = ({
   handleDelete,
   handleCancelEdit,
 }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="address-container">
       <div
@@ -43,7 +46,7 @@ const AddressCard = ({
                   <h2>Edit Address</h2>
                 </div>
                 <div className="form-edit-block">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div>
                       <div className="divisions">
                         <div className="input-block">
