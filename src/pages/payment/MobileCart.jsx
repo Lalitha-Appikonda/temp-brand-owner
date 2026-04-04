@@ -27,7 +27,7 @@ const MobileCart = () => {
       name: "AQUAREMID",
       qty: 2,
       price: 300,
-      stock: "stock",
+      stock: "out of stock",
       discount: "10",
     },
     {
@@ -213,26 +213,21 @@ const MobileCart = () => {
 
   // place order
 
-//   const handlePlaceOrder = () => {
-//   const selectedCartProducts = mobileCartItems.filter((item) =>
-//     selectedItems.includes(item.id)
-//   );
+  const selectedCartProducts = mobileCartItems.filter((item) =>
+    selectedItems.includes(item.id),
+  );
 
-//   if (selectedCartProducts.length === 0) {
-//     return;
-//   }
+  const hasOutOfStock = selectedCartProducts.some(
+    (item) => item.stock.toLowerCase() !== "in stock",
+  );
 
-//   const hasOutOfStock = selectedCartProducts.some(
-//     (item) => item.stock.toLowerCase() !== "in stock"
-//   );
+  const handlePlaceOrder = () => {
+    if (selectedCartProducts.length === 0) return;
 
-//   if (hasOutOfStock) {
-//     setShowStockPopup(true);
-//     return;
-//   }
+    if (hasOutOfStock) return;
 
-//   navigate("/address");
-// };
+    navigate("/address");
+  };
 
   return (
     <>
@@ -429,22 +424,41 @@ const MobileCart = () => {
             <h4>{totalPrice}</h4>
             <h1>₹{totalPrice - discount}</h1>
           </div>
-          <div className="mobile-place-order-button-container">
+          {/* <div className="mobile-place-order-button-container">
             <Buttons>Place Order</Buttons>
-          </div>
-          {/* {hasOutOfStock ? (
+          </div> */}
+          {hasOutOfStock ? (
             <PopUp
-              trigger={<div className="mobile-place-order-button-container"><Buttons>Place Order</Buttons> </div>}
-              title="Out of Stock"
+            size="sm"
+              trigger={
+                <div className="mobile-place-order-button-container">
+                  <Buttons>Place Order</Buttons>
+                </div>
+              }
             >
-              <p>
-                Some selected items are out of stock. Please remove them before
-                placing the order.
-              </p>
+              <div className="out-of-stock-popup">
+                <div className="stock-img"><img src={Images.outOfStock} alt="" /></div>
+                <h1 className="out-of-stock-title">Item (s) not deliverable</h1>
+                <h4>Please remove non available items from your bag to proceed.</h4>
+                <div className="dividing-line"></div>
+                <div className="item-details-block">
+                  <div><img src="" alt="" /></div>
+                  <div>
+                    <h2>Aqua Remid</h2>
+                    <h4>Unique blend of scientifically proven, non-pathogenic probiotic..</h4>
+                  </div>
+                </div>
+                <div>
+                  <div><Buttons variant="outline-primary">Remove</Buttons></div>
+                  <div><Buttons variant="primary">Unselect Items</Buttons></div>
+                </div>
+              </div>
             </PopUp>
           ) : (
-            <div className="mobile-place-order-button-container"><Buttons onClick={() => navigate("/address")}>Place Order</Buttons></div>
-          )} */}
+            <div className="mobile-place-order-button-container">
+              <Buttons onClick={handlePlaceOrder}>Place Order</Buttons>
+            </div>
+          )}
         </div>
       </div>
     </>

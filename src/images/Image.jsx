@@ -81,6 +81,7 @@ export const Images = {
   cartLikeMobile: "assets/icons/cart-like.svg",
   cartLikeMobile2: "assets/icons/like-icon.svg",
   cartMobileproduct: "/assets/icons/cart-mobile-img.jpg",
+  outOfStock : "/assets/icons/out of stock.svg",
 
   //product uploading
 

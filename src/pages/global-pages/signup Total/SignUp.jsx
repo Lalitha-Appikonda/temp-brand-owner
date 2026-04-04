@@ -9,6 +9,7 @@ import PopUp from "../../../components/popup/PopUp";
 import TermsAndConditions from "../TermsAndConditions";
 import Input from "../../../components/form-elements/Input";
 import axios from "axios";
+
 const BASE_URL = "http://localhost:5051/rest2/0.1";
 const SignUp = ({ formData, setFormData, nextStep }) => {
   const navigate = useNavigate();
