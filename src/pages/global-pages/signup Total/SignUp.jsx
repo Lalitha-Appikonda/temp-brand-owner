@@ -34,34 +34,30 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
 
   const { setSignupData } = useContext(SignupContext);
 
-  const signupSchema = Yup.object({
-    name: Yup.string()
-      .trim()
+  const signupSchema=Yup.object({
+    name:Yup.string()
+    .trim()
+    
+    .min(5,"*Minimum 5 characters")
+    .max(20, "*Maximum 20 characters only")
+    .matches(/^[A-Za-z ]+$/, "*Only letters and spaces allowed")
+    .required("*Name is required")
+    .test("*No multiple-spaces","no extra spaces allowed",(value)=> !/\s{2,}/.test(value || "")),
 
-      .min(5, "*Minimum 5 characters")
-      .max(20, "*Maximum 20 characters only")
-      .matches(/^[A-Za-z ]+$/, "*Only letters and spaces allowed")
-      .required("*Name is required")
-      .test(
-        "*No multiple-spaces",
-        "no extra spaces allowed",
-        (value) => !/\s{2,}/.test(value || ""),
-      ),
-
-    username: Yup.string()
-      .trim()
-      .min(5, "*Minimum 5 characters")
-      .max(25, "*Max 25 charcters only")
-      .matches(/^[a-zA-Z0-9_]+$/, "*Only letters, numbers, underscore") //have to write one more validation here to display as username already exits
-      .required("*Username is required"),
-    password: Yup.string()
-      .trim()
-
-      .min(8, "*Minimum 8 characters")
-      .max(16, "*Maximum 16 characters")
-      .matches(/[0-9]/, "At least 1 number")
-      .matches(/[!@#$%^&*(),.?":{}|<>]/, "*At least 1 special character")
-      .required("*Password is required"), // Pattern wrong
+    username:Yup.string()
+    .trim()
+    .min(5,"*Minimum 5 characters")
+    .max(25,"*Max 25 charcters only")
+    .matches(/^[a-zA-Z0-9_]+$/, "*Only letters, numbers, underscore")   //have to write one more validation here to display as username already exits
+    .required("*Username is required"),
+    password:Yup.string()
+    .trim()
+    
+    .min(8,"*Minimum 8 characters")
+    .max(16,"*Maximum 16 characters")
+    .matches(/[0-9]/, "At least 1 number")
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, "*At least 1 special character")
+    .required("*Password is required"), // Pattern wrong
 
     confirmpassword: Yup.string()
       .required("*Confirm password is required")
@@ -92,19 +88,20 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
       setErrors(formattedErrors);
     }
   };
+  
 
-  useEffect(() => {
-    const validate = async () => {
-      try {
-        await signupSchema.validate(form, { abortEarly: false });
-        setIsValid(true);
-      } catch {
-        setIsValid(false);
-      }
-    };
+    useEffect(() => {
+      const validate = async () => {
+        try {
+          await signupSchema.validate(form, { abortEarly: false });
+          setIsValid(true);
+        } catch {
+          setIsValid(false);
+        }
+      };
 
-    validate();
-  }, [form]);
+      validate();
+    }, [form]);
 
   // if (!isValid){
   //   return;
@@ -205,11 +202,11 @@ const checkUsernameAvailability = async (username) => {
     <form className="signup-container" onSubmit={handlesubmit}>
       {/* <div className='container'> */}
 
-      <h1 className="logintext">Create Your Account</h1>
-      <h4 className="singing-text">
+      <h2 className="logintext">Create Your Account</h2>
+      <h5 className="singing-text">
         Continue managing your sales, purchases, and reports by signing in
         securely.
-      </h4>
+      </h5>
 
       <div className="input-box">
         <img src={Images.user} className="icon left" />
@@ -254,16 +251,16 @@ const checkUsernameAvailability = async (username) => {
           maxLength={25}
           onKeyDown={(e) => {
             if (
-              !/[a-zA-Z0-9_]/.test(e.key) &&
-              e.key !== "Backspace" &&
-              e.key !== "Tab" &&
-              e.key !== "ArrowLeft" &&
-              e.key !== "ArrowRight"
-            ) {
-              e.preventDefault();
-            }
-          }}
-        />
+                !/[a-zA-Z0-9_]/.test(e.key) &&
+                e.key !== "Backspace" &&
+                e.key !== "Tab" &&
+                e.key !== "ArrowLeft" &&
+                e.key !== "ArrowRight"
+              ) {
+                e.preventDefault();
+              }
+            }}
+          />
       </div>
       {/* {errors.username  && <p className='error-text'>{errors.username}</p> } */}
 
@@ -277,7 +274,7 @@ const checkUsernameAvailability = async (username) => {
           onChange={handlechange}
           error={errors.password}
           maxLength={16}
-          onKeyDown={(e) => e.key === " " && e.preventDefault()}
+          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
         />
         <img
           src={showPassword ? Images.eyeclose : Images.eyeicon}
@@ -311,7 +308,7 @@ const checkUsernameAvailability = async (username) => {
           onChange={handlechange}
           error={errors.confirmpassword}
           maxLength={16}
-          onKeyDown={(e) => e.key === " " && e.preventDefault()}
+          onKeyDown={(e)=>e.key === " " && e.preventDefault()}
         />
         <img
           src={showConfirmPassword ? Images.eyeclose : Images.eyeicon}
@@ -333,7 +330,7 @@ const checkUsernameAvailability = async (username) => {
       <p className="terms terms-conditions">
         By clicking, I confirm that I have read, understood, and agree to the
         <PopUp
-          trigger={<span className="terms-signin"> Terms of Service </span>}
+          trigger={<span> Terms of Service </span>}
           size="md"
           title="Terms of Service"
           className="terms-popup"

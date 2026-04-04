@@ -75,7 +75,7 @@ const Card = ({
           </div>
         </div>
 
-        <h1 className="image-text">{title}</h1>
+        <h3 className="image-text">{title}</h3>
         <div className="price-section">
           {/* <h3 className="rupees">₹{price}</h3> */}
           <div className="product-price rupees">

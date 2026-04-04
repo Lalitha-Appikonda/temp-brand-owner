@@ -200,7 +200,7 @@ const SecurityQuestions = ({ formData, setFormData, prevStep }) => {
       </div>
 
       <div className="text-content">
-        <h1>Set Your Security Question</h1>
+        <h3>Set Your Security Question</h3>
 
         <p className="choose">
           Choose and answer a security question to help you safely reset your

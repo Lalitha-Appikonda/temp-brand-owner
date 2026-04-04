@@ -38,7 +38,7 @@ const PopUp = ({
  
             {/* Header */}
             <div className="popup-header">
-              <h3>{title}</h3>
+              <h4>{title}</h4>
               <button className="popup-close" onClick={close}>✕</button>
             </div>
  

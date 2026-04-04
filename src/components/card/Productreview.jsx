@@ -7,7 +7,7 @@ const Productreview = () => {
   return (
     <div>
       <div className='product-review'>
-        <h2>Review this product</h2>
+        <h4>Review this product</h4>
         <h5>Share your thoughts with other customers</h5>
         <div>
 

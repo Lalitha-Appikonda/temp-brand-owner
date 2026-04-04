@@ -81,8 +81,8 @@ const ForgotPassword = () => {
         <img src={Images.lessThan} alt="" />
       </div>
 
-      <p className='title-text'>Forgot Password</p>
-      <h3 className='sub-title-text'>For forgot password enter username</h3>
+      <h2 className='title-text'>Forgot Password</h2>
+      <h4 className='sub-title-text'>For forgot password enter username</h4>
       <form onSubmit={handlesubmit}>
               <div className='input-box-container'>
                   <label className='label-text'>Username</label>

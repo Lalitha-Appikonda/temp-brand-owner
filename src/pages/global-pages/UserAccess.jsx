@@ -25,7 +25,7 @@ const UserAccess = () => {
             <p className="sub-title">Get complete control over operations, performance, and
 business growth from one powerful panel.</p> */}
             <div className="login-text">
-              <h1>
+              <h3>
                 Simplify <br />
                 management with <br />
                 our{" "}
@@ -45,7 +45,7 @@ business growth from one powerful panel.</p> */}
                     />
                   </svg>
                 </span>
-              </h1>
+              </h3>
               <p>
                 Get complete control over operations, performance, and business
                 growth from one powerful panel.

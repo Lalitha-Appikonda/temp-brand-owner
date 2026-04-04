@@ -43,6 +43,10 @@ const SetNewPassword = () => {
       text:"include numbers and special symbols",
       valid:passwordRules.number && passwordRules.special
     },
+     {
+      text:"Avoid using your name, phone number, or birthdate",
+      valid:passwordRules.number && passwordRules.special
+    },
      
   ]
     
@@ -134,11 +138,11 @@ const SetNewPassword = () => {
   return (
     <form onSubmit={handleSubmit}>
         <div className="setnewpassword-container">
-          <p className="title-text">Set New Password</p>
-          <h4 className="sub-title-text">
+          <h2 className="title-text">Set New Password</h2>
+          <h5 className="sub-title-text">
             Set a new password to keep your account secure. Choose a strong password
             that is easy for you to remember.
-          </h4>
+          </h5>
           <div className="input-box-container">
             <label className="label-text">New Password</label>
             <div className="input-box">

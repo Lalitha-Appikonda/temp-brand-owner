@@ -6,8 +6,8 @@ const Review = () => {
 
   return (
     <div>
-      <h2>Review Page</h2>
-      <h3>Reviews for Product ID: {id}</h3>
+      <h3>Review Page</h3>
+      <h4>Reviews for Product ID: {id}</h4>
     </div>
   )
 }

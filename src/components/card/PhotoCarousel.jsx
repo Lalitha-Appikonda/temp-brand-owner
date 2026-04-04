@@ -25,9 +25,9 @@ const PhotoCarousel = ({ title = "Customer Photos", count = 0, image = [] }) => 
     <div className="carousel-container">
 
       <div className="carousel-header">
-        <h2>
+        <h4>
           {title} ({count})
-        </h2>
+        </h4>
         <Buttons variant="outline-primary" className="see-all-btn">See All Photo</Buttons>
         
       </div>
