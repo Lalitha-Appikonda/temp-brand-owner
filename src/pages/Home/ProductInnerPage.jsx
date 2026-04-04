@@ -518,7 +518,7 @@ const ProductInnerPage = () => {
                                     </div>
                                 </div>
 
-                                <h2 className='customer-reviews-title'>Customer Reviews (80)</h2>
+                                <h4 className='customer-reviews-title'>Customer Reviews (80)</h4>
                                 <div>
                                     {reviewsmobile.map((item, index) => (
                                         <ReviewCard

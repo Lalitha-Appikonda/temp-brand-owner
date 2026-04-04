@@ -17,7 +17,7 @@ const RatingReview = () => {
     return (
         <div className='reviewrating-container'>
             <div >
-                <h2 className='rating-review-text'>Probizyme Ratings & Reviews</h2>
+                <h4 className='rating-review-text'>Probizyme Ratings & Reviews</h4>
                 <div className='rating-content'>
                     <div>
                         <span className='star-rating'>

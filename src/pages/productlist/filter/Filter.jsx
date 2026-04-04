@@ -151,7 +151,7 @@ const Filter = () => {
       <div className="filter-container">
         <div>
           <div className="title">
-            <h3 className="filter-title">Filters</h3>
+            <h4 className="filter-title">Filters</h4>
             {selectedFilters.length > 0 && (
               <h6 className="clear-title" onClick={handleClearAll}>
                 Clear All
@@ -343,7 +343,7 @@ const Filter = () => {
               className="select-filter"
               onClick={() => setDiscountOpen(!discountopen)}
             >
-              <h4>Discount</h4>
+              <h5>Discount</h5>
               <span>
                 <FaChevronDown />
               </span>

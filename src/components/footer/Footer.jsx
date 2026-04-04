@@ -43,7 +43,7 @@ const Footer = () => {
 
               <div className="footer-right">
                 <img src={Images.ubm} alt="ubm" />
-                <h4>A Natural & Pure Mineral Product</h4>
+                <h5>A Natural & Pure Mineral Product</h5>
                 <h6>
                   Potassium and Magnesium are essential for fish, shrimp, and
                   phytoplankton. Unique Bio-Minerals replenishes these minerals

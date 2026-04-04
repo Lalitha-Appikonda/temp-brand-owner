@@ -121,8 +121,8 @@ const Login = () => {
     
     return (
         <div className='login-container'>
-            <h1 className='title-text'>Login Your Account</h1>
-            <h3 className='sub-title-text  login-texts'>Continue managing your sales, target, and reports by signing in securely.</h3>
+            <h3 className='title-text'>Login Your Account</h3>
+            <h4 className='sub-title-text  login-texts'>Continue managing your sales, target, and reports by signing in securely.</h4>
             <div className="input-box">
                 <img src={Images.user2} className="icon left" />
                 <Input placeholder="Name" 
@@ -171,7 +171,7 @@ const Login = () => {
                     </label>
                 </div> */}
                 <div>
-                    <h3 className='forgot-text forgotpassword' onClick={() => navigate('/login/forgotpassword')}>Forgot Password</h3>
+                    <h4 className='forgot-text forgotpassword' onClick={() => navigate('/login/forgotpassword')}>Forgot Password</h4>
                 </div>
 
             </div>

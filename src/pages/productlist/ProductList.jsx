@@ -134,7 +134,7 @@ const ProductList = () => {
             <Filter />
           </div> */}
             <div className="product-listing-right">
-              <h3 className="title">Results - All Products</h3>
+              <h4 className="title">Results - All Products</h4>
 
               <div className="sort-buttons">
                 <h5 className="sort">Sort By :</h5>
@@ -181,7 +181,7 @@ const ProductList = () => {
               trigger={
                 <div className="down-filters-title">
                   <TbArrowsUpDown className="icon" />
-                  <h3>SORT</h3>
+                  <h4>SORT</h4>
                 </div>
               }
               size="md"
@@ -204,7 +204,7 @@ const ProductList = () => {
             </div>
             <div className="down-filters-title">
               <TiFilter className="icon" />
-              <h3>FILTER</h3>
+              <h4>FILTER</h4>
             </div>
           </div>
         </div>

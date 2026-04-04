@@ -31,7 +31,7 @@ const DeliveryAddress = () => {
             <div className="address-left"></div>
 
             <div className="address-right">
-              <h2>Price Details</h2>
+              <h4>Price Details</h4>
 
               <div className="dividing-line"></div>
 

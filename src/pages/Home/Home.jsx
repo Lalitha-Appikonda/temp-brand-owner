@@ -254,7 +254,7 @@ const Home = () => {
         </section>
         {/*innersection2  */}
         <div className="all-products-container">
-          <p className='all-product-text'>Our Popular Products</p>
+          <h1 className='all-product-text'>Our Popular Products</h1>
           <div className="products-buttons">
             <Buttons
               variant="outline-primary"
@@ -359,7 +359,7 @@ const Home = () => {
             </div>
 
             <div className="right-section">
-              <p className='title'>Why Choose Us</p >
+              <h1 className='title'>Why Choose Us</h1 >
               <h6 className="subtitle">
                 Our probiotics are designed to enhance pond health, improve growth,
                 and promote sustainable aquaculture.
@@ -371,7 +371,7 @@ const Home = () => {
                     <div
                       className="accordion-title"
                       onClick={() => toggle1(index)}>
-                      <h1>{item.title}</h1>
+                      <h4>{item.title}</h4>
                       <span className="cross-plus-icons">
                         <img
                           src={activeIndex === index ? Images.cross : Images.plus}
@@ -458,7 +458,7 @@ const Home = () => {
 
           <section className='reference-program'>
             <p className='title1'>Join Our Referral Program!</p>
-            <h4 className='subtitle1'>Invite Dealers and Corporate farmers to join Unique Biotech’s online store and earn exclusive cashback on every referral.</h4>
+            <h5 className='subtitle1'>Invite Dealers and Corporate farmers to join Unique Biotech’s online store and earn exclusive cashback on every referral.</h5>
             <div className='whats-box'>
               <div className='whatsapp-box'>
                 <img src={Images.mail} />

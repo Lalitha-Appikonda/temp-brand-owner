@@ -3,7 +3,7 @@ import React from 'react'
 const EditAddress = () => {
   return (
     <div>
-      <h2>Edit Address Page</h2>
+      <h4>Edit Address Page</h4>
     </div>
   )
 }

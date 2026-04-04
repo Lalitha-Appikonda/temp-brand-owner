@@ -166,11 +166,11 @@ const isFormReady =
           <img src={Images.lessThan} alt="" />
         </div>
 
-        <p className="title-text">Answer Your Security Question</p>
+        <h2 className="title-text">Answer Your Security Question</h2>
 
-        <h3 className="sub-title-text">
+        <h4 className="sub-title-text">
           Answer your already setup question after that you can change login password.
-        </h3>
+        </h4>
 
         <div className="ques-container">
           {flatQuestions.map((q, index) => (
@@ -215,10 +215,6 @@ const isFormReady =
           ))}
         </div>
          
-         
-            
-          
-
         <Buttons
             type="submit"
             className="submit-button"

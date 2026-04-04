@@ -37,7 +37,7 @@ const WelcomePage = () => {
       </div>
 
       <div className="welcome-content">
-        <h1>Growing Health, Feeding Futures.Powering farms with science and trust.</h1>
+        <h3>Growing Health, Feeding Futures.Powering farms with science and trust.</h3>
         <p>Delivering quality nutrition and care for stronger animals, better farms, and a healthier tomorrow.</p>
         <div  className="get-start-button-container">
             <Buttons variant="primary">Get Started</Buttons>

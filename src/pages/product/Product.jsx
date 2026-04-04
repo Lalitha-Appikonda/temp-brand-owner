@@ -7,8 +7,8 @@ const Product = () => {
 
   return (
     <div>
-      <h2>Product Page</h2>
-      <h3>Product ID: {id}</h3>
+      <h4>Product Page</h4>
+      <h4>Product ID: {id}</h4>
 
      
       <button onClick={() => navigate(`/product/${id}/reviews`)}>
