@@ -203,7 +203,9 @@ const Home = () => {
                 {/* <img src={Images.mobilelogo1} /> */}
               </div>
 
-              <div className="down-position">
+              <div className="down-position" onClick={()=>{
+                navigate("/products")
+              }}>
                 <div className="double-buttons">
                   <Buttons
                     variant="double-primary"
@@ -307,7 +309,7 @@ const Home = () => {
             </div>
           </div>
           <div className='view-all-product'>
-            <Buttons variant='outline-primary' className="outline-bg" >View All</Buttons>
+            <Buttons variant='outline-primary' className="outline-bg" onClick={()=>navigate("/products")}  >View All</Buttons>
           </div>
         </div>
         <div>

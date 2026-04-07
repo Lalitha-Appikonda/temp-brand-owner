@@ -1,20 +1,14 @@
 import React from 'react'
-import Buttons from '../../components/form-elements/Buttons';
-import PopUp from '../popup/PopUp';
-import { Images } from '../../images/Image';
-import Input from '../form-elements/Input';
-import TextArea from '../form-elements/TextArea';
+import PopUp from '../popup/PopUp'
+import Buttons from '../form-elements/Buttons'
+import Input from '../form-elements/Input'
+import { Images } from '../../images/Image'
+import TextArea from '../form-elements/TextArea'
 
-const Productreview = () => {
+const ProRevMob = () => {
   return (
-    <div className='pro-all-rev'>
-      <div className='product-review'>
-        <h4>Review this product</h4>
-        <h5>Share your thoughts with other customers</h5>
-      </div>
-      <div>
-
-        <PopUp trigger={<Buttons variant='outline-primary'>Write a Product Review</Buttons>
+    <div className='pro-rev-mob'>
+        <PopUp trigger={<Buttons variant='outline-primary'>Write a Review</Buttons>
         } size="md" title="Edit Package">
           <div className='product-review-popup'>
             <div className='howitem-row'>
@@ -51,9 +45,8 @@ const Productreview = () => {
             </div>
           </div>
         </PopUp>
-      </div>
     </div>
   )
 }
 
-export default Productreview
+export default ProRevMob
