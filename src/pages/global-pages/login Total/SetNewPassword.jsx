@@ -104,17 +104,32 @@ const SetNewPassword = () => {
         confirmPassword: formData.confirmPassword,
       })
       console.log(res.data)
-      navigate("/login")
+      navigate("/status/success",{
+        state: { type: "success" }
+      })
     }catch(err){
-       if (err.inner){
-        const newErrors={};
-        err.inner.forEach((error)=>{
-          newErrors[error.path]=error.message
-        })
-        setError(newErrors)
-       }else{
-        console.log(err)
-       }
+      
+      console.log("ERROR DATA:", err.response?.data);
+
+  
+  if (err.response?.data?.message) {
+    setError({
+      newPassword: err.response.data.message
+    });
+  }
+
+   
+  else if (err.inner) {
+    const newErrors = {};
+    err.inner.forEach((error) => {
+      newErrors[error.path] = error.message;
+    });
+    setError(newErrors);
+  }
+
+  else {
+    console.log(err);
+  }
      
   }
 
@@ -123,15 +138,16 @@ const SetNewPassword = () => {
 
   const newpasswordschema=Yup.object({
     newPassword:Yup.string()
-    .required("password is required")
+    
     .min(8,"minimum 8 characters")
     .matches(/[A-Z]/, "At least 1 uppercase")
     .matches(/[a-z]/, "At least 1 lowercase")
     .matches(/[0-9]/, "At least 1 number")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character"),
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, "At least 1 special character")
+    .required("Password is required"),
 
     confirmPassword:Yup.string()
-    .required("confirm password is required")
+    .required("Confirm password is required")
     .oneOf([Yup.ref("newPassword")], "Passwords must match")
   })
 
@@ -189,7 +205,7 @@ const SetNewPassword = () => {
             <Buttons
               className="submit-button"
               variant={`btn ${isFormReady ? "btn-primary" : "btn-secondary"}`}
-              disabled={!isFormReady}
+               
                type="submit"
             >
               Submit

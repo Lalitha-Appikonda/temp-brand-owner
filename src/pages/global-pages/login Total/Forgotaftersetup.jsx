@@ -160,9 +160,10 @@ const isFormReady =
    console.log("fieldErrors:", fieldErrors);
 
   return (
+    
     <form onSubmit={handlesubmit}>
       <div className="aftersetup-container">
-        <div className="back-btn">
+        <div className="back-btn" onClick={() => navigate(-1)}>
           <img src={Images.lessThan} alt="" />
         </div>
 
@@ -207,8 +208,10 @@ const isFormReady =
                     }
                   }}
                   
-                    />
+                  
+                    /> 
                     {apiError && <p className="error-text">{apiError}</p>}
+                    
                 </div>
                </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Images } from "../../images/Image";
 import SelectBox from "../form-elements/SelectBox";
 import Buttons from "../form-elements/Buttons";
@@ -7,10 +7,12 @@ import { FcLike } from "react-icons/fc";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 import CheckBox from "../form-elements/CheckBox";
 import { useLocation } from "react-router-dom";
+import { CartContext } from "../../context/CartContext"; // adjust path
 
 const Card = ({
   id,
   title,
+  id,
   price,
   oldPrice,
   discount,
@@ -36,28 +38,10 @@ const Card = ({
 
   const [like, setLike] = useState(false);
 
-  const [quantity, setQuantity] = useState(1);
+  const { cartitems, addtocart, increaseqty, decreaseqty } = useContext(CartContext);
 
-  const [showQuantity, setShowQunatity] = useState(false);
-
-  const decrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    } else {
-      setShowQunatity(false);
-      setQuantity(1);
-    }
-  };
-
-  const increase = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const onAddingCart = () => {
-    setShowQunatity(true);
-    setQuantity(1);
-  };
-
+  const cartItem=cartitems.find(item=> item.id ===id);
+ 
   return (
     <div className="card-context">
       {ischecked && <div className="selected-check-cards"><CheckBox onChange={(e) => handleSelectedItems(id, e)}/></div>}
@@ -111,44 +95,30 @@ const Card = ({
         </div>
 
         <div className="select-cart">
-          {hideDropdownIcon ? (
-            <span className="weight-text">500g</span>
+          <select>
+            <option value="">500g</option>
+            <option value="">5L</option>
+            <option value="">1L</option>
+
+            <option value="">200g</option>
+            <option value="">1000g</option>
+            <option value="">300g</option>
+          </select>
+
+          {cartItem ? (
+            <div className="quantity">
+              <button className="reduce" onClick={()=>decreaseqty(id)}>
+                <FaMinus className="minus" />
+              </button>
+              <span>{cartItem.qty}</span>
+              <button className="increase" onClick={()=>increaseqty(id)}>
+                <FaPlus className="plus" />
+              </button>
+            </div>
           ) : (
-            <select>
-              <option>5L</option>
-              <option>1L</option>
-              <option>500g</option>
-              <option>200g</option>
-              <option>1000g</option>
-              <option>300g</option>
-            </select>
-          )}
-
-
-          {/* <div className="custom-select">
-            <select>
-              <option>500g</option>
-              <option>1kg</option>
-              <option>2kg</option>
-            </select>
-          </div> */}
-
-          {!hideAddCart && (
-            showQuantity ? (
-              <div className="quantity">
-                <button className="reduce" onClick={decrease}>
-                  <FaMinus className="minus" />
-                </button>
-                <span>{quantity}</span>
-                <button className="increase" onClick={increase}>
-                  <FaPlus className="plus" />
-                </button>
-              </div>
-            ) : (
-              <Buttons onClick={onAddingCart} className="addcart-mobile-btn">
-                Add to Cart
-              </Buttons>
-            )
+            <Buttons onClick={()=>addtocart({id,title,price})} className="addcart-mobile-btn">
+              Add to Cart
+            </Buttons>
           )}
         </div>
       </div>

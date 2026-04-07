@@ -9,10 +9,18 @@ import Card from '../../components/card/Card';
 import Styleguide from '../../Styleguide/Styleguide';
 import Input from '../../components/form-elements/Input';
 import PhotoCarousel from '../../components/card/PhotoCarousel';
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 
 const Home = () => {
   const navigate = useNavigate();
   const [like, setLike] = useState({});
+
+  const {cartitems,addtocart}=useContext(CartContext);
+  console.log(cartitems)
+
+
+console.log("Home / Card:", cartitems);
 
   const statsData = [
     {
@@ -58,8 +66,8 @@ const Home = () => {
   const productsmobile = [
     { id: 1, title: "AQUA REMID", price: 1200, badge: "Hot", image: Images.product, rating: "5.0", reviews: "20K" },
     { id: 2, title: "PROBIZYME", price: 1100, oldPrice: 2000, discount: "45% off", badge: "Sale", image: Images.product, rating: "5.0", reviews: "20K" },
-    { id: 1, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
-    { id: 1, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 3, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 4, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
 
   ];
 
@@ -238,7 +246,7 @@ const Home = () => {
 
           <div className="stats-container">
             {statsData.map((item, index) => (
-              <div className="stats-card" _key_={index}>
+              <div className="stats-card" key={index}>
                 <p className="cards-title">{item.number}</p>
                 <p className="subtitle ">{item.text}</p>
               </div>
@@ -280,6 +288,7 @@ const Home = () => {
             {products.map((item) => (
               <Card
                 key={item.id}
+                id={item.id}
                 title={item.title}
                 price={item.price}
                 oldPrice={item.oldPrice}
@@ -296,6 +305,7 @@ const Home = () => {
               {productsmobile.map((item) => (
                 <Card
                   key={item.id}
+                  id={item.id}
                   title={item.title}
                   price={item.price}
                   oldPrice={item.oldPrice}
@@ -309,7 +319,7 @@ const Home = () => {
             </div>
           </div>
           <div className='view-all-product'>
-            <Buttons variant='outline-primary' className="outline-bg" onClick={()=>navigate("/products")}  >View All</Buttons>
+            <Buttons variant='outline-primary' className="outline-bg" onClick={()=>navigate("/products")}>View All</Buttons>
           </div>
         </div>
         <div>
