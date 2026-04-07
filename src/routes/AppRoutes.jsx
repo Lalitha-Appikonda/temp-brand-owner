@@ -22,6 +22,8 @@ import ProductInnerPage from "../pages/home/ProductInnerPage";
 import ForgotPassword from "../pages/global-pages/login Total/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/login Total/Forgotaftersetup";
 import SetNewPassword from "../pages/global-pages/login Total/SetNewPassword";
+import MobileAddress from "../pages/payment/MobileAddress";
+import WishList from "../pages/wishlist/WishList";
 
 
 const AppRoutes = () => {
@@ -52,10 +54,8 @@ const AppRoutes = () => {
         <Route path="address" element={<Payment />} />
         <Route  path='samplecards' element={<CardSample/>} />
 
+        <Route path= "wishlist" element={<WishList />} />
       </Route>
-
-      <Route path="mobile" element={<MobileCart />}/>
-        {/* <Route path="mobile" element={<WelcomePage />}/> */}
 
     </Routes>
   );

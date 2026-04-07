@@ -5,8 +5,11 @@ import Buttons from "../form-elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
+import CheckBox from "../form-elements/CheckBox";
+import { useLocation } from "react-router-dom";
 
 const Card = ({
+  id,
   title,
   price,
   oldPrice,
@@ -16,7 +19,18 @@ const Card = ({
   rating,
   reviews,
   cusBtnIcon = null,
+  buttonText = "Add to Cart",
+  enableQuantity = true,
+  onButtonClick = null,
+  ischecked = false,
+  onMoveToBag,
+  isDisabled = false,
+  handleSelectedItems
 }) => {
+
+  const location = useLocation()
+  const currentPath = location.pathname;
+
   const [like, setLike] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
@@ -40,14 +54,16 @@ const Card = ({
     setShowQunatity(true);
     setQuantity(1);
   };
+
   return (
     <div className="card-context">
+      {ischecked && <div className="selected-check-cards"><CheckBox onChange={(e) => handleSelectedItems(id, e)}/></div>}
       <div className="card card-desktop ">
         <div className={badge ? "wrapper " : "card-image-wrapper"}>
           {badge && (
             <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>
           )}
-          <div className="image-likeback">
+          <div className={`image-likeback ${currentPath === "/wishlist" ? "hide-like": ""}`}>
             <svg
               onClick={() => setLike(!like)}
               xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +123,7 @@ const Card = ({
             </select>
           </div> */}
 
-          {showQuantity ? (
+          {enableQuantity && showQuantity ? (
             <div className="quantity">
               <button className="reduce" onClick={decrease}>
                 <FaMinus className="minus" />
@@ -118,12 +134,17 @@ const Card = ({
               </button>
             </div>
           ) : (
-            <Buttons onClick={onAddingCart} className="addcart-mobile-btn">
-              Add to Cart
+            <Buttons
+              onClick={enableQuantity ? onAddingCart : onMoveToBag}
+              className={`addcart-mobile-btn ${!enableQuantity ? "move-to-bag-change-style" : ""}`}
+              disabled = {isDisabled}
+            >
+              {buttonText}
             </Buttons>
           )}
         </div>
       </div>
+
 
       <div className="btn-down">
         <Buttons variant="circle-secondary">

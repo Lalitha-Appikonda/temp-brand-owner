@@ -11,8 +11,6 @@ const Address = () => {
   const [checkedAddress, setCheckedAddress] = useState("");
   const [editAddressId, setEditAddressId] = useState(null);
 
-  const [addressType, setAddressType] = useState("");
-
   const fullAddress = [
     {
       id: 1,
@@ -59,10 +57,6 @@ const Address = () => {
     }
   };
 
-  const handleAddressTypeChange = (e) => {
-    setAddressType(e.target.value);
-  };
-
   const handleEditClick = (id) => {
     setEditAddressId(id);
   };
@@ -84,6 +78,11 @@ const Address = () => {
     }
   };
 
+  const handleSaveEdit = () => {
+  console.log("address updated");
+  setEditAddressId(null);
+};
+
   return (
     <div className="address-container">
       {addresses.map((item) => (
@@ -92,12 +91,11 @@ const Address = () => {
           item={item}
           checkedAddress={checkedAddress}
           editAddressId={editAddressId}
-          addressType={addressType}
           handleChange={handleChange}
-          handleAddressTypeChange={handleAddressTypeChange}
           handleEditClick={handleEditClick}
           handleDelete={handleDelete}
           handleCancelEdit={handleCancelEdit}
+          handleSaveEdit = {handleSaveEdit}
         />
       ))}
     </div>

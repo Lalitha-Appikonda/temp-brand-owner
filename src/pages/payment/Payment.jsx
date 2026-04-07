@@ -1,38 +1,55 @@
 import React, { useState } from "react";
-import Cart from "./Cart";
-import PriceDetails from "./component/PriceDetails";
 import { useLocation } from "react-router-dom";
-import Address from "./Address";
+import { useMediaQuery } from "react-responsive";
 import { BsPlusLg } from "react-icons/bs";
+import { HiOutlineTrash } from "react-icons/hi";
+
+import Cart from "./Cart";
+import Address from "./Address";
+import MobileCart from "./MobileCart";
+import MobileAddress from "./MobileAddress";
+
+import PriceDetails from "./component/PriceDetails";
+import AddressForm from "./component/AddressForm";
 
 import Card from "../../components/card/Card";
-import { Images } from "../../images/Image";
 import Buttons from "../../components/form-elements/Buttons";
-import { useMediaQuery } from "react-responsive";
-import MobileCart from "./MobileCart";
-import { HiOutlineTrash } from "react-icons/hi";
+import PopUp from "../../components/popup/PopUp";
+
+import { Images } from "../../images/Image";
 
 const Payment = () => {
   const location = useLocation();
-
   const currentpage = location.pathname;
 
-  const mobileCartRoutes = ["/cart"];
+  const isMobileView = useMediaQuery({
+    query: "(max-width:768px)",
+  });
 
-  const MobileCartVisible = useMediaQuery({ query: "(max-width:768px)" });
+  const isCartMobile =
+    isMobileView && currentpage === "/cart";
 
-  const isMobileCart = MobileCartVisible && mobileCartRoutes.includes(currentpage);
+  const isAddressMobile =
+    isMobileView && currentpage === "/address";
+
+  const [showAddAddressPopup, setShowAddAddressPopup] =
+    useState(false);
 
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: "AQUAREMID", qty: 2, price: 300, stock: "In stock" },
-    { id: 2, name: "AQUABISON", qty: 3, price: 30, stock: "In stock" },
-    // { id: 3, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
-    // { id: 4, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
-    // { id: 5, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
-    // { id: 6, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
-    // { id: 7, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
-    // { id: 8, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
-    // { id: 9, name: "AQUABISON", qty: 3, price: 30 , stock: "In stock" },
+    {
+      id: 1,
+      name: "AQUAREMID",
+      qty: 2,
+      price: 300,
+      stock: "In stock",
+    },
+    {
+      id: 2,
+      name: "AQUABISON",
+      qty: 3,
+      price: 30,
+      stock: "In stock",
+    },
   ]);
 
   const products = [
@@ -77,42 +94,6 @@ const Payment = () => {
     },
     {
       id: 5,
-      title: "Pond Care",
-      price: 1100,
-      showQuantity: false,
-      image: Images.product,
-      rating: "5.0",
-      reviews: "20K",
-    },
-    {
-      id: 6,
-      title: "AquaCare",
-      price: 1080,
-      showQuantity: false,
-      image: Images.product,
-      rating: "5.0",
-      reviews: "20K",
-    },
-    {
-      id: 7,
-      title: "De - ODOPLUS",
-      price: 1700,
-      showQuantity: false,
-      image: Images.product,
-      rating: "5.0",
-      reviews: "20K",
-    },
-    {
-      id: 8,
-      title: "ub-SPORE",
-      price: 600,
-      showQuantity: false,
-      image: Images.product,
-      rating: "5.0",
-      reviews: "20K",
-    },
-    {
-      id: 9,
       title: "AquabISON",
       price: 850,
       showQuantity: false,
@@ -121,42 +102,102 @@ const Payment = () => {
       reviews: "20K",
     },
   ];
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.qty,
+    0
+  );
+
   return (
     <div className="payment-container">
       <div className="container">
-        {isMobileCart ? (<MobileCart />) : (
+        {isCartMobile ? (
+          <MobileCart />
+        ) : isAddressMobile ? (
+          <MobileAddress />
+        ) : (
           <div className="layout">
             <div className="title-button-row">
               <p className="title">
-                {currentpage === "/cart" && "Shopping Cart"}
-                {currentpage === "/address" && "Delivery Address"}
+                {currentpage === "/cart" &&
+                  "Shopping Cart"}
+                {currentpage === "/address" &&
+                  "Delivery Address"}
               </p>
+
               {currentpage === "/address" && (
-                <div className="new-address-button-wrapper">
-                  <Buttons variant="outline-primary" className="new-adddress">
-                    <span className="button-content">
-                      Add New Address
-                      <BsPlusLg className="icon" />
-                    </span>
-                  </Buttons>
-                </div>
+                <PopUp
+                  className="add-address-popup"
+                  trigger={
+                    <div className="new-address-button-wrapper">
+                      <Buttons
+                        variant="outline-primary"
+                        className="new-adddress"
+                        onClick={() =>
+                          setShowAddAddressPopup(true)
+                        }
+                      >
+                        <span className="button-content">
+                          Add New Address
+                          <BsPlusLg className="icon" />
+                        </span>
+                      </Buttons>
+                    </div>
+                  }
+                  open={showAddAddressPopup}
+                  onClose={() =>
+                    setShowAddAddressPopup(false)
+                  }
+                  title="Add a New Address"
+                  size="lg"
+                >
+                  <AddressForm
+                    submitButtonText="Add Address"
+                    showCancel={true}
+                    onCancel={() =>
+                      setShowAddAddressPopup(false)
+                    }
+                    onSubmit={(newAddress) => {
+                      console.log(
+                        "Address added:",
+                        newAddress
+                      );
+                      setShowAddAddressPopup(false);
+                    }}
+                  />
+                </PopUp>
               )}
             </div>
-            {cartItems.length > 0  && <div className="inner-container">
-              <div
-                className={`left-section ${currentpage === "/address" ? "left-section-address" : ""}`}
-              >
-                {currentpage === "/cart" && (
-                  <Cart cartItems={cartItems} setCartItems={setCartItems} />
-                )}
 
-                {currentpage === "/address" && <Address />}
+            {cartItems.length > 0 && (
+              <div className="inner-container">
+                <div
+                  className={`left-section ${
+                    currentpage === "/address"
+                      ? "left-section-address"
+                      : ""
+                  }`}
+                >
+                  {currentpage === "/cart" && (
+                    <Cart
+                      cartItems={cartItems}
+                      setCartItems={setCartItems}
+                    />
+                  )}
+
+                  {currentpage === "/address" && (
+                    <Address />
+                  )}
+                </div>
+
+                <div className="right-section">
+                  <PriceDetails
+                    cartItems={cartItems}
+                    total={total}
+                  />
+                </div>
               </div>
-              <div className="right-section">
-                <PriceDetails cartItems={cartItems} total={total} />
-              </div>
-            </div>}
+            )}
 
             {currentpage === "/cart" && (
               <div className="cart-card-bottom">
@@ -169,11 +210,15 @@ const Payment = () => {
                       oldPrice={product.oldPrice}
                       discount={product.discount}
                       badge={product.badge}
-                      showQuantity={product.showQuantity}
+                      showQuantity={
+                        product.showQuantity
+                      }
                       image={product.image}
                       rating={product.rating}
                       reviews={product.reviews}
-                      cusBtnIcon = {<HiOutlineTrash  className="icon"/>}
+                      cusBtnIcon={
+                        <HiOutlineTrash className="icon" />
+                      }
                     />
                   ))}
                 </div>

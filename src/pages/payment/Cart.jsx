@@ -46,7 +46,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                   />
 
                   <div className="item-details">
-                    <h2>{item.name}</h2>
+                    <h4>{item.name}</h4>
                     <h6 className="stock">{item.stock}</h6>
                     <h6 className="size">
                       Size:<span> 500g</span>

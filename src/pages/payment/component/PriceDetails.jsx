@@ -9,7 +9,7 @@ const PriceDetails = ({ cartItems, total }) => {
       <div className="cart-container">
         <div className="cart-wrapper"> 
           <div className="cart-right">
-            <h2>Price Details</h2>
+            <h4>Price Details</h4>
 
             <div className="dividing-line"></div>
 

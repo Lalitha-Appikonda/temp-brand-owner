@@ -93,6 +93,7 @@ export const Images = {
   addCartImage: "/assets/icons/add-to-cart-product-image.svg",
   cartLikeMobile: "assets/icons/cart-like.svg",
   cartMobileproduct: "/assets/icons/cart-mobile-img.jpg",
+  productoutOfStock : "/assets/icons/product-out-of-stock.png",
 
   //product uploading
 
@@ -130,4 +131,10 @@ export const Images = {
   // popup product inner page
 
   yellowstar:"/assets/icons/yellowstar.svg",
+
+
+
+  //wishlist
+
+  wishlistBag : "/assets/icons/wishlist-bag.svg"
 };

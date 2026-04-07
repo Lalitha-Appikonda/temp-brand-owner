@@ -14,6 +14,7 @@ import DeletePopup from "./component/DeletePop";
 import { useLocation, useNavigate } from "react-router-dom";
 import MobileHeader from "../../components/mobileHeader/MobileHeader";
 import ProductButtons from "../../components/productSortingButtons/ProductButtons";
+import { TiTick } from "react-icons/ti";
 
 const MobileCart = () => {
   const location = useLocation();
@@ -221,6 +222,32 @@ const MobileCart = () => {
     (item) => item.stock.toLowerCase() !== "in stock",
   );
 
+  const outOfStockSelectedItems = selectedCartProducts.filter(
+  (item) => item.stock.toLowerCase() !== "in stock",
+);
+
+// remove out-of-stock items from cart + selected list
+const handleRemoveOutOfStock = () => {
+  const outOfStockIds = outOfStockSelectedItems.map((item) => item.id);
+
+  setMobileCartItems((prev) =>
+    prev.filter((item) => !outOfStockIds.includes(item.id)),
+  );
+
+  setSelectedItems((prev) =>
+    prev.filter((id) => !outOfStockIds.includes(id)),
+  );
+};
+
+// only unselect out-of-stock items
+const handleUnselectOutOfStock = () => {
+  const outOfStockIds = outOfStockSelectedItems.map((item) => item.id);
+
+  setSelectedItems((prev) =>
+    prev.filter((id) => !outOfStockIds.includes(id)),
+  );
+};
+
   const handlePlaceOrder = () => {
     if (selectedCartProducts.length === 0) return;
 
@@ -242,7 +269,7 @@ const MobileCart = () => {
           <div className="step">
             <div
               className={`circle ${currentPath === "/cart" ? "active" : ""}`}
-            ></div>
+            ><TiTick className={`tick-icon ${currentPath === "/address" ? "enable" : ""}`}/></div>
             <span>Bag</span>
           </div>
 
@@ -421,8 +448,8 @@ const MobileCart = () => {
 
         <div className="place-order-mobile-wrapper">
           <div>
-            <h4>{totalPrice}</h4>
-            <h1>₹{totalPrice - discount}</h1>
+            <h4 className="total-price">{totalPrice}</h4>
+            <h1 className="final-price">₹{totalPrice - discount}</h1>
           </div>
           {/* <div className="mobile-place-order-button-container">
             <Buttons>Place Order</Buttons>
@@ -439,18 +466,18 @@ const MobileCart = () => {
               <div className="out-of-stock-popup">
                 <div className="stock-img"><img src={Images.outOfStock} alt="" /></div>
                 <h1 className="out-of-stock-title">Item (s) not deliverable</h1>
-                <h4>Please remove non available items from your bag to proceed.</h4>
+                <h4 className="sub-title">Please remove non available items from your bag to proceed.</h4>
                 <div className="dividing-line"></div>
                 <div className="item-details-block">
-                  <div><img src="" alt="" /></div>
-                  <div>
+                  <div className="item-details-block-left"><img src={Images.productoutOfStock} alt="" /></div>
+                  <div className="item-details-block-right">
                     <h2>Aqua Remid</h2>
                     <h4>Unique blend of scientifically proven, non-pathogenic probiotic..</h4>
                   </div>
                 </div>
-                <div>
-                  <div><Buttons variant="outline-primary">Remove</Buttons></div>
-                  <div><Buttons variant="primary">Unselect Items</Buttons></div>
+                <div className="out-of-stk-button-block">
+                  <div><Buttons variant="outline-primary" onClick={handleRemoveOutOfStock}>Remove</Buttons></div>
+                  <div><Buttons variant="primary"  onClick={handleUnselectOutOfStock}>Unselect Items</Buttons></div>
                 </div>
               </div>
             </PopUp>

@@ -6,17 +6,21 @@ import {
   FaChevronDown,
   FaChevronRight,
   FaHamburger,
+  FaRegHeart,
   FaUser,
   FaUserCircle,
 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import MobileNav from "../mobile nav/MobileNav";
 import { useMediaQuery } from "react-responsive";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { HiHeart } from "react-icons/hi";
 
 const NavBar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const navigate = useNavigate()
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -26,7 +30,7 @@ const NavBar = () => {
 
   const hiddenNav = useMediaQuery({ query: "(max-width:768px)" });
 
-  const hideNav = ["/products" , "/cart" ,"/productinnerpage"];
+  const hideNav = ["/products" , "/cart" ,"/productinnerpage" ,"/address" , "/wishlist"];
 
 
   const Condition = hiddenNav && hideNav.includes(currentPath);
@@ -135,7 +139,7 @@ const NavBar = () => {
                 >
                   <FaBars />
                 </div>
-                <div className="nav-hamburger-logo">
+                <div className="nav-hamburger-logo" onClick={()=>navigate('/')} style={{cursor: "pointer"}}>
                   <img src={Images.mainlogo} alt="" />
                 </div>
               </div>
@@ -348,7 +352,7 @@ const NavBar = () => {
                 </div>
               </div>
 
-              <div className="nav-logo">
+              <div className="nav-logo" onClick={()=>navigate("/")} style={{cursor: "pointer"}}>
                 <img src={Images.mainlogo} alt="" />
               </div>
 
@@ -474,6 +478,11 @@ const NavBar = () => {
                 <div className="nav-circles">
                   <div className="circles">
                     <FiUser />
+                  </div>
+                </div>
+                <div className="nav-circles">
+                  <div className="circles">
+                    <FaRegHeart />
                   </div>
                 </div>
               </div>

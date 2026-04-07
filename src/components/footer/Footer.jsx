@@ -8,14 +8,16 @@ const Footer = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const hiddenFooter = useMediaQuery({ query: "(max-width:768px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:768px)" });
 
-  const isFooter = useMediaQuery({ query: "(max-width:2750px)" });
+  const mobileHiddenRoutes = ["/products", "/productinnerpage" , "/wishlist"];
+  const fullyHiddenRoutes = ["/cart" , "/address"];
 
-  const hideFooter = ["/products" , "/cart" , "/productinnerpage"];
+  const hideOnMobile = isMobile && mobileHiddenRoutes.includes(currentPath);
 
-  const Condition = hiddenFooter && hideFooter.includes(currentPath);
-  const fullHidden =  isFooter && hideFooter.includes(currentPath);
+  const hideCompletely = fullyHiddenRoutes.includes(currentPath);
+
+  const shouldShowFooter = !hideOnMobile && !hideCompletely;
 
   const images = [
     { icon: Images.insta },
@@ -26,7 +28,7 @@ const Footer = () => {
 
   return (
     <>
-      {!Condition || !fullHidden && (
+      {shouldShowFooter && (
         <footer className="footer-container">
           <div className="container">
             <div className="footer-wrapper">
