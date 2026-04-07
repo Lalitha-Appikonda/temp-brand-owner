@@ -2,7 +2,7 @@ import React from 'react'
 import { Images } from '../../images/Image'
 import Buttons from '../form-elements/Buttons';
 
-const RatingReview = () => {
+const RatingReview = ({title}) => {
 
 
     const ratings = [
@@ -23,7 +23,7 @@ const RatingReview = () => {
                         <span className='star-rating'>
                             4.4<img src={Images.ministar} />
                         </span>
-                        <h5 className='verified-text'>20.8k Verified Buyers</h5>
+                        <h5 className='verified-text verified-text-mob'>{title}</h5>
                     </div>
                     <div className='rating-breakdown'>
                         <img src={Images.reviewline} />

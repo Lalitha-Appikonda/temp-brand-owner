@@ -25,7 +25,10 @@ const Card = ({
   ischecked = false,
   onMoveToBag,
   isDisabled = false,
-  handleSelectedItems
+  handleSelectedItems,
+  hideAddCart = false,
+  hideDropdownIcon = false,
+  hideLike = false
 }) => {
 
   const location = useLocation()
@@ -63,18 +66,20 @@ const Card = ({
           {badge && (
             <div className={`badge ${badge.toLowerCase()}`}>{badge}</div>
           )}
-          <div className={`image-likeback ${currentPath === "/wishlist" ? "hide-like": ""}`}>
-            <svg
-              onClick={() => setLike(!like)}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="25"
-              height="26"
-              className={`heart ${like ? "active" : ""}`}
-            >
-              <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
-            </svg>
-          </div>
+          {!hideLike && (
+            <div className="image-likeback">
+              <svg
+                onClick={() => setLike(!like)}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="25"
+                height="26"
+                className={`heart ${like ? "active" : ""}`}
+              >
+                <path d="M12 21s-7-4.35-9.5-7.28C.6 11.5.4 8.5 2.5 6.4c2.1-2.1 5.2-1.8 7.5.5L12 8.9l2-2c2.3-2.3 5.4-2.6 7.5-.5 2.1 2.1 1.9 5.1 0 7.3C19 16.65 12 21 12 21z" />
+              </svg>
+            </div>
+          )}
         </div>
 
         <div className="image-container">
@@ -106,14 +111,19 @@ const Card = ({
         </div>
 
         <div className="select-cart">
-          <select>
-            <option value="">5L</option>
-            <option value="">1L</option>
-            <option value="">500g</option>
-            <option value="">200g</option>
-            <option value="">1000g</option>
-            <option value="">300g</option>
-          </select>
+          {hideDropdownIcon ? (
+            <span className="weight-text">500g</span>
+          ) : (
+            <select>
+              <option>5L</option>
+              <option>1L</option>
+              <option>500g</option>
+              <option>200g</option>
+              <option>1000g</option>
+              <option>300g</option>
+            </select>
+          )}
+
 
           {/* <div className="custom-select">
             <select>
@@ -123,24 +133,22 @@ const Card = ({
             </select>
           </div> */}
 
-          {enableQuantity && showQuantity ? (
-            <div className="quantity">
-              <button className="reduce" onClick={decrease}>
-                <FaMinus className="minus" />
-              </button>
-              <span>{quantity}</span>
-              <button className="increase" onClick={increase}>
-                <FaPlus className="plus" />
-              </button>
-            </div>
-          ) : (
-            <Buttons
-              onClick={enableQuantity ? onAddingCart : onMoveToBag}
-              className={`addcart-mobile-btn ${!enableQuantity ? "move-to-bag-change-style" : ""}`}
-              disabled = {isDisabled}
-            >
-              {buttonText}
-            </Buttons>
+          {!hideAddCart && (
+            showQuantity ? (
+              <div className="quantity">
+                <button className="reduce" onClick={decrease}>
+                  <FaMinus className="minus" />
+                </button>
+                <span>{quantity}</span>
+                <button className="increase" onClick={increase}>
+                  <FaPlus className="plus" />
+                </button>
+              </div>
+            ) : (
+              <Buttons onClick={onAddingCart} className="addcart-mobile-btn">
+                Add to Cart
+              </Buttons>
+            )
           )}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "../pages/home/Home";
+// import Home from "../pages/home/Home";
 import CardSample from "../pages/home/CardSample";
 import ProductList from "../pages/productlist/ProductList";
 import Product from "../pages/product/Product";
@@ -16,14 +16,13 @@ import Register from "../pages/global-pages/signup Total/Register";
 import SigningIn from "../pages/global-pages/login Total/SigningIn";
 import Login from "../pages/global-pages/login Total/Login";
 import Payment from "../pages/payment/Payment";
- 
-import MobileCart from "../pages/payment/MobileCart";
 import ProductInnerPage from "../pages/home/ProductInnerPage";
 import ForgotPassword from "../pages/global-pages/login Total/ForgotPassword";
 import Forgotaftersetup from "../pages/global-pages/login Total/Forgotaftersetup";
 import SetNewPassword from "../pages/global-pages/login Total/SetNewPassword";
-import MobileAddress from "../pages/payment/MobileAddress";
 import WishList from "../pages/wishlist/WishList";
+import ReviewDetailed from "../pages/Home/ReviewDetailed";
+import Home from "../pages/Home/Home";
 
 
 const AppRoutes = () => {
@@ -44,7 +43,7 @@ const AppRoutes = () => {
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="productinnerpage" element={<ProductInnerPage/>}/>
+        <Route path="productinnerpage" element={<ProductInnerPage />} />
         <Route path="products" element={<ProductList />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="product/:id/reviews" element={<Review />} />
@@ -52,7 +51,8 @@ const AppRoutes = () => {
 
         <Route path="cart" element={<Payment />} />
         <Route path="address" element={<Payment />} />
-        <Route  path='samplecards' element={<CardSample/>} />
+        <Route path='samplecards' element={<CardSample />} />
+        <Route path='review-detailed' element={<ReviewDetailed />} />
 
         <Route path= "wishlist" element={<WishList />} />
       </Route>

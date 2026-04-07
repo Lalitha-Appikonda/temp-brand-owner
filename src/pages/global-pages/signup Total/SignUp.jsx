@@ -330,7 +330,7 @@ const checkUsernameAvailability = async (username) => {
       <p className="terms terms-conditions">
         By clicking, I confirm that I have read, understood, and agree to the
         <PopUp
-          trigger={<span> Terms of Service </span>}
+          trigger={<span className="terms-signin"> Terms of Service </span>}
           size="md"
           title="Terms of Service"
           className="terms-popup"

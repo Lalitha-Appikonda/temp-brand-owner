@@ -131,10 +131,12 @@ export const Images = {
   // popup product inner page
 
   yellowstar:"/assets/icons/yellowstar.svg",
+  uplaod:"/assets/icons/uploadimage.svg",
 
 
 
   //wishlist
 
   wishlistBag : "/assets/icons/wishlist-bag.svg"
+
 };
