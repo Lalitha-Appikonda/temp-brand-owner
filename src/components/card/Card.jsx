@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Images } from "../../images/Image";
 import SelectBox from "../form-elements/SelectBox";
 import Buttons from "../form-elements/Buttons";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
+import { CartContext } from "../../context/CartContext"; // adjust path
 
 const Card = ({
   title,
+  id,
   price,
   oldPrice,
   discount,
@@ -19,27 +21,10 @@ const Card = ({
 }) => {
   const [like, setLike] = useState(false);
 
-  const [quantity, setQuantity] = useState(1);
+  const { cartitems, addtocart, increaseqty, decreaseqty } = useContext(CartContext);
 
-  const [showQuantity, setShowQunatity] = useState(false);
-
-  const decrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    } else {
-      setShowQunatity(false);
-      setQuantity(1);
-    }
-  };
-
-  const increase = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const onAddingCart = () => {
-    setShowQunatity(true);
-    setQuantity(1);
-  };
+  const cartItem=cartitems.find(item=> item.id ===id);
+ 
   return (
     <div className="card-context">
       <div className="card card-desktop ">
@@ -96,18 +81,18 @@ const Card = ({
             <option value="">300g</option>
           </select>
 
-          {showQuantity ? (
+          {cartItem ? (
             <div className="quantity">
-              <button className="reduce" onClick={decrease}>
+              <button className="reduce" onClick={()=>decreaseqty(id)}>
                 <FaMinus className="minus" />
               </button>
-              <span>{quantity}</span>
-              <button className="increase" onClick={increase}>
+              <span>{cartItem.qty}</span>
+              <button className="increase" onClick={()=>increaseqty(id)}>
                 <FaPlus className="plus" />
               </button>
             </div>
           ) : (
-            <Buttons onClick={onAddingCart} className="addcart-mobile-btn">
+            <Buttons onClick={()=>addtocart({id,title,price})} className="addcart-mobile-btn">
               Add to Cart
             </Buttons>
           )}

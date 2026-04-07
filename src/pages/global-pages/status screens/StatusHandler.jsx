@@ -35,7 +35,7 @@ const StatusHandler = () => {
       message:
         "We are sorry to inform you that your account has not been approved at this time. Please try again later",
       buttonText: "Close",
-      action: () => navigate("/"),
+      action: () => navigate("/sign-up"),
     },
 
     "limit-exceed": {
@@ -59,9 +59,10 @@ const StatusHandler = () => {
     },
   };
   const data = config[type];
+  
 
     useEffect(() => {
-       if (type === "limit-exceed") return;
+       if (type === "limit-exceed" || type === "success") return;
     const checkStatus = async () => {
       try {
         const response = await axios.post(
@@ -83,7 +84,8 @@ const StatusHandler = () => {
 
       } catch (err) {
         console.error(err);
-        setType("rejected");
+        //setType("rejected");
+        setType("waiting"); 
       }
     };
 

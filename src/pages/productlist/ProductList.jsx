@@ -191,8 +191,7 @@ const ProductList = () => {
                     oldPrice={product.oldPrice}
                     discount={product.discount}
                     badge={product.badge}
-                    showQuantity={product.showQuantity}
-                    image={product.image}
+                     image={product.image}
                     rating={product.rating}
                     reviews={product.reviews}
                   />

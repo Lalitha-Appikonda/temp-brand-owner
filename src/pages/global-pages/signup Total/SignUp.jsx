@@ -31,7 +31,7 @@ const SignUp = ({ formData, setFormData, nextStep }) => {
   const [checkingUsername,setCheckingUsername]=useState(false);
 
 
-  const { setSignupData } = useContext(SignupContext);
+ 
 
   const signupSchema=Yup.object({
     name:Yup.string()

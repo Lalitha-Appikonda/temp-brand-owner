@@ -9,10 +9,18 @@ import Card from '../../components/card/Card';
 import Styleguide from '../../Styleguide/Styleguide';
 import Input from '../../components/form-elements/Input';
 import PhotoCarousel from '../../components/card/PhotoCarousel';
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 
 const Home = () => {
   const navigate = useNavigate();
   const [like, setLike] = useState({});
+
+  const {cartitems,addtocart}=useContext(CartContext);
+  console.log(cartitems)
+
+
+console.log("Home / Card:", cartitems);
 
   const statsData = [
     {
@@ -58,8 +66,8 @@ const Home = () => {
   const productsmobile = [
     { id: 1, title: "AQUA REMID", price: 1200, badge: "Hot", image: Images.product, rating: "5.0", reviews: "20K" },
     { id: 2, title: "PROBIZYME", price: 1100, oldPrice: 2000, discount: "45% off", badge: "Sale", image: Images.product, rating: "5.0", reviews: "20K" },
-    { id: 1, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
-    { id: 1, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 3, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
+    { id: 4, title: "AQUA REMID", price: 1200, image: Images.product, rating: "5.0", reviews: "20K" },
 
   ];
 
@@ -203,7 +211,9 @@ const Home = () => {
                 {/* <img src={Images.mobilelogo1} /> */}
               </div>
 
-              <div className="down-position">
+              <div className="down-position" onClick={()=>{
+                navigate("/products")
+              }}>
                 <div className="double-buttons">
                   <Buttons
                     variant="double-primary"
@@ -236,7 +246,7 @@ const Home = () => {
 
           <div className="stats-container">
             {statsData.map((item, index) => (
-              <div className="stats-card" _key_={index}>
+              <div className="stats-card" key={index}>
                 <p className="cards-title">{item.number}</p>
                 <p className="subtitle ">{item.text}</p>
               </div>
@@ -254,7 +264,7 @@ const Home = () => {
         </section>
         {/*innersection2  */}
         <div className="all-products-container">
-          <p className='all-product-text'>Our Popular Products</p>
+          <h1 className='all-product-text'>Our Popular Products</h1>
           <div className="products-buttons">
             <Buttons
               variant="outline-primary"
@@ -273,10 +283,12 @@ const Home = () => {
             >
               Minerals
             </Buttons>
-          </div> <div className="products-container">
+          </div> 
+          <div className="products-container">
             {products.map((item) => (
               <Card
                 key={item.id}
+                id={item.id}
                 title={item.title}
                 price={item.price}
                 oldPrice={item.oldPrice}
@@ -293,6 +305,7 @@ const Home = () => {
               {productsmobile.map((item) => (
                 <Card
                   key={item.id}
+                  id={item.id}
                   title={item.title}
                   price={item.price}
                   oldPrice={item.oldPrice}
@@ -306,7 +319,7 @@ const Home = () => {
             </div>
           </div>
           <div className='view-all-product'>
-            <Buttons variant='outline-primary' className="outline-bg" >View All</Buttons>
+            <Buttons variant='outline-primary' className="outline-bg" onClick={()=>navigate("/products")}>View All</Buttons>
           </div>
         </div>
         <div>
@@ -358,7 +371,7 @@ const Home = () => {
             </div>
 
             <div className="right-section">
-              <p className='title'>Why Choose Us</p >
+              <h1 className='title'>Why Choose Us</h1 >
               <h6 className="subtitle">
                 Our probiotics are designed to enhance pond health, improve growth,
                 and promote sustainable aquaculture.
@@ -370,7 +383,7 @@ const Home = () => {
                     <div
                       className="accordion-title"
                       onClick={() => toggle1(index)}>
-                      <h1>{item.title}</h1>
+                      <h4>{item.title}</h4>
                       <span className="cross-plus-icons">
                         <img
                           src={activeIndex === index ? Images.cross : Images.plus}
@@ -457,7 +470,7 @@ const Home = () => {
 
           <section className='reference-program'>
             <p className='title1'>Join Our Referral Program!</p>
-            <h4 className='subtitle1'>Invite Dealers and Corporate farmers to join Unique Biotech’s online store and earn exclusive cashback on every referral.</h4>
+            <h5 className='subtitle1'>Invite Dealers and Corporate farmers to join Unique Biotech’s online store and earn exclusive cashback on every referral.</h5>
             <div className='whats-box'>
               <div className='whatsapp-box'>
                 <img src={Images.mail} />

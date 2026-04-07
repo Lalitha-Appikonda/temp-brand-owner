@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Images } from "../../images/Image";
 import SelectBox from "../form-elements/SelectBox";
+import { useNavigate } from "react-router-dom";
 import {
   FaBars,
   FaChevronDown,
@@ -17,6 +18,8 @@ import { useLocation } from "react-router-dom";
 const NavBar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const navigate=useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -464,7 +467,7 @@ const NavBar = () => {
               </div>
 
               <div className="nav-right">
-                <div className="nav-circles">
+                <div className="nav-circles" onClick={()=>{navigate("/cart")}}>
                   <div className="circles">
                     <img src={Images.cart} alt="" />
                   </div>

@@ -3948,6 +3948,7 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .aftersetup-container .title-text {
@@ -4188,6 +4189,7 @@ h6 {
   position: absolute;
   bottom: 27px;
   right: 228px;
+   
 }
 
 .home-page .home-section1 .icons-img {
